@@ -1,0 +1,184 @@
+                      *******************************************************************************
+                      * @test           demo-01
+                      * @author         Janosch Reinking
+                      * @version        1.0.0
+                      * @date           01-01-2022 12-00-00
+                      *******************************************************************************
+INFO             main -------------------------------------------------------------------------------
+                      Start runner 'main'
+                      -------------------------------------------------------------------------------
+INFO             main ===============================================================================
+                      Section                                                     basic assertion (1)
+                      -------------------------------------------------------------------------------
+INFO             main This assertion should not fail.
+PASS 0000000000  main /home/root/pro-test/demos/demo01/main.pt.cpp:35
+                      PASS: the condition evaluates to true:
+                      'true'
+INFO             main -------------------------------------------------------------------------------
+                      This assertion should also not fail. Furthermore it should enter the if
+                      statment.
+                      -------------------------------------------------------------------------------
+PASS 0000000000  main /home/root/pro-test/demos/demo01/main.pt.cpp:43
+                      PASS: the condition evaluates to true:
+                      'true'
+INFO 0000000000  main /home/root/pro-test/demos/demo01/main.pt.cpp:45
+                      I am here!
+INFO             main -------------------------------------------------------------------------------
+                      This assertion should not fail. But it should also print a message next to it.
+                      -------------------------------------------------------------------------------
+PASS 0000000000  main /home/root/pro-test/demos/demo01/main.pt.cpp:57
+                      PASS: the condition evaluates to true:
+                      'true'
+                      Hello, World
+INFO             main -------------------------------------------------------------------------------
+                      This assertion should not fail, enter the if statment and print a message to
+                      the log.
+                      -------------------------------------------------------------------------------
+PASS 0000000000  main /home/root/pro-test/demos/demo01/main.pt.cpp:65
+                      PASS: the condition evaluates to true:
+                      'true'
+                      Hello, World
+INFO 0000000000  main /home/root/pro-test/demos/demo01/main.pt.cpp:67
+                      I am here!
+INFO             main -------------------------------------------------------------------------------
+                      This assertion should fail.
+                      -------------------------------------------------------------------------------
+FAIL 0000000000  main /home/root/pro-test/demos/demo01/main.pt.cpp:79
+                      FAIL: the condition evaluates to false:
+                      'false'
+INFO             main -------------------------------------------------------------------------------
+                      This assertion should fail, should not enter the if statment and print a
+                      message to the log.
+                      -------------------------------------------------------------------------------
+FAIL 0000000000  main /home/root/pro-test/demos/demo01/main.pt.cpp:87
+                      FAIL: the condition evaluates to false:
+                      'false'
+                      Hello, World
+INFO             main -------------------------------------------------------------------------------
+                      End section                                                 basic assertion (1)
+                      ===============================================================================
+INFO             main ===============================================================================
+                      Section                               formatting and escaping for assertion (2)
+                      -------------------------------------------------------------------------------
+INFO             main This assertion contains quotes. This should be handled properly by the
+                      protest-compiler.
+                      -------------------------------------------------------------------------------
+PASS 0000000000  main /home/root/pro-test/demos/demo01/main.pt.cpp:103
+                      PASS: the condition evaluates to true:
+                      'std::string("true") == "true"'
+INFO             main -------------------------------------------------------------------------------
+                      This assertion spreads over multiple lines. This should be handled
+                      properly by the protest-compiler.
+                      -------------------------------------------------------------------------------
+PASS 0000000000  main /home/root/pro-test/demos/demo01/main.pt.cpp:112
+                      PASS: the condition evaluates to true:
+                      'std::string("true") == "true"'
+INFO             main -------------------------------------------------------------------------------
+                      This assertion has an inner assertion. The protest compiler should handle this
+                      case properly. I.e.: it should process the inner @c assertThat first the the
+                      outer.
+                      -------------------------------------------------------------------------------
+PASS 0000000000  main /home/root/pro-test/demos/demo01/main.pt.cpp:125
+                      PASS: the condition evaluates to true:
+                      'true'
+PASS 0000000000  main /home/root/pro-test/demos/demo01/main.pt.cpp:124
+                      PASS: the condition evaluates to true:
+                      '[]() { assertThat(true); return true; }()'
+INFO             main -------------------------------------------------------------------------------
+                      Not executed @c assertThat should be reported
+                      -------------------------------------------------------------------------------
+INFO             main -------------------------------------------------------------------------------
+                      End section                           formatting and escaping for assertion (2)
+                      ===============================================================================
+INFO             main ===============================================================================
+                      Section                                                        basic checks (3)
+                      -------------------------------------------------------------------------------
+INFO             main This check should not fail. Which means that this check will not print anything
+                      to the log.
+INFO             main -------------------------------------------------------------------------------
+                      This check should also not fail. Furthermore it should enter the if
+                      statment.
+                      -------------------------------------------------------------------------------
+INFO 0000000000  main /home/root/pro-test/demos/demo01/main.pt.cpp:157
+                      I am here!
+INFO             main -------------------------------------------------------------------------------
+                      This check should not fail. It should also not print a log message.
+                      -------------------------------------------------------------------------------
+INFO             main -------------------------------------------------------------------------------
+                      This check should not fail, enter the if statment. But a message should not
+                      appear in the debug log.
+                      -------------------------------------------------------------------------------
+INFO 0000000000  main /home/root/pro-test/demos/demo01/main.pt.cpp:179
+                      I am here!
+INFO             main -------------------------------------------------------------------------------
+                      This check should fail.
+                      -------------------------------------------------------------------------------
+WARN 0000000000  main /home/root/pro-test/demos/demo01/main.pt.cpp:191
+                      WARN: the condition evaluates to false:
+                      'false'
+INFO             main -------------------------------------------------------------------------------
+                      This check should fail, should not enter the if statment and print a
+                      message to the log.
+                      -------------------------------------------------------------------------------
+WARN 0000000000  main /home/root/pro-test/demos/demo01/main.pt.cpp:199
+                      WARN: the condition evaluates to false:
+                      'false'
+                      Hello, World
+INFO             main -------------------------------------------------------------------------------
+                      End section                                                    basic checks (3)
+                      ===============================================================================
+INFO             main ===============================================================================
+                      Section                                  formatting and escaping for checks (4)
+                      -------------------------------------------------------------------------------
+INFO             main This check contains quotes. This should be handled properly by the
+                      protest-compiler.
+WARN 0000000000  main /home/root/pro-test/demos/demo01/main.pt.cpp:215
+                      WARN: the condition evaluates to false:
+                      'std::string("true") == "false"'
+INFO             main -------------------------------------------------------------------------------
+                      This check spreads over multiple lines. This should be handled
+                      properly by the protest-compiler.
+                      -------------------------------------------------------------------------------
+WARN 0000000000  main /home/root/pro-test/demos/demo01/main.pt.cpp:224
+                      WARN: the condition evaluates to false:
+                      'std::string("true") == "false"'
+INFO             main -------------------------------------------------------------------------------
+                      This check has an inner check. The protest compiler should handle this
+                      case properly. I.e.: it should process the inner @c checkThat first the the
+                      outer.
+                      -------------------------------------------------------------------------------
+WARN 0000000000  main /home/root/pro-test/demos/demo01/main.pt.cpp:237
+                      WARN: the condition evaluates to false:
+                      'false'
+WARN 0000000000  main /home/root/pro-test/demos/demo01/main.pt.cpp:236
+                      WARN: the condition evaluates to false:
+                      '[]() { checkThat(false); return false; }()'
+INFO             main -------------------------------------------------------------------------------
+                      End section                              formatting and escaping for checks (4)
+                      ===============================================================================
+INFO             main -------------------------------------------------------------------------------
+                      Exit of 'main'
+                      -------------------------------------------------------------------------------
+                      *******************************************************************************
+                      * NUMBER OF WARNINGS: 6
+                      * /home/root/pro-test/demos/demo01/main.pt.cpp:191
+                      * /home/root/pro-test/demos/demo01/main.pt.cpp:199
+                      * /home/root/pro-test/demos/demo01/main.pt.cpp:215
+                      * /home/root/pro-test/demos/demo01/main.pt.cpp:224
+                      * /home/root/pro-test/demos/demo01/main.pt.cpp:236
+                      * /home/root/pro-test/demos/demo01/main.pt.cpp:237
+                      *******************************************************************************
+                      * NUMBER OF FAILED ASSERTIONS: 2
+                      * /home/root/pro-test/demos/demo01/main.pt.cpp:79
+                      * /home/root/pro-test/demos/demo01/main.pt.cpp:87
+                      *******************************************************************************
+                      * NUMBER OF NOT EXECUTED ASSERTIONS: 2
+                      * /home/root/pro-test/demos/demo01/main.pt.cpp:137
+                      * /home/root/pro-test/demos/demo01/main.pt.cpp:247
+                      *******************************************************************************
+                      * FAILURES:                2                                               FAIL
+                      * WARNINGS:                6                                               WARN
+                      * INV VIOLATION:           0                                               PASS 
+                      *
+                      * TOTAL:                                                                   FAIL
+                      *******************************************************************************

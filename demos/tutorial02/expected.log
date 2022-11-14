@@ -1,0 +1,57 @@
+                      *******************************************************************************
+                      * @test           Tutorial-02
+                      * @author         jreinking
+                      * @version        0.0.1
+                      * @date           01-01-2022 12-00-00
+                      *******************************************************************************
+INFO             main -------------------------------------------------------------------------------
+                      Start runner 'main'
+                      -------------------------------------------------------------------------------
+WARN 0000000000  main /home/root/pro-test/demos/tutorial02/main.pt.cpp:31
+                      WARN: the condition evaluates to false:
+                      'sw.lap() == 1_ms'
+                      Stopwatch lap: 0ms
+WAIT 0000000000  main /home/root/pro-test/demos/tutorial02/main.pt.cpp:46
+                      Wait for condition:
+                      'value == 42'
+EXPR 0000001000  main /home/root/pro-test/demos/tutorial02/main.pt.cpp:35
+                      Timer 'timer' expired after:
+                      1000 ms
+RESM 0000001000  main /home/root/pro-test/demos/tutorial02/main.pt.cpp:46
+                      Condition is fulfilled:
+                      'value == 42'
+PASS 0000001000  main /home/root/pro-test/demos/tutorial02/main.pt.cpp:48
+                      PASS: the condition evaluates to true:
+                      'success'
+                      Should not run into a timeout!
+PASS 0000001000  main /home/root/pro-test/demos/tutorial02/main.pt.cpp:50
+                      PASS: the condition evaluates to true:
+                      'sw.lap() == 1000_ms'
+                      Timer should run after 1000_ms
+PASS 0000001000  main /home/root/pro-test/demos/tutorial02/main.pt.cpp:52
+                      PASS: the condition evaluates to true:
+                      'value == 42'
+                      Timer should set value to 42
+WAIT 0000001000  main /home/root/pro-test/demos/tutorial02/main.pt.cpp:54
+                      Wait for 1000 ms
+WAIT 0000002000  main /home/root/pro-test/demos/tutorial02/main.pt.cpp:54
+                      Timeout of 1000 ms elapsed!
+INV  0000002000  main /home/root/pro-test/demos/tutorial02/main.pt.cpp:42
+                      Invariant does not hold:
+                      '(!(sw < 1000_ms) || value == 0) && (!(sw > 1000_ms) || value == 42)'
+INFO             main -------------------------------------------------------------------------------
+                      Exit of 'main'
+                      -------------------------------------------------------------------------------
+                      *******************************************************************************
+                      * NUMBER OF VIOLATED INVARIANTS: 1
+                      * /home/root/pro-test/demos/tutorial02/main.pt.cpp:42
+                      *******************************************************************************
+                      * NUMBER OF WARNINGS: 1
+                      * /home/root/pro-test/demos/tutorial02/main.pt.cpp:31
+                      *******************************************************************************
+                      * FAILURES:                0                                               PASS
+                      * WARNINGS:                1                                               WARN
+                      * INV VIOLATION:           1                                               FAIL
+                      *
+                      * TOTAL:                                                                   FAIL
+                      *******************************************************************************

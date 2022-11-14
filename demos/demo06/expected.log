@@ -1,0 +1,107 @@
+                      *******************************************************************************
+                      * @test           demo-06
+                      * @author         Janosch Reinking
+                      * @version        1.0.0
+                      * @date           01-01-2022 12-00-00
+                      *******************************************************************************
+INFO             main -------------------------------------------------------------------------------
+                      Start runner 'main'
+                      -------------------------------------------------------------------------------
+INFO             main ===============================================================================
+                      Section                                                     condition basic (1)
+                      -------------------------------------------------------------------------------
+INFO             main Most of the protest objects can be used to form expressions. These expressions
+                      can be stored as @c Conditions. Condition are used for example in invariants
+                      or calls to @c wait. A condition reflects the structure of the expression in
+                      its type and stores also runtime information of the expression. Therefore, it
+                      knows about the object used to build the @c Condition. This allows protest to
+                      reflect changes in the condition which can be used to re-evaluate it.
+INFO             main -------------------------------------------------------------------------------
+                      The condition should reflect the change of the port.
+                      -------------------------------------------------------------------------------
+PUSH 0000000000  main /home/root/pro-test/demos/demo06/main.pt.cpp:64
+                      Push value to 'mSignal1':
+                      { 5, 0x00000005 }
+PASS 0000000000  main /home/root/pro-test/demos/demo06/main.pt.cpp:65
+                      PASS: the condition evaluates to true:
+                      'condition'
+PUSH 0000000000  main /home/root/pro-test/demos/demo06/main.pt.cpp:67
+                      Push value to 'mSignal1':
+                      { 6, 0x00000006 }
+PASS 0000000000  main /home/root/pro-test/demos/demo06/main.pt.cpp:68
+                      PASS: the condition evaluates to true:
+                      '!condition'
+INFO             main -------------------------------------------------------------------------------
+                      The runner should wait until the condition becomes true.
+                      -------------------------------------------------------------------------------
+WAIT 0000000000  main /home/root/pro-test/demos/demo06/main.pt.cpp:81
+                      Wait for condition:
+                      'condition'
+EXPR 0000001000  main /home/root/pro-test/demos/demo06/main.pt.cpp:76
+                      Timer '<anno>' expired after:
+                      1000 ms
+PUSH 0000001000  main /home/root/pro-test/demos/demo06/main.pt.cpp:77
+                      Push value to 'mSignal1':
+                      { 5, 0x00000005 }
+RESM 0000001000  main /home/root/pro-test/demos/demo06/main.pt.cpp:81
+                      Condition is fulfilled:
+                      'condition'
+PASS 0000001000  main /home/root/pro-test/demos/demo06/main.pt.cpp:82
+                      PASS: the condition evaluates to true:
+                      'condition'
+INFO             main -------------------------------------------------------------------------------
+                      It is also possible to use primitive types if there are wrapped into a
+                      @c Value.
+                      -------------------------------------------------------------------------------
+WAIT 0000001000  main /home/root/pro-test/demos/demo06/main.pt.cpp:102
+                      Wait for condition:
+                      'condition'
+EXPR 0000002000  main /home/root/pro-test/demos/demo06/main.pt.cpp:97
+                      Timer '<anno>' expired after:
+                      1000 ms
+RESM 0000002000  main /home/root/pro-test/demos/demo06/main.pt.cpp:102
+                      Condition is fulfilled:
+                      'condition'
+PASS 0000002000  main /home/root/pro-test/demos/demo06/main.pt.cpp:103
+                      PASS: the condition evaluates to true:
+                      'condition'
+INFO             main -------------------------------------------------------------------------------
+                      @c Value should be implicit convertable to the underlying type.
+                      -------------------------------------------------------------------------------
+PASS 0000002000  main /home/root/pro-test/demos/demo06/main.pt.cpp:114
+                      PASS: the condition evaluates to true:
+                      '4 + value == 9'
+PASS 0000002000  main /home/root/pro-test/demos/demo06/main.pt.cpp:116
+                      PASS: the condition evaluates to true:
+                      'value + 4 == 9'
+INFO             main -------------------------------------------------------------------------------
+                      Stopwatches can be used to bring time into the condition
+                      -------------------------------------------------------------------------------
+WAIT 0000002000  main /home/root/pro-test/demos/demo06/main.pt.cpp:124
+                      Wait for condition:
+                      'sw >= 1000_ms'
+RESM 0000003000  main /home/root/pro-test/demos/demo06/main.pt.cpp:124
+                      Condition is fulfilled:
+                      'sw >= 1000_ms'
+PASS 0000003000  main /home/root/pro-test/demos/demo06/main.pt.cpp:125
+                      PASS: the condition evaluates to true:
+                      'sw.lap() == 1000_ms'
+INFO             main -------------------------------------------------------------------------------
+                      Condition are also used to build invariants
+                      -------------------------------------------------------------------------------
+PASS 0000003000  main /home/root/pro-test/demos/demo06/main.pt.cpp:136
+                      PASS: the condition evaluates to true:
+                      'inv.holds()'
+INFO             main -------------------------------------------------------------------------------
+                      End section                                                 condition basic (1)
+                      ===============================================================================
+INFO             main -------------------------------------------------------------------------------
+                      Exit of 'main'
+                      -------------------------------------------------------------------------------
+                      *******************************************************************************
+                      * FAILURES:                0                                               PASS
+                      * WARNINGS:                0                                               PASS 
+                      * INV VIOLATION:           0                                               PASS 
+                      *
+                      * TOTAL:                                                                   PASS
+                      *******************************************************************************

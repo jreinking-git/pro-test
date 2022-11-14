@@ -1,0 +1,85 @@
+                      *******************************************************************************
+                      * @test           demo-03
+                      * @author         Janosch Reinking
+                      * @version        1.0.0
+                      * @date           01-01-2022 12-00-00
+                      *******************************************************************************
+INFO             main -------------------------------------------------------------------------------
+                      Start runner 'main'
+                      -------------------------------------------------------------------------------
+INFO             main ===============================================================================
+                      Section                                                     stopwatch basic (1)
+                      -------------------------------------------------------------------------------
+INFO             main A stopwatch can be used to measure time diff
+INFO             main -------------------------------------------------------------------------------
+                      The stopwatch should measure 1000 ms
+                      -------------------------------------------------------------------------------
+WAIT 0000000000  main /home/root/pro-test/demos/demo03/main.pt.cpp:42
+                      Wait for 1000 ms
+WAIT 0000001000  main /home/root/pro-test/demos/demo03/main.pt.cpp:42
+                      Timeout of 1000 ms elapsed!
+PASS 0000001000  main /home/root/pro-test/demos/demo03/main.pt.cpp:43
+                      PASS: the condition evaluates to true:
+                      'sw.lap() == 1000_ms'
+INFO             main -------------------------------------------------------------------------------
+                      Stopwatch is not active. Therefore the measure time will not change.
+                      -------------------------------------------------------------------------------
+WAIT 0000001000  main /home/root/pro-test/demos/demo03/main.pt.cpp:51
+                      Wait for 1000 ms
+WAIT 0000002000  main /home/root/pro-test/demos/demo03/main.pt.cpp:51
+                      Timeout of 1000 ms elapsed!
+PASS 0000002000  main /home/root/pro-test/demos/demo03/main.pt.cpp:52
+                      PASS: the condition evaluates to true:
+                      'sw.lap() == 1000_ms'
+INFO             main -------------------------------------------------------------------------------
+                      A reseted stopwatch should yield 0 ms
+                      -------------------------------------------------------------------------------
+PASS 0000002000  main /home/root/pro-test/demos/demo03/main.pt.cpp:60
+                      PASS: the condition evaluates to true:
+                      'sw.lap() == 0_ms'
+WAIT 0000002000  main /home/root/pro-test/demos/demo03/main.pt.cpp:61
+                      Wait for 1000 ms
+WAIT 0000003000  main /home/root/pro-test/demos/demo03/main.pt.cpp:61
+                      Timeout of 1000 ms elapsed!
+PASS 0000003000  main /home/root/pro-test/demos/demo03/main.pt.cpp:62
+                      PASS: the condition evaluates to true:
+                      'sw.lap() == 0_ms'
+WAIT 0000003000  main /home/root/pro-test/demos/demo03/main.pt.cpp:64
+                      Wait for 1000 ms
+WAIT 0000004000  main /home/root/pro-test/demos/demo03/main.pt.cpp:64
+                      Timeout of 1000 ms elapsed!
+PASS 0000004000  main /home/root/pro-test/demos/demo03/main.pt.cpp:65
+                      PASS: the condition evaluates to true:
+                      'sw.lap() == 1000_ms'
+INFO             main -------------------------------------------------------------------------------
+                      End section                                                 stopwatch basic (1)
+                      ===============================================================================
+INFO             main ===============================================================================
+                      Section                                              stopwatch in condition (2)
+                      -------------------------------------------------------------------------------
+INFO             main A stopwatch can also be used in conditions
+INFO             main -------------------------------------------------------------------------------
+                      It is also possible to use a stopwatch in a wait call.
+                      -------------------------------------------------------------------------------
+WAIT 0000004000  main /home/root/pro-test/demos/demo03/main.pt.cpp:82
+                      Wait for condition:
+                      'sw >= 1000_ms'
+RESM 0000005000  main /home/root/pro-test/demos/demo03/main.pt.cpp:82
+                      Condition is fulfilled:
+                      'sw >= 1000_ms'
+PASS 0000005000  main /home/root/pro-test/demos/demo03/main.pt.cpp:83
+                      PASS: the condition evaluates to true:
+                      'sw.lap() == 1000_ms'
+INFO             main -------------------------------------------------------------------------------
+                      End section                                          stopwatch in condition (2)
+                      ===============================================================================
+INFO             main -------------------------------------------------------------------------------
+                      Exit of 'main'
+                      -------------------------------------------------------------------------------
+                      *******************************************************************************
+                      * FAILURES:                0                                               PASS
+                      * WARNINGS:                0                                               PASS 
+                      * INV VIOLATION:           0                                               PASS 
+                      *
+                      * TOTAL:                                                                   PASS
+                      *******************************************************************************

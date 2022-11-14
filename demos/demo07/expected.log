@@ -1,0 +1,373 @@
+                      *******************************************************************************
+                      * @test           demo-07
+                      * @author         Janosch Reinking
+                      * @version        1.0.0
+                      * @date           01-01-2022 12-00-00
+                      *******************************************************************************
+INFO             main -------------------------------------------------------------------------------
+                      Start runner 'main'
+                      -------------------------------------------------------------------------------
+INFO             main ===============================================================================
+                      Section                                              unsigned integer types (1)
+                      -------------------------------------------------------------------------------
+INFO             main This test will print all unsigned integer which are available. The formatting
+                      is '{ <value as integer>, <value as hex> }'
+                      -------------------------------------------------------------------------------
+INFO 0000000000  main /home/root/pro-test/demos/demo07/main.pt.cpp:347
+                      { 0, 0x00 }
+PASS 0000000000  main /home/root/pro-test/demos/demo07/main.pt.cpp:348
+                      PASS: the condition evaluates to true:
+                      'format.str() == "{ 0, 0x00 }"'
+INFO 0000000000  main /home/root/pro-test/demos/demo07/main.pt.cpp:355
+                      { 1, 0x0001 }
+PASS 0000000000  main /home/root/pro-test/demos/demo07/main.pt.cpp:356
+                      PASS: the condition evaluates to true:
+                      'format.str() == "{ 1, 0x0001 }"'
+INFO 0000000000  main /home/root/pro-test/demos/demo07/main.pt.cpp:363
+                      { 2, 0x00000002 }
+PASS 0000000000  main /home/root/pro-test/demos/demo07/main.pt.cpp:364
+                      PASS: the condition evaluates to true:
+                      'format.str() == "{ 2, 0x00000002 }"'
+INFO 0000000000  main /home/root/pro-test/demos/demo07/main.pt.cpp:371
+                      { 3, 0x0000000000000003 }
+PASS 0000000000  main /home/root/pro-test/demos/demo07/main.pt.cpp:372
+                      PASS: the condition evaluates to true:
+                      'format.str() == "{ 3, 0x0000000000000003 }"'
+INFO             main -------------------------------------------------------------------------------
+                      End section                                          unsigned integer types (1)
+                      ===============================================================================
+INFO             main ===============================================================================
+                      Section                                                signed integer types (2)
+                      -------------------------------------------------------------------------------
+INFO             main This test will print all signed integer which are available. The formatting is
+                      '{ <value as integer>, <value as hex> }'
+                      -------------------------------------------------------------------------------
+INFO 0000000000  main /home/root/pro-test/demos/demo07/main.pt.cpp:389
+                      { 0, 0x00 }
+PASS 0000000000  main /home/root/pro-test/demos/demo07/main.pt.cpp:390
+                      PASS: the condition evaluates to true:
+                      'format.str() == "{ 0, 0x00 }"'
+INFO 0000000000  main /home/root/pro-test/demos/demo07/main.pt.cpp:397
+                      { -1, 0xffff }
+PASS 0000000000  main /home/root/pro-test/demos/demo07/main.pt.cpp:398
+                      PASS: the condition evaluates to true:
+                      'format.str() == "{ -1, 0xffff }"'
+INFO 0000000000  main /home/root/pro-test/demos/demo07/main.pt.cpp:405
+                      { -2, 0xfffffffe }
+PASS 0000000000  main /home/root/pro-test/demos/demo07/main.pt.cpp:406
+                      PASS: the condition evaluates to true:
+                      'format.str() == "{ -2, 0xfffffffe }"'
+INFO 0000000000  main /home/root/pro-test/demos/demo07/main.pt.cpp:413
+                      { -3, 0xfffffffffffffffd }
+PASS 0000000000  main /home/root/pro-test/demos/demo07/main.pt.cpp:414
+                      PASS: the condition evaluates to true:
+                      'format.str() == "{ -3, 0xfffffffffffffffd }"'
+INFO             main -------------------------------------------------------------------------------
+                      End section                                            signed integer types (2)
+                      ===============================================================================
+INFO             main ===============================================================================
+                      Section                                                floating point types (3)
+                      -------------------------------------------------------------------------------
+INFO             main This test will print all floating points types which are available. The
+                      formatting is '{ <value as integer>, <value as hex> }'
+                      -------------------------------------------------------------------------------
+INFO 0000000000  main /home/root/pro-test/demos/demo07/main.pt.cpp:431
+                      { 43.3f }
+PASS 0000000000  main /home/root/pro-test/demos/demo07/main.pt.cpp:432
+                      PASS: the condition evaluates to true:
+                      'format.str() == "{ 43.3f }"'
+INFO 0000000000  main /home/root/pro-test/demos/demo07/main.pt.cpp:439
+                      { -1.32f }
+PASS 0000000000  main /home/root/pro-test/demos/demo07/main.pt.cpp:440
+                      PASS: the condition evaluates to true:
+                      'format.str() == "{ -1.32f }"'
+INFO             main -------------------------------------------------------------------------------
+                      End section                                            floating point types (3)
+                      ===============================================================================
+INFO             main ===============================================================================
+                      Section                                          pointer to primitive types (4)
+                      -------------------------------------------------------------------------------
+INFO             main Pointers should be derefered by using one of the template specialisation of the
+                      operator<<(). A pointers value should be printed or { nullptr } if the pointer
+                      is a nullptr.
+INFO             main -------------------------------------------------------------------------------
+                      Print a nullptr
+                      -------------------------------------------------------------------------------
+INFO 0000000000  main /home/root/pro-test/demos/demo07/main.pt.cpp:463
+                      { nullptr }
+PASS 0000000000  main /home/root/pro-test/demos/demo07/main.pt.cpp:464
+                      PASS: the condition evaluates to true:
+                      'format.str() == "{ nullptr }"'
+INFO             main -------------------------------------------------------------------------------
+                      Print a pointer to float
+                      -------------------------------------------------------------------------------
+INFO 0000000000  main /home/root/pro-test/demos/demo07/main.pt.cpp:478
+                      { -1.32f }
+PASS 0000000000  main /home/root/pro-test/demos/demo07/main.pt.cpp:479
+                      PASS: the condition evaluates to true:
+                      'format.str() == "{ -1.32f }"'
+INFO             main -------------------------------------------------------------------------------
+                      Print a pointer to uint8_t
+                      -------------------------------------------------------------------------------
+INFO 0000000000  main /home/root/pro-test/demos/demo07/main.pt.cpp:493
+                      { 42, 0x2a }
+PASS 0000000000  main /home/root/pro-test/demos/demo07/main.pt.cpp:494
+                      PASS: the condition evaluates to true:
+                      'format.str() == "{ 42, 0x2a }"'
+INFO             main -------------------------------------------------------------------------------
+                      End section                                      pointer to primitive types (4)
+                      ===============================================================================
+INFO             main ===============================================================================
+                      Section                                                          enum types (5)
+                      -------------------------------------------------------------------------------
+INFO             main This test will print enums which has a generated printer function created by
+                      the protest-compiler. A enum value should be printed as string with it's scope
+                      (namespace, class, etc), the value as decimal and as hex.
+INFO 0000000000  main /home/root/pro-test/demos/demo07/main.pt.cpp:519
+                      { TestEnum::value1, 0, 0x00000000 }
+PASS 0000000000  main /home/root/pro-test/demos/demo07/main.pt.cpp:520
+                      PASS: the condition evaluates to true:
+                      'format.str() == "{ TestEnum::value1, 0, 0x00000000 }"'
+INFO             main -------------------------------------------------------------------------------
+                      Print a enum which lives in a namespace.
+                      -------------------------------------------------------------------------------
+INFO 0000000000  main /home/root/pro-test/demos/demo07/main.pt.cpp:533
+                      { test::TestEnum::test2, 1, 0x00000001 }
+PASS 0000000000  main /home/root/pro-test/demos/demo07/main.pt.cpp:534
+                      PASS: the condition evaluates to true:
+                      'format.str() == "{ test::TestEnum::test2, 1, 0x00000001 }"'
+INFO             main -------------------------------------------------------------------------------
+                      Print a enum which lives in a class which lives in a namespace.
+                      -------------------------------------------------------------------------------
+WARN 0000000000  main /home/root/pro-test/demos/demo07/main.pt.cpp:544
+                      Does not work since it tries to forward a inner enum
+INFO             main -------------------------------------------------------------------------------
+                      Print a enum which lives in a class namespace. The class itself will be include
+                      via #include. Therefore the type is know at the start of this file. This case
+                      is easier for the protest-compiler to generate a printer function.
+                      -------------------------------------------------------------------------------
+INFO 0000000000  main /home/root/pro-test/demos/demo07/main.pt.cpp:567
+                      { AnyClass::InnerEnum::mode1, 0, 0x00000000 }
+PASS 0000000000  main /home/root/pro-test/demos/demo07/main.pt.cpp:568
+                      PASS: the condition evaluates to true:
+                      'format.str() == "{ AnyClass::InnerEnum::mode1, 0, 0x00000000 }"'
+INFO 0000000000  main /home/root/pro-test/demos/demo07/main.pt.cpp:585
+                      { test::AnyClass::InnerEnum::status1, 0, 0x00000000 }
+PASS 0000000000  main /home/root/pro-test/demos/demo07/main.pt.cpp:586
+                      PASS: the condition evaluates to true:
+                      'format.str() == "{ test::AnyClass::InnerEnum::status1, 0, 0x00000000 }"'
+INFO             main -------------------------------------------------------------------------------
+                      End section                                                      enum types (5)
+                      ===============================================================================
+INFO             main ===============================================================================
+                      Section                                                        record types (6)
+                      -------------------------------------------------------------------------------
+INFO             main Records types are classes or structs. The test will demonstrate the printer
+                      function generation capabilities of protest.
+INFO             main -------------------------------------------------------------------------------
+                      Print an empty struct. This is a edge case.
+                      -------------------------------------------------------------------------------
+INFO 0000000000  main /home/root/pro-test/demos/demo07/main.pt.cpp:609
+                      struct EmptyStruct {
+                      }
+PASS 0000000000  main /home/root/pro-test/demos/demo07/main.pt.cpp:610
+                      PASS: the condition evaluates to true:
+                      'format.str() == "struct EmptyStruct {\n}"'
+INFO             main -------------------------------------------------------------------------------
+                      Print struct which has some primitive fields and an enum.
+                      -------------------------------------------------------------------------------
+INFO 0000000000  main /home/root/pro-test/demos/demo07/main.pt.cpp:626
+                      struct TestStruct {
+                        value1 : { 42, 0x2a }
+                        value2 : { 32, 0x0020 }
+                        mode   : { TestStructEnum::mode1, 0, 0x00000000 }
+                      }
+PASS 0000000000  main /home/root/pro-test/demos/demo07/main.pt.cpp:633
+                      PASS: the condition evaluates to true:
+                      'format.str() == expected'
+INFO             main -------------------------------------------------------------------------------
+                      Print struct which has an enum with a custom printer function.
+                      -------------------------------------------------------------------------------
+INFO 0000000000  main /home/root/pro-test/demos/demo07/main.pt.cpp:647
+                      struct CustomPrinterStruct {
+                        value : { custom value2 }
+                      }
+PASS 0000000000  main /home/root/pro-test/demos/demo07/main.pt.cpp:651
+                      PASS: the condition evaluates to true:
+                      'format.str() == expected'
+INFO             main -------------------------------------------------------------------------------
+                      Print class which has an nested class. Furtheremore the class has private
+                      attributes.
+                      -------------------------------------------------------------------------------
+INFO 0000000000  main /home/root/pro-test/demos/demo07/main.pt.cpp:665
+                      class EnclosingStruct {
+                        mValue1 : { 42, 0x2a }
+                        mValue2 : { 32, 0x0000000000000020 }
+                        mValue3 : struct NestedStruct {
+                          mValue : { 1, 0x01 }
+                        }
+                      }
+PASS 0000000000  main /home/root/pro-test/demos/demo07/main.pt.cpp:673
+                      PASS: the condition evaluates to true:
+                      'format.str() == expected'
+INFO             main -------------------------------------------------------------------------------
+                      Print a struct which has a ptr to a primitive type. Should be derefered by
+                      using one of the template specialisation for pointers.
+                      -------------------------------------------------------------------------------
+INFO 0000000000  main /home/root/pro-test/demos/demo07/main.pt.cpp:689
+                      struct PtrStruct {
+                        value : { 32, 0x20 }
+                      }
+PASS 0000000000  main /home/root/pro-test/demos/demo07/main.pt.cpp:693
+                      PASS: the condition evaluates to true:
+                      'format.str() == expected'
+INFO             main -------------------------------------------------------------------------------
+                      Print a struct which has a ptr to a other struct. The protest-compiler should
+                      be able to see the usage in the AST. A printer function should be generated.
+                      -------------------------------------------------------------------------------
+INFO 0000000000  main /home/root/pro-test/demos/demo07/main.pt.cpp:711
+                      struct PtrStruct2 {
+                        ptr : struct Pointee {
+                          value : { 32, 0x20 }
+                        }
+                      }
+PASS 0000000000  main /home/root/pro-test/demos/demo07/main.pt.cpp:717
+                      PASS: the condition evaluates to true:
+                      'format.str() == expected'
+INFO             main -------------------------------------------------------------------------------
+                      Print a struct which has a depth of 3. Protest should only print 2 of them
+                      since the max depth is currently 2. The third should be printed as
+                      object@<addr>.
+                      -------------------------------------------------------------------------------
+INFO 0000000000  main /home/root/pro-test/demos/demo07/main.pt.cpp:733
+                      struct StructDepth3 {
+                        value : struct StructDepth2 {
+                          value : object@0x5652545d28a0
+                        }
+                      }
+PASS 0000000000  main /home/root/pro-test/demos/demo07/main.pt.cpp:734
+                      PASS: the condition evaluates to true:
+                      'format.str().find("object@") != std::string::npos'
+PASS 0000000000  main /home/root/pro-test/demos/demo07/main.pt.cpp:735
+                      PASS: the condition evaluates to true:
+                      'format.str().find("StructDepth1") == std::string::npos'
+INFO             main -------------------------------------------------------------------------------
+                      Print a struct which has a depth of 2.
+                      -------------------------------------------------------------------------------
+INFO 0000000000  main /home/root/pro-test/demos/demo07/main.pt.cpp:749
+                      struct StructDepth2 {
+                        value : struct StructDepth1 {
+                          value : { 32, 0x20 }
+                        }
+                      }
+PASS 0000000000  main /home/root/pro-test/demos/demo07/main.pt.cpp:755
+                      PASS: the condition evaluates to true:
+                      'format.str() == expected'
+INFO             main -------------------------------------------------------------------------------
+                      Print a struct which has a pointer to itself. The recursion should stop on
+                      depth 2.
+                      -------------------------------------------------------------------------------
+INFO 0000000000  main /home/root/pro-test/demos/demo07/main.pt.cpp:771
+                      struct RecursionStruct {
+                        value : { 8, 0x08 }
+                        self  : struct RecursionStruct {
+                          value : { 8, 0x08 }
+                          self  : object@0x5652545d28f8
+                        }
+                      }
+PASS 0000000000  main /home/root/pro-test/demos/demo07/main.pt.cpp:772
+                      PASS: the condition evaluates to true:
+                      'format.str().find("object@") != std::string::npos'
+PASS 0000000000  main /home/root/pro-test/demos/demo07/main.pt.cpp:773
+                      PASS: the condition evaluates to true:
+                      'format.str().find("self : struct RecursionStruct") != std::string::npos'
+INFO             main -------------------------------------------------------------------------------
+                      Print a struct which has a std::set as member. Should be printed as
+                      object@<addr> since there is no custom printer function for std::set yet.
+                      -------------------------------------------------------------------------------
+INFO 0000000000  main /home/root/pro-test/demos/demo07/main.pt.cpp:789
+                      struct SetStruct {
+                        values : { object@0x5652545d2910 }
+                      }
+PASS 0000000000  main /home/root/pro-test/demos/demo07/main.pt.cpp:790
+                      PASS: the condition evaluates to true:
+                      'format.str().find("object@") != std::string::npos'
+INFO             main -------------------------------------------------------------------------------
+                      Print a struct which has a std::shared_ptr as member. Whereas there is a custom
+                      printer function for std::shared_ptr. since the protest- compiler cannot find
+                      the operator<<() with Dummy2 the printer function generation must be triggered
+                      explicit by using enforcePrinterGeneration
+                      -------------------------------------------------------------------------------
+INFO 0000000000  main /home/root/pro-test/demos/demo07/main.pt.cpp:814
+                      struct SharedPtrStruct {
+                        value : shared_ptr to struct Dummy2 {
+                          value : { 0, 0x00 }
+                        }
+                      }
+PASS 0000000000  main /home/root/pro-test/demos/demo07/main.pt.cpp:820
+                      PASS: the condition evaluates to true:
+                      'format.str() == expected'
+INFO             main -------------------------------------------------------------------------------
+                      Since there is a template function for std::vector<T> protest should use it.
+                      I.e.: it should print a nicely formatted list.
+                      -------------------------------------------------------------------------------
+INFO 0000000000  main /home/root/pro-test/demos/demo07/main.pt.cpp:838
+                      vector [
+                        struct Dummy3 {
+                          value : { 32, 0x20 }
+                        },
+                        struct Dummy3 {
+                          value : { 32, 0x20 }
+                        },
+                        struct Dummy3 {
+                          value : { 32, 0x20 }
+                        }
+                      ]
+FAIL 0000000000  main /home/root/pro-test/demos/demo07/main.pt.cpp:851
+                      FAIL: the condition evaluates to false:
+                      'format.str() == expected'
+INFO             main -------------------------------------------------------------------------------
+                      Since there is a specialization for std::vector<int> of the printer function,
+                      protest should prever it. I.e all elements should be printed as unformated
+                      integers.
+                      -------------------------------------------------------------------------------
+INFO 0000000000  main /home/root/pro-test/demos/demo07/main.pt.cpp:869
+                      vector [1, 2, 3]
+PASS 0000000000  main /home/root/pro-test/demos/demo07/main.pt.cpp:872
+                      PASS: the condition evaluates to true:
+                      'format.str() == expected'
+INFO             main -------------------------------------------------------------------------------
+                      Since this vector has more than 5 elements it should print a element per line.
+                      -------------------------------------------------------------------------------
+INFO 0000000000  main /home/root/pro-test/demos/demo07/main.pt.cpp:896
+                      vector [
+                        0,
+                        1,
+                        2,
+                        3,
+                        4,
+                        5,
+                        6,
+                        7,
+                        8,
+                        9
+                      ]
+PASS 0000000000  main /home/root/pro-test/demos/demo07/main.pt.cpp:910
+                      PASS: the condition evaluates to true:
+                      'format.str() == expected'
+INFO             main -------------------------------------------------------------------------------
+                      End section                                                    record types (6)
+                      ===============================================================================
+INFO             main -------------------------------------------------------------------------------
+                      Exit of 'main'
+                      -------------------------------------------------------------------------------
+                      *******************************************************************************
+                      * NUMBER OF FAILED ASSERTIONS: 1
+                      * /home/root/pro-test/demos/demo07/main.pt.cpp:851
+                      *******************************************************************************
+                      * FAILURES:                1                                               FAIL
+                      * WARNINGS:                0                                               PASS 
+                      * INV VIOLATION:           0                                               PASS 
+                      *
+                      * TOTAL:                                                                   FAIL
+                      *******************************************************************************

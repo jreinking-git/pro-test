@@ -1,0 +1,7 @@
+*.pyc
+.build
+build
+build.*
+.build.*
+*.dblite
+.vscode

@@ -1,0 +1,235 @@
+                      *******************************************************************************
+                      * @test           demo-04
+                      * @author         Janosch Reinking
+                      * @version        1.0.0
+                      * @date           01-01-2022 12-00-00
+                      *******************************************************************************
+INFO             main -------------------------------------------------------------------------------
+                      Start runner 'main'
+                      -------------------------------------------------------------------------------
+INFO             main ===============================================================================
+                      Section                                                         sample port (1)
+                      -------------------------------------------------------------------------------
+INFO             main Object of type Signal can be used for the communcation between diffrent Runner.
+                      A Runner can attach a SamplePort or QueuePort to the Signal in order to listen
+                      on it. The Signal itself can be used to send values.
+INFO             main -------------------------------------------------------------------------------
+                      A SamplePort will keep the last value received via the connected signal. The
+                      sample port can be cast to the type of the received value.
+                      -------------------------------------------------------------------------------
+PUSH 0000000000  main /home/root/pro-test/demos/demo04/main.pt.cpp:59
+                      Push value to 'mSignal1':
+                      { 4, 0x00000004 }
+PASS 0000000000  main /home/root/pro-test/demos/demo04/main.pt.cpp:62
+                      PASS: the condition evaluates to true:
+                      'static_cast<int>(mSamplePort) == 4'
+PASS 0000000000  main /home/root/pro-test/demos/demo04/main.pt.cpp:63
+                      PASS: the condition evaluates to true:
+                      'value == 4'
+PASS 0000000000  main /home/root/pro-test/demos/demo04/main.pt.cpp:64
+                      PASS: the condition evaluates to true:
+                      'mSamplePort == 4'
+INFO             main -------------------------------------------------------------------------------
+                      Listener can also be attached to a port in order to receive the messages.
+                      The callback has a parameter which can be omitted if the received value is
+                      not relevant.
+                      -------------------------------------------------------------------------------
+PUSH 0000000000  main /home/root/pro-test/demos/demo04/main.pt.cpp:87
+                      Push value to 'mSignal1':
+                      { 4, 0x00000004 }
+HDL  0000000000  main /home/root/pro-test/demos/demo04/main.pt.cpp:77
+                      Handle value of 'mSignal1':
+                      { 4, 0x00000004 }
+HDL  0000000000  main /home/root/pro-test/demos/demo04/main.pt.cpp:82
+                      Handle value of 'mSignal1':
+                      { 4, 0x00000004 }
+PASS 0000000000  main /home/root/pro-test/demos/demo04/main.pt.cpp:88
+                      PASS: the condition evaluates to true:
+                      'called == 2'
+PASS 0000000000  main /home/root/pro-test/demos/demo04/main.pt.cpp:89
+                      PASS: the condition evaluates to true:
+                      'value == 4'
+INFO             main -------------------------------------------------------------------------------
+                      Listener can also be removed
+                      -------------------------------------------------------------------------------
+PUSH 0000000000  main /home/root/pro-test/demos/demo04/main.pt.cpp:100
+                      Push value to 'mSignal1':
+                      { 4, 0x00000004 }
+PASS 0000000000  main /home/root/pro-test/demos/demo04/main.pt.cpp:101
+                      PASS: the condition evaluates to true:
+                      'called == 0'
+INFO             main -------------------------------------------------------------------------------
+                      A Runner can also wait until a SamplePort has a given value.
+                      -------------------------------------------------------------------------------
+WAIT 0000000000  main /home/root/pro-test/demos/demo04/main.pt.cpp:118
+                      Wait for condition:
+                      'mSamplePort == expectedValue'
+EXPR 0000001000  main /home/root/pro-test/demos/demo04/main.pt.cpp:112
+                      Timer '<anno>' expired after:
+                      1000 ms
+PUSH 0000001000  main /home/root/pro-test/demos/demo04/main.pt.cpp:113
+                      Push value to 'mSignal1':
+                      { 5, 0x00000005 }
+RESM 0000001000  main /home/root/pro-test/demos/demo04/main.pt.cpp:118
+                      Condition is fulfilled:
+                      'mSamplePort == expectedValue'
+PASS 0000001000  main /home/root/pro-test/demos/demo04/main.pt.cpp:120
+                      PASS: the condition evaluates to true:
+                      'sw.lap() == timeout'
+PASS 0000001000  main /home/root/pro-test/demos/demo04/main.pt.cpp:121
+                      PASS: the condition evaluates to true:
+                      'mSamplePort == expectedValue'
+INFO             main -------------------------------------------------------------------------------
+                      Filter can be used to ignore certain values.
+                      -------------------------------------------------------------------------------
+WAIT 0000001000  main /home/root/pro-test/demos/demo04/main.pt.cpp:139
+                      Wait for condition:
+                      'mSamplePort == filteredValue'
+EXPR 0000001500  main /home/root/pro-test/demos/demo04/main.pt.cpp:134
+                      Timer '<anno>' expired after:
+                      500 ms
+PUSH 0000001500  main /home/root/pro-test/demos/demo04/main.pt.cpp:135
+                      Push value to 'mSignal1':
+                      { 42, 0x0000002a }
+RESM 0000002000  main /home/root/pro-test/demos/demo04/main.pt.cpp:139
+                      Condition is not fulfilled (timeout after 1000 ms):
+                      'mSamplePort == filteredValue'
+PASS 0000002000  main /home/root/pro-test/demos/demo04/main.pt.cpp:140
+                      PASS: the condition evaluates to true:
+                      '!success'
+INFO             main -------------------------------------------------------------------------------
+                      Remove the filter again
+                      -------------------------------------------------------------------------------
+WAIT 0000002000  main /home/root/pro-test/demos/demo04/main.pt.cpp:155
+                      Wait for condition:
+                      'mSamplePort == 42'
+EXPR 0000002500  main /home/root/pro-test/demos/demo04/main.pt.cpp:150
+                      Timer '<anno>' expired after:
+                      500 ms
+PUSH 0000002500  main /home/root/pro-test/demos/demo04/main.pt.cpp:151
+                      Push value to 'mSignal1':
+                      { 42, 0x0000002a }
+RESM 0000002500  main /home/root/pro-test/demos/demo04/main.pt.cpp:155
+                      Condition is fulfilled:
+                      'mSamplePort == 42'
+PASS 0000002500  main /home/root/pro-test/demos/demo04/main.pt.cpp:156
+                      PASS: the condition evaluates to true:
+                      'success'
+INFO             main -------------------------------------------------------------------------------
+                      With setPrinterFunction() the user can use there own printer function for the
+                      port. The printer function is only used, when there is at least a listener
+                      which triggers a log message.
+                      -------------------------------------------------------------------------------
+PUSH 0000002500  main /home/root/pro-test/demos/demo04/main.pt.cpp:173
+                      Push value to 'mSignal1':
+                      { 32, 0x00000020 }
+HDL  0000002500  main /home/root/pro-test/demos/demo04/main.pt.cpp:171
+                      This is my value:
+                      32
+INFO             main -------------------------------------------------------------------------------
+                      End section                                                     sample port (1)
+                      ===============================================================================
+INFO             main ===============================================================================
+                      Section                                                          queue port (2)
+                      -------------------------------------------------------------------------------
+INFO             main In contrast to the SamplePort a QueuePort stores the received values in a Queue.
+                      -------------------------------------------------------------------------------
+PUSH 0000002500  main /home/root/pro-test/demos/demo04/main.pt.cpp:185
+                      Push value to 'mSignal2':
+                      { 1, 0x00000001 }
+PUSH 0000002500  main /home/root/pro-test/demos/demo04/main.pt.cpp:186
+                      Push value to 'mSignal2':
+                      { 2, 0x00000002 }
+PASS 0000002500  main /home/root/pro-test/demos/demo04/main.pt.cpp:188
+                      PASS: the condition evaluates to true:
+                      'mQueuePort.size() == 2'
+POP  0000002500  main /home/root/pro-test/demos/demo04/main.pt.cpp:189
+                      Pop value from 'mQueuePort':
+                      { 1, 0x00000001 }
+POP  0000002500  main /home/root/pro-test/demos/demo04/main.pt.cpp:190
+                      Pop value from 'mQueuePort':
+                      { 2, 0x00000002 }
+PASS 0000002500  main /home/root/pro-test/demos/demo04/main.pt.cpp:191
+                      PASS: the condition evaluates to true:
+                      'v1 == 1'
+PASS 0000002500  main /home/root/pro-test/demos/demo04/main.pt.cpp:192
+                      PASS: the condition evaluates to true:
+                      'v2 == 2'
+INFO             main -------------------------------------------------------------------------------
+                      Analogously to the Sample port listener can be attached to the port.
+                      -------------------------------------------------------------------------------
+PUSH 0000002500  main /home/root/pro-test/demos/demo04/main.pt.cpp:214
+                      Push value to 'mSignal2':
+                      { 4, 0x00000004 }
+HDL  0000002500  main /home/root/pro-test/demos/demo04/main.pt.cpp:204
+                      Handle value of 'mSignal2':
+                      { 4, 0x00000004 }
+HDL  0000002500  main /home/root/pro-test/demos/demo04/main.pt.cpp:209
+                      Handle value of 'mSignal2':
+                      { 4, 0x00000004 }
+PASS 0000002500  main /home/root/pro-test/demos/demo04/main.pt.cpp:215
+                      PASS: the condition evaluates to true:
+                      'called == 2'
+PASS 0000002500  main /home/root/pro-test/demos/demo04/main.pt.cpp:216
+                      PASS: the condition evaluates to true:
+                      'value = 4'
+POP  0000002500  main /home/root/pro-test/demos/demo04/main.pt.cpp:217
+                      Pop value from 'mQueuePort':
+                      { 4, 0x00000004 }
+INFO             main -------------------------------------------------------------------------------
+                      Listener can also be removed
+                      -------------------------------------------------------------------------------
+PUSH 0000002500  main /home/root/pro-test/demos/demo04/main.pt.cpp:229
+                      Push value to 'mSignal2':
+                      { 4, 0x00000004 }
+PASS 0000002500  main /home/root/pro-test/demos/demo04/main.pt.cpp:230
+                      PASS: the condition evaluates to true:
+                      'called == 0'
+POP  0000002500  main /home/root/pro-test/demos/demo04/main.pt.cpp:231
+                      Pop value from 'mQueuePort':
+                      { 4, 0x00000004 }
+INFO             main -------------------------------------------------------------------------------
+                      One can also add filter to ignore certain values
+                      -------------------------------------------------------------------------------
+PUSH 0000002500  main /home/root/pro-test/demos/demo04/main.pt.cpp:245
+                      Push value to 'mSignal2':
+                      { 42, 0x0000002a }
+PASS 0000002500  main /home/root/pro-test/demos/demo04/main.pt.cpp:246
+                      PASS: the condition evaluates to true:
+                      '!mQueuePort.isAvailable()'
+INFO             main -------------------------------------------------------------------------------
+                      Remove the filter again
+                      -------------------------------------------------------------------------------
+PUSH 0000002500  main /home/root/pro-test/demos/demo04/main.pt.cpp:255
+                      Push value to 'mSignal2':
+                      { 42, 0x0000002a }
+POP  0000002500  main /home/root/pro-test/demos/demo04/main.pt.cpp:257
+                      Pop value from 'mQueuePort':
+                      { 42, 0x0000002a }
+PASS 0000002500  main /home/root/pro-test/demos/demo04/main.pt.cpp:258
+                      PASS: the condition evaluates to true:
+                      'v4 == filteredValue'
+INFO             main -------------------------------------------------------------------------------
+                      With setPrinterFunction() the user can use there own printer function for the
+                      port. The printer function is only used, when there is at least a listener
+                      which triggers a log message.
+                      -------------------------------------------------------------------------------
+PUSH 0000002500  main /home/root/pro-test/demos/demo04/main.pt.cpp:275
+                      Push value to 'mSignal2':
+                      { 32, 0x00000020 }
+HDL  0000002500  main /home/root/pro-test/demos/demo04/main.pt.cpp:273
+                      This is my value:
+                      32
+INFO             main -------------------------------------------------------------------------------
+                      End section                                                      queue port (2)
+                      ===============================================================================
+INFO             main -------------------------------------------------------------------------------
+                      Exit of 'main'
+                      -------------------------------------------------------------------------------
+                      *******************************************************************************
+                      * FAILURES:                0                                               PASS
+                      * WARNINGS:                0                                               PASS 
+                      * INV VIOLATION:           0                                               PASS 
+                      *
+                      * TOTAL:                                                                   PASS
+                      *******************************************************************************

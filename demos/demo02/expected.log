@@ -1,0 +1,187 @@
+                      *******************************************************************************
+                      * @test           demo-02
+                      * @author         Janosch Reinking
+                      * @version        1.0.0
+                      * @date           01-01-2022 12-00-00
+                      *******************************************************************************
+INFO             main -------------------------------------------------------------------------------
+                      Start runner 'main'
+                      -------------------------------------------------------------------------------
+INFO             main ===============================================================================
+                      Section                                                         timer basic (1)
+                      -------------------------------------------------------------------------------
+INFO             main This should create a timer which expires after 1000 ms.
+                      -------------------------------------------------------------------------------
+WAIT 0000000000  main /home/root/pro-test/demos/demo02/main.pt.cpp:45
+                      Wait for 1000 ms
+EXPR 0000001000  main /home/root/pro-test/demos/demo02/main.pt.cpp:39
+                      Timer 'timer' expired after:
+                      1000 ms
+WAIT 0000001000  main /home/root/pro-test/demos/demo02/main.pt.cpp:45
+                      Timeout of 1000 ms elapsed!
+PASS 0000001000  main /home/root/pro-test/demos/demo02/main.pt.cpp:47
+                      PASS: the condition evaluates to true:
+                      'i == 1'
+INFO             main -------------------------------------------------------------------------------
+                      The timer should immediatly started and expires after 1000 ms.
+                      -------------------------------------------------------------------------------
+WAIT 0000001000  main /home/root/pro-test/demos/demo02/main.pt.cpp:64
+                      Wait for 1000 ms
+EXPR 0000002000  main /home/root/pro-test/demos/demo02/main.pt.cpp:59
+                      Timer '<anno>' expired after:
+                      1000 ms
+WAIT 0000002000  main /home/root/pro-test/demos/demo02/main.pt.cpp:64
+                      Timeout of 1000 ms elapsed!
+PASS 0000002000  main /home/root/pro-test/demos/demo02/main.pt.cpp:66
+                      PASS: the condition evaluates to true:
+                      'i == 1'
+INFO             main -------------------------------------------------------------------------------
+                      The method @c stop can be used to stop a running timer.
+                      -------------------------------------------------------------------------------
+WAIT 0000002000  main /home/root/pro-test/demos/demo02/main.pt.cpp:83
+                      Wait for 500 ms
+WAIT 0000002500  main /home/root/pro-test/demos/demo02/main.pt.cpp:83
+                      Timeout of 500 ms elapsed!
+WAIT 0000002500  main /home/root/pro-test/demos/demo02/main.pt.cpp:85
+                      Wait for 500 ms
+WAIT 0000003000  main /home/root/pro-test/demos/demo02/main.pt.cpp:85
+                      Timeout of 500 ms elapsed!
+PASS 0000003000  main /home/root/pro-test/demos/demo02/main.pt.cpp:87
+                      PASS: the condition evaluates to true:
+                      'i == 0'
+INFO             main -------------------------------------------------------------------------------
+                      @c reset can be used to start the timer from zero again. This method can be
+                      called on running but also on stopped timers. In both cases the timer starts
+                      from zero.
+                      -------------------------------------------------------------------------------
+WAIT 0000003000  main /home/root/pro-test/demos/demo02/main.pt.cpp:105
+                      Wait for 500 ms
+WAIT 0000003500  main /home/root/pro-test/demos/demo02/main.pt.cpp:105
+                      Timeout of 500 ms elapsed!
+WAIT 0000003500  main /home/root/pro-test/demos/demo02/main.pt.cpp:107
+                      Wait for 500 ms
+WAIT 0000004000  main /home/root/pro-test/demos/demo02/main.pt.cpp:107
+                      Timeout of 500 ms elapsed!
+WAIT 0000004000  main /home/root/pro-test/demos/demo02/main.pt.cpp:110
+                      Wait for 500 ms
+WAIT 0000004500  main /home/root/pro-test/demos/demo02/main.pt.cpp:110
+                      Timeout of 500 ms elapsed!
+PASS 0000004500  main /home/root/pro-test/demos/demo02/main.pt.cpp:112
+                      PASS: the condition evaluates to true:
+                      'i == 0'
+WAIT 0000004500  main /home/root/pro-test/demos/demo02/main.pt.cpp:114
+                      Wait for 500 ms
+EXPR 0000005000  main /home/root/pro-test/demos/demo02/main.pt.cpp:100
+                      Timer 'timer' expired after:
+                      1000 ms
+WAIT 0000005000  main /home/root/pro-test/demos/demo02/main.pt.cpp:114
+                      Timeout of 500 ms elapsed!
+PASS 0000005000  main /home/root/pro-test/demos/demo02/main.pt.cpp:116
+                      PASS: the condition evaluates to true:
+                      'i == 1'
+INFO             main -------------------------------------------------------------------------------
+                      Recursive timers should work
+                      -------------------------------------------------------------------------------
+WAIT 0000005000  main /home/root/pro-test/demos/demo02/main.pt.cpp:133
+                      Wait for 2000 ms
+EXPR 0000006000  main /home/root/pro-test/demos/demo02/main.pt.cpp:127
+                      Timer '<anno>' expired after:
+                      1000 ms
+EXPR 0000007000  main /home/root/pro-test/demos/demo02/main.pt.cpp:128
+                      Timer '<anno>' expired after:
+                      1000 ms
+WAIT 0000007000  main /home/root/pro-test/demos/demo02/main.pt.cpp:133
+                      Timeout of 2000 ms elapsed!
+PASS 0000007000  main /home/root/pro-test/demos/demo02/main.pt.cpp:135
+                      PASS: the condition evaluates to true:
+                      'i == 1'
+INFO             main -------------------------------------------------------------------------------
+                      By adding a parameter to the callback it is possible to access and restart the
+                      timer from the callback itself.
+                      -------------------------------------------------------------------------------
+WAIT 0000007000  main /home/root/pro-test/demos/demo02/main.pt.cpp:159
+                      Wait for 10000 ms
+EXPR 0000008000  main /home/root/pro-test/demos/demo02/main.pt.cpp:147
+                      Timer '<anno>' expired after:
+                      1000 ms
+INFO             main 1
+EXPR 0000009000  main /home/root/pro-test/demos/demo02/main.pt.cpp:147
+                      Timer '<anno>' expired after:
+                      1000 ms
+INFO             main 2
+EXPR 0000010000  main /home/root/pro-test/demos/demo02/main.pt.cpp:147
+                      Timer '<anno>' expired after:
+                      1000 ms
+INFO             main 3
+EXPR 0000011000  main /home/root/pro-test/demos/demo02/main.pt.cpp:147
+                      Timer '<anno>' expired after:
+                      1000 ms
+INFO             main 4
+EXPR 0000012000  main /home/root/pro-test/demos/demo02/main.pt.cpp:147
+                      Timer '<anno>' expired after:
+                      1000 ms
+INFO             main 5
+EXPR 0000013000  main /home/root/pro-test/demos/demo02/main.pt.cpp:147
+                      Timer '<anno>' expired after:
+                      1000 ms
+INFO             main 6
+EXPR 0000014000  main /home/root/pro-test/demos/demo02/main.pt.cpp:147
+                      Timer '<anno>' expired after:
+                      1000 ms
+WAIT 0000017000  main /home/root/pro-test/demos/demo02/main.pt.cpp:159
+                      Timeout of 10000 ms elapsed!
+PASS 0000017000  main /home/root/pro-test/demos/demo02/main.pt.cpp:161
+                      PASS: the condition evaluates to true:
+                      'i == 7'
+INFO             main -------------------------------------------------------------------------------
+                      A timer can be started or stopped via the methods @c stop and @c start
+                      -------------------------------------------------------------------------------
+WAIT 0000017000  main /home/root/pro-test/demos/demo02/main.pt.cpp:176
+                      Wait for 500 ms
+WAIT 0000017500  main /home/root/pro-test/demos/demo02/main.pt.cpp:176
+                      Timeout of 500 ms elapsed!
+WAIT 0000017500  main /home/root/pro-test/demos/demo02/main.pt.cpp:178
+                      Wait for 500 ms
+WAIT 0000018000  main /home/root/pro-test/demos/demo02/main.pt.cpp:178
+                      Timeout of 500 ms elapsed!
+PASS 0000018000  main /home/root/pro-test/demos/demo02/main.pt.cpp:180
+                      PASS: the condition evaluates to true:
+                      'i == 0'
+WAIT 0000018000  main /home/root/pro-test/demos/demo02/main.pt.cpp:181
+                      Wait for 500 ms
+EXPR 0000018500  main /home/root/pro-test/demos/demo02/main.pt.cpp:172
+                      Timer 'stopAndGo' expired after:
+                      1000 ms
+WAIT 0000018500  main /home/root/pro-test/demos/demo02/main.pt.cpp:181
+                      Timeout of 500 ms elapsed!
+PASS 0000018500  main /home/root/pro-test/demos/demo02/main.pt.cpp:183
+                      PASS: the condition evaluates to true:
+                      'i == 1'
+INFO             main -------------------------------------------------------------------------------
+                      Other protest api function can also be called inside the callback. Since the
+                      compiler will evaluate the expr from inner to outer the @c assertThat will be
+                      handled before @c createTimer.
+                      -------------------------------------------------------------------------------
+WAIT 0000018500  main /home/root/pro-test/demos/demo02/main.pt.cpp:200
+                      Wait for 1000 ms
+EXPR 0000019500  main /home/root/pro-test/demos/demo02/main.pt.cpp:197
+                      Timer '<anno>' expired after:
+                      1000 ms
+PASS 0000019500  main /home/root/pro-test/demos/demo02/main.pt.cpp:198
+                      PASS: the condition evaluates to true:
+                      'true'
+WAIT 0000019500  main /home/root/pro-test/demos/demo02/main.pt.cpp:200
+                      Timeout of 1000 ms elapsed!
+INFO             main -------------------------------------------------------------------------------
+                      End section                                                     timer basic (1)
+                      ===============================================================================
+INFO             main -------------------------------------------------------------------------------
+                      Exit of 'main'
+                      -------------------------------------------------------------------------------
+                      *******************************************************************************
+                      * FAILURES:                0                                               PASS
+                      * WARNINGS:                0                                               PASS 
+                      * INV VIOLATION:           0                                               PASS 
+                      *
+                      * TOTAL:                                                                   PASS
+                      *******************************************************************************

@@ -1,0 +1,10 @@
+@PACKAGE_INIT@
+
+find_package(Clang REQUIRED 15.0.0)
+
+include(${CMAKE_CURRENT_LIST_DIR}/Protest.cmake)
+set_and_check(Protest_INCLUDE_DIR "@PACKAGE_CMAKE_INSTALL_INCLUDEDIR@")
+set(Protest_LIBRARIES Protest::Protest)
+check_required_components(Protest)
+list(PREPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_LIST_DIR}/modules)
+set(PROTEST_MODULE_PATH ${CMAKE_CURRENT_LIST_DIR}/modules)

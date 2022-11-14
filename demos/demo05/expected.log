@@ -1,0 +1,103 @@
+                      *******************************************************************************
+                      * @test           demo-05
+                      * @author         Janosch Reinking
+                      * @version        1.0.0
+                      * @date           01-01-2022 12-00-00
+                      *******************************************************************************
+INFO             main -------------------------------------------------------------------------------
+                      Start runner 'main'
+                      -------------------------------------------------------------------------------
+INFO             main ===============================================================================
+                      Section                                                     invariant basic (1)
+                      -------------------------------------------------------------------------------
+INFO             main A invariant describes a condition which must always met. When ever a part of
+                      the condition changed, the invariant will be re-evaluated.
+INFO             main -------------------------------------------------------------------------------
+                      Since the value of mSamplePort is smaller then 5 the invariants holds.
+                      -------------------------------------------------------------------------------
+PASS 0000000000  main /home/root/pro-test/demos/demo05/main.pt.cpp:56
+                      PASS: the condition evaluates to true:
+                      'inv1.holds()'
+INFO             main -------------------------------------------------------------------------------
+                      By pushing the value 6 to mSignal1 the invariant does not hold any more. The
+                      violation will be reported once.
+                      -------------------------------------------------------------------------------
+PUSH 0000000000  main /home/root/pro-test/demos/demo05/main.pt.cpp:64
+                      Push value to 'mSignal1':
+                      { 5, 0x00000005 }
+INV  0000000000  main /home/root/pro-test/demos/demo05/main.pt.cpp:55
+                      Invariant does not hold:
+                      'mSamplePort < 5'
+PASS 0000000000  main /home/root/pro-test/demos/demo05/main.pt.cpp:65
+                      PASS: the condition evaluates to true:
+                      '!inv1.holds()'
+PASS 0000000000  main /home/root/pro-test/demos/demo05/main.pt.cpp:66
+                      PASS: the condition evaluates to true:
+                      'tm.getNumberOfFailedInvariants() == 1'
+INFO             main -------------------------------------------------------------------------------
+                      The method @c stop can be used to disable an invariant. It can be reactivated
+                      by using @c start.
+                      -------------------------------------------------------------------------------
+PUSH 0000000000  main /home/root/pro-test/demos/demo05/main.pt.cpp:79
+                      Push value to 'mSignal1':
+                      { 100, 0x00000064 }
+PASS 0000000000  main /home/root/pro-test/demos/demo05/main.pt.cpp:80
+                      PASS: the condition evaluates to true:
+                      'inv2.holds()'
+PUSH 0000000000  main /home/root/pro-test/demos/demo05/main.pt.cpp:81
+                      Push value to 'mSignal1':
+                      { 1, 0x00000001 }
+PASS 0000000000  main /home/root/pro-test/demos/demo05/main.pt.cpp:84
+                      PASS: the condition evaluates to true:
+                      'inv2.holds()'
+PASS 0000000000  main /home/root/pro-test/demos/demo05/main.pt.cpp:85
+                      PASS: the condition evaluates to true:
+                      'tm.getNumberOfFailedInvariants() == 1'
+INFO             main -------------------------------------------------------------------------------
+                      An invariant that does not hold on creating should also report an
+                      violation.
+                      -------------------------------------------------------------------------------
+PUSH 0000000000  main /home/root/pro-test/demos/demo05/main.pt.cpp:94
+                      Push value to 'mSignal1':
+                      { 100, 0x00000064 }
+INV  0000000000  main /home/root/pro-test/demos/demo05/main.pt.cpp:95
+                      Invariant does not hold:
+                      'mSamplePort != 100'
+PASS 0000000000  main /home/root/pro-test/demos/demo05/main.pt.cpp:98
+                      PASS: the condition evaluates to true:
+                      '!inv3.holds()'
+INFO             main 2
+PASS 0000000000  main /home/root/pro-test/demos/demo05/main.pt.cpp:100
+                      PASS: the condition evaluates to true:
+                      'tm.getNumberOfFailedInvariants() == 2'
+INFO             main -------------------------------------------------------------------------------
+                      A invariant is active as long as the handle exists. The following code
+                      should not report an vialation of the invariant.
+                      -------------------------------------------------------------------------------
+PUSH 0000000000  main /home/root/pro-test/demos/demo05/main.pt.cpp:111
+                      Push value to 'mSignal1':
+                      { 1000, 0x000003e8 }
+INFO             main -------------------------------------------------------------------------------
+                      A invariant which was not created by the test can be retrieved using the
+                      @c TestManager.
+                      -------------------------------------------------------------------------------
+PASS 0000000000  main /home/root/pro-test/demos/demo05/main.pt.cpp:123
+                      PASS: the condition evaluates to true:
+                      'tm.getNumberOfNotExecutedInvariants() == 1'
+INFO             main -------------------------------------------------------------------------------
+                      End section                                                 invariant basic (1)
+                      ===============================================================================
+INFO             main -------------------------------------------------------------------------------
+                      Exit of 'main'
+                      -------------------------------------------------------------------------------
+                      *******************************************************************************
+                      * NUMBER OF VIOLATED INVARIANTS: 2
+                      * /home/root/pro-test/demos/demo05/main.pt.cpp:55
+                      * /home/root/pro-test/demos/demo05/main.pt.cpp:95
+                      *******************************************************************************
+                      * FAILURES:                0                                               PASS
+                      * WARNINGS:                0                                               PASS 
+                      * INV VIOLATION:           2                                               FAIL
+                      *
+                      * TOTAL:                                                                   FAIL
+                      *******************************************************************************

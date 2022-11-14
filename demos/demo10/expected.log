@@ -1,0 +1,111 @@
+                      *******************************************************************************
+                      * @test           demo-10
+                      * @author         Janosch Reinking
+                      * @version        1.0.0
+                      * @date           01-01-2022 12-00-00
+                      *******************************************************************************
+INFO             main -------------------------------------------------------------------------------
+                      Start runner 'main'
+                      -------------------------------------------------------------------------------
+INFO             main ===============================================================================
+                      Section                                                            template (1)
+                      -------------------------------------------------------------------------------
+PASS 0000000000  main /home/root/pro-test/demos/demo10/main.pt.cpp:31
+                      PASS: the condition evaluates to true:
+                      'param == 42'
+PASS 0000000000  main /home/root/pro-test/demos/demo10/main.pt.cpp:35
+                      PASS: the condition evaluates to true:
+                      'true'
+PASS 0000000000  main /home/root/pro-test/demos/demo10/main.pt.cpp:49
+                      PASS: the condition evaluates to true:
+                      'param == 42'
+PASS 0000000000  main /home/root/pro-test/demos/demo10/main.pt.cpp:53
+                      PASS: the condition evaluates to true:
+                      'true'
+PASS 0000000000  main /home/root/pro-test/demos/demo10/main.pt.cpp:61
+                      PASS: the condition evaluates to true:
+                      'true'
+PASS 0000000000  main /home/root/pro-test/demos/demo10/main.pt.cpp:76
+                      PASS: the condition evaluates to true:
+                      'param == 42'
+PASS 0000000000  main /home/root/pro-test/demos/demo10/main.pt.cpp:80
+                      PASS: the condition evaluates to true:
+                      'true'
+PASS 0000000000  main /home/root/pro-test/demos/demo10/main.pt.cpp:88
+                      PASS: the condition evaluates to true:
+                      'true'
+INFO             main -------------------------------------------------------------------------------
+                      End section                                                        template (1)
+                      ===============================================================================
+INFO             main ===============================================================================
+                      Section                                             lambda / generic lambda (2)
+                      -------------------------------------------------------------------------------
+PASS 0000000000  main /home/root/pro-test/demos/demo10/main.pt.cpp:156
+                      PASS: the condition evaluates to true:
+                      'true'
+PASS 0000000000  main /home/root/pro-test/demos/demo10/main.pt.cpp:166
+                      PASS: the condition evaluates to true:
+                      'param == anyValue'
+PASS 0000000000  main /home/root/pro-test/demos/demo10/main.pt.cpp:178
+                      PASS: the condition evaluates to true:
+                      'param == anyValue'
+PASS 0000000000  main /home/root/pro-test/demos/demo10/main.pt.cpp:188
+                      PASS: the condition evaluates to true:
+                      'param == anyValue'
+PASS 0000000000  main /home/root/pro-test/demos/demo10/main.pt.cpp:188
+                      PASS: the condition evaluates to true:
+                      'param == anyValue'
+PASS 0000000000  main /home/root/pro-test/demos/demo10/main.pt.cpp:188
+                      PASS: the condition evaluates to true:
+                      'param == anyValue'
+PASS 0000000000  main /home/root/pro-test/demos/demo10/main.pt.cpp:203
+                      PASS: the condition evaluates to true:
+                      'param == anyValue'
+PASS 0000000000  main /home/root/pro-test/demos/demo10/main.pt.cpp:203
+                      PASS: the condition evaluates to true:
+                      'param == anyValue'
+PASS 0000000000  main /home/root/pro-test/demos/demo10/main.pt.cpp:203
+                      PASS: the condition evaluates to true:
+                      'param == anyValue'
+PUSH 0000000000  main /home/root/pro-test/demos/demo10/main.pt.cpp:238
+                      Push value to 'structSignal':
+                      struct Result {
+                        mValue : { 42, 0x0000002a }
+                      }
+HDL  0000000000  main /home/root/pro-test/demos/demo10/main.pt.cpp:211
+                      Handle value of 'structSignal':
+                      struct Result {
+                        mValue : { 42, 0x0000002a }
+                      }
+PASS 0000000000  main /home/root/pro-test/demos/demo10/main.pt.cpp:216
+                      PASS: the condition evaluates to true:
+                      'true'
+HDL  0000000000  main /home/root/pro-test/demos/demo10/main.pt.cpp:219
+                      Handle value of 'structSignal':
+                      struct Result {
+                        mValue : { 42, 0x0000002a }
+                      }
+PASS 0000000000  main /home/root/pro-test/demos/demo10/main.pt.cpp:224
+                      PASS: the condition evaluates to true:
+                      'param.mValue == 42'
+HDL  0000000000  main /home/root/pro-test/demos/demo10/main.pt.cpp:227
+                      Handle value of 'structSignal':
+                      struct Result {
+                        mValue : { 42, 0x0000002a }
+                      }
+PASS 0000000000  main /home/root/pro-test/demos/demo10/main.pt.cpp:234
+                      PASS: the condition evaluates to true:
+                      'param.mValue == 42'
+INFO             main -------------------------------------------------------------------------------
+                      End section                                         lambda / generic lambda (2)
+                      ===============================================================================
+INFO             main -------------------------------------------------------------------------------
+                      Exit of 'main'
+                      -------------------------------------------------------------------------------
+                      *******************************************************************************
+                      * FAILURES:                0                                               PASS
+                      * WARNINGS:                0                                               PASS 
+                      * INV VIOLATION:           0                                               PASS 
+                      *
+                      * TOTAL:                                                                   PASS
+                      *******************************************************************************
