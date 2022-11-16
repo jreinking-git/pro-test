@@ -45,10 +45,24 @@ UniversalStream::incrementIndent()
 }
 
 void
+UniversalStream::incrementIndent(size_t indent)
+{
+  mIndent += indent;
+  assert(mIndent >= indent);
+}
+
+void
 UniversalStream::decrementIndent()
 {
   assert(mIndent >= 2);
   mIndent -= 2;
+}
+
+void
+UniversalStream::decrementIndent(size_t indent)
+{
+  assert(mIndent >= indent);
+  mIndent -= indent;
 }
 
 // ---------------------------------------------------------------------------

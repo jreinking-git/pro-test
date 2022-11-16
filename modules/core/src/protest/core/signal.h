@@ -128,7 +128,6 @@ Signal<T>::push(T value, meta::CallContext& context)
     stream.operator std::ostream&()
         << "Push value to '" << getSignalInfo().getObjectName() << "':\n";
     runner->getLogger().getStream() << value;
-    stream.operator std::ostream&() << "\n";
   }
 
   auto n = mSamplePorts.numberOfElements();

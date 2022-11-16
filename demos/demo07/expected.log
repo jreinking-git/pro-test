@@ -102,18 +102,18 @@ INFO             main ----------------------------------------------------------
                       Print a pointer to float
                       -------------------------------------------------------------------------------
 INFO 0000000000  main /home/root/pro-test/demos/demo07/main.pt.cpp:478
-                      { -1.32f }
+                      @0x55e3a2bee8e0 -> { -1.32f }
 PASS 0000000000  main /home/root/pro-test/demos/demo07/main.pt.cpp:479
                       PASS: the condition evaluates to true:
-                      'format.str() == "{ -1.32f }"'
+                      'format.str().find("{ -1.32f }") != std::string::npos'
 INFO             main -------------------------------------------------------------------------------
                       Print a pointer to uint8_t
                       -------------------------------------------------------------------------------
 INFO 0000000000  main /home/root/pro-test/demos/demo07/main.pt.cpp:493
-                      { 42, 0x2a }
+                      @0x55e3a2bee8e0 -> { 42, 0x2a }
 PASS 0000000000  main /home/root/pro-test/demos/demo07/main.pt.cpp:494
                       PASS: the condition evaluates to true:
-                      'format.str() == "{ 42, 0x2a }"'
+                      'format.str().find("{ 42, 0x2a }") != std::string::npos'
 INFO             main -------------------------------------------------------------------------------
                       End section                                      pointer to primitive types (4)
                       ===============================================================================
@@ -216,80 +216,80 @@ INFO             main ----------------------------------------------------------
                       -------------------------------------------------------------------------------
 INFO 0000000000  main /home/root/pro-test/demos/demo07/main.pt.cpp:689
                       struct PtrStruct {
-                        value : { 32, 0x20 }
+                        value : @0x55e3a2bee8df -> { 32, 0x20 }
                       }
-PASS 0000000000  main /home/root/pro-test/demos/demo07/main.pt.cpp:693
+PASS 0000000000  main /home/root/pro-test/demos/demo07/main.pt.cpp:691
                       PASS: the condition evaluates to true:
-                      'format.str() == expected'
+                      'format.str().find(expected) != std::string::npos'
 INFO             main -------------------------------------------------------------------------------
                       Print a struct which has a ptr to a other struct. The protest-compiler should
                       be able to see the usage in the AST. A printer function should be generated.
                       -------------------------------------------------------------------------------
-INFO 0000000000  main /home/root/pro-test/demos/demo07/main.pt.cpp:711
+INFO 0000000000  main /home/root/pro-test/demos/demo07/main.pt.cpp:709
                       struct PtrStruct2 {
-                        ptr : struct Pointee {
+                        ptr : @0x55e3a2bee8df -> struct Pointee {
                           value : { 32, 0x20 }
                         }
                       }
-PASS 0000000000  main /home/root/pro-test/demos/demo07/main.pt.cpp:717
+PASS 0000000000  main /home/root/pro-test/demos/demo07/main.pt.cpp:711
                       PASS: the condition evaluates to true:
-                      'format.str() == expected'
+                      'format.str().find(expected) != std::string::npos'
 INFO             main -------------------------------------------------------------------------------
                       Print a struct which has a depth of 3. Protest should only print 2 of them
                       since the max depth is currently 2. The third should be printed as
                       object@<addr>.
                       -------------------------------------------------------------------------------
-INFO 0000000000  main /home/root/pro-test/demos/demo07/main.pt.cpp:733
+INFO 0000000000  main /home/root/pro-test/demos/demo07/main.pt.cpp:727
                       struct StructDepth3 {
                         value : struct StructDepth2 {
-                          value : object@0x5652545d28a0
+                          value : object@0x55e3a2bee8e0
                         }
                       }
-PASS 0000000000  main /home/root/pro-test/demos/demo07/main.pt.cpp:734
+PASS 0000000000  main /home/root/pro-test/demos/demo07/main.pt.cpp:728
                       PASS: the condition evaluates to true:
                       'format.str().find("object@") != std::string::npos'
-PASS 0000000000  main /home/root/pro-test/demos/demo07/main.pt.cpp:735
+PASS 0000000000  main /home/root/pro-test/demos/demo07/main.pt.cpp:729
                       PASS: the condition evaluates to true:
                       'format.str().find("StructDepth1") == std::string::npos'
 INFO             main -------------------------------------------------------------------------------
                       Print a struct which has a depth of 2.
                       -------------------------------------------------------------------------------
-INFO 0000000000  main /home/root/pro-test/demos/demo07/main.pt.cpp:749
+INFO 0000000000  main /home/root/pro-test/demos/demo07/main.pt.cpp:743
                       struct StructDepth2 {
                         value : struct StructDepth1 {
                           value : { 32, 0x20 }
                         }
                       }
-PASS 0000000000  main /home/root/pro-test/demos/demo07/main.pt.cpp:755
+PASS 0000000000  main /home/root/pro-test/demos/demo07/main.pt.cpp:749
                       PASS: the condition evaluates to true:
                       'format.str() == expected'
 INFO             main -------------------------------------------------------------------------------
                       Print a struct which has a pointer to itself. The recursion should stop on
                       depth 2.
                       -------------------------------------------------------------------------------
-INFO 0000000000  main /home/root/pro-test/demos/demo07/main.pt.cpp:771
+INFO 0000000000  main /home/root/pro-test/demos/demo07/main.pt.cpp:765
                       struct RecursionStruct {
                         value : { 8, 0x08 }
-                        self  : struct RecursionStruct {
+                        self  : @0x55e3a2bee930 -> struct RecursionStruct {
                           value : { 8, 0x08 }
-                          self  : object@0x5652545d28f8
+                          self  : object@0x55e3a2bee938
                         }
                       }
-PASS 0000000000  main /home/root/pro-test/demos/demo07/main.pt.cpp:772
+PASS 0000000000  main /home/root/pro-test/demos/demo07/main.pt.cpp:766
                       PASS: the condition evaluates to true:
                       'format.str().find("object@") != std::string::npos'
-PASS 0000000000  main /home/root/pro-test/demos/demo07/main.pt.cpp:773
+PASS 0000000000  main /home/root/pro-test/demos/demo07/main.pt.cpp:767
                       PASS: the condition evaluates to true:
-                      'format.str().find("self : struct RecursionStruct") != std::string::npos'
+                      'format.str().find("struct RecursionStruct") != std::string::npos'
 INFO             main -------------------------------------------------------------------------------
                       Print a struct which has a std::set as member. Should be printed as
                       object@<addr> since there is no custom printer function for std::set yet.
                       -------------------------------------------------------------------------------
-INFO 0000000000  main /home/root/pro-test/demos/demo07/main.pt.cpp:789
+INFO 0000000000  main /home/root/pro-test/demos/demo07/main.pt.cpp:783
                       struct SetStruct {
-                        values : { object@0x5652545d2910 }
+                        values : { object@0x55e3a2bee950 }
                       }
-PASS 0000000000  main /home/root/pro-test/demos/demo07/main.pt.cpp:790
+PASS 0000000000  main /home/root/pro-test/demos/demo07/main.pt.cpp:784
                       PASS: the condition evaluates to true:
                       'format.str().find("object@") != std::string::npos'
 INFO             main -------------------------------------------------------------------------------
@@ -298,20 +298,20 @@ INFO             main ----------------------------------------------------------
                       the operator<<() with Dummy2 the printer function generation must be triggered
                       explicit by using enforcePrinterGeneration
                       -------------------------------------------------------------------------------
-INFO 0000000000  main /home/root/pro-test/demos/demo07/main.pt.cpp:814
+INFO 0000000000  main /home/root/pro-test/demos/demo07/main.pt.cpp:808
                       struct SharedPtrStruct {
                         value : shared_ptr to struct Dummy2 {
                           value : { 0, 0x00 }
                         }
                       }
-PASS 0000000000  main /home/root/pro-test/demos/demo07/main.pt.cpp:820
+PASS 0000000000  main /home/root/pro-test/demos/demo07/main.pt.cpp:814
                       PASS: the condition evaluates to true:
                       'format.str() == expected'
 INFO             main -------------------------------------------------------------------------------
                       Since there is a template function for std::vector<T> protest should use it.
                       I.e.: it should print a nicely formatted list.
                       -------------------------------------------------------------------------------
-INFO 0000000000  main /home/root/pro-test/demos/demo07/main.pt.cpp:838
+INFO 0000000000  main /home/root/pro-test/demos/demo07/main.pt.cpp:832
                       vector [
                         struct Dummy3 {
                           value : { 32, 0x20 }
@@ -323,7 +323,7 @@ INFO 0000000000  main /home/root/pro-test/demos/demo07/main.pt.cpp:838
                           value : { 32, 0x20 }
                         }
                       ]
-FAIL 0000000000  main /home/root/pro-test/demos/demo07/main.pt.cpp:851
+FAIL 0000000000  main /home/root/pro-test/demos/demo07/main.pt.cpp:845
                       FAIL: the condition evaluates to false:
                       'format.str() == expected'
 INFO             main -------------------------------------------------------------------------------
@@ -331,15 +331,15 @@ INFO             main ----------------------------------------------------------
                       protest should prever it. I.e all elements should be printed as unformated
                       integers.
                       -------------------------------------------------------------------------------
-INFO 0000000000  main /home/root/pro-test/demos/demo07/main.pt.cpp:869
+INFO 0000000000  main /home/root/pro-test/demos/demo07/main.pt.cpp:863
                       vector [1, 2, 3]
-PASS 0000000000  main /home/root/pro-test/demos/demo07/main.pt.cpp:872
+PASS 0000000000  main /home/root/pro-test/demos/demo07/main.pt.cpp:866
                       PASS: the condition evaluates to true:
                       'format.str() == expected'
 INFO             main -------------------------------------------------------------------------------
                       Since this vector has more than 5 elements it should print a element per line.
                       -------------------------------------------------------------------------------
-INFO 0000000000  main /home/root/pro-test/demos/demo07/main.pt.cpp:896
+INFO 0000000000  main /home/root/pro-test/demos/demo07/main.pt.cpp:890
                       vector [
                         0,
                         1,
@@ -352,7 +352,7 @@ INFO 0000000000  main /home/root/pro-test/demos/demo07/main.pt.cpp:896
                         8,
                         9
                       ]
-PASS 0000000000  main /home/root/pro-test/demos/demo07/main.pt.cpp:910
+PASS 0000000000  main /home/root/pro-test/demos/demo07/main.pt.cpp:904
                       PASS: the condition evaluates to true:
                       'format.str() == expected'
 INFO             main -------------------------------------------------------------------------------
@@ -363,7 +363,7 @@ INFO             main ----------------------------------------------------------
                       -------------------------------------------------------------------------------
                       *******************************************************************************
                       * NUMBER OF FAILED ASSERTIONS: 1
-                      * /home/root/pro-test/demos/demo07/main.pt.cpp:851
+                      * /home/root/pro-test/demos/demo07/main.pt.cpp:845
                       *******************************************************************************
                       * FAILURES:                1                                               FAIL
                       * WARNINGS:                0                                               PASS 

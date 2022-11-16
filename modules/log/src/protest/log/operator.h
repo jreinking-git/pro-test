@@ -112,7 +112,7 @@ template <typename T>
 std::enable_if_t<std::is_same_v<std::string, T>, UniversalStream&>
 toStringCustom(UniversalStream& stream, const T& value)
 {
-  stream.getPlain() << "'" << value << "'";
+  stream.getPlain() << "\"" << value << "\"";
   stream.flush();
   return stream;
 }
@@ -190,6 +190,7 @@ operator<<(UniversalStream& stream, const T* value)
 {
   if (value)
   {
+    stream.mOutput << "@" << static_cast<const void*>(value) << " -> ";
     stream << (const T&) (*value);
   }
   else

@@ -93,18 +93,6 @@ public:// TODO
   void
   swap(size_t n, size_t m);
 
-  void
-  checkTree();
-
-  void
-  checkTree(int i);
-
-  void
-  checkTreeLeft(int root, int i);
-
-  void
-  checkTreeRight(int root, int i);
-
   T* mBuffer[N];
   size_t mNumberOfElements;
 };
@@ -150,7 +138,6 @@ Heap<T, N>::push(T* value)
   }
 
   mNumberOfElements++;
-  checkTree();
 }
 
 template <typename T, size_t N>
@@ -168,7 +155,6 @@ Heap<T, N>::pop()
   PROTEST_ASSERT(isAvailable());
   T* value = mBuffer[0];
   heapify(0);
-  checkTree();
   return value;
 }
 
@@ -193,7 +179,6 @@ Heap<T, N>::remove(T* value)
     }
   }
   pop();
-  checkTree();
 }
 
 template <typename T, size_t N>
@@ -331,27 +316,6 @@ Heap<T, N>::swap(size_t n, size_t m)
 
   mBuffer[m]->mIndex = m;
   mBuffer[n]->mIndex = n;
-}
-
-template <typename T, size_t N>
-void
-Heap<T, N>::checkTree()
-{
-  for (int i = 1; i < mNumberOfElements; i++)
-  {
-    checkTree(i);
-  }
-}
-
-template <typename T, size_t N>
-void
-Heap<T, N>::checkTree(int i)
-{
-  int p = parent(i);
-  if (!(*mBuffer[p] <= *mBuffer[i]))
-  {
-    assert(false);
-  }
 }
 
 } // namespace protest

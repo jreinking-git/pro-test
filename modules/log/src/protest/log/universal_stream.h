@@ -89,6 +89,9 @@ public:
   void
   incrementIndent();
 
+  void
+  incrementIndent(size_t indent);
+
   /**
    * @brief decreaseIndent
    * 
@@ -96,6 +99,9 @@ public:
    */
   void
   decrementIndent();
+
+  void
+  decrementIndent(size_t indent);
 
 // ---------------------------------------------------------------------------
   /**
@@ -196,6 +202,7 @@ UniversalStream::printRecord(const T& value)
   {
     mOutput << "object@" << reinterpret_cast<const void*>(&value);
   }
+  flush();
 }
 
 } // namespace log

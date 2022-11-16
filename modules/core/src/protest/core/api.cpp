@@ -115,7 +115,9 @@ protest::wait(time::Duration duration, meta::CallContext& callContext)
         << std::string("Wait for ") << std::to_string(duration.milliseconds())
         << " ms\n";
   }
+  
   runner->RunnerRaw::waitInternal(duration);
+
   {
     auto stream =
         runner->getLogger().startLog("WAIT",
@@ -237,6 +239,7 @@ protest::assertThat(bool condition, protest::meta::Assertion& assertion)
     stream.operator std::ostream&()
         << "PASS: the condition evaluates to true:\n'"
         << assertion.getCondition() << "'\n";
+    runner->getLogger().flush();
   }
   return Stream(runner->getLogger(),
                 runner->getLogger().getStream(),

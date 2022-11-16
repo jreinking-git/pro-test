@@ -636,11 +636,13 @@ SamplePort<T>::Callback<Function>::handle(T& value)
                     mContext.getUnit().getFileName(),
                     mContext.getLine(),
                     runner->now());
-    logger.getStream() << "Handle value of '"
+    logger.getStream().mOutput << "Handle value of '"
                        << mInternal->mSignal->getSignalInfo().getObjectName()
-                       << "':\n"
-                       << value << "\n";
+                       << "':\n";
+    logger.getStream() << value;
+    // logger.getStream().mOutput << "\n";
   }
+  logger.getStream().flush();
 
   if constexpr (CanInvoke<Function, T>::value)
   {

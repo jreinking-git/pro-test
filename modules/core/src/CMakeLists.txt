@@ -27,7 +27,8 @@ target_link_libraries(core
   log
   coro
   meta
-  doc)
+  doc
+  matcher)
 
 install(TARGETS core EXPORT Protest)
 install(DIRECTORY . DESTINATION ${CMAKE_INSTALL_INCLUDEDIR} FILES_MATCHING PATTERN *.h)

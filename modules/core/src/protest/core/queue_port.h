@@ -657,8 +657,9 @@ QueuePort<T>::pop(protest::meta::CallContext& context)
                   context.getUnit().getFileName(),
                   context.getLine(),
                   runner->now());
-  logger.getStream() << "Pop value from '" << context.getObjectName() << "':\n"
-                     << value << "\n";
+  logger.getStream().mOutput << "Pop value from '" << context.getObjectName() << "':\n";
+  logger.getStream() << value;
+  logger.getStream().mOutput << "\n";
   return value;
 }
 
@@ -768,11 +769,13 @@ QueuePort<T>::Callback<Function>::handle(T& value)
                     mContext.getUnit().getFileName(),
                     mContext.getLine(),
                     runner->now());
-    logger.getStream() << "Handle value of '"
+    logger.getStream().mOutput << "Handle value of '"
                        << mInternal->mSignal->getSignalInfo().getObjectName()
-                       << "':\n"
-                       << value << "\n";
+                       << "':\n";
+    logger.getStream() << value;
+    // logger.getStream().mOutput << "\n";
   }
+  logger.getStream().flush();
 
   if constexpr (CanInvoke<Function, T>::value)
   {

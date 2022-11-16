@@ -28,7 +28,7 @@ public:
   {
     {
       auto sec = section("timer basic");
-      
+
       /** @info
        * This should create a timer which expires after 1000 ms.
        * @seperator

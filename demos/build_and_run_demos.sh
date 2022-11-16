@@ -41,7 +41,7 @@ done
 
 if [[ -z "$TEST" ]]
 then
-  list=("demo01" "demo02" "demo03" "demo04" "demo05" "demo06" "demo07" "demo08" "demo09" "demo10" "reliable_broadcast" "tutorial01" "tutorial02")
+  list=("demo01" "demo02" "demo03" "demo04" "demo05" "demo06" "demo07" "demo08" "demo09" "demo10" "demo11" "reliable_broadcast" "tutorial01" "tutorial02")
 else
   list=("$TEST")
 fi
@@ -92,7 +92,7 @@ do
   make -s -C ./$i/build
   ./$i/build/run_test > ./$i/build/main.log
   # ignore @date and object@<addr> since it will always change
-  diff <(grep -Ev 'object' ./$i/expected.log) <(grep -Ev 'object' ./$i/build/main.log)
+  diff <(grep -Ev '@date|object|        0x|But is: 0x|Actual: 0x|        @|But is: @|Actual: @' ./$i/expected.log) <(grep -Ev '@date|object|        0x|But is: 0x|Actual: 0x|        @|But is: @|Actual: @' ./$i/build/main.log)
   if [ $? -eq 0 ]; then
     echo "PASS $i"
   else

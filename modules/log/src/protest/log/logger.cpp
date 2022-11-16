@@ -156,7 +156,6 @@ Logger::NullOStream::NullOStream() : std::ostream(this)
 std::streambuf::int_type
 Logger::overflow(std::streambuf::int_type character)
 {
-  assert(false);
   if (character != traits_type::eof())
   {
     *pptr() = static_cast<char>(character);
@@ -179,6 +178,7 @@ Logger::sync()
 void
 Logger::writeToCOut()
 {
+  static bool newline = false;
   auto* iter = pbase();
   while (iter != pptr())
   {
@@ -198,11 +198,14 @@ Logger::writeToCOut()
       mStatus = Status::indent;
       mLastIsNewline = true;
       globalLastIsNewline = true;
+      assert(!newline);
+      newline = true;
     }
     else
     {
       globalLastIsNewline = false;
       mLastIsNewline = false;
+      newline = false;
     }
 
     std::cout.write(iter, 1);
@@ -218,7 +221,7 @@ template <>
 UniversalStream&
 protest::log::operator<<(UniversalStream& stream, const char* value)
 {
-  stream.mOutput << value;
+  stream.mOutput << "\"" << value << "\"";
   stream.flush();
   return stream;
 }

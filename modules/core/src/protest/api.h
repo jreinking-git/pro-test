@@ -26,4 +26,5 @@
 #pragma once
 
 #include "protest/core/api.h"
+#include "protest/matcher/matcher.h"
 #include "protest/log/operator.h"

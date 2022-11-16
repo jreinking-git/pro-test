@@ -32,6 +32,7 @@
 #include "protest/core/invariant.h"
 #include "protest/core/signal.h"
 #include "protest/core/value.h"
+#include "protest/matcher/matcher.h"
 
 namespace protest
 {
@@ -58,7 +59,7 @@ using Logger = protest::log::Logger;
 /**
  * @class Runner
  */
-class Runner : private core::RunnerRaw
+class Runner : public core::RunnerRaw// TODO private
 {
 public:
   explicit Runner(core::Context& context, const char* name = "none");
@@ -334,12 +335,14 @@ public:
   explicit Section(const char* name);
 
   Section(const Section& other) = delete;
-  
+
   Section(Section&& other) = default;
 
-  Section& operator=(const Section& other) = delete;
+  Section&
+  operator=(const Section& other) = delete;
 
-  Section& operator=(Section&& other) = delete;
+  Section&
+  operator=(Section&& other) = delete;
 
   ~Section();
 
@@ -366,6 +369,62 @@ Stream
 assertThat(bool condition,
            protest::meta::Assertion& assertion =
                protest::meta::Assertion::defaultContext());
+
+// ---------------------------------------------------------------------------
+/**
+ * @brief assert a condition
+ * 
+ * @param condition
+ *  the condition to check
+ * 
+ * @return true 
+ *  when the condition is true
+ * 
+ * @return false 
+ *  when the condition is false
+ */
+template <typename Lhs, typename Rhs>
+std::enable_if_t<std::is_convertible_v<Rhs, matcher::Matcher<Lhs>>, Stream>
+assertThat(Lhs&& lhs,
+           Rhs rhs,
+           protest::meta::Assertion& assertion =
+               protest::meta::Assertion::defaultContext())
+{
+  protest::matcher::Matcher<Lhs> matcher = rhs;
+
+  auto* context = core::Context::getCurrentContext();
+  auto* runner = context->getCurrentVirtual();
+
+  bool condition = matcher.check(lhs);
+  assertion.markAsExecuted();
+  if (!condition)
+  {
+    assertion.incrementNumberOfFailes();
+    runner->getLogger().startLog("FAIL",
+                                 runner->getName(),
+                                 assertion.getUnit().getFileName(),
+                                 assertion.getLine(),
+                                 runner->now());
+  }
+  else
+  {
+    runner->getLogger().startLog("PASS",
+                                 runner->getName(),
+                                 assertion.getUnit().getFileName(),
+                                 assertion.getLine(),
+                                 runner->now());
+  }
+
+  matcher.explain(assertion.getCondition(),
+                  lhs,
+                  runner->getLogger().getStream());
+
+  matcher.clear();
+
+  return Stream(runner->getLogger(),
+                runner->getLogger().getStream(),
+                condition);
+}
 
 // ---------------------------------------------------------------------------
 /**

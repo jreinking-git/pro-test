@@ -58,7 +58,7 @@ public:
 
   template <typename T>
   friend StreamWrapper
-  operator<<(StreamWrapper&& wrapper, const T& value);
+  operator<<(StreamWrapper&& wrapper, const T&& value);
 
 // ---------------------------------------------------------------------------
   explicit StreamWrapper(std::ostream& stream);

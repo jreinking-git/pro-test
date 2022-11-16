@@ -110,7 +110,7 @@ wait(T condition, protest::meta::CallContext& callContext)
                                      callContext.getLine(),
                                      runner->now());
     stream.operator std::ostream&()
-        << "Wait for condition:\n'" << callContext.getArg(0) << "'\n";
+        << "Wait for condition:\n'" << callContext.getArg(0) << "'";
   }
 
   expr->enable();

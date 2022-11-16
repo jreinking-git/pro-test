@@ -757,7 +757,7 @@ private:
         std::stringstream impl;
         impl << "void toString(protest::log::UniversalStream& output, const "
              << tt->getQualifiedNameAsString() << "& value) {"
-             << " output << \"";
+             << " output.mOutput << \"";
         if (tt->isStruct())
         {
           impl << "struct " << tt->getQualifiedNameAsString();
@@ -804,20 +804,22 @@ private:
 
           if (isARecord)
           {
-            impl << "output << \"" << std::setfill(' ') << std::left
+            impl << "output.mOutput << \"" << std::setfill(' ') << std::left
                  << std::setw(largestFiled + 1) << field->getNameAsString()
                  << ": \"; output.printRecord(value."
-                 << field->getNameAsString() << "); output << \"\\n\";";
+                 << field->getNameAsString() << "); output.mOutput << \"\\n\";";
           }
           else
           {
-            impl << "output << \"" << std::setfill(' ') << std::left
+            impl << "output.mOutput << \"" << std::setfill(' ') << std::left
                  << std::setw(largestFiled + 1) << field->getNameAsString()
-                 << ": \" << value." << field->getNameAsString()
-                 << " << \"\\n\";";
+                 << ": \"; ";
+            impl << "output << value." << field->getNameAsString() << ";";
+            impl << "output.mOutput << \"\\n\";";
           }
         }
-        impl << "output.decrementIndent(); output.printIndent(); output << "
+        impl << "output.decrementIndent(); output.printIndent(); "
+                "output.mOutput << "
                 "\"}\";";
         impl << "}\n";
         mImpls[tt->getBeginLoc()] = impl.str();
