@@ -115,13 +115,153 @@ FAIL 0000000000  main /home/root/pro-test/demos/demo11/main.pt.cpp:124
                       Expected: is greater or equals to
                                 { 43, 0x0000002b }
                         But is: { 42, 0x0000002a }
+PASS 0000000000  main /home/root/pro-test/demos/demo11/main.pt.cpp:127
+                      Value of: 42
+                      Expected: is equal to
+                                { 42, 0x0000002a }
+                        Actual: { 42, 0x0000002a }
+FAIL 0000000000  main /home/root/pro-test/demos/demo11/main.pt.cpp:129
+                      Value of: 42
+                      Expected: is equal to
+                                { 43, 0x0000002b }
+                        But is: { 42, 0x0000002a }
+FAIL 0000000000  main /home/root/pro-test/demos/demo11/main.pt.cpp:132
+                      Value of: 42
+                      Expected: is not equal to
+                                { 42, 0x0000002a }
+                        But is: { 42, 0x0000002a }
+PASS 0000000000  main /home/root/pro-test/demos/demo11/main.pt.cpp:134
+                      Value of: 42
+                      Expected: is not equal to
+                                { 43, 0x0000002b }
+                        Actual: { 42, 0x0000002a }
+PASS 0000000000  main /home/root/pro-test/demos/demo11/main.pt.cpp:137
+                      Value of: 42
+                      Expected: is greater then
+                                { 41, 0x00000029 }
+                        Actual: { 42, 0x0000002a }
+FAIL 0000000000  main /home/root/pro-test/demos/demo11/main.pt.cpp:139
+                      Value of: 42
+                      Expected: is greater then
+                                { 42, 0x0000002a }
+                        But is: { 42, 0x0000002a }
+PASS 0000000000  main /home/root/pro-test/demos/demo11/main.pt.cpp:142
+                      Value of: 42
+                      Expected: is less then
+                                { 43, 0x0000002b }
+                        Actual: { 42, 0x0000002a }
+FAIL 0000000000  main /home/root/pro-test/demos/demo11/main.pt.cpp:144
+                      Value of: 42
+                      Expected: is less then
+                                { 42, 0x0000002a }
+                        But is: { 42, 0x0000002a }
+PASS 0000000000  main /home/root/pro-test/demos/demo11/main.pt.cpp:147
+                      Value of: 42
+                      Expected: is less or equals to
+                                { 43, 0x0000002b }
+                        Actual: { 42, 0x0000002a }
+PASS 0000000000  main /home/root/pro-test/demos/demo11/main.pt.cpp:149
+                      Value of: 42
+                      Expected: is less or equals to
+                                { 42, 0x0000002a }
+                        Actual: { 42, 0x0000002a }
+FAIL 0000000000  main /home/root/pro-test/demos/demo11/main.pt.cpp:151
+                      Value of: 42
+                      Expected: is less or equals to
+                                { 41, 0x00000029 }
+                        But is: { 42, 0x0000002a }
+PASS 0000000000  main /home/root/pro-test/demos/demo11/main.pt.cpp:154
+                      Value of: 42
+                      Expected: is greater or equals to
+                                { 41, 0x00000029 }
+                        Actual: { 42, 0x0000002a }
+PASS 0000000000  main /home/root/pro-test/demos/demo11/main.pt.cpp:156
+                      Value of: 42
+                      Expected: is greater or equals to
+                                { 42, 0x0000002a }
+                        Actual: { 42, 0x0000002a }
+FAIL 0000000000  main /home/root/pro-test/demos/demo11/main.pt.cpp:158
+                      Value of: 42
+                      Expected: is greater or equals to
+                                { 43, 0x0000002b }
+                        But is: { 42, 0x0000002a }
+PASS 0000000000  main /home/root/pro-test/demos/demo11/main.pt.cpp:161
+                      Value of: static_cast<const int>(42)
+                      Expected: is equal to
+                                { 42, 0x0000002a }
+                        Actual: { 42, 0x0000002a }
+FAIL 0000000000  main /home/root/pro-test/demos/demo11/main.pt.cpp:163
+                      Value of: static_cast<const int>(42)
+                      Expected: is equal to
+                                { 43, 0x0000002b }
+                        But is: { 42, 0x0000002a }
+FAIL 0000000000  main /home/root/pro-test/demos/demo11/main.pt.cpp:166
+                      Value of: static_cast<const int>(42)
+                      Expected: is not equal to
+                                { 42, 0x0000002a }
+                        But is: { 42, 0x0000002a }
+PASS 0000000000  main /home/root/pro-test/demos/demo11/main.pt.cpp:168
+                      Value of: static_cast<const int>(42)
+                      Expected: is not equal to
+                                { 43, 0x0000002b }
+                        Actual: { 42, 0x0000002a }
+PASS 0000000000  main /home/root/pro-test/demos/demo11/main.pt.cpp:171
+                      Value of: static_cast<const int>(42)
+                      Expected: is greater then
+                                { 41, 0x00000029 }
+                        Actual: { 42, 0x0000002a }
+FAIL 0000000000  main /home/root/pro-test/demos/demo11/main.pt.cpp:173
+                      Value of: static_cast<const int>(42)
+                      Expected: is greater then
+                                { 42, 0x0000002a }
+                        But is: { 42, 0x0000002a }
+PASS 0000000000  main /home/root/pro-test/demos/demo11/main.pt.cpp:176
+                      Value of: static_cast<const int>(42)
+                      Expected: is less then
+                                { 43, 0x0000002b }
+                        Actual: { 42, 0x0000002a }
+FAIL 0000000000  main /home/root/pro-test/demos/demo11/main.pt.cpp:178
+                      Value of: static_cast<const int>(42)
+                      Expected: is less then
+                                { 42, 0x0000002a }
+                        But is: { 42, 0x0000002a }
+PASS 0000000000  main /home/root/pro-test/demos/demo11/main.pt.cpp:181
+                      Value of: static_cast<const int>(42)
+                      Expected: is less or equals to
+                                { 43, 0x0000002b }
+                        Actual: { 42, 0x0000002a }
+PASS 0000000000  main /home/root/pro-test/demos/demo11/main.pt.cpp:183
+                      Value of: static_cast<const int>(42)
+                      Expected: is less or equals to
+                                { 42, 0x0000002a }
+                        Actual: { 42, 0x0000002a }
+FAIL 0000000000  main /home/root/pro-test/demos/demo11/main.pt.cpp:185
+                      Value of: static_cast<const int>(42)
+                      Expected: is less or equals to
+                                { 41, 0x00000029 }
+                        But is: { 42, 0x0000002a }
+PASS 0000000000  main /home/root/pro-test/demos/demo11/main.pt.cpp:188
+                      Value of: static_cast<const int>(42)
+                      Expected: is greater or equals to
+                                { 41, 0x00000029 }
+                        Actual: { 42, 0x0000002a }
+PASS 0000000000  main /home/root/pro-test/demos/demo11/main.pt.cpp:190
+                      Value of: static_cast<const int>(42)
+                      Expected: is greater or equals to
+                                { 42, 0x0000002a }
+                        Actual: { 42, 0x0000002a }
+FAIL 0000000000  main /home/root/pro-test/demos/demo11/main.pt.cpp:192
+                      Value of: static_cast<const int>(42)
+                      Expected: is greater or equals to
+                                { 43, 0x0000002b }
+                        But is: { 42, 0x0000002a }
 INFO             main -------------------------------------------------------------------------------
                       End section                             binary comparison - primitive types (1)
                       ===============================================================================
 INFO             main ===============================================================================
                       Section                                    binary comparison - record types (2)
                       -------------------------------------------------------------------------------
-PASS 0000000000  main /home/root/pro-test/demos/demo11/main.pt.cpp:136
+PASS 0000000000  main /home/root/pro-test/demos/demo11/main.pt.cpp:204
                       Value of: a
                       Expected: is equal to
                                 struct TestStruct {
@@ -130,7 +270,7 @@ PASS 0000000000  main /home/root/pro-test/demos/demo11/main.pt.cpp:136
                         Actual: struct TestStruct {
                                   a : { 42, 0x0000002a }
                                 }
-FAIL 0000000000  main /home/root/pro-test/demos/demo11/main.pt.cpp:145
+FAIL 0000000000  main /home/root/pro-test/demos/demo11/main.pt.cpp:213
                       Value of: a
                       Expected: is equal to
                                 struct TestStruct {
@@ -139,7 +279,7 @@ FAIL 0000000000  main /home/root/pro-test/demos/demo11/main.pt.cpp:145
                         But is: struct TestStruct {
                                   a : { 42, 0x0000002a }
                                 }
-FAIL 0000000000  main /home/root/pro-test/demos/demo11/main.pt.cpp:154
+FAIL 0000000000  main /home/root/pro-test/demos/demo11/main.pt.cpp:222
                       Value of: a
                       Expected: is not equal to
                                 struct TestStruct {
@@ -148,7 +288,7 @@ FAIL 0000000000  main /home/root/pro-test/demos/demo11/main.pt.cpp:154
                         But is: struct TestStruct {
                                   a : { 42, 0x0000002a }
                                 }
-PASS 0000000000  main /home/root/pro-test/demos/demo11/main.pt.cpp:163
+PASS 0000000000  main /home/root/pro-test/demos/demo11/main.pt.cpp:231
                       Value of: a
                       Expected: is not equal to
                                 struct TestStruct {
@@ -157,7 +297,7 @@ PASS 0000000000  main /home/root/pro-test/demos/demo11/main.pt.cpp:163
                         Actual: struct TestStruct {
                                   a : { 42, 0x0000002a }
                                 }
-PASS 0000000000  main /home/root/pro-test/demos/demo11/main.pt.cpp:172
+PASS 0000000000  main /home/root/pro-test/demos/demo11/main.pt.cpp:240
                       Value of: a
                       Expected: is greater then
                                 struct TestStruct {
@@ -166,7 +306,7 @@ PASS 0000000000  main /home/root/pro-test/demos/demo11/main.pt.cpp:172
                         Actual: struct TestStruct {
                                   a : { 42, 0x0000002a }
                                 }
-FAIL 0000000000  main /home/root/pro-test/demos/demo11/main.pt.cpp:181
+FAIL 0000000000  main /home/root/pro-test/demos/demo11/main.pt.cpp:249
                       Value of: a
                       Expected: is greater then
                                 struct TestStruct {
@@ -175,7 +315,7 @@ FAIL 0000000000  main /home/root/pro-test/demos/demo11/main.pt.cpp:181
                         But is: struct TestStruct {
                                   a : { 42, 0x0000002a }
                                 }
-PASS 0000000000  main /home/root/pro-test/demos/demo11/main.pt.cpp:190
+PASS 0000000000  main /home/root/pro-test/demos/demo11/main.pt.cpp:258
                       Value of: a
                       Expected: is less then
                                 struct TestStruct {
@@ -184,7 +324,7 @@ PASS 0000000000  main /home/root/pro-test/demos/demo11/main.pt.cpp:190
                         Actual: struct TestStruct {
                                   a : { 42, 0x0000002a }
                                 }
-FAIL 0000000000  main /home/root/pro-test/demos/demo11/main.pt.cpp:199
+FAIL 0000000000  main /home/root/pro-test/demos/demo11/main.pt.cpp:267
                       Value of: a
                       Expected: is less then
                                 struct TestStruct {
@@ -193,7 +333,7 @@ FAIL 0000000000  main /home/root/pro-test/demos/demo11/main.pt.cpp:199
                         But is: struct TestStruct {
                                   a : { 42, 0x0000002a }
                                 }
-PASS 0000000000  main /home/root/pro-test/demos/demo11/main.pt.cpp:208
+PASS 0000000000  main /home/root/pro-test/demos/demo11/main.pt.cpp:276
                       Value of: a
                       Expected: is less or equals to
                                 struct TestStruct {
@@ -202,7 +342,7 @@ PASS 0000000000  main /home/root/pro-test/demos/demo11/main.pt.cpp:208
                         Actual: struct TestStruct {
                                   a : { 42, 0x0000002a }
                                 }
-PASS 0000000000  main /home/root/pro-test/demos/demo11/main.pt.cpp:217
+PASS 0000000000  main /home/root/pro-test/demos/demo11/main.pt.cpp:285
                       Value of: a
                       Expected: is less or equals to
                                 struct TestStruct {
@@ -211,7 +351,7 @@ PASS 0000000000  main /home/root/pro-test/demos/demo11/main.pt.cpp:217
                         Actual: struct TestStruct {
                                   a : { 42, 0x0000002a }
                                 }
-FAIL 0000000000  main /home/root/pro-test/demos/demo11/main.pt.cpp:226
+FAIL 0000000000  main /home/root/pro-test/demos/demo11/main.pt.cpp:294
                       Value of: a
                       Expected: is less or equals to
                                 struct TestStruct {
@@ -220,7 +360,7 @@ FAIL 0000000000  main /home/root/pro-test/demos/demo11/main.pt.cpp:226
                         But is: struct TestStruct {
                                   a : { 42, 0x0000002a }
                                 }
-PASS 0000000000  main /home/root/pro-test/demos/demo11/main.pt.cpp:235
+PASS 0000000000  main /home/root/pro-test/demos/demo11/main.pt.cpp:303
                       Value of: a
                       Expected: is greater or equals to
                                 struct TestStruct {
@@ -229,7 +369,7 @@ PASS 0000000000  main /home/root/pro-test/demos/demo11/main.pt.cpp:235
                         Actual: struct TestStruct {
                                   a : { 42, 0x0000002a }
                                 }
-PASS 0000000000  main /home/root/pro-test/demos/demo11/main.pt.cpp:244
+PASS 0000000000  main /home/root/pro-test/demos/demo11/main.pt.cpp:312
                       Value of: a
                       Expected: is greater or equals to
                                 struct TestStruct {
@@ -238,7 +378,7 @@ PASS 0000000000  main /home/root/pro-test/demos/demo11/main.pt.cpp:244
                         Actual: struct TestStruct {
                                   a : { 42, 0x0000002a }
                                 }
-FAIL 0000000000  main /home/root/pro-test/demos/demo11/main.pt.cpp:253
+FAIL 0000000000  main /home/root/pro-test/demos/demo11/main.pt.cpp:321
                       Value of: a
                       Expected: is greater or equals to
                                 struct TestStruct {
@@ -253,129 +393,192 @@ INFO             main ----------------------------------------------------------
 INFO             main ===============================================================================
                       Section                                         binary comparison - pointer (3)
                       -------------------------------------------------------------------------------
-PASS 0000000000  main /home/root/pro-test/demos/demo11/main.pt.cpp:265
+PASS 0000000000  main /home/root/pro-test/demos/demo11/main.pt.cpp:333
                       Value of: ptr
                       Expected: is equal to
-                                @0x55e7e37252a8 -> { 42, 0x0000002a }
-                        Actual: @0x55e7e37252a8 -> { 42, 0x0000002a }
-FAIL 0000000000  main /home/root/pro-test/demos/demo11/main.pt.cpp:267
+                                @0x559956176ba0 -> { 42, 0x0000002a }
+                        Actual: @0x559956176ba0 -> { 42, 0x0000002a }
+FAIL 0000000000  main /home/root/pro-test/demos/demo11/main.pt.cpp:335
                       Value of: ptr
                       Expected: is equal to
-                                @0x55e7e37252b0 -> { 42, 0x0000002a }
-                        But is: @0x55e7e37252a8 -> { 42, 0x0000002a }
-PASS 0000000000  main /home/root/pro-test/demos/demo11/main.pt.cpp:279
+                                @0x559956176ba8 -> { 42, 0x0000002a }
+                        But is: @0x559956176ba0 -> { 42, 0x0000002a }
+PASS 0000000000  main /home/root/pro-test/demos/demo11/main.pt.cpp:347
                       Value of: adptr
                       Expected: is equal to
-                                @0x55e7e37252a8 -> @0x55e7e37252a0 -> { 42, 0x0000002a }
-                        Actual: @0x55e7e37252a8 -> @0x55e7e37252a0 -> { 42, 0x0000002a }
-FAIL 0000000000  main /home/root/pro-test/demos/demo11/main.pt.cpp:281
+                                @0x559956176ba0 -> @0x559956176b98 -> { 42, 0x0000002a }
+                        Actual: @0x559956176ba0 -> @0x559956176b98 -> { 42, 0x0000002a }
+FAIL 0000000000  main /home/root/pro-test/demos/demo11/main.pt.cpp:349
                       Value of: adptr
                       Expected: is equal to
-                                @0x55e7e37252b0 -> @0x55e7e37252a4 -> { 42, 0x0000002a }
-                        But is: @0x55e7e37252a8 -> @0x55e7e37252a0 -> { 42, 0x0000002a }
+                                @0x559956176ba8 -> @0x559956176b9c -> { 42, 0x0000002a }
+                        But is: @0x559956176ba0 -> @0x559956176b98 -> { 42, 0x0000002a }
+PASS 0000000000  main /home/root/pro-test/demos/demo11/main.pt.cpp:363
+                      Value of: aptr
+                      Expected: is equal to
+                                @0x559956176b9c -> struct TestStruct {
+                                  a : { 42, 0x0000002a }
+                                }
+                        Actual: @0x559956176b9c -> struct TestStruct {
+                                  a : { 42, 0x0000002a }
+                                }
+FAIL 0000000000  main /home/root/pro-test/demos/demo11/main.pt.cpp:365
+                      Value of: bptr
+                      Expected: is equal to
+                                @0x559956176b9c -> struct TestStruct {
+                                  a : { 42, 0x0000002a }
+                                }
+                        But is: @0x559956176ba0 -> struct TestStruct {
+                                  a : { 42, 0x0000002a }
+                                }
+FAIL 0000000000  main /home/root/pro-test/demos/demo11/main.pt.cpp:368
+                      Value of: aptr
+                      Expected: is not equal to
+                                @0x559956176b9c -> struct TestStruct {
+                                  a : { 42, 0x0000002a }
+                                }
+                        But is: @0x559956176b9c -> struct TestStruct {
+                                  a : { 42, 0x0000002a }
+                                }
+PASS 0000000000  main /home/root/pro-test/demos/demo11/main.pt.cpp:370
+                      Value of: bptr
+                      Expected: is not equal to
+                                @0x559956176b9c -> struct TestStruct {
+                                  a : { 42, 0x0000002a }
+                                }
+                        Actual: @0x559956176ba0 -> struct TestStruct {
+                                  a : { 42, 0x0000002a }
+                                }
 INFO             main -------------------------------------------------------------------------------
                       End section                                     binary comparison - pointer (3)
                       ===============================================================================
 INFO             main ===============================================================================
                       Section                                                  pointer null check (4)
                       -------------------------------------------------------------------------------
-PASS 0000000000  main /home/root/pro-test/demos/demo11/main.pt.cpp:292
+PASS 0000000000  main /home/root/pro-test/demos/demo11/main.pt.cpp:381
                       Value of: aptr
-                      Expected: is not nullptr
-                        Actual: @0x55e7e37252b0
-FAIL 0000000000  main /home/root/pro-test/demos/demo11/main.pt.cpp:294
+                      Expected: is not Null
+                        Actual: @0x559956176ba8
+FAIL 0000000000  main /home/root/pro-test/demos/demo11/main.pt.cpp:383
                       Value of: nullptr
-                      Expected: is not nullptr
+                      Expected: is not Null
                         But is: @0
-PASS 0000000000  main /home/root/pro-test/demos/demo11/main.pt.cpp:296
+PASS 0000000000  main /home/root/pro-test/demos/demo11/main.pt.cpp:385
                       Value of: nullptr
-                      Expected: is nullptr
+                      Expected: is Null
                         Actual: @0
-PASS 0000000000  main /home/root/pro-test/demos/demo11/main.pt.cpp:298
+PASS 0000000000  main /home/root/pro-test/demos/demo11/main.pt.cpp:387
                       Value of: nullptr
-                      Expected: is nullptr
+                      Expected: is Null
                         Actual: @0
-FAIL 0000000000  main /home/root/pro-test/demos/demo11/main.pt.cpp:300
+FAIL 0000000000  main /home/root/pro-test/demos/demo11/main.pt.cpp:389
                       Value of: aptr
-                      Expected: is nullptr
-                        But is: @0x55e7e37252b0
+                      Expected: is Null
+                        But is: @0x559956176ba8
 INFO             main -------------------------------------------------------------------------------
                       End section                                              pointer null check (4)
                       ===============================================================================
 INFO             main ===============================================================================
                       Section                                                     reference check (5)
                       -------------------------------------------------------------------------------
-PASS 0000000000  main /home/root/pro-test/demos/demo11/main.pt.cpp:310
+PASS 0000000000  main /home/root/pro-test/demos/demo11/main.pt.cpp:401
+                      Value of: c
+                      Expected: is a reference to value
+                                @0x559956176a2c
+                        Actual: @0x559956176a2c
+PASS 0000000000  main /home/root/pro-test/demos/demo11/main.pt.cpp:404
                       Value of: a
                       Expected: is a reference to value
-                                @0x55e7e37252b0
-                        Actual: @0x55e7e37252b0
-FAIL 0000000000  main /home/root/pro-test/demos/demo11/main.pt.cpp:312
+                                @0x559956176a2c
+                        Actual: @0x559956176a2c
+FAIL 0000000000  main /home/root/pro-test/demos/demo11/main.pt.cpp:406
                       Value of: a
                       Expected: is a reference to value
-                                @0x55e7e37252b8
-                        But is: @0x55e7e37252b0
-FAIL 0000000000  main /home/root/pro-test/demos/demo11/main.pt.cpp:314
+                                @0x559956176a2c
+                        But is: @0x559956176a2c
+FAIL 0000000000  main /home/root/pro-test/demos/demo11/main.pt.cpp:408
                       Value of: a
                       Expected: is not a reference to value
-                                @0x55e7e37252b0
-                        But is: @0x55e7e37252b0
-PASS 0000000000  main /home/root/pro-test/demos/demo11/main.pt.cpp:316
+                                @0x5599561769cc
+                        But is: @0x5599561769cc
+PASS 0000000000  main /home/root/pro-test/demos/demo11/main.pt.cpp:410
                       Value of: a
                       Expected: is not a reference to value
-                                @0x55e7e37252b8
-                        Actual: @0x55e7e37252b0
-FAIL 0000000000  main /home/root/pro-test/demos/demo11/main.pt.cpp:318
+                                @0x5599561769cc
+                        Actual: @0x5599561769cc
+FAIL 0000000000  main /home/root/pro-test/demos/demo11/main.pt.cpp:412
                       Value of: a
                       Expected: is a reference to value
-                                @0x55e7e37252b8
-                        But is: @0x55e7e37252b0
+                                @0x55995617696c
+                        But is: @0x55995617696c
 INFO             main -------------------------------------------------------------------------------
                       End section                                                 reference check (5)
                       ===============================================================================
 INFO             main ===============================================================================
                       Section                                                       boolean check (6)
                       -------------------------------------------------------------------------------
-PASS 0000000000  main /home/root/pro-test/demos/demo11/main.pt.cpp:326
+PASS 0000000000  main /home/root/pro-test/demos/demo11/main.pt.cpp:420
                       Value of: true
                       Expected: to be true
                         Actual: true
-FAIL 0000000000  main /home/root/pro-test/demos/demo11/main.pt.cpp:328
+FAIL 0000000000  main /home/root/pro-test/demos/demo11/main.pt.cpp:422
                       Value of: false
                       Expected: to be true
                         But is: false
-FAIL 0000000000  main /home/root/pro-test/demos/demo11/main.pt.cpp:330
+FAIL 0000000000  main /home/root/pro-test/demos/demo11/main.pt.cpp:424
                       Value of: true
                       Expected: to be false
                         But is: true
-PASS 0000000000  main /home/root/pro-test/demos/demo11/main.pt.cpp:332
+PASS 0000000000  main /home/root/pro-test/demos/demo11/main.pt.cpp:426
                       Value of: false
                       Expected: to be false
                         Actual: false
-FAIL 0000000000  main /home/root/pro-test/demos/demo11/main.pt.cpp:334
+FAIL 0000000000  main /home/root/pro-test/demos/demo11/main.pt.cpp:428
                       Value of: true
                       Expected: to be false
                         But is: true
-PASS 0000000000  main /home/root/pro-test/demos/demo11/main.pt.cpp:336
+PASS 0000000000  main /home/root/pro-test/demos/demo11/main.pt.cpp:430
                       Value of: false
                       Expected: to be false
                         Actual: false
-PASS 0000000000  main /home/root/pro-test/demos/demo11/main.pt.cpp:338
+PASS 0000000000  main /home/root/pro-test/demos/demo11/main.pt.cpp:432
                       Value of: true
                       Expected: to be true
                         Actual: true
-FAIL 0000000000  main /home/root/pro-test/demos/demo11/main.pt.cpp:340
+FAIL 0000000000  main /home/root/pro-test/demos/demo11/main.pt.cpp:434
                       Value of: false
                       Expected: to be true
                         But is: false
 INFO             main -------------------------------------------------------------------------------
                       End section                                                   boolean check (6)
                       ===============================================================================
+INFO             main ===============================================================================
+                      Section                                                                 any (7)
+                      -------------------------------------------------------------------------------
+PASS 0000000000  main /home/root/pro-test/demos/demo11/main.pt.cpp:443
+                      Value of: false
+                      Expected: is anything
+                        Actual: is something
+PASS 0000000000  main /home/root/pro-test/demos/demo11/main.pt.cpp:445
+                      Value of: 1
+                      Expected: is anything
+                        Actual: is something
+PASS 0000000000  main /home/root/pro-test/demos/demo11/main.pt.cpp:447
+                      Value of: "false"
+                      Expected: is anything
+                        Actual: is something
+FAIL 0000000000  main /home/root/pro-test/demos/demo11/main.pt.cpp:449
+                      Value of: 1
+                      Expected: is nothing
+                        But is: is something
+INFO             main -------------------------------------------------------------------------------
+                      End section                                                             any (7)
+                      ===============================================================================
 INFO             main -------------------------------------------------------------------------------
                       Exit of 'main'
                       -------------------------------------------------------------------------------
                       *******************************************************************************
-                      * NUMBER OF FAILED ASSERTIONS: 26
+                      * NUMBER OF FAILED ASSERTIONS: 41
                       * /home/root/pro-test/demos/demo11/main.pt.cpp:79
                       * /home/root/pro-test/demos/demo11/main.pt.cpp:83
                       * /home/root/pro-test/demos/demo11/main.pt.cpp:87
@@ -385,25 +588,40 @@ INFO             main ----------------------------------------------------------
                       * /home/root/pro-test/demos/demo11/main.pt.cpp:110
                       * /home/root/pro-test/demos/demo11/main.pt.cpp:117
                       * /home/root/pro-test/demos/demo11/main.pt.cpp:124
-                      * /home/root/pro-test/demos/demo11/main.pt.cpp:145
-                      * /home/root/pro-test/demos/demo11/main.pt.cpp:154
-                      * /home/root/pro-test/demos/demo11/main.pt.cpp:181
-                      * /home/root/pro-test/demos/demo11/main.pt.cpp:199
-                      * /home/root/pro-test/demos/demo11/main.pt.cpp:226
-                      * /home/root/pro-test/demos/demo11/main.pt.cpp:253
+                      * /home/root/pro-test/demos/demo11/main.pt.cpp:129
+                      * /home/root/pro-test/demos/demo11/main.pt.cpp:132
+                      * /home/root/pro-test/demos/demo11/main.pt.cpp:139
+                      * /home/root/pro-test/demos/demo11/main.pt.cpp:144
+                      * /home/root/pro-test/demos/demo11/main.pt.cpp:151
+                      * /home/root/pro-test/demos/demo11/main.pt.cpp:158
+                      * /home/root/pro-test/demos/demo11/main.pt.cpp:163
+                      * /home/root/pro-test/demos/demo11/main.pt.cpp:166
+                      * /home/root/pro-test/demos/demo11/main.pt.cpp:173
+                      * /home/root/pro-test/demos/demo11/main.pt.cpp:178
+                      * /home/root/pro-test/demos/demo11/main.pt.cpp:185
+                      * /home/root/pro-test/demos/demo11/main.pt.cpp:192
+                      * /home/root/pro-test/demos/demo11/main.pt.cpp:213
+                      * /home/root/pro-test/demos/demo11/main.pt.cpp:222
+                      * /home/root/pro-test/demos/demo11/main.pt.cpp:249
                       * /home/root/pro-test/demos/demo11/main.pt.cpp:267
-                      * /home/root/pro-test/demos/demo11/main.pt.cpp:281
                       * /home/root/pro-test/demos/demo11/main.pt.cpp:294
-                      * /home/root/pro-test/demos/demo11/main.pt.cpp:300
-                      * /home/root/pro-test/demos/demo11/main.pt.cpp:312
-                      * /home/root/pro-test/demos/demo11/main.pt.cpp:314
-                      * /home/root/pro-test/demos/demo11/main.pt.cpp:318
-                      * /home/root/pro-test/demos/demo11/main.pt.cpp:328
-                      * /home/root/pro-test/demos/demo11/main.pt.cpp:330
-                      * /home/root/pro-test/demos/demo11/main.pt.cpp:334
-                      * /home/root/pro-test/demos/demo11/main.pt.cpp:340
+                      * /home/root/pro-test/demos/demo11/main.pt.cpp:321
+                      * /home/root/pro-test/demos/demo11/main.pt.cpp:335
+                      * /home/root/pro-test/demos/demo11/main.pt.cpp:349
+                      * /home/root/pro-test/demos/demo11/main.pt.cpp:365
+                      * /home/root/pro-test/demos/demo11/main.pt.cpp:368
+                      * /home/root/pro-test/demos/demo11/main.pt.cpp:383
+                      * /home/root/pro-test/demos/demo11/main.pt.cpp:389
+                      * /home/root/pro-test/demos/demo11/main.pt.cpp:406
+                      * /home/root/pro-test/demos/demo11/main.pt.cpp:408
+                      * /home/root/pro-test/demos/demo11/main.pt.cpp:412
+                      * /home/root/pro-test/demos/demo11/main.pt.cpp:422
+                      * /home/root/pro-test/demos/demo11/main.pt.cpp:424
+                      * /home/root/pro-test/demos/demo11/main.pt.cpp:428
+                      * /home/root/pro-test/demos/demo11/main.pt.cpp:434
+                      * /home/root/pro-test/demos/demo11/main.pt.cpp:449
                       *******************************************************************************
-                      * FAILURES:               26                                               FAIL
+                      * FAILURES:               41                                               FAIL
                       * WARNINGS:                0                                               PASS 
                       * INV VIOLATION:           0                                               PASS 
                       *

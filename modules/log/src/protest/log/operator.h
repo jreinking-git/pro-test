@@ -36,12 +36,24 @@ namespace protest
 namespace log
 {
 
+namespace internal
+{
+
 // ---------------------------------------------------------------------------
+/**
+ * @brief UnsignedTypeOf
+ * 
+ * Mapping from signed to unsigned types. E.g.: int8_t -> uint8_t
+ * 
+ * @tparam T
+ *   type to map
+ */
 template <typename T>
 struct UnsignedTypeOf
 {
 };
 
+// ---------------------------------------------------------------------------
 template <>
 struct UnsignedTypeOf<int8_t>
 {
@@ -67,38 +79,89 @@ struct UnsignedTypeOf<int64_t>
 };
 
 // ---------------------------------------------------------------------------
-template <typename T>
-std::enable_if_t<std::is_integral_v<T> && std::is_unsigned_v<T>,
-                 UniversalStream&>
-toStringCustom(UniversalStream& stream0, const T& value)
+template <>
+struct UnsignedTypeOf<uint8_t>
 {
-  static_assert(sizeof(T) <= sizeof(unsigned long long));
-  std::stringstream ss;
-  ss << std::setfill('0') << std::hex << std::setw(sizeof(T) * 2)
-     << static_cast<unsigned long long>(value);
-  stream0.mOutput << "{ " << static_cast<unsigned long long>(value) << ", 0x"
-                  << ss.str() << " }";
-  stream0.flush();
-  return stream0;
+  using type = uint8_t;
+};
+
+template <>
+struct UnsignedTypeOf<uint16_t>
+{
+  using type = uint16_t;
+};
+
+template <>
+struct UnsignedTypeOf<uint32_t>
+{
+  using type = uint32_t;
+};
+
+template <>
+struct UnsignedTypeOf<uint64_t>
+{
+  using type = uint64_t;
+};
+
+// ---------------------------------------------------------------------------
+template <typename T>
+inline void
+toStringIntegralHex(std::stringstream& sstream, const T& value)
+{
+  sstream << "0x";
+  sstream << std::setfill('0') << std::hex << std::setw(sizeof(T) * 2);
+  sstream << static_cast<unsigned long long>(
+      static_cast<typename UnsignedTypeOf<T>::type>(value));
 }
 
+} // namespace internal
+
+// ---------------------------------------------------------------------------
+/**
+ * @brief toStringCustom
+ * 
+ * Custom printer function for integral types.
+ * 
+ * @tparam T
+ *   type of the integral to print
+ * 
+ * @param stream0
+ *   stream to print the integral
+ * 
+ * @param value 
+ *   the value to print
+ * 
+ * @return the stream
+ */
 template <typename T>
-std::enable_if_t<std::is_integral_v<T> && std::is_signed_v<T>, UniversalStream&>
+inline std::enable_if_t<std::is_integral_v<T>, UniversalStream&>
 toStringCustom(UniversalStream& stream0, const T& value)
 {
   static_assert(sizeof(T) <= sizeof(long long));
   std::stringstream ss;
-  ss << std::setfill('0') << std::hex << std::setw(sizeof(T) * 2)
-     << static_cast<long long>(
-            static_cast<typename UnsignedTypeOf<T>::type>(value));
-  stream0.mOutput << "{ " << static_cast<long long>(value) << ", 0x" << ss.str()
+  internal::toStringIntegralHex(ss, value);
+  stream0.mOutput << "{ " << static_cast<long long>(value) << ", " << ss.str()
                   << " }";
   stream0.flush();
   return stream0;
 }
 
+// ---------------------------------------------------------------------------
+/**
+ * @brief toStringCustom
+ * 
+ * Custom printer function for floating point types
+ * 
+ * @param stream0 
+ *   stream to print the floating point number
+ * 
+ * @param value
+ *   the value to print
+ * 
+ * @return the stream
+ */
 template <typename T>
-std::enable_if_t<std::is_floating_point_v<T>, UniversalStream&>
+inline std::enable_if_t<std::is_floating_point_v<T>, UniversalStream&>
 toStringCustom(UniversalStream& stream0, const T& value)
 {
   std::stringstream ss;
@@ -108,8 +171,21 @@ toStringCustom(UniversalStream& stream0, const T& value)
 }
 
 // ---------------------------------------------------------------------------
+/**
+ * @brief toStringCustom
+ * 
+ * Custom printer function for std::string
+ * 
+ * @param stream0 
+ *   stream to print the std::string
+ * 
+ * @param value
+ *   the value to print
+ * 
+ * @return the stream
+ */
 template <typename T>
-std::enable_if_t<std::is_same_v<std::string, T>, UniversalStream&>
+inline std::enable_if_t<std::is_same_v<std::string, T>, UniversalStream&>
 toStringCustom(UniversalStream& stream, const T& value)
 {
   stream.getPlain() << "\"" << value << "\"";
@@ -118,75 +194,214 @@ toStringCustom(UniversalStream& stream, const T& value)
 }
 
 // ---------------------------------------------------------------------------
+template <typename T>
+inline constexpr bool firstLevel =
+    HasCustomOperator<std::remove_reference_t<T>>::value;
+
 /**
- * Template specialization for types which have an toStringCustom function.
- * This specialization has the highest priority among the specializations.
- */
-template <typename T>
-std::enable_if_t<HasCustomOperator<std::remove_reference_t<T>>::value,
-                 UniversalStream&>
-operator<<(UniversalStream& stream, const T& value)
-{
-  toStringCustom(stream, value);
-  stream.flush();
-  return stream;
-}
-
-template <typename T>
-std::enable_if_t<HasCustomOperator<std::remove_reference_t<T>>::value,
-                 UniversalStream&>
-operator<<(UniversalStream& stream, const T&& value)
-{
-  toStringCustom(stream, value);
-  stream.flush();
-  return stream;
-}
-
-// ---------------------------------------------------------------------------
-/**
- * Template specialization for types which have an toStringCustom function.
- * This specialization has the highest priority among the specializations.
- */
-template <typename T>
-std::enable_if_t<HasOutputOperator<std::remove_reference_t<T>>::value &&
-                     !HasCustomOperator<std::remove_reference_t<T>>::value &&
-                     !std::is_pointer_v<std::remove_reference_t<T>>,
-                 UniversalStream&>
-operator<<(UniversalStream& stream, const T& value)
-{
-  stream.mOutput << value;
-  stream.flush();
-  return stream;
-}
-
-template <typename T>
-std::enable_if_t<HasOutputOperator<std::remove_reference_t<T>>::value &&
-                     !HasCustomOperator<std::remove_reference_t<T>>::value &&
-                     !std::is_pointer_v<std::remove_reference_t<T>>,
-                 UniversalStream&>
-operator<<(UniversalStream& stream, const T&& value)
-{
-  stream.mOutput << value;
-  stream.flush();
-  return stream;
-}
-
-// ---------------------------------------------------------------------------
-/**
- * This template specialization has the lowest priority. It print any type
- * which could not use one of the previouse specializations. If the 
- * protest-compiler detects the usage of this operator it tries to generate a
- * @c toString funktion for the given type. If succesful, on the actual call
- * of the c++ compiler one of the other specialization will be used. Therefore
- * this specialization will only be used rarly in a test execution.
+ * @brief operator<<
  * 
- * @warning the protest-compiler recognizes the usage by locking at the name of
- * the stream (E.g.: stream2). Therefore it should not be change!
+ * Template specialization for types which have an toStringCustom function.
+ * This specialization has the highest priority among the specializations.
+ * 
+ * @tparam T
+ *   type of the value to print
+ * 
+ * @param stream 
+ *   stream to print the value
+ * 
+ * @param value 
+ *   the value to print
+ * 
+ * @return the stream
  */
+template <typename T>
+std::enable_if_t<firstLevel<T>, UniversalStream&>
+operator<<(UniversalStream& stream, const T& value)
+{
+  toStringCustom(stream, value);
+  stream.flush();
+  return stream;
+}
 
 template <typename T>
-UniversalStream&
-operator<<(UniversalStream& stream, const T* value)
+std::enable_if_t<firstLevel<T>, UniversalStream&>
+operator<<(UniversalStream& stream, const T&& value)
+{
+  toStringCustom(stream, value);
+  stream.flush();
+  return stream;
+}
+
+// ---------------------------------------------------------------------------
+// pointers and array types can be printed via std::iostream
+// -> HasOutputOperator is always true
+// exclude them from this level so that they can be printed as array (every
+// element) or as pointer to value (where the value might be printed via
+// universal stream). This allows to use a toStringCustom or a generated
+// printer function for dereferenced pointer type.
+template <typename T>
+inline constexpr bool secondLevel =
+    HasOutputOperator<std::remove_reference_t<T>>::value &&
+    !HasCustomOperator<std::remove_reference_t<T>>::value &&
+    !std::is_pointer_v<std::remove_reference_t<T>> &&
+    !std::is_array_v<std::remove_reference_t<T>>;
+
+/**
+ * @brief operator<<
+ * 
+ * This specialization is used for types which has no custom printer function
+ * but can be directly printed to a an std::iostream. Therefore if for the
+ * given type a std::iostream& operator<<(std::iostream&, T value) exists, it
+ * will be used. This specialisation has the second highest priority.
+ * 
+ * Arrays and pointer will be execuded since there get an extrac treatment.
+ * 
+ * @tparam T
+ *   the type of the value to print
+ * 
+ * @param stream
+ *   the stream to print to
+ * 
+ * @param value
+ *   the value to print
+ * 
+ * @return the stream
+ */
+template <typename T>
+std::enable_if_t<secondLevel<T>, UniversalStream&>
+operator<<(UniversalStream& stream, const T& value)
+{
+  stream.mOutput << value;
+  stream.flush();
+  return stream;
+}
+
+template <typename T>
+std::enable_if_t<secondLevel<T>, UniversalStream&>
+operator<<(UniversalStream& stream, const T&& value)
+{
+  stream.mOutput << value;
+  stream.flush();
+  return stream;
+}
+
+// ---------------------------------------------------------------------------
+
+namespace internal
+{
+
+template <typename T, size_t N>
+void
+hexDumpArray(UniversalStream& stream, const T* value)
+{
+  static constexpr size_t maxNumberBytes = 128;
+
+  stream.mOutput << "[" << N << "] {\n";
+  stream.incrementIndent();
+  auto indent = stream.getIndent();
+  int numberPerLine = ((79 - indent) + 1 /* no space for the last one */) /
+                      ((2 * sizeof(T)) + 2 /* 0x */ + 1 /* space */);
+  for (int i = numberPerLine; i >= (numberPerLine / 2) && i > 0; i--)
+  {
+    if (N % i == 0)
+    {
+      numberPerLine = i;
+      break;
+    }
+    else
+    {
+    }
+  }
+
+  bool firstLine = true;
+  bool firstPerLine = true;
+  for (int i = 0; i < N; i++)
+  {
+    if ((i % numberPerLine == 0))
+    {
+      if (firstLine)
+      {
+        stream.printIndent();
+        firstLine = false;
+      }
+      else
+      {
+        stream.mOutput << "\n";
+        stream.printIndent();
+      }
+      firstPerLine = true;
+    }
+    else
+    {
+    }
+
+    if (firstPerLine)
+    {
+      firstPerLine = false;
+    }
+    else
+    {
+      stream.mOutput << " ";
+    }
+
+    if (i == maxNumberBytes && N > maxNumberBytes)
+    {
+      stream.mOutput << "...";
+    }
+    else
+    {
+      std::stringstream sstream;
+      toStringIntegralHex(sstream, value[i]);
+      stream.mOutput << sstream.str();
+    }
+  }
+  stream.decrementIndent();
+  stream.mOutput << "\n";
+  stream.printIndent();
+  stream.mOutput << "}";
+}
+
+// ---------------------------------------------------------------------------
+template <typename T, size_t N>
+std::enable_if_t<!std::is_integral_v<T>, UniversalStream&>
+toStringArray(UniversalStream& stream, const T (&value)[N])
+{
+  stream.mOutput << "{\n";
+  stream.incrementIndent();
+  bool first = true;
+  for (int i = 0; i < N; i++)
+  {
+    if (first)
+    {
+      first = false;
+    }
+    else
+    {
+      stream.mOutput << ",\n";
+    }
+    stream.printIndent();
+    stream << value[i];
+  }
+  stream.decrementIndent();
+  stream.printIndent();
+  stream.mOutput << "}\n";
+  return stream;
+}
+
+template <typename T, size_t N>
+std::enable_if_t<std::is_integral_v<T>, UniversalStream&>
+toStringArray(UniversalStream& stream, const T (&value)[N])
+{
+  hexDumpArray<T, N>(stream, value);
+  return stream;
+}
+
+// ---------------------------------------------------------------------------
+template <typename T>
+std::enable_if_t<!std::is_same_v<std::remove_reference_t<T>, const char*>,
+                 UniversalStream&>
+toStringPointer(UniversalStream& stream, const T* value)
 {
   if (value)
   {
@@ -202,51 +417,98 @@ operator<<(UniversalStream& stream, const T* value)
 }
 
 template <typename T>
-UniversalStream&
-operator<<(UniversalStream& stream, const T** value)
+std::enable_if_t<std::is_same_v<std::remove_reference_t<T>, const char*>,
+                 UniversalStream&>
+toStringPointer(UniversalStream& stream, T& value)
 {
-  if (value)
-  {
-    stream.mOutput << "{ object@" << (void*) value << " }";
-  }
-  else
-  {
-    stream.mOutput << "{ nullptr }";
-  }
+  stream.mOutput << "\"" << value << "\"";
   stream.flush();
   return stream;
 }
 
-template <>
-UniversalStream&
-operator<<(UniversalStream& stream, const char* value);
-
+// ---------------------------------------------------------------------------
 template <typename T>
-std::enable_if_t<!HasCustomOperator<std::remove_reference_t<T>>::value &&
-                     !HasOutputOperator<std::remove_reference_t<T>>::value &&
-                     !HasProtestOperator<std::remove_reference_t<T>>::value &&
-                     !std::is_pointer_v<std::remove_reference_t<T>>,
-                 UniversalStream&>
-
-operator<<(UniversalStream& stream2, const T& value)
+UniversalStream&
+printUnknownObject(UniversalStream& stream2, const T& value)
 {
-  stream2.mOutput << "{ object@" << &value << " }";
-  stream2.flush();
+  stream2.mOutput << "object@" << &value;
+  auto objectAsPointer = reinterpret_cast<const uint8_t*>(&value);
+  hexDumpArray<uint8_t, sizeof(T)>(stream2, objectAsPointer);
   return stream2;
 }
 
-template <typename T>
-std::enable_if_t<!HasCustomOperator<std::remove_reference_t<T>>::value &&
-                     !HasOutputOperator<std::remove_reference_t<T>>::value &&
-                     !HasProtestOperator<std::remove_reference_t<T>>::value &&
-                     !std::is_pointer_v<std::remove_reference_t<T>>,
-                 UniversalStream&>
+} // namespace internal
 
-operator<<(UniversalStream& stream2, const T&& value)
+// ---------------------------------------------------------------------------
+/**
+ * @brief operator<<
+ * 
+ * The specialization with the lowest priority. It will be used for all types
+ * which cannot be printed to a std::iostream and has no custom printer
+ * function. If the protest-compiler sees a call to this function in the AST
+ * it tries to generated a printer function for the given type (expect for
+ * pointer and array types).
+ * 
+ * Pointers and array types are explicit handled in this function. Without
+ * this special handling it is not possible for C++ to distinguish between
+ * pointer and arrays since arrays can be implicit convertable to the
+ * corresponding pointer type.
+ * 
+ * @tparam T
+ *   the type of the value to print
+ * 
+ * @param stream 
+ *   the stream to print to
+ * 
+ * @param value 
+ *   the value to print
+ * 
+ * @return the stream
+ */
+template <typename T>
+std::enable_if_t<(!HasProtestOperator<std::remove_reference_t<T>>::value &&
+                  !HasCustomOperator<std::remove_reference_t<T>>::value),
+                 UniversalStream&>
+operator<<(UniversalStream& stream, const T& value)
 {
-  stream2.mOutput << "{ object@" << &value << " }";
-  stream2.flush();
-  return stream2;
+  if constexpr (std::is_array_v<T>)
+  {
+    internal::toStringArray(stream, value);
+  }
+  else if constexpr (std::is_pointer_v<T>)
+  {
+    internal::toStringPointer(stream, value);
+  }
+  else
+  {
+    // try to generate printer funiction via the protest-compiler
+    // if not possible -> print hex dump
+    internal::printUnknownObject(stream, value);
+  }
+  return stream;
+}
+
+template <typename T>
+std::enable_if_t<(!HasProtestOperator<std::remove_reference_t<T>>::value &&
+                  !HasCustomOperator<std::remove_reference_t<T>>::value),
+                 UniversalStream&>
+operator<<(UniversalStream& stream, const T&& value)
+{
+  if constexpr (std::is_array_v<T>)
+  {
+    internal::toStringArray(stream, value);
+  }
+  else if constexpr (std::is_pointer_v<T>)
+  {
+    internal::toStringPointer(stream, value);
+  }
+  else
+  {
+    // try to generate printer funiction via the protest-compiler
+    // if not possible -> print hex dump
+    internal::printUnknownObject(stream, value);
+  }
+  return stream;
 }
 
 } // namespace log

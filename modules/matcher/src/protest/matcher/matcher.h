@@ -27,6 +27,8 @@
 
 #include "protest/log/universal_stream.h"
 
+#include <cassert>
+
 namespace protest
 {
 
@@ -36,16 +38,16 @@ namespace matcher
 // ---------------------------------------------------------------------------
 template <typename Pointer>
 inline const typename Pointer::element_type*
-getRawPointer(const Pointer& p)
+getRawPointer(const Pointer& ptr)
 {
-  return p.get();
+  return ptr.get();
 }
 
 template <typename Element>
 inline Element*
-getRawPointer(Element* p)
+getRawPointer(Element* ptr)
 {
-  return p;
+  return ptr;
 }
 
 inline void*
@@ -58,7 +60,7 @@ getRawPointer(std::nullptr_t)
 /**
  * @class MatcherInterface
  */
-template <typename Lhs>
+template <typename Opr>
 class MatcherInterface
 {
 public:
@@ -78,92 +80,347 @@ public:
 
 // ---------------------------------------------------------------------------
   virtual bool
-  check(Lhs lhs) = 0;
+  check(Opr lhs) = 0;
 
   virtual void
-  explain(const char* param, Lhs lhs, log::UniversalStream& stream) = 0;
+  explain(const char* param, Opr lhs, log::UniversalStream& stream) = 0;
 
   virtual void
-  explainNegative(const char* param, Lhs lhs, log::UniversalStream& stream) = 0;
+  explainNegative(const char* param, Opr lhs, log::UniversalStream& stream) = 0;
 
 private:
 };
 
 // ---------------------------------------------------------------------------
 /**
+ * @class UnaryMatcherInterface
+ */
+template <typename M, typename Opr>
+class UnaryMatcherInterface : public MatcherInterface<Opr>
+{
+public:
+  explicit UnaryMatcherInterface() = default;
+
+  UnaryMatcherInterface(const UnaryMatcherInterface& other) = delete;
+
+  UnaryMatcherInterface(UnaryMatcherInterface&& other) = delete;
+
+  UnaryMatcherInterface&
+  operator=(const UnaryMatcherInterface& other) = delete;
+
+  UnaryMatcherInterface&
+  operator=(UnaryMatcherInterface&& other) = delete;
+
+  ~UnaryMatcherInterface() = default;
+
+// ---------------------------------------------------------------------------
+  bool
+  check(Opr opr) override;
+
+  void
+  explain(const char* param, Opr opr, log::UniversalStream& stream) override;
+
+  void
+  explainNegative(const char* param,
+                  Opr opr,
+                  log::UniversalStream& stream) override;
+
+private:
+  void
+  explain(const char* param,
+          Opr value,
+          log::UniversalStream& stream,
+          bool negative,
+          bool check);
+};
+
+// ---------------------------------------------------------------------------
+template <typename M, typename Opr>
+bool
+UnaryMatcherInterface<M, Opr>::check(Opr lhs)
+{
+  return M::checkValue(lhs);
+}
+
+template <typename M, typename Opr>
+void
+UnaryMatcherInterface<M, Opr>::explain(const char* param,
+                                       Opr opr,
+                                       log::UniversalStream& stream)
+{
+  explain(param, opr, stream, false, M::checkValue(opr));
+}
+
+template <typename M, typename Opr>
+void
+UnaryMatcherInterface<M, Opr>::explainNegative(const char* param,
+                                               Opr opr,
+                                               log::UniversalStream& stream)
+{
+  explain(param, opr, stream, true, M::checkValue(opr));
+}
+
+template <typename M, typename Opr>
+void
+UnaryMatcherInterface<M, Opr>::explain(const char* param,
+                                       Opr value,
+                                       log::UniversalStream& stream,
+                                       bool negative,
+                                       bool check)
+{
+  static constexpr size_t indent = 10;
+  stream.mOutput << "Value of: " << param << "\n";
+  stream.mOutput << "Expected: ";
+  if (!negative)
+  {
+    stream.mOutput << M::description;
+  }
+  else
+  {
+    stream.mOutput << M::negativeDescription;
+  }
+  stream.mOutput << "\n";
+
+  if (negative ? !check : check)
+  {
+    stream.mOutput << "  Actual: ";
+  }
+  else
+  {
+    stream.mOutput << "  But is: ";
+  }
+
+  stream.incrementIndent(indent);
+  // stream.mOutput << asString;
+  M::printValue(value, stream);
+  stream.decrementIndent(indent);
+  stream.mOutput << "\n";
+}
+
+// ---------------------------------------------------------------------------
+/**
+ * @class BinaryMatcherInterface
+ */
+template <typename M, typename Lhs, typename Rhs>
+class BinaryMatcherInterface : public MatcherInterface<Lhs>
+{
+public:
+  explicit BinaryMatcherInterface(Rhs rhs) : mRhs(rhs)
+  {
+  }
+
+  BinaryMatcherInterface(const BinaryMatcherInterface& other) = delete;
+
+  BinaryMatcherInterface(BinaryMatcherInterface&& other) = delete;
+
+  BinaryMatcherInterface&
+  operator=(const BinaryMatcherInterface& other) = delete;
+
+  BinaryMatcherInterface&
+  operator=(BinaryMatcherInterface&& other) = delete;
+
+  ~BinaryMatcherInterface() = default;
+
+// ---------------------------------------------------------------------------
+  bool
+  check(Lhs lhs) override;
+
+  void
+  explain(const char* param, Lhs lhs, log::UniversalStream& stream) override;
+
+  void
+  explainNegative(const char* param,
+                  Lhs lhs,
+                  log::UniversalStream& stream) override;
+
+private:
+  void
+  explain(const char* param,
+          Lhs lhs,
+          Rhs rhs,
+          log::UniversalStream& stream,
+          bool negative,
+          bool check);
+
+  Rhs mRhs;
+};
+
+// ---------------------------------------------------------------------------
+template <typename M, typename Lhs, typename Rhs>
+bool
+BinaryMatcherInterface<M, Lhs, Rhs>::check(Lhs lhs)
+{
+  return M::checkValue(lhs, mRhs);
+}
+
+template <typename M, typename Lhs, typename Rhs>
+void
+BinaryMatcherInterface<M, Lhs, Rhs>::explain(const char* param,
+                                             Lhs lhs,
+                                             log::UniversalStream& stream)
+{
+  explain(param, lhs, mRhs, stream, false, M::checkValue(lhs, mRhs));
+}
+
+template <typename M, typename Lhs, typename Rhs>
+void
+BinaryMatcherInterface<M, Lhs, Rhs>::explainNegative(
+    const char* param,
+    Lhs lhs,
+    log::UniversalStream& stream)
+{
+  explain(param, lhs, mRhs, stream, true, M::checkValue(lhs, mRhs));
+}
+
+template <typename M, typename Lhs, typename Rhs>
+void
+BinaryMatcherInterface<M, Lhs, Rhs>::explain(const char* param,
+                                             Lhs lhs,
+                                             Rhs rhs,
+                                             log::UniversalStream& stream,
+                                             bool negative,
+                                             bool check)
+{
+  static constexpr size_t indent = 10;
+  stream.mOutput << "Value of: " << param << "\n";
+  stream.mOutput << "Expected: ";
+
+  if (!negative)
+  {
+    stream.mOutput << M::description;
+  }
+  else
+  {
+    stream.mOutput << M::negativeDescription;
+  }
+
+  stream.mOutput << "\n";
+  stream.incrementIndent(indent);
+  stream.printIndent();
+  M::printValue(rhs, stream);
+  stream.decrementIndent(indent);
+  stream.mOutput << "\n";
+
+  if (negative ? !check : check)
+  {
+    stream.mOutput << "  Actual: ";
+  }
+  else
+  {
+    stream.mOutput << "  But is: ";
+  }
+
+  stream.incrementIndent(indent);
+  M::printValue(lhs, stream);
+  stream.decrementIndent(indent);
+  stream.mOutput << "\n";
+}
+
+// ---------------------------------------------------------------------------
+/**
  * @class Matcher
  */
-template <typename Lhs>
+template <typename Opr>
 class Matcher
 {
 public:
-  explicit Matcher(MatcherInterface<Lhs>* interface);
+  explicit Matcher(MatcherInterface<Opr>* interface);
 
-  Matcher(const Matcher& other) = default;
+  Matcher(const Matcher& other) = delete;
 
-  Matcher(Matcher&& other) = delete;
+  Matcher(Matcher&& other);
 
   Matcher&
   operator=(const Matcher& other) = delete;
 
   Matcher&
-  operator=(Matcher&& other) = delete;
+  operator=(Matcher&& other);
 
-  ~Matcher() = default;
+  ~Matcher();
 
 // ---------------------------------------------------------------------------
   bool
-  check(Lhs value);
+  check(Opr value);
 
   void
-  explain(const char* param, Lhs value, protest::log::UniversalStream& stream);
+  explain(const char* param, Opr value, protest::log::UniversalStream& stream);
 
   void
   explainNegative(const char* param,
-                  Lhs value,
+                  Opr value,
                   protest::log::UniversalStream& stream);
 
   void
   clear();
 
 private:
-  MatcherInterface<Lhs>* mInterface;
+  MatcherInterface<Opr>* mInterface;
 };
 
 // ---------------------------------------------------------------------------
-template <typename Lhs>
-Matcher<Lhs>::Matcher(MatcherInterface<Lhs>* interface) : mInterface(interface)
+template <typename Opr>
+Matcher<Opr>::Matcher(MatcherInterface<Opr>* interface) : mInterface(interface)
 {
 }
 
-template <typename Lhs>
+template <typename Opr>
+Matcher<Opr>::Matcher(Matcher&& other)
+{
+  mInterface = other.mInterface;
+  other.mInterface = nullptr;
+}
+
+template <typename Opr>
+Matcher<Opr>&
+Matcher<Opr>::operator=(Matcher&& other)
+{
+  mInterface = other.mInterface;
+  other.mInterface = nullptr;
+  return *this;
+}
+
+template <typename Opr>
+Matcher<Opr>::~Matcher()
+{
+  if (mInterface != nullptr)
+  {
+    delete mInterface;
+    mInterface = nullptr;
+  }
+  else
+  {
+  }
+}
+
+// ---------------------------------------------------------------------------
+template <typename Opr>
 bool
-Matcher<Lhs>::check(Lhs value)
+Matcher<Opr>::check(Opr value)
 {
   return mInterface->check(value);
 }
 
-template <typename Lhs>
+template <typename Opr>
 void
-Matcher<Lhs>::explain(const char* param,
-                      Lhs value,
+Matcher<Opr>::explain(const char* param,
+                      Opr value,
                       protest::log::UniversalStream& stream)
 {
   mInterface->explain(param, value, stream);
 }
 
-template <typename Lhs>
+template <typename Opr>
 void
-Matcher<Lhs>::explainNegative(const char* param,
-                              Lhs value,
+Matcher<Opr>::explainNegative(const char* param,
+                              Opr value,
                               protest::log::UniversalStream& stream)
 {
   mInterface->explainNegative(param, value, stream);
 }
 
-template <typename Lhs>
+template <typename Opr>
 void
-Matcher<Lhs>::clear()
+Matcher<Opr>::clear()
 {
   delete mInterface;
   mInterface = nullptr;
@@ -200,9 +457,14 @@ private:
    * @class ComparisonImpl
    */
   template <typename Lhs>
-  class ComparisonImpl : public MatcherInterface<Lhs>
+  class ComparisonImpl :
+    public BinaryMatcherInterface<ComparisonImpl<Lhs>, Lhs, Rhs>
   {
   public:
+    static constexpr const char* description = Comparison::description;
+    static constexpr const char* negativeDescription =
+        Comparison::negativeDescription;
+
     explicit ComparisonImpl(Rhs rhs);
 
     ComparisonImpl(const ComparisonImpl& other) = delete;
@@ -218,19 +480,14 @@ private:
     ~ComparisonImpl() = default;
 
 // ---------------------------------------------------------------------------
-    bool
-    check(Lhs lhs) override;
+    static bool
+    checkValue(Lhs lhs, Rhs rhs);
 
-    void
-    explain(const char* param, Lhs lhs, log::UniversalStream& stream) override;
-
-    void
-    explainNegative(const char* param,
-                    Lhs lhs,
-                    log::UniversalStream& stream) override;
+    template <typename Opr>
+    static void
+    printValue(Opr opr, log::UniversalStream& stream);
 
   private:
-    Rhs mValue;
   };
 
   Rhs mValue;
@@ -253,80 +510,29 @@ ComparisonBase<Rhs, Comparison>::operator Matcher<Lhs>()
 template <typename Rhs, typename Comparison>
 template <typename Lhs>
 ComparisonBase<Rhs, Comparison>::ComparisonImpl<Lhs>::ComparisonImpl(Rhs rhs) :
-  mValue(rhs)
+  BinaryMatcherInterface<ComparisonImpl<Lhs>, Lhs, Rhs>(rhs)
 {
 }
 
 template <typename Rhs, typename Comparison>
 template <typename Lhs>
 bool
-ComparisonBase<Rhs, Comparison>::ComparisonImpl<Lhs>::check(Lhs lhs)
+ComparisonBase<Rhs, Comparison>::ComparisonImpl<Lhs>::checkValue(Lhs lhs,
+                                                                 Rhs rhs)
 {
-  return Comparison::compare(lhs, mValue);
+  bool ret = Comparison::compare(lhs, rhs);
+  return ret;
 }
 
 template <typename Rhs, typename Comparison>
 template <typename Lhs>
+template <typename Opr>
 void
-ComparisonBase<Rhs, Comparison>::ComparisonImpl<Lhs>::explain(
-    const char* param,
-    Lhs lhs,
+ComparisonBase<Rhs, Comparison>::ComparisonImpl<Lhs>::printValue(
+    Opr opr,
     log::UniversalStream& stream)
 {
-  static constexpr size_t indent = 10;
-  stream.mOutput << "Value of: " << param << "\n";
-  stream.mOutput << "Expected: " << Comparison::description << "\n";
-  stream.incrementIndent(indent);
-  stream.printIndent();
-  stream << mValue;
-  stream.decrementIndent(indent);
-  stream.mOutput << "\n";
-
-  if (check(lhs))
-  {
-    stream.mOutput << "  Actual: ";
-  }
-  else
-  {
-    stream.mOutput << "  But is: ";
-  }
-
-  stream.incrementIndent(indent);
-  stream << lhs;
-  stream.decrementIndent(indent);
-  stream.mOutput << "\n";
-}
-
-template <typename Rhs, typename Comparison>
-template <typename Lhs>
-void
-ComparisonBase<Rhs, Comparison>::ComparisonImpl<Lhs>::explainNegative(
-    const char* param,
-    Lhs lhs,
-    log::UniversalStream& stream)
-{
-  static constexpr size_t indent = 10;
-  stream.mOutput << "Value of: " << param << "\n";
-  stream.mOutput << "Expected: " << Comparison::negativeDescription << "\n";
-  stream.incrementIndent(indent);
-  stream.printIndent();
-  stream << mValue;
-  stream.decrementIndent(indent);
-  stream.mOutput << "\n";
-
-  if (check(lhs))
-  {
-    stream.mOutput << "  But is: ";
-  }
-  else
-  {
-    stream.mOutput << "  Actual: ";
-  }
-
-  stream.incrementIndent(indent);
-  stream << lhs;
-  stream.decrementIndent(indent);
-  stream.mOutput << "\n";
+  stream << opr;
 }
 
 // ---------------------------------------------------------------------------
@@ -400,7 +606,7 @@ private:
   class NotMatcherImpl : public matcher::MatcherInterface<Lhs>
   {
   public:
-    explicit NotMatcherImpl(matcher::Matcher<Lhs> inner);
+    explicit NotMatcherImpl(matcher::Matcher<Lhs>&& inner);
 
     NotMatcherImpl(const NotMatcherImpl& other) = delete;
 
@@ -450,8 +656,8 @@ NotMatcher<Inner>::operator matcher::Matcher<Lhs>()
 template <typename Inner>
 template <typename Lhs>
 NotMatcher<Inner>::NotMatcherImpl<Lhs>::NotMatcherImpl(
-    matcher::Matcher<Lhs> inner) :
-  mInner(inner)
+    matcher::Matcher<Lhs>&& inner) :
+  mInner(std::move(inner))
 {
 }
 
@@ -538,109 +744,49 @@ private:
   /**
    * @class NotNullImpl
    */
-  template <typename Lhs>
-  class NotNullImpl : public matcher::MatcherInterface<Lhs>
+  template <typename Opr>
+  class NotNullImpl :
+    public matcher::UnaryMatcherInterface<NotNullImpl<Opr>, Opr>
   {
   public:
-    static_assert(std::is_pointer_v<std::remove_reference_t<Lhs>> ||
-                  std::is_same_v<std::remove_reference_t<Lhs>, std::nullptr_t>);
+    static_assert(std::is_pointer_v<std::remove_reference_t<Opr>> ||
+                  std::is_same_v<std::remove_reference_t<Opr>, std::nullptr_t>);
 
-    explicit NotNullImpl() = default;
-
-    NotNullImpl(const NotNullImpl& other) = delete;
-
-    NotNullImpl(NotNullImpl&& other) = delete;
-
-    NotNullImpl&
-    operator=(const NotNullImpl& other) = delete;
-
-    NotNullImpl&
-    operator=(NotNullImpl&& other) = delete;
-
-    ~NotNullImpl() = default;
+    static constexpr const char* description = "is not Null";
+    static constexpr const char* negativeDescription = "is Null";
 
 // ---------------------------------------------------------------------------
-    bool
-    check(Lhs lhs) override;
+    static void
+    printValue(Opr opr, log::UniversalStream& stream);
 
-    void
-    explain(const char* param, Lhs lhs, log::UniversalStream& stream) override;
-
-    void
-    explainNegative(const char* param,
-                    Lhs lhs,
-                    log::UniversalStream& stream) override;
+    static bool
+    checkValue(Opr opr);
 
   private:
   };
 };
 
 // ---------------------------------------------------------------------------
-template <typename Lhs>
-NotNull::operator matcher::Matcher<Lhs>()
+template <typename Opr>
+NotNull::operator matcher::Matcher<Opr>()
 {
-  return matcher::Matcher<Lhs>(new NotNullImpl<Lhs>());
+  return matcher::Matcher<Opr>(new NotNullImpl<Opr>());
 }
 
-template <typename Lhs>
+// ---------------------------------------------------------------------------
+template <typename Opr>
+void
+NotNull::NotNullImpl<Opr>::printValue(Opr opr, log::UniversalStream& stream)
+{
+  stream.mOutput << "@"
+                 << static_cast<const void*>(matcher::getRawPointer(opr));
+}
+
+template <typename Opr>
 bool
-NotNull::NotNullImpl<Lhs>::check(Lhs lhs)
+NotNull::NotNullImpl<Opr>::checkValue(Opr opr)
 {
-  return matcher::getRawPointer(lhs) != nullptr;
-}
-
-template <typename Lhs>
-void
-NotNull::NotNullImpl<Lhs>::explain(const char* param,
-                                   Lhs lhs,
-                                   log::UniversalStream& stream)
-{
-  static constexpr size_t indent = 10;
-  stream.mOutput << "Value of: " << param << "\n";
-  stream.mOutput << "Expected: "
-                 << "is not nullptr"
-                 << "\n";
-
-  if (check(lhs))
-  {
-    stream.mOutput << "  Actual: ";
-  }
-  else
-  {
-    stream.mOutput << "  But is: ";
-  }
-
-  stream.incrementIndent(indent);
-  stream.mOutput << "@" << static_cast<const void*>(lhs);
-  stream.decrementIndent(indent);
-  stream.mOutput << "\n";
-}
-
-template <typename Lhs>
-void
-NotNull::NotNullImpl<Lhs>::explainNegative(const char* param,
-                                           Lhs lhs,
-                                           log::UniversalStream& stream)
-{
-  static constexpr size_t indent = 10;
-  stream.mOutput << "Value of: " << param << "\n";
-  stream.mOutput << "Expected: "
-                 << "is nullptr"
-                 << "\n";
-
-  if (check(lhs))
-  {
-    stream.mOutput << "  But is: ";
-  }
-  else
-  {
-    stream.mOutput << "  Actual: ";
-  }
-
-  stream.incrementIndent(indent);
-  stream.mOutput << "@" << static_cast<const void*>(lhs);
-  stream.decrementIndent(indent);
-  stream.mOutput << "\n";
+  return matcher::getRawPointer(opr) != nullptr;
 }
 
 // ---------------------------------------------------------------------------
@@ -676,43 +822,31 @@ public:
   operator matcher::Matcher<Lhs>();
 
 private:
+  using Rhs = T&;
+
   /**
    * @class RefImpl
    */
   template <typename Lhs>
-  class RefImpl : public matcher::MatcherInterface<Lhs>
+  class RefImpl : public matcher::BinaryMatcherInterface<RefImpl<Lhs>, Lhs, Rhs>
   {
   public:
     static_assert(std::is_reference_v<Lhs>);
 
+    static constexpr const char* description = "is a reference to value";
+    static constexpr const char* negativeDescription =
+        "is not a reference to value";
+
     explicit RefImpl(T& ref);
 
-    RefImpl(const RefImpl& other) = delete;
+    static bool
+    checkValue(Lhs lhs, Rhs rhs);
 
-    RefImpl(RefImpl&& other) = delete;
-
-    RefImpl&
-    operator=(const RefImpl& other) = delete;
-
-    RefImpl&
-    operator=(RefImpl&& other) = delete;
-
-    ~RefImpl() = default;
-
-// ---------------------------------------------------------------------------
-    bool
-    check(Lhs lhs) override;
-
-    void
-    explain(const char* param, Lhs lhs, log::UniversalStream& stream) override;
-
-    void
-    explainNegative(const char* param,
-                    Lhs lhs,
-                    log::UniversalStream& stream) override;
+    template <typename Opr>
+    static void
+    printValue(Opr opr, log::UniversalStream& stream);
 
   private:
-    T& mRef;
   };
 
   T& mRef;
@@ -734,82 +868,27 @@ Ref<T>::operator matcher::Matcher<Lhs>()
 // ---------------------------------------------------------------------------
 template <typename T>
 template <typename Lhs>
-Ref<T>::RefImpl<Lhs>::RefImpl(T& ref) : mRef(ref)
+Ref<T>::RefImpl<Lhs>::RefImpl(T& ref) :
+  matcher::BinaryMatcherInterface<RefImpl<Lhs>, Lhs, Rhs>(ref)
 {
 }
 
 template <typename T>
 template <typename Lhs>
 bool
-Ref<T>::RefImpl<Lhs>::check(Lhs lhs)
+Ref<T>::RefImpl<Lhs>::checkValue(Lhs lhs, typename Ref<T>::Rhs rhs)
 {
-  return &lhs == &mRef;
+  bool ret = &lhs == &rhs;
+  return ret;
 }
 
 template <typename T>
 template <typename Lhs>
+template <typename Opr>
 void
-Ref<T>::RefImpl<Lhs>::explain(const char* param,
-                              Lhs lhs,
-                              log::UniversalStream& stream)
+Ref<T>::RefImpl<Lhs>::printValue(Opr opr, log::UniversalStream& stream)
 {
-  static constexpr size_t indent = 10;
-  stream.mOutput << "Value of: " << param << "\n";
-  stream.mOutput << "Expected: "
-                 << "is a reference to value"
-                 << "\n";
-  stream.incrementIndent(indent);
-  stream.printIndent();
-  stream.mOutput << "@" << static_cast<const void*>(&mRef);
-  stream.decrementIndent(indent);
-  stream.mOutput << "\n";
-
-  if (check(lhs))
-  {
-    stream.mOutput << "  Actual: ";
-  }
-  else
-  {
-    stream.mOutput << "  But is: ";
-  }
-
-  stream.incrementIndent(indent);
-  stream.mOutput << "@" << static_cast<const void*>(&lhs);
-  stream.decrementIndent(indent);
-  stream.mOutput << "\n";
-}
-
-template <typename T>
-template <typename Lhs>
-void
-Ref<T>::RefImpl<Lhs>::explainNegative(const char* param,
-                                      Lhs lhs,
-                                      log::UniversalStream& stream)
-{
-  static constexpr size_t indent = 10;
-  stream.mOutput << "Value of: " << param << "\n";
-  stream.mOutput << "Expected: "
-                 << "is not a reference to value"
-                 << "\n";
-  stream.incrementIndent(indent);
-  stream.printIndent();
-  stream.mOutput << "@" << static_cast<const void*>(&mRef);
-  stream.decrementIndent(indent);
-  stream.mOutput << "\n";
-
-  if (check(lhs))
-  {
-    stream.mOutput << "  But is: ";
-  }
-  else
-  {
-    stream.mOutput << "  Actual: ";
-  }
-
-  stream.incrementIndent(indent);
-  stream.mOutput << "@" << static_cast<const void*>(&lhs);
-  stream.decrementIndent(indent);
-  stream.mOutput << "\n";
+  stream.mOutput << "@" << static_cast<const void*>(&opr);
 }
 
 // ---------------------------------------------------------------------------
@@ -840,106 +919,43 @@ private:
   /**
    * @class IsTrueImpl
    */
-  template <typename Lhs>
-  class IsTrueImpl : public matcher::MatcherInterface<Lhs>
+  template <typename Opr>
+  class IsTrueImpl : public matcher::UnaryMatcherInterface<IsTrueImpl<Opr>, Opr>
   {
   public:
-    explicit IsTrueImpl() = default;
+    static constexpr const char* description = "to be true";
+    static constexpr const char* negativeDescription = "to be false";
 
-    IsTrueImpl(const IsTrueImpl& other) = delete;
+    static void
+    printValue(Opr opr, log::UniversalStream& stream);
 
-    IsTrueImpl(IsTrueImpl&& other) = delete;
-
-    IsTrueImpl&
-    operator=(const IsTrueImpl& other) = delete;
-
-    IsTrueImpl&
-    operator=(IsTrueImpl&& other) = delete;
-
-    ~IsTrueImpl() = default;
-
-// ---------------------------------------------------------------------------
-    bool
-    check(Lhs lhs) override;
-
-    void
-    explain(const char* param, Lhs lhs, log::UniversalStream& stream) override;
-
-    void
-    explainNegative(const char* param,
-                    Lhs lhs,
-                    log::UniversalStream& stream) override;
+    static bool
+    checkValue(Opr opr);
 
   private:
   };
 };
 
 // ---------------------------------------------------------------------------
-template <typename Lhs>
-IsTrue::operator matcher::Matcher<Lhs>()
+template <typename Opr>
+IsTrue::operator matcher::Matcher<Opr>()
 {
-  return matcher::Matcher<Lhs>(new IsTrueImpl<Lhs>());
+  return matcher::Matcher<Opr>(new IsTrueImpl<Opr>());
 }
 
-template <typename Lhs>
+// ---------------------------------------------------------------------------
+template <typename Opr>
+void
+IsTrue::IsTrueImpl<Opr>::printValue(Opr opr, log::UniversalStream& stream)
+{
+  stream.mOutput << (checkValue(opr) ? "true" : "false");
+}
+
+template <typename Opr>
 bool
-IsTrue::IsTrueImpl<Lhs>::check(Lhs lhs)
+IsTrue::IsTrueImpl<Opr>::checkValue(Opr opr)
 {
-  return static_cast<bool>(lhs);
-}
-
-template <typename Lhs>
-void
-IsTrue::IsTrueImpl<Lhs>::explain(const char* param,
-                                   Lhs lhs,
-                                   log::UniversalStream& stream)
-{
-  static constexpr size_t indent = 10;
-  stream.mOutput << "Value of: " << param << "\n";
-  stream.mOutput << "Expected: "
-                 << "to be true"
-                 << "\n";
-
-  if (check(lhs))
-  {
-    stream.mOutput << "  Actual: ";
-  }
-  else
-  {
-    stream.mOutput << "  But is: ";
-  }
-
-  stream.incrementIndent(indent);
-  stream.mOutput << (check(lhs) ? "true" : "false");
-  stream.decrementIndent(indent);
-  stream.mOutput << "\n";
-}
-
-template <typename Lhs>
-void
-IsTrue::IsTrueImpl<Lhs>::explainNegative(const char* param,
-                                           Lhs lhs,
-                                           log::UniversalStream& stream)
-{
-  static constexpr size_t indent = 10;
-  stream.mOutput << "Value of: " << param << "\n";
-  stream.mOutput << "Expected: "
-                 << "to be false"
-                 << "\n";
-
-  if (check(lhs))
-  {
-    stream.mOutput << "  But is: ";
-  }
-  else
-  {
-    stream.mOutput << "  Actual: ";
-  }
-
-  stream.incrementIndent(indent);
-  stream.mOutput << (check(lhs) ? "true" : "false");
-  stream.decrementIndent(indent);
-  stream.mOutput << "\n";
+  return static_cast<bool>(opr);
 }
 
 // ---------------------------------------------------------------------------
@@ -948,5 +964,82 @@ IsFalse()
 {
   return Not(IsTrue());
 }
+
+// ---------------------------------------------------------------------------
+/**
+ * @class Anything
+ */
+class Anything
+{
+public:
+  explicit Anything() = default;
+
+  Anything(const Anything& other) = default;
+
+  Anything(Anything&& other) = delete;
+
+  Anything&
+  operator=(const Anything& other) = delete;
+
+  Anything&
+  operator=(Anything&& other) = delete;
+
+  ~Anything() = default;
+
+  template <typename Lhs>
+  operator matcher::Matcher<Lhs>();
+
+private:
+  /**
+   * @class AnythingImpl
+   */
+  template <typename Opr>
+  class AnythingImpl :
+    public matcher::UnaryMatcherInterface<AnythingImpl<Opr>, Opr>
+  {
+  public:
+    static constexpr const char* description = "is anything";
+    static constexpr const char* negativeDescription = "is nothing";
+
+    static void
+    printValue(Opr opr, log::UniversalStream& stream);
+
+    static bool
+    checkValue(Opr opr);
+
+  private:
+  };
+};
+
+// ---------------------------------------------------------------------------
+template <typename Opr>
+Anything::operator matcher::Matcher<Opr>()
+{
+  return matcher::Matcher<Opr>(new AnythingImpl<Opr>());
+}
+
+// ---------------------------------------------------------------------------
+template <typename Opr>
+void
+Anything::AnythingImpl<Opr>::printValue(Opr opr, log::UniversalStream& stream)
+{
+  stream.getPlain() << "is something";
+}
+
+template <typename Opr>
+bool
+Anything::AnythingImpl<Opr>::checkValue(Opr opr)
+{
+  return true;
+}
+
+// ---------------------------------------------------------------------------
+inline auto
+Any()
+{
+  return Anything();
+}
+
+static Anything _;
 
 } // namespace protest

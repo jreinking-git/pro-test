@@ -25,63 +25,20 @@
 
 #pragma once
 
-#include "protest/meta/call_context.h"
+#include <type_traits>
 
 namespace protest
 {
 
-namespace meta
+namespace mock
 {
 
-class Unit;
-
 // ---------------------------------------------------------------------------
-/**
- * @class Invariant
- */
-class Invariant : public CallContext
+template <typename T>
+struct HasMockImpl : std::false_type
 {
-public:
-  static Invariant&
-  defaultContext();
-
-// ---------------------------------------------------------------------------
-  explicit Invariant(Unit& unit,
-                     size_t line,
-                     const char* condition,
-                     std::vector<std::string>&& args,
-                     std::map<std::string, std::string>&& comments);
-
-  Invariant(const Invariant&) = delete;
-
-  Invariant(Invariant&&) noexcept = delete;
-
-  Invariant&
-  operator=(const Invariant&) = delete;
-
-  Invariant&
-  operator=(Invariant&&) noexcept = delete;
-
-  ~Invariant() = default;
-
-// ---------------------------------------------------------------------------
-  bool
-  wasCreated() const;
-
-  void
-  markAsCreated();
-
-  bool
-  hold() const;
-
-  void
-  markAsNotHold();
-
-private:
-  bool mWasCreated;
-  bool mHold;
 };
 
-} // namespace meta
+} // namespace mock
 
 } // namespace protest

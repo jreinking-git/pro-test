@@ -23,70 +23,37 @@
  * IN THE SOFTWARE.
  */
 
-#pragma once
+#include "protest/mock/mock_base.h"
 
-#include <map>
-#include <vector>
-#include <string>
+#include <iostream>
 
-#include <cstdint>
-#include <cstddef>
-
-namespace protest
-{
-
-namespace meta
-{
-
-class Unit;
+using namespace protest::mock;
+using namespace protest::mock::internal;
 
 // ---------------------------------------------------------------------------
-/**
- * @class Signal
- */
-// TODO this class is not really needed
-class Signal
+MockBase::MockBase(meta::MockCreation& callContext) : mCallContext(callContext)
 {
-public:
-  static Signal&
-  defaultContext();
+}
 
-// ---------------------------------------------------------------------------
-  explicit Signal(Unit& unit,
-                  size_t line,
-                  const char* objectName,
-                  std::vector<std::string>&& args,
-                  std::map<std::string, std::string>&& comments);
+void
+MockBase::addFunctionMocker(FunctionMockerRaw* functionMocker)
+{
+  assert(functionMocker);
+  mFunctionMockers.push_back(functionMocker);
+}
 
-  Signal(const Signal&) = delete;
+protest::meta::MockCreation&
+MockBase::getCallContext()
+{
+  return mCallContext;
+}
 
-  Signal(Signal&&) noexcept = delete;
-
-  Signal&
-  operator=(const Signal&) = delete;
-
-  Signal&
-  operator=(Signal&&) noexcept = delete;
-
-  ~Signal() = default;
-
-// ---------------------------------------------------------------------------
-  const Unit&
-  getUnit();
-
-  size_t
-  getLine() const;
-
-  const char*
-  getObjectName() const;
-
-private:
-  Unit& mUnit;
-  size_t mLine;
-  const char* mObjectName;
-  std::vector<std::string> mArgs;
-};
-
-} // namespace meta
-
-} // namespace protest
+void
+MockBase::checkMissingCalls()
+{
+  for (auto& mocker : mFunctionMockers)
+  {
+    assert(mocker);
+    mocker->checkMissingCalls();
+  }
+}

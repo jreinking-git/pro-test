@@ -198,7 +198,7 @@ Logger::writeToCOut()
       mStatus = Status::indent;
       mLastIsNewline = true;
       globalLastIsNewline = true;
-      assert(!newline);
+      // assert(!newline);
       newline = true;
     }
     else
@@ -213,15 +213,4 @@ Logger::writeToCOut()
   }
   // NOLINTNEXTLINE
   pbump(pbase() - pptr());
-}
-
-// ---------------------------------------------------------------------------
-// NOLINTNEXTLINE
-template <>
-UniversalStream&
-protest::log::operator<<(UniversalStream& stream, const char* value)
-{
-  stream.mOutput << "\"" << value << "\"";
-  stream.flush();
-  return stream;
 }

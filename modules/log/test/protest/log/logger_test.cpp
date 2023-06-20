@@ -94,19 +94,3 @@ TEST(logger, init)
   os << Number::second;
   assert(false);
 }
-
-// TEST(logger, init)
-// {
-//   Logger logger;
-//   auto& log = logger.startLog("INFO", "main", "/home/jreinking/Projekte/main.cpp", 42, protest::time::TimePoint::startOfEpoche() + protest::time::Millisecond(1000u));
-//   log << "geht das?" << std::endl;
-//   log << "das wäre gut :)" << std::endl;
-//   auto& log2 = logger.startLog("INFO", "main", "/home/jreinking/Projekte/main.cpp", 42, protest::time::TimePoint::startOfEpoche() + protest::time::Millisecond(1000u));
-//   log2 << "geht das?" << std::endl;
-//   log2 << "das wäre gut :)";
-//   auto& log3 = logger.startLog("INFO", "main", "/home/jreinking/Projekte/main.cpp", 42, protest::time::TimePoint::startOfEpoche() + protest::time::Millisecond(1000u));
-//   log3 << "geht das?" << std::endl;
-//   log3 << "das wäre gut :)" << std::endl;
-//   auto& log4 = logger.startLog("INFO", "main", "/home/jreinking/Projekte/main.cpp", 42);
-//   log4 << Number::first << std::endl;
-// }

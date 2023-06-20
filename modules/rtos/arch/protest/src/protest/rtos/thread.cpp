@@ -88,7 +88,7 @@ Thread::Thread(const char* name) : mUserdata(nullptr)
   mUserdata = new ThreadRunner(name, this);
 }
 
-Thread::Thread(uint8_t priority, const char* name) : mUserdata(nullptr)
+Thread::Thread(uint8_t /* priority */, const char* name) : mUserdata(nullptr)
 {
   // NOLINTNEXTLINE
   mUserdata = new ThreadRunner(name, this);

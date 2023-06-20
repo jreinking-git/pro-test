@@ -39,10 +39,10 @@ namespace protest
 namespace rtos
 {
 
-void
+void // NOLINTNEXTLINE
 _info(const char* file, size_t line, const char* format, ...);
 
-void
+void // NOLINTNEXTLINE
 _warn(const char* file, size_t line, const char* format, ...);
 
 } // namespace rtos

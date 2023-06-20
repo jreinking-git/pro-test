@@ -149,7 +149,7 @@ Signal<T>::push(T value, meta::CallContext& context)
   {
     // yield here so that if there are two or more coroutines runable
     // there can mix the delivery ot the message instead of that each
-    // coroutine is pushing it in a raw
+    // coroutine is pushing it in a row
     mContext.getCurrent()->coroYield();
     iter2->insertValue(value);
     ++iter2;

@@ -25,6 +25,23 @@
 
 #pragma once
 
+// PROTEST_HIDE is used to hide certain parts of the code which are used
+// by the protest-compiler but can cause problems in the last compile stage
+// (I.e.: when creating a object file). E.g.:
+// 
+// PROTEST_HIDE(__attribute__("annotation")) void function() {}
+// 
+// the __attribute__("annotation") is only visible for the protest-compiler
+#ifdef PROTEST_COMPILE_STAGE
+#define PROTEST_HIDE(X) X
+#else
+#define PROTEST_HIDE(X)
+#endif
+
 #include "protest/core/api.h"
 #include "protest/matcher/matcher.h"
 #include "protest/log/operator.h"
+#include "protest/mock/traits.h"
+#include "protest/mock/mock_base.h"
+#include "protest/mock/expectation.h"
+#include "protest/mock/in_sequence.h"

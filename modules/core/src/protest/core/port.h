@@ -71,8 +71,7 @@ public:
   friend class SamplePort<T>;
 
   explicit AnyPortCreator(core::Signal<T>& signal,
-                          RunnerRaw* runner,
-                          const char* name);
+                          RunnerRaw* runner);
 
   AnyPortCreator(const AnyPortCreator&) = default;
 
@@ -89,17 +88,14 @@ public:
 private:
   core::Signal<T>& mSignal;
   RunnerRaw* mRunner;
-  const char* mName;
 };
 
 // ---------------------------------------------------------------------------
 template <typename T>
 AnyPortCreator<T>::AnyPortCreator(core::Signal<T>& signal,
-                                  RunnerRaw* runner,
-                                  const char* name) :
+                                  RunnerRaw* runner) :
   mSignal(signal),
-  mRunner(runner),
-  mName(name)
+  mRunner(runner)
 {
 }
 

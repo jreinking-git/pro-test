@@ -41,7 +41,22 @@ done
 
 if [[ -z "$TEST" ]]
 then
-  list=("demo01" "demo02" "demo03" "demo04" "demo05" "demo06" "demo07" "demo08" "demo09" "demo10" "demo11" "reliable_broadcast" "tutorial01" "tutorial02")
+  list=("demo01"
+        "demo02"
+        "demo03"
+        "demo04"
+        "demo05"
+        "demo06"
+        "demo07"
+        "demo08"
+        "demo09"
+        "demo10"
+        "demo11"
+        "demo12"
+        "demo13"
+        "reliable_broadcast"
+        "tutorial01"
+        "tutorial02")
 else
   list=("$TEST")
 fi
@@ -63,41 +78,62 @@ if [ $DEVMODE -ne 1 ]; then
     echo "Error"
     exit 1
   fi
-fi
 
-make -s -C ./build
-if [ $? -ne 0 ]; then
-  echo "Error"
-  exit 1
-fi
+  make -s -C ./build
+  if [ $? -ne 0 ]; then
+    echo "Error"
+    exit 1
+  fi
 
-make -s -C ./build install
-if [ $? -ne 0 ]; then
-  echo "Error"
-  exit 1
+  make -s -C ./build install
+  if [ $? -ne 0 ]; then
+    echo "Error"
+    exit 1
+  fi
 fi
 
 returnVal=0
 for i in "${list[@]}"
 do
-  echo "BUILD $i"
-  rm -rf ./$i/build
-  mkdir ./$i/build
-  echo "cmake -DCMAKE_PREFIX_PATH="`pwd`/build/install" -B./$i/build -S./$i"
-  cmake -DCMAKE_PREFIX_PATH="`pwd`/build/install" -B./$i/build -S./$i
-  if [ $? -ne 0 ]; then
-    echo "Error"
-    exit 1
-  fi
-  make -s -C ./$i/build
-  ./$i/build/run_test > ./$i/build/main.log
-  # ignore @date and object@<addr> since it will always change
-  diff <(grep -Ev '@date|object|        0x|But is: 0x|Actual: 0x|        @|But is: @|Actual: @' ./$i/expected.log) <(grep -Ev '@date|object|        0x|But is: 0x|Actual: 0x|        @|But is: @|Actual: @' ./$i/build/main.log)
-  if [ $? -eq 0 ]; then
-    echo "PASS $i"
+  if (( $DEVMODE ==  1 )); then
+    echo "BUILD $i"
+    mkdir -p ./$i/build
+    echo "cmake -DCMAKE_BUILD_TYPE=Debug -DDEVELOPMENT_BUILD=1 -DCMAKE_PREFIX_PATH="`pwd`/build/install" -B./$i/build -S./$i"
+    cmake -DCMAKE_BUILD_TYPE=Debug -DDEVELOPMENT_BUILD=1 -DCMAKE_PREFIX_PATH="`pwd`/build/install" -B./$i/build -S./$i
+    if [ $? -ne 0 ]; then
+      echo "Error"
+      exit 1
+    fi
+    make -s -C ./$i/build
+    ./$i/build/run_test > ./$i/build/main.log
+    # ignore @date and object@<addr> since it will always change
+    diff <(grep -Ev 'pt.cpp:|@0x|@date|object|        0x|But is: 0x|Actual: 0x|        @|But is: @|Actual: @' ./$i/expected.log) <(grep -Ev 'pt.cpp:|@0x|@date|object|        0x|But is: 0x|Actual: 0x|        @|But is: @|Actual: @' ./$i/build/main.log)
+    if [ $? -eq 0 ]; then
+      echo "PASS $i"
+    else
+      echo "FAIL $i"
+      returnVal=1
+    fi
   else
-    echo "FAIL $i"
-    returnVal=1
+    echo "BUILD $i"
+    rm -rf ./$i/build
+    mkdir ./$i/build
+    echo "cmake -DCMAKE_PREFIX_PATH="`pwd`/build/install" -B./$i/build -S./$i"
+    cmake -DCMAKE_PREFIX_PATH="`pwd`/build/install" -B./$i/build -S./$i
+    if [ $? -ne 0 ]; then
+      echo "Error"
+      exit 1
+    fi
+    make -s -C ./$i/build
+    ./$i/build/run_test > ./$i/build/main.log
+    # ignore @date and object@<addr> since it will always change
+    diff <(grep -Ev '@0x|@date|object|        0x|But is: 0x|Actual: 0x|        @|But is: @|Actual: @' ./$i/expected.log) <(grep -Ev '@0x|@date|object|        0x|But is: 0x|Actual: 0x|        @|But is: @|Actual: @' ./$i/build/main.log)
+    if [ $? -eq 0 ]; then
+      echo "PASS $i"
+    else
+      echo "FAIL $i"
+      returnVal=1
+    fi
   fi
 done
 

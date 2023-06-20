@@ -174,10 +174,14 @@ template <uint8_t numberOfBlocks, size_t blockSize>
 uint8_t
 MemoryPool<numberOfBlocks, blockSize>::block2index(const uint8_t* block)
 {
+  // is in mBuffer?
   PROTEST_ASSERT(block >= mBuffer &&
-                 block < &mBuffer[numberOfBlocks * blockSize]);// is in mBuffer?
+                 block < &mBuffer[numberOfBlocks * blockSize]);
+  
+  // points to start of block?
   PROTEST_ASSERT((block - mBuffer) % blockSize ==
-                 0u);// points to start of block?
+                 0u);
+  
   return (block - mBuffer) / blockSize;
 }
 

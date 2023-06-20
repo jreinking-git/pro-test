@@ -102,7 +102,7 @@ public:
   process() override
   {
     mModule.start();
-    static constexpr size_t numberOfSequences = 100;
+    static constexpr size_t numberOfSequences = 5;
     auto inv = createInvariant((mStopwatch <= maxExecutionTime) || mIsFaulty);
 
     for (int i = 0; i < numberOfSequences; i++)

@@ -26,13 +26,9 @@
 #pragma once
 
 #include "protest/utils/static_linked_list.h"
-#include "protest/meta/assertion.h"
-#include "protest/meta/check.h"
-#include "protest/meta/invariant.h"
+#include "protest/meta/call_context.h"
 
 #include <vector>
-
-#define PROTEST_PATHS(path1, path2, path3) ("project:/" path3)
 
 namespace protest
 {
@@ -110,6 +106,37 @@ public:
   getNumberOfNotExecutedChecks() const;
 
 // ---------------------------------------------------------------------------
+  void
+  addExpectCall(ExpectCall& call);
+
+  const std::vector<ExpectCall*>&
+  getExpectCalls() const;
+
+  void
+  addMockCreation(MockCreation& call);
+
+  const std::vector<MockCreation*>&
+  getMockCreations() const;
+
+  size_t
+  getNumberOfOversaturatedFunctionCalls() const;
+
+  size_t
+  getNumberOfUnmetPrerequisties() const;
+
+  size_t
+  getNumberOfMissingFunctionCalls() const;
+
+  size_t
+  getNumberOfUnexpectedFunctionCalls() const;
+
+  size_t
+  getNumberOfExecutedExpectCall() const;
+
+  size_t
+  getNumberOfMocks() const;
+
+// ---------------------------------------------------------------------------
   const char*
   getFileName() const;
 
@@ -118,6 +145,8 @@ private:
   std::vector<Assertion*> mAssertions;
   std::vector<Invariant*> mInvariants;
   std::vector<Check*> mChecks;
+  std::vector<ExpectCall*> mExpectCalls;
+  std::vector<MockCreation*> mMockCreations;
 };
 
 } // namespace meta

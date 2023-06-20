@@ -31,6 +31,7 @@ using namespace protest::rtos;
 using namespace protest::time;
 using namespace std::chrono;
 
+// NOLINTNEXTLINE
 static std::chrono::_V2::steady_clock::time_point startedAt =
     steady_clock::now();
 

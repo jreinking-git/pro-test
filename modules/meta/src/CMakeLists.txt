@@ -1,12 +1,7 @@
 set(sources
-  "protest/meta/assertion.cpp"
   "protest/meta/test_manager.cpp"
-  "protest/meta/check.cpp"
-  "protest/meta/wait.cpp"
   "protest/meta/unit.cpp"
-  "protest/meta/invariant.cpp"
   "protest/meta/call_context.cpp"
-  "protest/meta/signal.cpp"
 )
 
 if (PROTEST_INCLUDE_UNIT_TESTS)

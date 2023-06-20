@@ -49,7 +49,7 @@ takeSemaphore(sem_t* self, protest::time::Duration timeout)
   };
   retValue = clock_gettime(CLOCK_MONOTONIC, &now);
   PROTEST_ASSERT(retValue == 0);
-  int64_t nanoseconds = timeout.nanoseconds();
+  const int64_t nanoseconds = timeout.nanoseconds();
   struct timespec time
   {
     0
@@ -84,7 +84,7 @@ Semaphore::Semaphore() : mUserdata(nullptr)
   mUserdata = new sem_t();
   auto* userdata = reinterpret_cast<sem_t*>(mUserdata);
 
-  int ret = sem_init(userdata, 0, 0);
+  const int ret = sem_init(userdata, 0, 0);
   if (ret != 0)
   {
     perror("sem_init");
@@ -98,7 +98,7 @@ Semaphore::Semaphore() : mUserdata(nullptr)
 Semaphore::~Semaphore()
 {
   auto* userdata = reinterpret_cast<sem_t*>(mUserdata);
-  int ret = sem_destroy(userdata);
+  const int ret = sem_destroy(userdata);
   if (ret != 0)
   {
     perror("sem_destroy");
@@ -116,7 +116,7 @@ Semaphore::acquire(time::Duration timeout)
   bool gotTimeout = false;
   if (timeout == time::Duration::infinity())
   {
-    int ret = sem_wait(userdata);
+    const int ret = sem_wait(userdata);
     PROTEST_ASSERT(ret == 0);
   }
   else
@@ -130,7 +130,7 @@ void
 Semaphore::release()
 {
   auto* userdata = reinterpret_cast<sem_t*>(mUserdata);
-  int ret = sem_post(userdata);
+  const int ret = sem_post(userdata);
   if (ret != 0)
   {
     perror("sem_post");

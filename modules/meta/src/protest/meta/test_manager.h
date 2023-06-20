@@ -42,11 +42,6 @@ namespace meta
 class TestManager
 {
 public:
-  static const Unit&
-  getCurrentUnit(protest::meta::CallContext& context =
-                     protest::meta::CallContext::defaultContext());
-
-// ---------------------------------------------------------------------------
   explicit TestManager() = default;
 
   TestManager(const TestManager&) = delete;
@@ -96,10 +91,35 @@ public:
   getNumberOfNotExecutedInvariants() const;
 
 // ---------------------------------------------------------------------------
+  size_t
+  getNumberOfOversaturatedFunctionCalls() const;
+
+  size_t
+  getNumberOfUnmetPrerequisties() const;
+
+  size_t
+  getNumberOfMissingFunctionCalls() const;
+
+  size_t
+  getNumberOfUnexpectedFunctionCalls() const;
+
+  size_t
+  getNumberOfExecutedExpectCalls() const;
+
+  size_t
+  getNumberOfMockFailures() const;
+
+  size_t
+  getNumberOfMocks() const;
+
+// ---------------------------------------------------------------------------
   std::vector<Unit*>&
   getUnits();
 
 private:
+  size_t
+  sum(size_t(Unit::*func)() const) const;
+
   std::vector<Unit*> mUnits;
 };
 

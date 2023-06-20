@@ -116,7 +116,7 @@ public:
       /** @info
        * @seperator
        * This assertion has an inner assertion. The protest compiler should handle this
-       * case properly. I.e.: it should process the inner @c assertThat first the the
+       * case properly. I.e.: it should process the inner @c assertThat first then the
        * outer.
        * @seperator
        */

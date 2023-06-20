@@ -27,7 +27,15 @@
 #include "protest/core/condition.h"
 #include "protest/utils/log.h"
 
+#include <cassert>
+
 using namespace protest::core;
+
+// ---------------------------------------------------------------------------
+RunnerRaw::Userdata::Userdata(size_t identifier) : mId(identifier)
+{
+  assert(identifier < numberOfPerRunnerData);
+}
 
 // ---------------------------------------------------------------------------
 RunnerRaw::RunnerRaw(const char* name) :
@@ -37,8 +45,10 @@ RunnerRaw::RunnerRaw(const char* name) :
   mWakeUpEvent(false),
   mNext(nullptr),
   mTestSteps(1),
-  mCurrentTestStepName(nullptr)
+  mCurrentTestStepName(nullptr),
+  mUserdata({})
 {
+  mUserdata.fill(nullptr);
   Context::getCurrentContext()->addRunner(this);
 }
 
@@ -49,8 +59,10 @@ RunnerRaw::RunnerRaw(core::Context& context, const char* name) :
   mWakeUpEvent(false),
   mNext(nullptr),
   mTestSteps(1),
-  mCurrentTestStepName(nullptr)
+  mCurrentTestStepName(nullptr),
+  mUserdata({})
 {
+  mUserdata.fill(nullptr);
   context.Scheduler::addThread(this);
   context.addRunner(this);
 }
@@ -58,6 +70,7 @@ RunnerRaw::RunnerRaw(core::Context& context, const char* name) :
 RunnerRaw::~RunnerRaw()
 {
   assert(mPriorityQueue.isEmpty());
+  mUserdata.fill(nullptr);
 }
 
 // ---------------------------------------------------------------------------
@@ -156,7 +169,7 @@ RunnerRaw::waitInternal(time::Duration timeout, Condition* condition)
 {
   PROTEST_ASSERT(mCondition == nullptr);
   mCondition = condition;
-  bool gotTimeout = waitInternal(timeout);
+  const bool gotTimeout = waitInternal(timeout);
   mCondition = nullptr;
   return gotTimeout;
 }
@@ -214,8 +227,8 @@ RunnerRaw::waitInternal(time::Duration timeout)
     }
   }
 
-  bool gotTimeout =
-      !((mCondition != nullptr && mCondition->isFulfilled()) || mWakeUpEvent);
+  const bool gotTimeout =
+      ((mCondition == nullptr || !mCondition->isFulfilled()) && !mWakeUpEvent);
   return gotTimeout;
 }
 
@@ -264,7 +277,7 @@ RunnerRaw::endSection()
     number = std::string(mCurrentTestStepName) + " " + number;
   }
   std::stringstream sstream;
-  std::string endTeststepAsString = "End section";
+  const std::string endTeststepAsString = "End section";
   sstream << endTeststepAsString;
   sstream << std::setfill(' ')
           << std::setw(

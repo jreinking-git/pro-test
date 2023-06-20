@@ -24,6 +24,8 @@ add_subdirectory(../../modules/doc/src ./modules/doc/src)
 add_subdirectory(../../modules/log/src ./modules/log/src)
 add_subdirectory(../../modules/matcher/src ./modules/matcher/src)
 add_subdirectory(../../modules/meta/src ./modules/meta/src)
+add_subdirectory(../../modules/mock/src ./modules/mock/src)
+add_subdirectory(../../modules/mock/test ./modules/mock/test)
 add_subdirectory(../../modules/utils/src ./modules/utils/src)
 add_subdirectory(../../modules/utils/test ./modules/utils/test)
 add_subdirectory(../../modules/time/src ./modules/time/src)
@@ -50,6 +52,8 @@ target_link_libraries(demo
   coro_test
   rtos
   rtos_test
+  mock
+  mock_test
   gtest
 )
 

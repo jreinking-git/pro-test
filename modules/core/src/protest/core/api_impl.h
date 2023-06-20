@@ -75,8 +75,7 @@ createPort(protest::core::Signal<T>& signal)
 {
   auto context = core::Context::getCurrentContext();
   auto runner = context->getCurrentVirtual();
-  // TODO remove name?
-  return core::AnyPortCreator<T>(signal, runner, "");
+  return core::AnyPortCreator<T>(signal, runner);
 }
 
 // ---------------------------------------------------------------------------
@@ -157,7 +156,7 @@ wait(T condition,
   }
 
   expr->enable();
-  bool gotTimeout = runner->RunnerRaw::waitInternal(timeout, expr);
+  const bool gotTimeout = runner->RunnerRaw::waitInternal(timeout, expr);
   expr->disable();
 
   if (!gotTimeout)

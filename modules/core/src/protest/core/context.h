@@ -60,6 +60,14 @@ public:
   static Context*
   getCurrentContext();
 
+  /**
+   * @brief getCurrentLogger
+   * 
+   * @return the logger of the current runner
+   */
+  static log::Logger&
+  getCurrentLogger();
+
 // ---------------------------------------------------------------------------
   explicit Context(protest::meta::CallContext& context =
                        protest::meta::CallContext::defaultContext());

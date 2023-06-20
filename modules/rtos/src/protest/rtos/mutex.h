@@ -61,8 +61,12 @@ public:
   void
   release();
 
+  bool
+  isAcquired();
+
 private:
   void* mUserdata;
+  bool mAcquired;
 };
 
 } // namespace rtos

@@ -123,6 +123,74 @@ public:
       assert(ret);
       ret = assertThat(42, Ge(43));
       assert(!ret);
+
+      ret = assertThat(42, Eq(static_cast<const int>(42)));
+      assert(ret);
+      ret = assertThat(42, Eq(static_cast<const int>(43)));
+      assert(!ret);
+
+      ret = assertThat(42, Ne(static_cast<const int>(42)));
+      assert(!ret);
+      ret = assertThat(42, Ne(static_cast<const int>(43)));
+      assert(ret);
+
+      ret = assertThat(42, Gt(static_cast<const int>(41)));
+      assert(ret);
+      ret = assertThat(42, Gt(static_cast<const int>(42)));
+      assert(!ret);
+
+      ret = assertThat(42, Lt(static_cast<const int>(43)));
+      assert(ret);
+      ret = assertThat(42, Lt(static_cast<const int>(42)));
+      assert(!ret);
+
+      ret = assertThat(42, Le(static_cast<const int>(43)));
+      assert(ret);
+      ret = assertThat(42, Le(static_cast<const int>(42)));
+      assert(ret);
+      ret = assertThat(42, Le(static_cast<const int>(41)));
+      assert(!ret);
+
+      ret = assertThat(42, Ge(static_cast<const int>(41)));
+      assert(ret);
+      ret = assertThat(42, Ge(static_cast<const int>(42)));
+      assert(ret);
+      ret = assertThat(42, Ge(static_cast<const int>(43)));
+      assert(!ret);
+
+      ret = assertThat(static_cast<const int>(42), Eq(42));
+      assert(ret);
+      ret = assertThat(static_cast<const int>(42), Eq(43));
+      assert(!ret);
+
+      ret = assertThat(static_cast<const int>(42), Ne(42));
+      assert(!ret);
+      ret = assertThat(static_cast<const int>(42), Ne(43));
+      assert(ret);
+
+      ret = assertThat(static_cast<const int>(42), Gt(41));
+      assert(ret);
+      ret = assertThat(static_cast<const int>(42), Gt(42));
+      assert(!ret);
+
+      ret = assertThat(static_cast<const int>(42), Lt(43));
+      assert(ret);
+      ret = assertThat(static_cast<const int>(42), Lt(42));
+      assert(!ret);
+
+      ret = assertThat(static_cast<const int>(42), Le(43));
+      assert(ret);
+      ret = assertThat(static_cast<const int>(42), Le(42));
+      assert(ret);
+      ret = assertThat(static_cast<const int>(42), Le(41));
+      assert(!ret);
+
+      ret = assertThat(static_cast<const int>(42), Ge(41));
+      assert(ret);
+      ret = assertThat(static_cast<const int>(42), Ge(42));
+      assert(ret);
+      ret = assertThat(static_cast<const int>(42), Ge(43));
+      assert(!ret);
     }
 
     {
@@ -281,6 +349,27 @@ public:
         ret = assertThat(adptr, Eq(bdptr));
         assert(!ret);
       }
+
+      {
+        TestStruct a;
+        a.a = 42;
+
+        TestStruct b;
+        b.a = 42;
+
+        TestStruct* aptr = &a;
+        TestStruct* bptr = &b;
+
+        bool ret = assertThat(aptr, Eq(&a));
+        assert(ret);
+        ret = assertThat(bptr, Eq(&a));
+        assert(!ret);
+
+        ret = assertThat(aptr, Not(Eq(&a)));
+        assert(!ret);
+        ret = assertThat(bptr, Not(Eq(&a)));
+        assert(ret);
+      }
     }
 
     {
@@ -307,7 +396,12 @@ public:
 
       int a = 34;
       int b = 42;
-      bool ret = assertThat(a, Ref(a));
+      const int& c = b;
+
+      bool ret = assertThat(c, Ref(b));
+      assert(ret);
+
+      ret = assertThat(a, Ref(a));
       assert(ret);
       ret = assertThat(a, Ref(b));
       assert(!ret);
@@ -339,6 +433,22 @@ public:
       assert(ret);
       ret = assertThat(false, Not(IsFalse()));
       assert(!ret);
+    }
+
+    {
+      auto sec = section("any");
+
+      {
+        auto ret = false;
+        ret = assertThat(false, _);
+        assert(ret);
+        ret = assertThat(1, _);
+        assert(ret);
+        ret = assertThat("false", _);
+        assert(ret);
+        ret = assertThat(1, Not(_));
+        assert(!ret);
+      }
     }
   }
 

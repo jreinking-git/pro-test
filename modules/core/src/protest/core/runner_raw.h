@@ -32,6 +32,8 @@
 #include "protest/core/condition.h"
 #include "protest/core/context.h"
 
+#include <array>
+
 namespace protest
 {
 
@@ -47,8 +49,38 @@ class Condition;
 class RunnerRaw : public coro::Coroutine, public Condition::Listener
 {
 public:
+  static constexpr size_t numberOfPerRunnerData = 10;
+
   friend class List<RunnerRaw>;
 
+// ---------------------------------------------------------------------------
+  /**
+   * @class Userdata
+   */
+  class Userdata
+  {
+  public:
+    friend class RunnerRaw;
+
+    explicit Userdata(size_t id);
+
+    Userdata(const Userdata& other) = delete;
+
+    Userdata(Userdata&& other) = delete;
+
+    Userdata&
+    operator=(const Userdata& other) = delete;
+
+    Userdata&
+    operator=(Userdata&& other) = delete;
+
+    virtual ~Userdata() = default;
+
+  private:
+    size_t mId;
+  };
+
+// ---------------------------------------------------------------------------
   explicit RunnerRaw(const char* name);
 
   explicit RunnerRaw(core::Context& context, const char* name);
@@ -120,6 +152,39 @@ public:
   core::Context&
   getContext();
 
+// ---------------------------------------------------------------------------
+  /**
+   * @brief getUserdataAs
+   * 
+   * Userdata can be used to store `per-runner` data. It can be accessed with
+   * this method.
+   * 
+   * @tparam T
+   *  the type of the user data
+   * 
+   * @return
+   *  pointer to the user data
+   */
+  template <typename T>
+  T*
+  getUserdataAs();
+
+  /**
+   * @brief setUserdata
+   * 
+   * Userdata can be used to store `per-runner` data. It can be set with
+   * this method.
+   * 
+   * @tparam T
+   *  the type of the user data
+   * 
+   * @param userdata 
+   *  pointer to the user data
+   */
+  template <typename T>
+  void
+  setUserdata(T* userdata);
+
 private:
   static constexpr size_t seperatorLength = 79;
 
@@ -135,7 +200,24 @@ private:
 
   uint32_t mTestSteps;
   const char* mCurrentTestStepName;
+  std::array<Userdata*, numberOfPerRunnerData> mUserdata;
 };
+
+// ---------------------------------------------------------------------------
+template <typename T>
+T*
+RunnerRaw::getUserdataAs()
+{
+  assert(T::id < numberOfPerRunnerData);
+  return static_cast<T*>(mUserdata.at(T::id));
+}
+
+template <typename T>
+void
+RunnerRaw::setUserdata(T* userdata)
+{
+  mUserdata.at(T::id) = userdata;
+}
 
 } // namespace core
 

@@ -135,11 +135,6 @@ public:
   operator=(const core::AnyPortCreator<T>& info);
 
 // ---------------------------------------------------------------------------
-  // TODO remove
-  template <typename U>
-  void
-  operator=(U value);
-
   operator T();
 
   template <typename Function>
@@ -527,15 +522,6 @@ SamplePort<T>::~SamplePort()
 
 // ---------------------------------------------------------------------------
 template <typename T>
-template <typename U>
-void
-SamplePort<T>::operator=(U value)
-{
-  assert(mInternal);
-  mInternal->setValue(value);
-}
-
-template <typename T>
 SamplePort<T>::operator T()
 {
   assert(mInternal);
@@ -636,9 +622,9 @@ SamplePort<T>::Callback<Function>::handle(T& value)
                     mContext.getUnit().getFileName(),
                     mContext.getLine(),
                     runner->now());
-    logger.getStream().mOutput << "Handle value of '"
-                       << mInternal->mSignal->getSignalInfo().getObjectName()
-                       << "':\n";
+    logger.getStream().mOutput
+        << "Handle value of '"
+        << mInternal->mSignal->getSignalInfo().getObjectName() << "':\n";
     logger.getStream() << value;
     // logger.getStream().mOutput << "\n";
   }

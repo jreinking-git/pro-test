@@ -16,6 +16,11 @@ class OpenSourceFile(object):
             return file_content
 
 
+def split(list_a, chunk_size):
+    for i in range(0, len(list_a), chunk_size):
+        yield list_a[i:i + chunk_size]
+
+
 class MergeHeaderModifier(object):
 
     def __init__(self, src_file, include_paths):
@@ -80,12 +85,7 @@ class MergeHeaderModifier(object):
         return self.resolve(self.src_file, text)
 
 
-def split(list_a, chunk_size):
-    for i in range(0, len(list_a), chunk_size):
-        yield list_a[i:i + chunk_size]
-
-
-class PrivateToPublicModifier(object):
+class Cpp11AnnotationToClangAnnotation(object):
 
     def handle_block(self, block):
         if len(block) == 1:
@@ -99,14 +99,27 @@ class PrivateToPublicModifier(object):
                 # match_string_literal
                 return block[0] + block[3]
             if block[5]:
-                # match_private
-                return block[0] + block[6] + "public" + block[8]
-            if block[9]:
+                # match_annotation
+                ms = block[7].split("\n")
+                # TODO (jreinking) what about already escaped '"'?
+                retval = block[0] + "PROTEST_HIDE([[clang::annotate(\"" + block[7].replace("\n", "").replace(" ", "").replace("\"", "\\\"") + "\")]])"
+                for j in range(len(ms) - 1):
+                    retval += "\n"
+                return retval
+            if block[8]:
                 # match line comment
-                return block[0] + block[9]
+                return block[0] + block[8]
         raise ValueError("block must have a match or must be a suffix")
 
     def modify(self, text):
+        # TODO (jreinking) code duplication
+        # TODO (jreinking) a comment can also look like:
+        #
+        # // this a comment \
+        # this is still part of the comment and > private: < will be replaced
+        # 
+        # currently the regex will not match this as comment?
+
         # do not replace string 'private' in comments
         match_block_comment = "(\\/\\*((?!\\*\\/).)*\\*\\/)"
         # do not replace string 'private' in line comments
@@ -114,78 +127,18 @@ class PrivateToPublicModifier(object):
         # do not replace string 'private' in string literals
         match_string_literal = "(\"([^\"\\\\]|\\\\.)*\")"
         # replace it in the rest of the document
-        match_private = "(([^a-zA-Z])(private)(\\s*:))"
+        match_annotation = "((\[\[([^\]]*)\]\]))"
         regex = "(?s){}|{}|{}|{}".format(match_block_comment,
-                                         match_string_literal, match_private, match_line_comment)
+                                         match_string_literal,
+                                         match_annotation,
+                                         match_line_comment)
         regex = re.compile(regex)
         blocks = re.split(regex, text)
-        blocks = list(split(blocks, 10))
+        blocks = list(split(blocks, 9))
         new_blocks = []
         for b in blocks:
             new_blocks.append(self.handle_block(b))
         return "".join(new_blocks)
-
-
-class PrintCommendModifier(object):
-
-    def handle_block(self, block, limit):
-        new_lines = []
-        new_line = ""
-        for word in block:
-            if new_line == "":
-                new_line = word
-            elif len(new_line) + len(word) + 1 <= limit:
-                new_line = new_line + " " + word
-            else:
-                new_lines.append(new_line)
-                new_line = word
-        if new_line != "":
-            new_lines.append(new_line)
-        return new_lines
-
-    def modify(self, text):
-        matches = re.split(
-            '([\t ]*/\*\* @info(\(format\))?\n(((?!\*/).)*)?\*/)', text, flags=re.S)
-        text = ""
-        while len(matches) > 3:
-            limit = 0
-            if matches[2]:
-                limit = defaultLineLength
-            m = matches[1]
-            ms = m.split("\n")
-            n = len(ms)
-            ms = ms[1:]
-            ms = ms[:-1]
-            i = 0
-            for line in ms:
-                line = re.sub('^([ \t]*)\*[ \t]*', '',
-                              line, flags=re.MULTILINE)
-                line = line.strip()
-                if "@seperator" == line:
-                    line = "-" * defaultLineLength
-                ms[i] = line
-                i += 1
-            if limit:
-                new_lines = []
-                block = []
-                for line in ms:
-                    if line == "":
-                        new_lines += self.handle_block(block, limit)
-                        new_lines.append(line)
-                        block = []
-                    else:
-                        block += line.split()
-                new_lines += self.handle_block(block, limit)
-                ms = new_lines
-
-            m = "\n".join(ms)
-            text += matches[0] + "logger() << \"" + \
-                m.replace("\n", "\\n") + "\" << \"\\n\";"
-            for j in range(n - 1):
-                text += "\n"
-            matches = matches[5:]
-        text += matches[0]
-        return text
 
 
 class PreCompiler(object):
@@ -218,10 +171,10 @@ class PreCompiler(object):
         self.parsed = set()
         self.modifiers = []
         self.modifiers.append(OpenSourceFile(self.args.src_file))
-        self.modifiers.append(MergeHeaderModifier(
-            self.args.src_file, self.src_include_dir))
-        self.modifiers.append(PrivateToPublicModifier())
-        self.modifiers.append(PrintCommendModifier())
+        self.modifiers.append(MergeHeaderModifier(self.args.src_file, self.src_include_dir))
+        # self.modifiers.append(PrivateToPublicModifier())
+        # self.modifiers.append(PrintCommendModifier())
+        self.modifiers.append(Cpp11AnnotationToClangAnnotation())
         self.run()
 
     def run(self):

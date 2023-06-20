@@ -25,10 +25,4 @@
 
 #pragma once
 
-#include "protest/meta/unit.h"
-#include "protest/meta/check.h"
-#include "protest/meta/wait.h"
-#include "protest/meta/assertion.h"
-#include "protest/meta/call_context.h"
-#include "protest/meta/invariant.h"
-#include "protest/meta/signal.h"
+#include "protest/matcher/matcher.h"

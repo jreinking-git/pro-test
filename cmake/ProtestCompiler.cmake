@@ -47,8 +47,23 @@ function(add_protest_file)
         
       add_custom_command(
           OUTPUT "${CMAKE_CURRENT_BINARY_DIR}/${name}.protest${ext}"
-          COMMAND ${PROTEST_MODULE_PATH}/../../../../bin/protest-compiler
-             "${CMAKE_CURRENT_BINARY_DIR}/${name}.pretest${ext}" -r ${PROTEST_PROJECT_ROOT} -o ${OUTPUT_FILE} -- --std=c++${CMAKE_CXX_STANDARD} ${DEFINITIONS} "${DEFINITIONS_COMPILER}"
+          COMMAND
+            ${PROTEST_MODULE_PATH}/../../../../bin/protest-create-mocks
+              "${CMAKE_CURRENT_BINARY_DIR}/${name}.pretest${ext}"
+              -r ${PROTEST_PROJECT_ROOT}
+              -o ${name}_mocks.hpp
+               -- 
+              -ferror-limit=1000
+              --std=c++${CMAKE_CXX_STANDARD}
+              -DPROTEST_COMPILE_STAGE
+              ${DEFINITIONS}
+              "${DEFINITIONS_COMPILER}" 2> /dev/null &&
+            ${PROTEST_MODULE_PATH}/../../../../bin/protest-compiler
+              "${CMAKE_CURRENT_BINARY_DIR}/${name}.pretest${ext}"
+              -r ${PROTEST_PROJECT_ROOT}
+              -o ${OUTPUT_FILE}
+               --
+              --std=c++${CMAKE_CXX_STANDARD} -DPROTEST_COMPILE_STAGE ${DEFINITIONS} "${DEFINITIONS_COMPILER}"
           COMMAND_EXPAND_LISTS VERBATIM
           DEPENDS "${CMAKE_CURRENT_BINARY_DIR}/${name}.pretest${ext}")
   endforeach()

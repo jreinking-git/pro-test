@@ -23,77 +23,63 @@
  * IN THE SOFTWARE.
  */
 
-#include "protest/meta/check.h"
-#include "protest/meta/unit.h"
+#include "protest/mock/in_sequence.h"
+#include "protest/mock/expectation.h"
 
-using namespace protest::meta;
+using namespace protest::mock;
 
 // ---------------------------------------------------------------------------
-protest::meta::Check&
-protest::meta::Check::defaultContext()
+ImplicitSequence::ImplicitSequence() :
+  protest::core::RunnerRaw::Userdata(id),
+  mLast(nullptr)
 {
-  static protest::meta::Unit unit("");
-  static protest::meta::Check ctx(unit, 0, "", {}, {});
-  return ctx;
 }
 
 // ---------------------------------------------------------------------------
-Check::Check(Unit& unit,
-             size_t line,
-             const char* /* objectName */,
-             std::vector<std::string>&& args,
-             std::map<std::string, std::string>&& /* comments */) :
-  mUnit(unit),
-  mLine(line),
-  mArgs(std::move(args)),
-  mNumberOfFailes(0),
-  mExecuted(false)
-{
-  // TODO (jreinking) mUnit might not be initialized yet
-  mUnit.addCheck(*this);
-}
-
-// ---------------------------------------------------------------------------
-bool
-Check::wasExecuted() const
-{
-  return mExecuted;
-}
-
 void
-Check::markAsExecuted()
+ImplicitSequence::addExpectation(
+    std::shared_ptr<internal::ExpectationBase>& expectation)
 {
-  mExecuted = true;
+  if (mLast != nullptr)
+  {
+    expectation->addPrerequisites(mLast);
+  }
+  else
+  {
+  }
+  mLast = expectation;
 }
 
 // ---------------------------------------------------------------------------
-uint32_t
-Check::getNumberOfFailes() const
+InSequence::InSequence()
 {
-  return mNumberOfFailes;
+  auto* context = protest::core::Context::getCurrentContext();
+  auto* runner = context->getCurrentVirtual();
+
+  if (runner->getUserdataAs<ImplicitSequence>() == nullptr)
+  {
+    auto* sequenceList = &mImplicitSequence;
+    runner->setUserdata(sequenceList);
+  }
+  else
+  {
+  }
 }
 
-void
-Check::incrementNumberOfFailes()
+InSequence::~InSequence()
 {
-  mNumberOfFailes++;
-}
+  auto* context = protest::core::Context::getCurrentContext();
+  auto* runner = context->getCurrentVirtual();
+  auto* userdata = runner->getUserdataAs<ImplicitSequence>();
 
-// ---------------------------------------------------------------------------
-const Unit&
-Check::getUnit()
-{
-  return mUnit;
-}
+  // there must be at least one since this is a InSequence
+  assert(userdata);
 
-size_t
-Check::getLine() const
-{
-  return mLine;
-}
-
-const char*
-Check::getCondition() const
-{
-  return mArgs.at(0).c_str();
+  if (&mImplicitSequence == userdata)
+  {
+    runner->setUserdata<ImplicitSequence>(nullptr);
+  }
+  else
+  {
+  }
 }

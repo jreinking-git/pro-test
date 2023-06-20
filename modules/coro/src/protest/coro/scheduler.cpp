@@ -182,7 +182,7 @@ Scheduler::getNext()
       }
       else
       {
-        time::Duration sleepTime = current->mSleepUntil - mClock.now();
+        const time::Duration sleepTime = current->mSleepUntil - mClock.now();
         // protest::rtos::Thread::sleep(sleepTime);
         mClock.moveForward(sleepTime);
         next = current;

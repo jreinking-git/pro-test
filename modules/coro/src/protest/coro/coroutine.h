@@ -110,9 +110,11 @@ public:
   operator<=(const Coroutine& other);
 
 // ---------------------------------------------------------------------------
-protected:// TODO
+// TODO (jreinking) make private
+protected:
   Scheduler& mScheduler;
-  char* mStack;// TODO move to port
+  // TODO move to port
+  char* mStack;
   time::TimePoint mSleepUntil;
   Coroutine* mNext;
   size_t mIndex;

@@ -49,9 +49,9 @@ TimePoint::operator-(const Duration rhs) const
 Duration
 TimePoint::operator-(const TimePoint rhs) const
 {
-  uint64_t diff = (mNanoseconds > rhs.mNanoseconds)
-                      ? (mNanoseconds - rhs.mNanoseconds)
-                      : (rhs.mNanoseconds - mNanoseconds);
+  const uint64_t diff = (mNanoseconds > rhs.mNanoseconds)
+                            ? (mNanoseconds - rhs.mNanoseconds)
+                            : (rhs.mNanoseconds - mNanoseconds);
   PROTEST_ASSERT(diff <= INT64_MAX);
   return Duration((mNanoseconds > rhs.mNanoseconds)
                       ? static_cast<int64_t>(diff)

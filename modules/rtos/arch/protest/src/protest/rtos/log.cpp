@@ -28,15 +28,23 @@
 #include "protest/core/runner_raw.h"
 
 #include <iostream>
-#include <stdarg.h>
+
+#include <cstdarg>
+#include <cassert>
 
 using namespace protest::rtos;
 
-void
+// ---------------------------------------------------------------------------
+// TODO (jreinking) would be nicer to have a stream like vsnprintf which does
+// not need a buffer but streams the chars directly into the the protest log.
+static constexpr size_t bufferSize = 1024;
+
+// ---------------------------------------------------------------------------
+void // NOLINTNEXTLINE
 protest::rtos::_info(const char* file, size_t line, const char* format, ...)
 {
   va_list argp;
-  va_start(argp, format);
+  va_start(&argp[0], format);
   auto* runner =
       protest::core::Context::getCurrentContext()->getCurrentVirtual();
   auto stream = runner->getLogger().startLog("INFO",
@@ -44,19 +52,18 @@ protest::rtos::_info(const char* file, size_t line, const char* format, ...)
                                              file,
                                              line,
                                              runner->now());
-  // TODO (jreinking) error check
-  // TODO (jreinking) static buffer is not fine
-  static char buf[1024];
-  vsprintf(buf, format, argp);
+  static char buf[bufferSize]; // TODO (jreinking) no static
+  const int ret = vsnprintf(&buf[0], bufferSize, format, &argp[0]);
+  assert(ret >= 0 && ret < bufferSize);
   stream.operator std::ostream&() << &buf[0];
-  va_end(argp);
+  va_end(&argp[0]);
 }
 
-void
+void // NOLINTNEXTLINE
 protest::rtos::_warn(const char* file, size_t line, const char* format, ...)
 {
   va_list argp;
-  va_start(argp, format);
+  va_start(&argp[0], format);
   auto* runner =
       protest::core::Context::getCurrentContext()->getCurrentVirtual();
   auto stream = runner->getLogger().startLog("WARN",
@@ -64,10 +71,9 @@ protest::rtos::_warn(const char* file, size_t line, const char* format, ...)
                                              file,
                                              line,
                                              runner->now());
-  // TODO (jreinking) error check
-  // TODO (jreinking) static buffer is not fine
-  static char buf[1024];
-  vsprintf(buf, format, argp);
+  static char buf[bufferSize]; // TODO (jreinking) no static
+  const int ret = vsnprintf(&buf[0], bufferSize, format, &argp[0]);
+  assert(ret >= 0 && ret < bufferSize);
   stream.operator std::ostream&() << &buf[0];
-  va_end(argp);
+  va_end(&argp[0]);
 }

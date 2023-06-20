@@ -2,7 +2,7 @@
 /*
  * The MIT License (MIT)
  * 
- * Copyright (c) 2022 Janosch Reinking
+ * Copyright (c) 2023 Janosch Reinking
  * 
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to 
@@ -23,34 +23,9 @@
  * IN THE SOFTWARE.
  */
 
-#include "protest/meta/wait.h"
-#include "protest/meta/unit.h"
+#pragma once
 
-using namespace protest::meta;
-
-// ---------------------------------------------------------------------------
-Wait::Wait(Unit& unit, size_t line, const char* condition) :
-  mUnit(unit),
-  mLine(line),
-  mCondition(condition)
-{
-}
-
-// ---------------------------------------------------------------------------
-const Unit&
-Wait::getUnit() const
-{
-  return mUnit;
-}
-
-size_t
-Wait::getLine() const
-{
-  return mLine;
-}
-
-const char*
-Wait::getCondition() const
-{
-  return mCondition;
-}
+#include "protest/rtos/thread.h"
+#include "protest/rtos/semaphore.h"
+#include "protest/rtos/system_clock.h"
+#include "protest/rtos/mutex.h"

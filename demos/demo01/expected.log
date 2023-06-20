@@ -75,7 +75,7 @@ PASS 0000000000  main /home/root/pro-test/demos/demo01/main.pt.cpp:112
                       'std::string("true") == "true"'
 INFO             main -------------------------------------------------------------------------------
                       This assertion has an inner assertion. The protest compiler should handle this
-                      case properly. I.e.: it should process the inner @c assertThat first the the
+                      case properly. I.e.: it should process the inner @c assertThat first then the
                       outer.
                       -------------------------------------------------------------------------------
 PASS 0000000000  main /home/root/pro-test/demos/demo01/main.pt.cpp:125

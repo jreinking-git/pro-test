@@ -23,77 +23,77 @@
  * IN THE SOFTWARE.
  */
 
-#include "protest/meta/assertion.h"
-#include "protest/meta/unit.h"
+#pragma once
 
-using namespace protest::meta;
+#include "protest/core/runner_raw.h"
+#include "protest/mock/sequence.h"
+
+#include <memory>
+
+namespace protest
+{
+
+namespace mock
+{
+
+// TODO (jreinking) code duplicatio with sequence.cpp/hpp?
+// ---------------------------------------------------------------------------
+/**
+ * @class ImplicitSequence
+ */
+class ImplicitSequence : public protest::core::RunnerRaw::Userdata
+{
+public:
+  static constexpr size_t id = 0;
+
+  explicit ImplicitSequence();
+
+  ImplicitSequence(const ImplicitSequence& other) = delete;
+
+  ImplicitSequence(ImplicitSequence&& other) = delete;
+
+  ImplicitSequence&
+  operator=(const ImplicitSequence& other) = delete;
+
+  ImplicitSequence&
+  operator=(ImplicitSequence&& other) = delete;
+
+  ~ImplicitSequence() = default;
 
 // ---------------------------------------------------------------------------
-protest::meta::Assertion&
-protest::meta::Assertion::defaultContext()
-{
-  static protest::meta::Unit unit("");
-  static protest::meta::Assertion ctx(unit, 0, "", {}, {});
-  return ctx;
-}
+  void
+  addExpectation(std::shared_ptr<internal::ExpectationBase>& expectation);
+
+private:
+  std::shared_ptr<internal::ExpectationBase> mLast;
+};
 
 // ---------------------------------------------------------------------------
-Assertion::Assertion(Unit& unit,
-                     size_t line,
-                     const char* /* objectName */,
-                     std::vector<std::string>&& args,
-                     std::map<std::string, std::string>&& /* comments */) :
-  mUnit(unit),
-  mLine(line),
-  mArgs(std::move(args)),
-  mNumberOfFailes(0),
-  mExecuted(false)
+/**
+ * @class InSequence
+ */
+class InSequence
 {
-  // TODO (jreinking) mUnit might not be initialized yet
-  unit.addAssertion(*this);
-}
-
+public:
 // ---------------------------------------------------------------------------
-bool
-Assertion::wasExecuted() const
-{
-  return mExecuted;
-}
+  explicit InSequence();
 
-void
-Assertion::markAsExecuted()
-{
-  mExecuted = true;
-}
+  InSequence(const InSequence& other) = delete;
 
-// ---------------------------------------------------------------------------
-uint32_t
-Assertion::getNumberOfFailes() const
-{
-  return mNumberOfFailes;
-}
+  InSequence(InSequence&& other) = delete;
 
-void
-Assertion::incrementNumberOfFailes()
-{
-  mNumberOfFailes++;
-}
+  InSequence&
+  operator=(const InSequence& other) = delete;
 
-// ---------------------------------------------------------------------------
-const Unit&
-Assertion::getUnit() const
-{
-  return mUnit;
-}
+  InSequence&
+  operator=(InSequence&& other) = delete;
 
-size_t
-Assertion::getLine() const
-{
-  return mLine;
-}
+  ~InSequence();
 
-const char*
-Assertion::getCondition() const
-{
-  return mArgs.at(0).c_str();
-}
+private:
+  ImplicitSequence mImplicitSequence;
+};
+
+} // namespace mock
+
+} // namespace protest

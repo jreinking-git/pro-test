@@ -77,7 +77,7 @@ Semaphore::acquire(time::Duration timeout)
     auto* context = core::Context::getCurrentContext();
     auto* runner = context->getCurrent();
     userdata->mWaitingList.prepend(*runner);
-    bool gotTimeout = runner->waitInternal(timeout);
+    gotTimeout = runner->waitInternal(timeout);
     if (gotTimeout)
     {
       userdata->mWaitingList.remove(*runner);

@@ -25,54 +25,43 @@
 
 #pragma once
 
-#include <cstdint>
-#include <cstddef>
+#define _STRINGIFY(X) _STRINGIFY2(X)
+#define _STRINGIFY2(X) #X
+
+#define _CAT(X, Y) _CAT2(X, Y)
+#define _CAT2(X, Y) X##_##Y
+#define _CAT_2 _CAT
+
+#define _INCLUDE_FILE(HEAD, TAIL) _STRINGIFY(_CAT_2(HEAD, TAIL))
+
+#include _INCLUDE_FILE(PROTEST_SOURCE_FILE, mocks.hpp)
 
 namespace protest
 {
 
-namespace meta
+template <typename T>
+std::enable_if_t<!protest::mock::HasMockImpl<T>::value, T&>
+createMock(protest::meta::CallContext& callContext =
+               protest::meta::CallContext::defaultContext())
+{
+  // should be replaced via template specialization
+  assert(false);
+  void* ptr = nullptr;
+  return *reinterpret_cast<T*>(ptr);
+}
+
+template <typename T>
+typename protest::mock::ExpectationHandle<typename T::Function>
+expectCall(T&& expectation)
+{
+  auto ptr = expectation.operator std::shared_ptr<internal::ExpectationBase>();
+  ptr->getCallContext().markAsExecuted();
+  return expectation;
+}
+
+namespace mock
 {
 
-class Unit;
-
-// ---------------------------------------------------------------------------
-/**
- * @class Wait
- */
-class Wait
-{
-public:
-  explicit Wait(Unit& unit, size_t line, const char* condition);
-
-  Wait(const Wait&) = delete;
-
-  Wait(Wait&&) noexcept = delete;
-
-  Wait&
-  operator=(const Wait&) = delete;
-
-  Wait&
-  operator=(Wait&&) noexcept = delete;
-
-  ~Wait() = default;
-
-// ---------------------------------------------------------------------------
-  const Unit&
-  getUnit() const;
-
-  size_t
-  getLine() const;
-
-  const char*
-  getCondition() const;
-
-private:
-  Unit& mUnit;
-  size_t mLine;
-  const char* mCondition;
-};
-
-} // namespace meta
+} // namespace mock
 
 } // namespace protest

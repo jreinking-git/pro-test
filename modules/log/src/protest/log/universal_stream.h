@@ -25,6 +25,11 @@
 
 #pragma once
 
+// this header is intentionally not complete
+// if you use this file outsite of the protest environment include
+// "protest/log/operator.h" urself.
+// #include "protest/log/operator.h"
+
 #include <type_traits>
 #include <iostream>
 
@@ -102,6 +107,9 @@ public:
 
   void
   decrementIndent(size_t indent);
+
+  size_t
+  getIndent() const;
 
 // ---------------------------------------------------------------------------
   /**

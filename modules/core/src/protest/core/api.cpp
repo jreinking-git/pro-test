@@ -92,6 +92,7 @@ protest::warn(meta::CallContext& callContext)
 }
 
 // ---------------------------------------------------------------------------
+// TODO (jreinking) now could also be used like: wait(now() >= myTimePoint);
 TimePoint
 protest::now()
 {
@@ -115,7 +116,7 @@ protest::wait(time::Duration duration, meta::CallContext& callContext)
         << std::string("Wait for ") << std::to_string(duration.milliseconds())
         << " ms\n";
   }
-  
+
   runner->RunnerRaw::waitInternal(duration);
 
   {

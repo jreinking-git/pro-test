@@ -188,6 +188,37 @@ struct SharedPtrStruct
   std::shared_ptr<Dummy2> value;
 };
 
+// ---------------------------------------------------------------------------
+struct BufferInStruct1
+{
+  static constexpr size_t bufferSize = 32;
+  uint8_t buffer[bufferSize];
+};
+
+struct BufferInStruct2
+{
+  static constexpr size_t bufferSize = 32 / 2;
+  uint16_t buffer[bufferSize];
+};
+
+struct BufferInStruct3
+{
+  static constexpr size_t bufferSize = 32 / 4;
+  uint32_t buffer[bufferSize];
+};
+
+struct BufferInStruct4
+{
+  static constexpr size_t bufferSize = 32 / 8;
+  uint64_t buffer[bufferSize];
+};
+
+struct BufferInStruct5
+{
+  static constexpr size_t bufferSize = 129;
+  uint8_t buffer[bufferSize];
+};
+
 namespace protest
 {
 
@@ -825,6 +856,7 @@ public:
         protest::log::UniversalStream universalStream(format);
         std::vector<Dummy3> vec;
         Dummy3 d;
+        d.value = 0;
         vec.push_back(d);
         vec.push_back(d);
         vec.push_back(d);
@@ -902,6 +934,95 @@ public:
                                     "  9\n"
                                     "]");
         assertThat(format.str() == expected);
+      }
+    }
+
+    {
+      auto sec = section("array / buffer");
+
+      /** @info(format)
+       * @seperator
+       * Should print a array of uint8_t
+       * @seperator
+       */
+      {
+        BufferInStruct1 a;
+        std::stringstream format;
+        protest::log::UniversalStream universalStream(format);
+        for (int i = 0; i < BufferInStruct1::bufferSize; i++)
+        {
+          a.buffer[i] = i;
+        }
+        universalStream << a;
+        info() << format.str() << "\n";
+      }
+
+      /** @info(format)
+       * @seperator
+       * Should print a array of uint16_t
+       * @seperator
+       */
+      {
+        BufferInStruct2 a;
+        std::stringstream format;
+        protest::log::UniversalStream universalStream(format);
+        for (int i = 0; i < BufferInStruct2::bufferSize; i++)
+        {
+          a.buffer[i] = i;
+        }
+        universalStream << a;
+        info() << format.str() << "\n";
+      }
+
+      /** @info(format)
+       * @seperator
+       * Should print a array of uint32_t
+       * @seperator
+       */
+      {
+        BufferInStruct3 a;
+        std::stringstream format;
+        protest::log::UniversalStream universalStream(format);
+        for (int i = 0; i < BufferInStruct3::bufferSize; i++)
+        {
+          a.buffer[i] = i;
+        }
+        universalStream << a;
+        info() << format.str() << "\n";
+      }
+
+      /** @info(format)
+       * @seperator
+       * Should print a array of uint64_t
+       * @seperator
+       */
+      {
+        BufferInStruct4 a;
+        std::stringstream format;
+        protest::log::UniversalStream universalStream(format);
+        for (int i = 0; i < BufferInStruct4::bufferSize; i++)
+        {
+          a.buffer[i] = i;
+        }
+        universalStream << a;
+        info() << format.str() << "\n";
+      }
+
+      /** @info(format)
+       * @seperator
+       * Should limit the number of printed elements.
+       * @seperator
+       */
+      {
+        BufferInStruct5 a;
+        std::stringstream format;
+        protest::log::UniversalStream universalStream(format);
+        for (int i = 0; i < BufferInStruct5::bufferSize; i++)
+        {
+          a.buffer[i] = i;
+        }
+        universalStream << a;
+        info() << format.str() << "\n";
       }
     }
   }

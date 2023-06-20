@@ -28,13 +28,6 @@
 using namespace protest::meta;
 
 // ---------------------------------------------------------------------------
-const Unit&
-TestManager::getCurrentUnit(protest::meta::CallContext& context)
-{
-  return context.getUnit();
-}
-
-// ---------------------------------------------------------------------------
 void
 TestManager::initialize()
 {
@@ -50,80 +43,38 @@ TestManager::initialize()
 size_t
 TestManager::getNumberOfFailedAssertions() const
 {
-  size_t number = 0;
-  auto iter = mUnits.begin();
-  while (iter != mUnits.end())
-  {
-    number += (*iter)->getNumberOfFailedAssertions();
-    ++iter;
-  }
-  return number;
+  return sum(&Unit::getNumberOfFailedAssertions);
 }
 
 size_t
 TestManager::getNumberOfPassedAssertions() const
 {
-  size_t number = 0;
-  auto iter = mUnits.begin();
-  while (iter != mUnits.end())
-  {
-    number += (*iter)->getNumberOfPassedAssertions();
-    ++iter;
-  }
-  return number;
+  return sum(&Unit::getNumberOfPassedAssertions);
 }
 
 size_t
 TestManager::getNumberOfNotExecutedAssertions() const
 {
-  size_t number = 0;
-  auto iter = mUnits.begin();
-  while (iter != mUnits.end())
-  {
-    number += (*iter)->getNumberOfNotExecutedAssertions();
-    ++iter;
-  }
-  return number;
+  return sum(&Unit::getNumberOfNotExecutedAssertions);
 }
 
 // ---------------------------------------------------------------------------
 size_t
 TestManager::getNumberOfFailedChecks() const
 {
-  size_t number = 0;
-  auto iter = mUnits.begin();
-  while (iter != mUnits.end())
-  {
-    number += (*iter)->getNumberOfFailedChecks();
-    ++iter;
-  }
-  return number;
+  return sum(&Unit::getNumberOfFailedChecks);
 }
 
 size_t
 TestManager::getNumberOfPassedChecks() const
 {
-  size_t number = 0;
-  auto iter = mUnits.begin();
-  while (iter != mUnits.end())
-  {
-    number += (*iter)->getNumberOfPassedChecks();
-    ++iter;
-  }
-  return number;
+  return sum(&Unit::getNumberOfPassedChecks);
 }
 
 size_t
 TestManager::getNumberOfNotExecutedChecks() const
 {
-  size_t number = 0;
-  auto iter = mUnits.begin();
-  while (iter != mUnits.end())
-  {
-    number += (*iter)->getNumberOfNotExecutedChecks();
-    ++iter;
-  }
-  return number;
+  return sum(&Unit::getNumberOfNotExecutedChecks);
 }
 
 // ---------------------------------------------------------------------------
@@ -145,30 +96,75 @@ TestManager::getNumberOfPassedInvariants() const
 size_t
 TestManager::getNumberOfFailedInvariants() const
 {
-  size_t number = 0;
-  auto iter = mUnits.begin();
-  while (iter != mUnits.end())
-  {
-    number += (*iter)->getNumberOfFailedInvariants();
-    ++iter;
-  }
-  return number;
+  return sum(&Unit::getNumberOfFailedInvariants);
 }
 
 size_t
 TestManager::getNumberOfNotExecutedInvariants() const
 {
+  return sum(&Unit::getNumberOfNotExecutedInvariants);
+}
+
+// ---------------------------------------------------------------------------
+size_t
+TestManager::getNumberOfOversaturatedFunctionCalls() const
+{
+  return sum(&Unit::getNumberOfOversaturatedFunctionCalls);
+}
+
+size_t
+TestManager::getNumberOfUnmetPrerequisties() const
+{
+  return sum(&Unit::getNumberOfUnmetPrerequisties);
+}
+
+size_t
+TestManager::getNumberOfMissingFunctionCalls() const
+{
+  return sum(&Unit::getNumberOfMissingFunctionCalls);
+}
+
+size_t
+TestManager::getNumberOfUnexpectedFunctionCalls() const
+{
+  return sum(&Unit::getNumberOfUnexpectedFunctionCalls);
+}
+
+size_t
+TestManager::getNumberOfExecutedExpectCalls() const
+{
+  return sum(&Unit::getNumberOfExecutedExpectCall);
+}
+
+size_t
+TestManager::getNumberOfMockFailures() const
+{
+  return getNumberOfOversaturatedFunctionCalls() +
+         getNumberOfMissingFunctionCalls() +
+         getNumberOfUnexpectedFunctionCalls() + getNumberOfUnmetPrerequisties();
+}
+
+size_t
+TestManager::getNumberOfMocks() const
+{
+  return sum(&Unit::getNumberOfMocks);
+}
+
+// ---------------------------------------------------------------------------
+size_t
+TestManager::sum(size_t(Unit::*func)() const) const
+{
   size_t number = 0;
   auto iter = mUnits.begin();
   while (iter != mUnits.end())
   {
-    number += (*iter)->getNumberOfNotExecutedInvariants();
+    Unit* unit = *iter;
+    number += (unit->*func)();
     ++iter;
   }
   return number;
 }
 
-// ---------------------------------------------------------------------------
 std::vector<Unit*>&
 TestManager::getUnits()
 {

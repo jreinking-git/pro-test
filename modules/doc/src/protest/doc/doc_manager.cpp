@@ -214,17 +214,139 @@ DocManager::printPostamble()
   {
   }
 
-  bool notTested = (mTestManager.getNumberOfPassedAssertions() == 0 &&
-                    mTestManager.getNumberOfFailedAssertions() == 0) &&
-                   (mTestManager.getNumberOfPassedInvariants() == 0 &&
-                    mTestManager.getNumberOfFailedInvariants() == 0);
+  if (mTestManager.getNumberOfOversaturatedFunctionCalls() != 0)
+  {
+    auto stream = mLogger.startLog("    ", "    ");
+    printSeperator();
+    stream.operator std::ostream&()
+        << "* NUMBER OF OVERSATURATED FUNCTION CALLS: "
+        << std::to_string(mTestManager.getNumberOfOversaturatedFunctionCalls())
+        << "\n";
 
-  bool totalVerdict = (mTestManager.getNumberOfFailedAssertions() == 0 &&
-                       mTestManager.getNumberOfFailedInvariants() == 0);
+    for (auto* unit : mTestManager.getUnits())
+    {
+      for (meta::ExpectCall* assertion : unit->getExpectCalls())
+      {
+        if (assertion->getNumberOfUnexpectedCalls() > 0)
+        {
+          stream.operator std::ostream&()
+              << "* " << unit->getFileName() << ":"
+              << std::to_string(assertion->getLine()) << "\n";
+        }
+        else
+        {
+        }
+      }
+    }
+  }
+  else
+  {
+  }
+
+  if (mTestManager.getNumberOfMissingFunctionCalls() != 0)
+  {
+    auto stream = mLogger.startLog("    ", "    ");
+    printSeperator();
+    stream.operator std::ostream&()
+        << "* NUMBER OF MISSING FUNCTION CALLS: "
+        << std::to_string(mTestManager.getNumberOfMissingFunctionCalls())
+        << "\n";
+
+    for (auto* unit : mTestManager.getUnits())
+    {
+      for (meta::ExpectCall* assertion : unit->getExpectCalls())
+      {
+        if (assertion->getNumberOfMissingCalls() > 0)
+        {
+          stream.operator std::ostream&()
+              << "* " << unit->getFileName() << ":"
+              << std::to_string(assertion->getLine()) << "\n";
+        }
+        else
+        {
+        }
+      }
+    }
+  }
+  else
+  {
+  }
+
+  if (mTestManager.getNumberOfUnexpectedFunctionCalls() != 0)
+  {
+    auto stream = mLogger.startLog("    ", "    ");
+    printSeperator();
+    stream.operator std::ostream&()
+        << "* NUMBER OF UNEXPECTED FUNCTION CALLS: "
+        << std::to_string(mTestManager.getNumberOfUnexpectedFunctionCalls())
+        << "\n";
+
+    for (auto* unit : mTestManager.getUnits())
+    {
+      for (meta::ExpectCall* assertion : unit->getExpectCalls())
+      {
+        if (assertion->getNumberOfUnexpectedCalls() > 0)
+        {
+          stream.operator std::ostream&()
+              << "* " << unit->getFileName() << ":"
+              << std::to_string(assertion->getLine()) << "\n";
+        }
+        else
+        {
+        }
+      }
+    }
+  }
+  else
+  {
+  }
+
+  if (mTestManager.getNumberOfUnmetPrerequisties() != 0)
+  {
+    auto stream = mLogger.startLog("    ", "    ");
+    printSeperator();
+    stream.operator std::ostream&()
+        << "* NUMBER OF MISSING PREREQUISITES: "
+        << std::to_string(mTestManager.getNumberOfUnmetPrerequisties()) << "\n";
+
+    for (auto* unit : mTestManager.getUnits())
+    {
+      for (meta::ExpectCall* assertion : unit->getExpectCalls())
+      {
+        if (assertion->getNumberOfUnmetPrerequisites() > 0)
+        {
+          stream.operator std::ostream&()
+              << "* " << unit->getFileName() << ":"
+              << std::to_string(assertion->getLine()) << "\n";
+        }
+        else
+        {
+        }
+      }
+    }
+  }
+  else
+  {
+  }
+
+  const bool notTested = (mTestManager.getNumberOfPassedAssertions() == 0 &&
+                          mTestManager.getNumberOfFailedAssertions() == 0) &&
+                         (mTestManager.getNumberOfPassedInvariants() == 0 &&
+                          mTestManager.getNumberOfFailedInvariants() == 0) &&
+                         mTestManager.getNumberOfExecutedExpectCalls() == 0;
+
+  const bool totalVerdict =
+      (mTestManager.getNumberOfFailedAssertions() == 0 &&
+       mTestManager.getNumberOfFailedInvariants() == 0 &&
+       mTestManager.getNumberOfUnexpectedFunctionCalls() == 0 &&
+       mTestManager.getNumberOfMissingFunctionCalls() == 0 &&
+       mTestManager.getNumberOfUnmetPrerequisties() == 0 &&
+       mTestManager.getNumberOfOversaturatedFunctionCalls() == 0);
 
   auto stream = mLogger.startLog("    ", "    ");
   printSeperator();
-
+  // TODO (jreinking) whould be nice to have a 'not tested' in the case that there
+  // was no executed assertion.
   stream.operator std::ostream&() << "* FAILURES:       ";
   std::stringstream tmp0;
   tmp0 << std::setw(maxLengthOfKey);
@@ -248,7 +370,21 @@ DocManager::printPostamble()
   stream.operator std::ostream&()
       << tmp2.str() << "                                         "
       << (mTestManager.getNumberOfFailedInvariants() != 0 ? "      FAIL"
-                                                          : "      PASS ")
+                                                          : "      PASS ");
+  if (mTestManager.getNumberOfMocks() > 0)
+  {
+    stream.operator std::ostream&() << "\n"
+                                    << "* MOCK VIOLATION: ";
+    std::stringstream tmp3;
+    tmp3 << std::setw(maxLengthOfKey);
+    tmp3 << mTestManager.getNumberOfMockFailures();
+    stream.operator std::ostream&()
+        << tmp3.str() << "                                         "
+        << (mTestManager.getNumberOfMockFailures() != 0 ? "      FAIL"
+                                                        : "      PASS ");
+  }
+
+  stream.operator std::ostream&()
       << "\n"
       << "*"
       << "\n"

@@ -65,6 +65,12 @@ UniversalStream::decrementIndent(size_t indent)
   mIndent -= indent;
 }
 
+size_t
+UniversalStream::getIndent() const
+{
+  return mIndent;
+}
+
 // ---------------------------------------------------------------------------
 void
 UniversalStream::incrementDepth()

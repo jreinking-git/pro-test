@@ -191,6 +191,109 @@ Unit::getNumberOfNotExecutedChecks() const
 }
 
 // ---------------------------------------------------------------------------
+void
+Unit::addExpectCall(ExpectCall& call)
+{
+  mExpectCalls.push_back(&call);
+}
+
+const std::vector<ExpectCall*>&
+Unit::getExpectCalls() const
+{
+  return mExpectCalls;
+}
+
+void
+Unit::addMockCreation(MockCreation& call)
+{
+  mMockCreations.push_back(&call);
+}
+
+const std::vector<MockCreation*>&
+Unit::getMockCreations() const
+{
+  return mMockCreations;
+}
+
+size_t
+Unit::getNumberOfOversaturatedFunctionCalls() const
+{
+  size_t number = 0;
+  auto iter = mExpectCalls.begin();
+  while (iter != mExpectCalls.end())
+  {
+    number += (*iter)->getNumberOfUnexpectedCalls();
+    ++iter;
+  }
+  return number;
+}
+
+size_t
+Unit::getNumberOfUnmetPrerequisties() const
+{
+  size_t number = 0;
+  auto iter = mExpectCalls.begin();
+  while (iter != mExpectCalls.end())
+  {
+    number += (*iter)->getNumberOfUnmetPrerequisites();
+    ++iter;
+  }
+  return number;
+}
+
+size_t
+Unit::getNumberOfMissingFunctionCalls() const
+{
+  size_t number = 0;
+  auto iter = mExpectCalls.begin();
+  while (iter != mExpectCalls.end())
+  {
+    number += (*iter)->getNumberOfMissingCalls();
+    ++iter;
+  }
+  return number;
+}
+
+size_t
+Unit::getNumberOfUnexpectedFunctionCalls() const
+{
+  size_t number = 0;
+  auto iter = mMockCreations.begin();
+  while (iter != mMockCreations.end())
+  {
+    number += (*iter)->getNumberOfUnexpectedCalls();
+    ++iter;
+  }
+  return number;
+}
+
+size_t
+Unit::getNumberOfExecutedExpectCall() const
+{
+  size_t number = 0;
+  auto iter = mExpectCalls.begin();
+  while (iter != mExpectCalls.end())
+  {
+    number += static_cast<size_t>((*iter)->wasExecuted());
+    ++iter;
+  }
+  return number;
+}
+
+size_t
+Unit::getNumberOfMocks() const
+{
+  size_t number = 0;
+  auto iter = mMockCreations.begin();
+  while (iter != mMockCreations.end())
+  {
+    number += (*iter)->getNumberOfCreations();
+    ++iter;
+  }
+  return number;
+}
+
+// ---------------------------------------------------------------------------
 const char*
 Unit::getFileName() const
 {

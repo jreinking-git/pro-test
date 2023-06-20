@@ -25,82 +25,62 @@
 
 #pragma once
 
-#include <map>
-#include <string>
-#include <vector>
+#include "protest/mock/function_mocker.h"
+#include "protest/meta/call_context.h"
 
-#include <cstdint>
-#include <cstddef>
+#include <algorithm>
+#include <iostream>
+#include <iomanip>
+
+#include <cstring>
 
 namespace protest
 {
 
-namespace meta
+namespace mock
 {
 
-class Unit;
+namespace internal
+{
 
 // ---------------------------------------------------------------------------
 /**
- * @class Check
+ * @class MockBase
  */
-class Check
+class MockBase
 {
 public:
-  static Check&
-  defaultContext();
+  explicit MockBase(meta::MockCreation& callContext);
+
+  MockBase(const MockBase&) = delete;
+
+  MockBase(MockBase&&) noexcept = delete;
+
+  MockBase&
+  operator=(const MockBase&) = delete;
+
+  MockBase&
+  operator=(MockBase&&) noexcept = delete;
+
+  ~MockBase() = default;
 
 // ---------------------------------------------------------------------------
-  explicit Check(Unit& unit,
-                 size_t line,
-                 const char* objectName,
-                 std::vector<std::string>&& args,
-                 std::map<std::string, std::string>&& comments);
+  void
+  addFunctionMocker(FunctionMockerRaw* functionMocker);
 
-  Check(const Check&) = delete;
-
-  Check(Check&&) noexcept = delete;
-
-  Check&
-  operator=(const Check&) = delete;
-
-  Check&
-  operator=(Check&&) noexcept = delete;
-
-  ~Check() = default;
-
-// ---------------------------------------------------------------------------
-  bool
-  wasExecuted() const;
+  meta::MockCreation&
+  getCallContext();
 
   void
-  markAsExecuted();
-
-// ---------------------------------------------------------------------------
-  uint32_t
-  getNumberOfFailes() const;
-
-  void
-  incrementNumberOfFailes();
-
-// ---------------------------------------------------------------------------
-  const Unit&
-  getUnit();
-
-  size_t
-  getLine() const;
-
-  const char*
-  getCondition() const;
+  checkMissingCalls();
 
 private:
-  Unit& mUnit;
-  size_t mLine;
-  std::vector<std::string> mArgs;
-  uint32_t mNumberOfFailes;
-  bool mExecuted;
+  std::vector<FunctionMockerRaw*> mFunctionMockers;
+  meta::MockCreation& mCallContext;
 };
 
-} // namespace meta
+} // namespace internal
+
+} // namespace mock
 
 } // namespace protest

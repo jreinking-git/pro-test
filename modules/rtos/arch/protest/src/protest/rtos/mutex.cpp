@@ -34,7 +34,7 @@
 using namespace protest::rtos;
 
 // ---------------------------------------------------------------------------
-Mutex::Mutex() : mUserdata(nullptr)
+Mutex::Mutex() : mUserdata(nullptr), mAcquired(false)
 {
   // NOLINTNEXTLINE
   mUserdata = new Semaphore();
@@ -54,12 +54,24 @@ bool
 Mutex::acquire(protest::time::Duration timeout)
 {
   auto* userdata = reinterpret_cast<Semaphore*>(mUserdata);
-  return userdata->acquire(timeout);
+  auto success = userdata->acquire(timeout);
+  if (success)
+  {
+    mAcquired = true;
+  }
+  return success;
 }
 
 void
 Mutex::release()
 {
   auto* userdata = reinterpret_cast<Semaphore*>(mUserdata);
+  mAcquired = false;
   userdata->release();
+}
+
+bool
+Mutex::isAcquired()
+{
+  return mAcquired;
 }

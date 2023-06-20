@@ -49,6 +49,14 @@ Context::getCurrentContext()
   return currentContext;
 }
 
+protest::log::Logger&
+Context::getCurrentLogger()
+{
+  auto* context = Context::getCurrentContext();
+  auto* runner = context->getCurrentVirtual();
+  return runner->getLogger();
+}
+
 // ---------------------------------------------------------------------------
 RunnerRaw*
 Context::getCurrent()

@@ -59,7 +59,7 @@ using Logger = protest::log::Logger;
 /**
  * @class Runner
  */
-class Runner : public core::RunnerRaw// TODO private
+class Runner : public core::RunnerRaw
 {
 public:
   explicit Runner(core::Context& context, const char* name = "none");
@@ -418,6 +418,8 @@ assertThat(Lhs&& lhs,
   matcher.explain(assertion.getCondition(),
                   lhs,
                   runner->getLogger().getStream());
+
+  runner->getLogger().flush();
 
   matcher.clear();
 

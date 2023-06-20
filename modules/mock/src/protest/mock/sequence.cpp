@@ -2,7 +2,7 @@
 /*
  * The MIT License (MIT)
  * 
- * Copyright (c) 2022 Janosch Reinking
+ * Copyright (c) 2023 Janosch Reinking
  * 
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to 
@@ -23,55 +23,26 @@
  * IN THE SOFTWARE.
  */
 
-#include "protest/meta/invariant.h"
-#include "protest/meta/unit.h"
+#include "protest/mock/sequence.h"
+#include "protest/mock/expectation.h"
 
-using namespace protest::meta;
+using namespace protest::mock;
 
 // ---------------------------------------------------------------------------
-Invariant&
-Invariant::defaultContext()
+Sequence::Sequence() : mLast(nullptr)
 {
-  static protest::meta::Unit unit("");
-  static protest::meta::Invariant ctx(unit, 0, "", {}, {});
-  return ctx;
 }
 
 // ---------------------------------------------------------------------------
-Invariant::Invariant(Unit& unit,
-                     size_t line,
-                     const char* condition,
-                     std::vector<std::string>&& args,
-                     std::map<std::string, std::string>&& /* comments */) :
-  CallContext(unit, line, condition, std::move(args)),
-  mWasCreated(false),
-  mHold(true)
-{
-  // TODO (jreinking) might not be initialized when allocated statically
-  unit.addInvariant(*this);
-}
-
-// ---------------------------------------------------------------------------
-bool
-Invariant::wasCreated() const
-{
-  return mWasCreated;
-}
-
 void
-Invariant::markAsCreated()
+Sequence::addExpectation(std::shared_ptr<internal::ExpectationBase>& expectation)
 {
-  mWasCreated = true;
-}
-
-bool
-Invariant::hold() const
-{
-  return mHold;
-}
-
-void
-Invariant::markAsNotHold()
-{
-  mHold = false;
+  if (mLast != nullptr)
+  {
+    expectation->addPrerequisites(mLast);
+  }
+  else
+  {
+  }
+  mLast = expectation;
 }

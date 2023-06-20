@@ -2,7 +2,7 @@
 /*
  * The MIT License (MIT)
  * 
- * Copyright (c) 2022 Janosch Reinking
+ * Copyright (c) 2023 Janosch Reinking
  * 
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to 
@@ -25,82 +25,51 @@
 
 #pragma once
 
-#include <map>
-#include <string>
+#include <memory>
 #include <vector>
-
-#include <cstdint>
-#include <cstddef>
 
 namespace protest
 {
 
-namespace meta
+namespace mock
 {
 
-class Unit;
+namespace internal
+{
+
+class ExpectationBase;
+
+}
 
 // ---------------------------------------------------------------------------
 /**
- * @class Assertion
+ * @class Sequence
  */
-class Assertion
+class Sequence
 {
 public:
-  static Assertion&
-  defaultContext();
+  explicit Sequence();
+
+  Sequence(const Sequence& other) = delete;
+
+  Sequence(Sequence&& other) = delete;
+
+  Sequence&
+  operator=(const Sequence& other) = delete;
+
+  Sequence&
+  operator=(Sequence&& other) = delete;
+
+  ~Sequence() = default;
 
 // ---------------------------------------------------------------------------
-  explicit Assertion(Unit& unit,
-                     size_t line,
-                     const char* objectName,
-                     std::vector<std::string>&& args,
-                     std::map<std::string, std::string>&& comments);
-
-  Assertion(const Assertion&) = delete;
-
-  Assertion(Assertion&&) noexcept = delete;
-
-  Assertion&
-  operator=(const Assertion&) = delete;
-
-  Assertion&
-  operator=(Assertion&&) noexcept = delete;
-
-  ~Assertion() = default;
-
-// ---------------------------------------------------------------------------
-  bool
-  wasExecuted() const;
-
   void
-  markAsExecuted();
-
-// ---------------------------------------------------------------------------
-  uint32_t
-  getNumberOfFailes() const;
-
-  void
-  incrementNumberOfFailes();
-
-// ---------------------------------------------------------------------------
-  const Unit&
-  getUnit() const;
-
-  size_t
-  getLine() const;
-
-  const char*
-  getCondition() const;
+  addExpectation(std::shared_ptr<internal::ExpectationBase>& expectation);
 
 private:
-  Unit& mUnit;
-  size_t mLine;
-  std::vector<std::string> mArgs;
-  uint32_t mNumberOfFailes;
-  bool mExecuted;
+  std::shared_ptr<internal::ExpectationBase> mLast;
 };
 
-} // namespace meta
+} // namespace mock
 
 } // namespace protest

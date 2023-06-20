@@ -479,7 +479,7 @@ void
 Stopwatch::StopwatchInternal::start()
 {
   PROTEST_ASSERT(!mRunning);
-  TimePoint now = mRunner->now();
+  const TimePoint now = mRunner->now();
   if (mStartOrStopedAt == protest::time::TimePoint::endOfEpoche())
   {
     // started for the first time
@@ -488,7 +488,7 @@ Stopwatch::StopwatchInternal::start()
   else
   {
   }
-  Duration diff = now - mStartOrStopedAt;
+  const Duration diff = now - mStartOrStopedAt;
   mStartOrStopedAt = now;
   auto iter = mOperators.begin();
   while (iter != mOperators.end())
@@ -511,7 +511,7 @@ void
 Stopwatch::StopwatchInternal::stop()
 {
   PROTEST_ASSERT(mRunning);
-  TimePoint now = mRunner->now();
+  const TimePoint now = mRunner->now();
 
   mTimePassed = mTimePassed + (now - mStartOrStopedAt);
   auto iter = mOperators.begin();
@@ -567,7 +567,7 @@ void
 Stopwatch::StopwatchInternal::update(Operator& opr, time::Duration duration)
 {
   PROTEST_ASSERT(!opr.isArmed());
-  Duration diff = duration - lap();
+  const Duration diff = duration - lap();
   opr.setDue(mRunner->now() + diff, &opr);
   if (mRunning && !opr.isDue(mRunner->now()))
   {
@@ -585,7 +585,7 @@ Stopwatch::StopwatchInternal::lap()
   time::Duration duration = Duration::zero();
   if (mRunning)
   {
-    TimePoint now = mRunner->now();
+    const TimePoint now = mRunner->now();
     duration = mTimePassed + (now - mStartOrStopedAt);
   }
   else

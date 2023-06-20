@@ -70,7 +70,7 @@ Thread::Thread(uint8_t priority, const char* name) : Thread(priority, 0, name)
 }
 
 Thread::Thread(uint8_t /* priority */,
-               size_t stackSize,
+               size_t /* stackSize */,
                const char* /* name */) :
   mUserdata(nullptr)
 {
@@ -84,27 +84,11 @@ Thread::Thread(uint8_t /* priority */,
   //   userdata->mLocalStorage[i] = nullptr;
   // }
 
-  int retValue = pthread_attr_init(&userdata->mAttr);
+  const int retValue = pthread_attr_init(&userdata->mAttr);
   if (retValue != 0)
   {
     perror("pthread_attr_init");
     PROTEST_ASSERT(false);
-  }
-  else
-  {
-  }
-
-  if (stackSize > 0)
-  {
-    // retValue = pthread_attr_setstacksize(&userdata->mAttr, stackSize);
-    // if (retValue != 0)
-    // {
-    //   perror("pthread_attr_setstacksize");
-    //   PROTEST_ASSERT(false);
-    // }
-    // else
-    // {
-    // }
   }
   else
   {
@@ -114,7 +98,7 @@ Thread::Thread(uint8_t /* priority */,
 Thread::~Thread()
 {
   auto* userdata = reinterpret_cast<Userdata*>(mUserdata);
-  int ret = pthread_detach(userdata->mThread);
+  const int ret = pthread_detach(userdata->mThread);
   if (ret != 0)
   {
     perror("pthread_detach");
@@ -129,7 +113,7 @@ void
 Thread::start()
 {
   auto* userdata = reinterpret_cast<Userdata*>(mUserdata);
-  int retValue =
+  const int retValue =
       pthread_create(&userdata->mThread, &userdata->mAttr, &wrapper, this);
   if (retValue != 0)
   {

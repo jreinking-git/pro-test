@@ -36,7 +36,7 @@ using namespace protest::rtos;
 static constexpr int64_t nanoToSeconds = 1000000000U;
 
 // ---------------------------------------------------------------------------
-Mutex::Mutex() : mUserdata(nullptr)
+Mutex::Mutex() : mUserdata(nullptr), mAcquired(false)
 {
   // NOLINTNEXTLINE
   mUserdata = new pthread_mutex_t();
@@ -77,7 +77,7 @@ Mutex::acquire(time::Duration timeout)
     };
     int ret = clock_gettime(CLOCK_MONOTONIC, &now);
     PROTEST_ASSERT(ret == 0);
-    int64_t nanoseconds = timeout.nanoseconds();
+    const int64_t nanoseconds = timeout.nanoseconds();
     struct timespec time
     {
       0
@@ -102,12 +102,26 @@ Mutex::acquire(time::Duration timeout)
       gotTimeout = false;
     }
   }
-  return gotTimeout;
+
+  if (!gotTimeout)
+  {
+    mAcquired = true;
+  }
+
+  return !gotTimeout;
 }
 
 void
 Mutex::release()
 {
   auto* userdata = reinterpret_cast<pthread_mutex_t*>(mUserdata);
+  mAcquired = false;
   pthread_mutex_unlock(userdata);
+}
+
+
+bool
+Mutex::isAcquired()
+{
+  return mAcquired;
 }

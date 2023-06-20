@@ -26,28 +26,32 @@
 #include "protest/rtos/log.h"
 
 #include <iostream>
-#include <stdarg.h>
+
+#include <cstdarg>
+#include <cassert>
 
 using namespace protest::rtos;
 
-void
-protest::rtos::_info(const char* file, size_t line, const char* format, ...)
+void // NOLINTNEXTLINE
+protest::rtos::_info(const char* /* file */, size_t /* line */, const char* format, ...)
 {
   va_list argp;
-  va_start(argp, format);
+  va_start(&argp[0], format);
   printf("INFO: ");
-  vprintf(format, argp);
+  const int ret = vprintf(format, &argp[0]);
+  assert(ret >= 0);
   printf("\n");
-  va_end(argp);
+  va_end(&argp[0]);
 }
 
-void
-protest::rtos::_warn(const char* file, size_t line, const char* format, ...)
+void // NOLINTNEXTLINE
+protest::rtos::_warn(const char* /* file */, size_t /* line */, const char* format, ...)
 {
   va_list argp;
-  va_start(argp, format);
+  va_start(&argp[0], format);
   printf("WARN: ");
-  vprintf(format, argp);
+  const int ret = vprintf(format, &argp[0]);
+  assert(ret >= 0);
   printf("\n");
-  va_end(argp);
+  va_end(&argp[0]);
 }

@@ -7,9 +7,10 @@ set(sources
   "protest/utils/ring_buffer_test.cpp"
 )
 
- if (PROTEST_INCLUDE_UNIT_TESTS)
+if (PROTEST_INCLUDE_UNIT_TESTS)
   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS}  --coverage")
 endif()
+
 add_library(utils_test OBJECT ${sources})
 target_link_libraries(utils_test utils gtest)
 target_include_directories(utils_test PUBLIC .)
