@@ -17,7 +17,7 @@ set(protestSrc
   "main.pt.cpp"
 )
 
-add_protest_file(SOURCES ${protestSrc}
+add_protest_files(SOURCES ${protestSrc}
                  TARGETS protestOut)
 
 add_executable(run_test ${protestOut})

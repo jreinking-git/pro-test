@@ -54,6 +54,7 @@ then
         "demo11"
         "demo12"
         "demo13"
+        "demo14"
         "reliable_broadcast"
         "tutorial01"
         "tutorial02")
@@ -107,7 +108,7 @@ do
     make -s -C ./$i/build
     ./$i/build/run_test > ./$i/build/main.log
     # ignore @date and object@<addr> since it will always change
-    diff <(grep -Ev 'pt.cpp:|@0x|@date|object|        0x|But is: 0x|Actual: 0x|        @|But is: @|Actual: @' ./$i/expected.log) <(grep -Ev 'pt.cpp:|@0x|@date|object|        0x|But is: 0x|Actual: 0x|        @|But is: @|Actual: @' ./$i/build/main.log)
+    diff <(grep -Ev 'cpp:|@0x|@date|object|        0x|But is: 0x|Actual: 0x|        @|But is: @|Actual: @' ./$i/expected.log) <(grep -Ev 'cpp:|@0x|@date|object|        0x|But is: 0x|Actual: 0x|        @|But is: @|Actual: @' ./$i/build/main.log)
     if [ $? -eq 0 ]; then
       echo "PASS $i"
     else

@@ -58,37 +58,37 @@ PASS 0000000000  main /home/root/pro-test/demos/demo10/main.pt.cpp:188
 PASS 0000000000  main /home/root/pro-test/demos/demo10/main.pt.cpp:188
                       PASS: the condition evaluates to true:
                       'param == anyValue'
-PASS 0000000000  main /home/root/pro-test/demos/demo10/main.pt.cpp:203
+PASS 0000000000  main /home/root/pro-test/demos/demo10/main.pt.cpp:204
                       PASS: the condition evaluates to true:
                       'param == anyValue'
-PASS 0000000000  main /home/root/pro-test/demos/demo10/main.pt.cpp:203
+PASS 0000000000  main /home/root/pro-test/demos/demo10/main.pt.cpp:204
                       PASS: the condition evaluates to true:
                       'param == anyValue'
-PASS 0000000000  main /home/root/pro-test/demos/demo10/main.pt.cpp:203
+PASS 0000000000  main /home/root/pro-test/demos/demo10/main.pt.cpp:204
                       PASS: the condition evaluates to true:
                       'param == anyValue'
-PUSH 0000000000  main /home/root/pro-test/demos/demo10/main.pt.cpp:238
+PUSH 0000000000  main /home/root/pro-test/demos/demo10/main.pt.cpp:239
                       Push value to 'structSignal':
                       struct Result {
                         mValue : { 42, 0x0000002a }
                       }
-HDL  0000000000  main /home/root/pro-test/demos/demo10/main.pt.cpp:211
+HDL  0000000000  main /home/root/pro-test/demos/demo10/main.pt.cpp:214
                       Handle value of 'structSignal':
                       struct Result {
                         mValue : { 42, 0x0000002a }
                       }
-PASS 0000000000  main /home/root/pro-test/demos/demo10/main.pt.cpp:216
+PASS 0000000000  main /home/root/pro-test/demos/demo10/main.pt.cpp:218
                       PASS: the condition evaluates to true:
                       'true'
-HDL  0000000000  main /home/root/pro-test/demos/demo10/main.pt.cpp:219
+HDL  0000000000  main /home/root/pro-test/demos/demo10/main.pt.cpp:221
                       Handle value of 'structSignal':
                       struct Result {
                         mValue : { 42, 0x0000002a }
                       }
-PASS 0000000000  main /home/root/pro-test/demos/demo10/main.pt.cpp:224
+PASS 0000000000  main /home/root/pro-test/demos/demo10/main.pt.cpp:225
                       PASS: the condition evaluates to true:
                       'param.mValue == 42'
-HDL  0000000000  main /home/root/pro-test/demos/demo10/main.pt.cpp:227
+HDL  0000000000  main /home/root/pro-test/demos/demo10/main.pt.cpp:228
                       Handle value of 'structSignal':
                       struct Result {
                         mValue : { 42, 0x0000002a }

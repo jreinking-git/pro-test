@@ -180,59 +180,60 @@ public:
 
       fun3(anyValue);
       {
-        CClass clzC(
-            [&](int param)
-            {
-              // no 'dependent types' involved
-              // -> can be directly resolved as a call to protest::assertThat
-              assertThat(param == anyValue);
-            });
+        // clang-format off
+        CClass clzC([&](int param)
+        {
+          // no 'dependent types' involved
+          // -> can be directly resolved as a call to protest::assertThat
+          assertThat(param == anyValue);
+        });
+        // clang-format on
 
         clzC.func();
         clzC.func<int>(anyValue);
         clzC.func<int&>(anyValue);
       }
       {
-        CClass clzC(
-            [&](auto param)
-            {
-              // param is bound to 'dependent type'
-              // -> can not directly be resolved by looking at tha AST since the type
-              // of param is not known unless the function gets actually called.
-              // Needs extra effort from the protest/protest-compiler.
-              assertThat(param == anyValue);
-            });
+        // clang-format off
+        CClass clzC([&](auto param)
+        {
+          // param is bound to 'dependent type'
+          // -> can not directly be resolved by looking at tha AST since the type
+          // of param is not known unless the function gets actually called.
+          // Needs extra effort from the protest/protest-compiler.
+          assertThat(param == anyValue);
+        });
+        // clang-format on
 
         clzC.func();
         clzC.func<int>(anyValue);
         clzC.func<int&>(anyValue);
       }
 
-      mResultPort.addListener(
-          []()
-          {
-            // no 'dependent types' involved
-            // -> can be directly resolved as a call to protest::assertThat
-            assertThat(true);
-          });
+      // clang-format off
+      mResultPort.addListener([]()
+      {
+        // no 'dependent types' involved
+        // -> can be directly resolved as a call to protest::assertThat
+        assertThat(true);
+      });
 
-      mResultPort.addListener(
-          [](Result param)
-          {
-            // no 'dependent types' involved
-            // -> can be directly resolved as a call to protest::assertThat
-            assertThat(param.mValue == 42);
-          });
+      mResultPort.addListener([](Result param)
+      {
+        // no 'dependent types' involved
+        // -> can be directly resolved as a call to protest::assertThat
+        assertThat(param.mValue == 42);
+      });
 
-      mResultPort.addListener(
-          [&](auto param)
-          {
-            // param is bound to 'dependent type'
-            // -> can not directly be resolved by looking at tha AST since the type
-            // of param is not known unless the function gets actually called.
-            // Needs extra effort from the protest/protest-compiler.
-            assertThat(param.mValue == 42);
-          });
+      mResultPort.addListener([&](auto param)
+      {
+        // param is bound to 'dependent type'
+        // -> can not directly be resolved by looking at tha AST since the type
+        // of param is not known unless the function gets actually called.
+        // Needs extra effort from the protest/protest-compiler.
+        assertThat(param.mValue == 42);
+      });
+      // clang-format on
 
       Result res = {anyValue};
       structSignal.push(res);

@@ -65,7 +65,7 @@ MOCK 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:211
                       Call to mock function 'doSomething(uint8_t param)' with:
                          param: { 42, 0x2a }
 INFO             main -------------------------------------------------------------------------------
-                      Expect two calls to doSomething(42)
+                      Expect two calls to @c doSomething(42)
                       -------------------------------------------------------------------------------
 MOCK 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:224
                       Call to mock function 'doSomething(uint8_t param)' with:
@@ -74,7 +74,7 @@ MOCK 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:224
                       Call to mock function 'doSomething(uint8_t param)' with:
                          param: { 42, 0x2a }
 INFO             main -------------------------------------------------------------------------------
-                      Expect 3 calls to doSomething(42)
+                      Expect 3 calls to @c doSomething(42)
                       -------------------------------------------------------------------------------
 MOCK 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:240
                       Call to mock function 'doSomething(uint8_t param)' with:
@@ -86,7 +86,7 @@ MOCK 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:240
                       Call to mock function 'doSomething(uint8_t param)' with:
                          param: { 42, 0x2a }
 INFO             main -------------------------------------------------------------------------------
-                      Expect 3 calls to setValue(42). The default value should be returned since
+                      Expect 3 calls to @c setValue(42). The default value should be returned since
                       there was no action specified. uint8_t setValue(uint8_t)
                       -------------------------------------------------------------------------------
 MOCK 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:259
@@ -203,7 +203,7 @@ FAIL 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:429
                       Unexpected function call for 'doSomething(Eq(42))'
                       Expected: called once
 INFO             main -------------------------------------------------------------------------------
-                      Expect 3 calls to 'setValue(42)' but there are 4. The first 3 calls should
+                      Expect 3 calls to @c setValue(42) but there are 4. The first 3 calls should
                       return 3. The 4 call should yield in a 'Unexpected call' message. In this case
                       the default value should be returned. Which is 0 in this case.
                       -------------------------------------------------------------------------------

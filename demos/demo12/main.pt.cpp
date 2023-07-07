@@ -214,7 +214,7 @@ public:
 
       /** @info(format)
        * @seperator
-       * Expect two calls to doSomething(42)
+       * Expect two calls to @c doSomething(42)
        * @seperator
        */
       {
@@ -230,7 +230,7 @@ public:
 
       /** @info(format)
        * @seperator
-       * Expect 3 calls to doSomething(42)
+       * Expect 3 calls to @c doSomething(42)
        * @seperator
        */
       {
@@ -247,7 +247,7 @@ public:
 
       /** @info(format)
        * @seperator
-       * Expect 3 calls to setValue(42). The default value should be returned
+       * Expect 3 calls to @c setValue(42). The default value should be returned
        * since there was no action specified.
        * uint8_t setValue(uint8_t)
        * @seperator
@@ -436,7 +436,7 @@ public:
 
       /** @info(format)
        * @seperator
-       * Expect 3 calls to 'setValue(42)' but there are 4. The first 3 calls
+       * Expect 3 calls to @c setValue(42) but there are 4. The first 3 calls
        * should return 3. The 4 call should yield in a 'Unexpected call'
        * message. In this case the default value should be returned. Which
        * is 0 in this case.

@@ -23,6 +23,10 @@
  * IN THE SOFTWARE.
  */
 
+#include "member_func_visitor.h"
+#include "member_attr_visitor.h"
+#include "static_attr_visitor.h"
+
 #include "clang/AST/AST.h"
 #include "clang/AST/ASTConsumer.h"
 #include "clang/AST/ASTContext.h"
@@ -370,83 +374,86 @@ public:
   bool
   VisitFunctionDecl(FunctionDecl* Func)
   {
-    if (Func != nullptr &&
-        isInMainFile(Context, Func))
+    if (Func != nullptr && isInMainFile(Context, Func))
     {
-      for (auto attr : Func->getAttrs())
+      if (Func->hasAttrs())
       {
-        std::string attr_name(attr->getSpelling());
-        std::string attr_annotate("annotate");
-        std::string attr_my("annotate(\"my_attr\")");
-        // std::cout << "attr_name: " << attr_name << std::endl;
-        if (attr_name == attr_annotate)
+        for (auto attr : Func->getAttrs())
         {
-          // std::cout << "attr->getAttrName(): " << attr->getAttrName()->getName().str() << std::endl;
+          std::string attr_name(attr->getSpelling());
+          std::string attr_annotate("annotate");
+          std::string attr_my("annotate(\"my_attr\")");
           // std::cout << "attr_name: " << attr_name << std::endl;
-          // std::cout << "here: " << attr->getNormalizedFullName() << std::endl;
-          std::string SS;
-          llvm::raw_string_ostream S(SS);
-          static PrintingPolicy print_policy(Context->getLangOpts());
-          print_policy.FullyQualifiedName = 1;
-          print_policy.SuppressScope = 0;
-          print_policy.PrintCanonicalTypes = 1;
-          attr->printPretty(S, print_policy);
-          std::string annotations = S.str();
-
-          std::string result;
-          while (true)
+          if (attr_name == attr_annotate)
           {
-            auto n = annotations.find("pt::");
-            if (n != std::string::npos)
-            {
-              annotations = annotations.substr(n + 4);
-              // std::cout << "n: " << n << std::endl;
-              // std::cout << "anno: " << annotations << std::endl;
-              int start = annotations.find("(");
-              int braces = 1;
-              int i = 0;
+            // std::cout << "attr->getAttrName(): " << attr->getAttrName()->getName().str() << std::endl;
+            // std::cout << "attr_name: " << attr_name << std::endl;
+            // std::cout << "here: " << attr->getNormalizedFullName() << std::endl;
+            std::string SS;
+            llvm::raw_string_ostream S(SS);
+            static PrintingPolicy print_policy(Context->getLangOpts());
+            print_policy.FullyQualifiedName = 1;
+            print_policy.SuppressScope = 0;
+            print_policy.PrintCanonicalTypes = 1;
+            attr->printPretty(S, print_policy);
+            std::string annotations = S.str();
 
-              if (start != std::string::npos)
+            std::string result;
+            while (true)
+            {
+              auto n = annotations.find("pt::");
+              if (n != std::string::npos)
               {
-                for (i = start + 1; i < annotations.size() && braces > 0; i++)
+                annotations = annotations.substr(n + 4);
+                // std::cout << "n: " << n << std::endl;
+                // std::cout << "anno: " << annotations << std::endl;
+                int start = annotations.find("(");
+                int braces = 1;
+                int i = 0;
+
+                if (start != std::string::npos)
                 {
-                  if (annotations[i] == '(')
+                  for (i = start + 1; i < annotations.size() && braces > 0; i++)
                   {
-                    braces++;
-                  }
-                  else if (annotations[i] == ')')
-                  {
-                    braces--;
+                    if (annotations[i] == '(')
+                    {
+                      braces++;
+                    }
+                    else if (annotations[i] == ')')
+                    {
+                      braces--;
+                    }
                   }
                 }
-              }
 
-              if (braces == 0)
+                if (braces == 0)
+                {
+                  auto curr = annotations.substr(0, i - 1);
+                  std::string metaObjectName =
+                      std::string("protest_annotation");
+                  result += std::string("auto ") + metaObjectName + "_guard" +
+                            std::to_string(mIdNext) + " = protest::" + curr +
+                            ", " + metaObjectName + std::to_string(mIdNext) +
+                            ");";
+                  writeMetaInfos(Func, metaObjectName, {});
+                }
+              }
+              else
               {
-                auto curr = annotations.substr(0, i - 1);
-                std::string metaObjectName = std::string("protest_annotation");
-                result += std::string("auto ") + metaObjectName + "_guard" + std::to_string(mIdNext) + " = protest::" + curr + ", " + metaObjectName + std::to_string(mIdNext) + ");";
-                writeMetaInfos(Func,
-                               metaObjectName,
-                               {});
+                break;
               }
             }
-            else
-            {
-              break;
-            }
+
+            auto body = Func->getBody();
+            auto range = body->getSourceRange();
+            auto range2 = CharSourceRange::getTokenRange(range.getBegin(),
+                                                         range.getBegin());
+            std::string oldCall = Rewriter.getRewrittenText(range2);
+            std::string newBody = std::string("{") + result + oldCall.substr(1);
+            Rewriter.ReplaceText(range2, newBody);
           }
-
-
-          auto body = Func->getBody();
-          auto range = body->getSourceRange();
-          auto range2 = CharSourceRange::getTokenRange(range.getBegin(), range.getBegin());
-          std::string oldCall = Rewriter.getRewrittenText(range2);
-          std::string newBody = std::string("{") + result + oldCall.substr(1);
-          Rewriter.ReplaceText(range2, newBody);
         }
       }
-
     }
     return true;
   }
@@ -616,6 +623,12 @@ public:
         writeMetaInfos(Expr, metaObjectName, args, type, text);
       }
     }
+    if (decl)
+    {
+      mMemberFuncVisitor.handle(decl);
+      mMemberAttrVisitor.handle(decl);
+      mStaticAttrVisitor.handle(decl);
+    }
     return true;
   }
 
@@ -625,10 +638,15 @@ public:
     return true;
   }
 
+  protest::MemberFuncVisitor mMemberFuncVisitor;
+  protest::MemberAttrVisitor mMemberAttrVisitor;
+  protest::StaticAttrVisitor mStaticAttrVisitor;
+
   std::map<std::pair<SourceLocation, SourceLocation>,
            std::pair<std::string, int>>
       mMetaInfos;
   std::map<std::pair<SourceLocation, SourceLocation>, std::string> mImpls;
+  // std::map<std::pair<SourceLocation, SourceLocation>, std::string> mMemberImpls;
   std::set<clang::Decl*> mAlreadyTraversed;
 
 private:
@@ -810,8 +828,8 @@ private:
     // }
     // else
     // {
-      id = mIdNext;
-      mIdNext++;
+    id = mIdNext;
+    mIdNext++;
     // }
     std::stringstream output;
     output << "static " << metaType << " " << name << id << "(protest_unit, "
@@ -846,7 +864,8 @@ private:
     std::string other;
     if (mMetaInfos.count(std::pair(expr->getBeginLoc(), expr->getEndLoc())) > 0)
     {
-      other = mMetaInfos[std::pair(expr->getBeginLoc(), expr->getEndLoc())].first;
+      other =
+          mMetaInfos[std::pair(expr->getBeginLoc(), expr->getEndLoc())].first;
     }
     mMetaInfos[std::pair(expr->getBeginLoc(), expr->getEndLoc())] =
         std::pair<std::string, int>(other + output.str(), id);
@@ -953,6 +972,7 @@ private:
                << "{"
                << "};\n";
 
+        // TODO check if there is already a meta info for the type
         mMetaInfos[std::pair(tt->getBeginLoc(), tt->getEndLoc())] = {
             output.str(),
             0};
@@ -1084,6 +1104,7 @@ private:
              << "{"
              << "};\n";
 
+      // TODO check if there is already a meta info for the type
       mMetaInfos[std::pair(edecl->getBeginLoc(), edecl->getEndLoc())] = {
           output.str(),
           0};
@@ -1153,6 +1174,10 @@ public:
         mOutputFile << meta.second.first;
       }
 
+      Visitor.mMemberAttrVisitor.writeDeclarations(mOutputFile);
+      Visitor.mMemberFuncVisitor.writeDeclarations(mOutputFile);
+      Visitor.mStaticAttrVisitor.writeDeclarations(mOutputFile);
+
       // operator2 needs template specialization from above. Therefore it must
       // be include at last #include
       mOutputFile << "#include <protest/log/operator2.h>\n\n";
@@ -1170,6 +1195,11 @@ public:
     {
       mOutputFile << impl.second;
     }
+
+
+    Visitor.mMemberFuncVisitor.writeImplementation(mOutputFile);
+    Visitor.mMemberAttrVisitor.writeImplementation(mOutputFile);
+    Visitor.mStaticAttrVisitor.writeImplementation(mOutputFile);
   }
 
 public:

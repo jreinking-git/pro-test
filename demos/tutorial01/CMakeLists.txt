@@ -23,7 +23,7 @@ set(modules
   sut
 )
 
-add_protest_file(SOURCES ${protestSrc}
+add_protest_files(SOURCES ${protestSrc}
                  TARGETS protestOut
                  DEPENDENCIES ${modules})
 

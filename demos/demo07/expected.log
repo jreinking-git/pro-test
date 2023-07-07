@@ -102,7 +102,7 @@ INFO             main ----------------------------------------------------------
                       Print a pointer to float
                       -------------------------------------------------------------------------------
 INFO 0000000000  main /home/root/pro-test/demos/demo07/main.pt.cpp:509
-                      @0x55f5bb572ca0 -> { -1.32f }
+                      @0x556078d85ca0 -> { -1.32f }
 PASS 0000000000  main /home/root/pro-test/demos/demo07/main.pt.cpp:510
                       PASS: the condition evaluates to true:
                       'format.str().find("{ -1.32f }") != std::string::npos'
@@ -110,7 +110,7 @@ INFO             main ----------------------------------------------------------
                       Print a pointer to uint8_t
                       -------------------------------------------------------------------------------
 INFO 0000000000  main /home/root/pro-test/demos/demo07/main.pt.cpp:524
-                      @0x55f5bb572ca0 -> { 42, 0x2a }
+                      @0x556078d85ca0 -> { 42, 0x2a }
 PASS 0000000000  main /home/root/pro-test/demos/demo07/main.pt.cpp:525
                       PASS: the condition evaluates to true:
                       'format.str().find("{ 42, 0x2a }") != std::string::npos'
@@ -216,7 +216,7 @@ INFO             main ----------------------------------------------------------
                       -------------------------------------------------------------------------------
 INFO 0000000000  main /home/root/pro-test/demos/demo07/main.pt.cpp:720
                       struct PtrStruct {
-                        value : @0x55f5bb572ca0 -> { 32, 0x20 }
+                        value : @0x556078d85ca0 -> { 32, 0x20 }
                       }
 PASS 0000000000  main /home/root/pro-test/demos/demo07/main.pt.cpp:722
                       PASS: the condition evaluates to true:
@@ -227,7 +227,7 @@ INFO             main ----------------------------------------------------------
                       -------------------------------------------------------------------------------
 INFO 0000000000  main /home/root/pro-test/demos/demo07/main.pt.cpp:740
                       struct PtrStruct2 {
-                        ptr : @0x55f5bb572ca0 -> struct Pointee {
+                        ptr : @0x556078d85ca0 -> struct Pointee {
                           value : { 32, 0x20 }
                         }
                       }
@@ -242,7 +242,7 @@ INFO             main ----------------------------------------------------------
 INFO 0000000000  main /home/root/pro-test/demos/demo07/main.pt.cpp:758
                       struct StructDepth3 {
                         value : struct StructDepth2 {
-                          value : object@0x55f5bb572ca8
+                          value : object@0x556078d85ca8
                         }
                       }
 PASS 0000000000  main /home/root/pro-test/demos/demo07/main.pt.cpp:759
@@ -270,9 +270,9 @@ INFO             main ----------------------------------------------------------
 INFO 0000000000  main /home/root/pro-test/demos/demo07/main.pt.cpp:796
                       struct RecursionStruct {
                         value : { 8, 0x08 }
-                        self  : @0x55f5bb572ce0 -> struct RecursionStruct {
+                        self  : @0x556078d85ce0 -> struct RecursionStruct {
                           value : { 8, 0x08 }
-                          self  : object@0x55f5bb572ce8
+                          self  : object@0x556078d85ce8
                         }
                       }
 PASS 0000000000  main /home/root/pro-test/demos/demo07/main.pt.cpp:797
@@ -287,11 +287,11 @@ INFO             main ----------------------------------------------------------
                       -------------------------------------------------------------------------------
 INFO 0000000000  main /home/root/pro-test/demos/demo07/main.pt.cpp:814
                       struct SetStruct {
-                        values : object@0x55f5bb572d00[48] {
-                          0x40 0xb4 0x7c 0xbe 0xfe 0x7f 0x00 0x00 0x00 0x00 0x00 0x00
+                        values : object@0x556078d85d00[48] {
+                          0x80 0xbe 0x9c 0x54 0xfe 0x7f 0x00 0x00 0x00 0x00 0x00 0x00
                           0xfe 0x7f 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00
-                          0x08 0x2d 0x57 0xbb 0xf5 0x55 0x00 0x00 0x08 0x2d 0x57 0xbb
-                          0xf5 0x55 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00
+                          0x08 0x5d 0xd8 0x78 0x60 0x55 0x00 0x00 0x08 0x5d 0xd8 0x78
+                          0x60 0x55 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x00
                         }
                       }
 PASS 0000000000  main /home/root/pro-test/demos/demo07/main.pt.cpp:815

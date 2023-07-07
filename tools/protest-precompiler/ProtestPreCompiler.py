@@ -263,6 +263,7 @@ class PreCompiler(object):
         self.args = parser.parse_args()
         global verbose
         verbose = self.args.verbose
+
         if not os.path.isabs(self.args.src_file):
             self.args.src_file = os.path.abspath(
                 os.path.join(os.curdir, self.args.src_file))

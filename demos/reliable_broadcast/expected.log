@@ -498,27 +498,27 @@ WARN 0000026457  tsk2 /home/root/pro-test/demos/reliable_broadcast/sut/reliable_
                       Failure detected: Invalid sequence! (1 != 0)
 PUSH 0000027032  thd3 /home/root/pro-test/demos/reliable_broadcast/main.pt.cpp:218
                       Push value to 'deliver':
-                      object@0x55f12050bba6[2] {
+                      object@0x55b8e0602ba6[2] {
                         0x2a 0x03
                       }
 HDL  0000027032  tsk0 /home/root/pro-test/demos/reliable_broadcast/main.pt.cpp:90
                       Handle value of 'deliver':
-                      object@0x55f12050bb2e[2] {
+                      object@0x55b8e0602b2e[2] {
                         0x2a 0x03
                       }
 HDL  0000027032  tsk1 /home/root/pro-test/demos/reliable_broadcast/main.pt.cpp:90
                       Handle value of 'deliver':
-                      object@0x55f12050bb2e[2] {
+                      object@0x55b8e0602b2e[2] {
                         0x2a 0x03
                       }
 HDL  0000027032  tsk2 /home/root/pro-test/demos/reliable_broadcast/main.pt.cpp:90
                       Handle value of 'deliver':
-                      object@0x55f12050bb2e[2] {
+                      object@0x55b8e0602b2e[2] {
                         0x2a 0x03
                       }
 HDL  0000027032  tsk3 /home/root/pro-test/demos/reliable_broadcast/main.pt.cpp:90
                       Handle value of 'deliver':
-                      object@0x55f12050bb2e[2] {
+                      object@0x55b8e0602b2e[2] {
                         0x2a 0x03
                       }
 PASS 0000027032  tsk3 /home/root/pro-test/demos/reliable_broadcast/main.pt.cpp:93
@@ -529,12 +529,12 @@ PASS 0000027032  tsk3 /home/root/pro-test/demos/reliable_broadcast/main.pt.cpp:9
                       'v == 42u || mIsFaulty'
 PUSH 0000027386  thd0 /home/root/pro-test/demos/reliable_broadcast/main.pt.cpp:218
                       Push value to 'deliver':
-                      object@0x55f1204aedb6[2] {
+                      object@0x55b8e05a5db6[2] {
                         0x2a 0x00
                       }
 HDL  0000027386  tsk0 /home/root/pro-test/demos/reliable_broadcast/main.pt.cpp:90
                       Handle value of 'deliver':
-                      object@0x55f1204aed3e[2] {
+                      object@0x55b8e05a5d3e[2] {
                         0x2a 0x00
                       }
 PASS 0000027386  tsk0 /home/root/pro-test/demos/reliable_broadcast/main.pt.cpp:93
@@ -545,27 +545,27 @@ PASS 0000027386  tsk0 /home/root/pro-test/demos/reliable_broadcast/main.pt.cpp:9
                       'v == 42u || mIsFaulty'
 HDL  0000027386  tsk1 /home/root/pro-test/demos/reliable_broadcast/main.pt.cpp:90
                       Handle value of 'deliver':
-                      object@0x55f1204aed3e[2] {
+                      object@0x55b8e05a5d3e[2] {
                         0x2a 0x00
                       }
 HDL  0000027386  tsk2 /home/root/pro-test/demos/reliable_broadcast/main.pt.cpp:90
                       Handle value of 'deliver':
-                      object@0x55f1204aed3e[2] {
+                      object@0x55b8e05a5d3e[2] {
                         0x2a 0x00
                       }                      
 HDL  0000027386  tsk3 /home/root/pro-test/demos/reliable_broadcast/main.pt.cpp:90
                       Handle value of 'deliver':
-                      object@0x55f1204aed3e[2] {
+                      object@0x55b8e05a5d3e[2] {
                         0x2a 0x00
                       }                      
 PUSH 0000027432  thd2 /home/root/pro-test/demos/reliable_broadcast/main.pt.cpp:218
                       Push value to 'deliver':
-                      object@0x55f1204ecc56[2] {
+                      object@0x55b8e05e3c56[2] {
                         0x2a 0x02
                       }                      
 HDL  0000027432  tsk0 /home/root/pro-test/demos/reliable_broadcast/main.pt.cpp:90
                       Handle value of 'deliver':
-                      object@0x55f1204ecbde[2] {
+                      object@0x55b8e05e3bde[2] {
                         0x2a 0x02
                       }
 RESM 0000027432  tsk0 /home/root/pro-test/demos/reliable_broadcast/main.pt.cpp:141
@@ -576,7 +576,7 @@ WAIT 0000027432  tsk0 /home/root/pro-test/demos/reliable_broadcast/main.pt.cpp:1
                       'mDeliverPort.size() == numberOfNodes'
 HDL  0000027432  tsk1 /home/root/pro-test/demos/reliable_broadcast/main.pt.cpp:90
                       Handle value of 'deliver':
-                      object@0x55f1204ecbde[2] {
+                      object@0x55b8e05e3bde[2] {
                         0x2a 0x02
                       }
 RESM 0000027432  tsk1 /home/root/pro-test/demos/reliable_broadcast/main.pt.cpp:141
@@ -587,7 +587,7 @@ WAIT 0000027432  tsk1 /home/root/pro-test/demos/reliable_broadcast/main.pt.cpp:1
                       'mDeliverPort.size() == numberOfNodes'
 HDL  0000027432  tsk2 /home/root/pro-test/demos/reliable_broadcast/main.pt.cpp:90
                       Handle value of 'deliver':
-                      object@0x55f1204ecbde[2] {
+                      object@0x55b8e05e3bde[2] {
                         0x2a 0x02
                       }
 PASS 0000027432  tsk2 /home/root/pro-test/demos/reliable_broadcast/main.pt.cpp:93
@@ -604,7 +604,7 @@ WAIT 0000027432  tsk2 /home/root/pro-test/demos/reliable_broadcast/main.pt.cpp:1
                       'mDeliverPort.size() == numberOfNodes'
 HDL  0000027432  tsk3 /home/root/pro-test/demos/reliable_broadcast/main.pt.cpp:90
                       Handle value of 'deliver':
-                      object@0x55f1204ecbde[2] {
+                      object@0x55b8e05e3bde[2] {
                         0x2a 0x02
                       }
 RESM 0000027432  tsk3 /home/root/pro-test/demos/reliable_broadcast/main.pt.cpp:141
@@ -615,12 +615,12 @@ WAIT 0000027432  tsk3 /home/root/pro-test/demos/reliable_broadcast/main.pt.cpp:1
                       'mDeliverPort.size() == numberOfNodes'                      
 PUSH 0000027883  thd1 /home/root/pro-test/demos/reliable_broadcast/main.pt.cpp:218
                       Push value to 'deliver':
-                      object@0x55f1204cdd06[2] {
+                      object@0x55b8e05c4d06[2] {
                         0x2a 0x01
                       }
 HDL  0000027883  tsk0 /home/root/pro-test/demos/reliable_broadcast/main.pt.cpp:90
                       Handle value of 'deliver':
-                      object@0x55f1204cdc8e[2] {
+                      object@0x55b8e05c4c8e[2] {
                         0x2a 0x01
                       }
 RESM 0000027883  tsk0 /home/root/pro-test/demos/reliable_broadcast/main.pt.cpp:146
@@ -630,7 +630,7 @@ WAIT 0000027883  tsk0 /home/root/pro-test/demos/reliable_broadcast/main.pt.cpp:1
                       Wait for 18000 ms
 HDL  0000027883  tsk1 /home/root/pro-test/demos/reliable_broadcast/main.pt.cpp:90
                       Handle value of 'deliver':
-                      object@0x55f1204cdc8e[2] {
+                      object@0x55b8e05c4c8e[2] {
                         0x2a 0x01
                       }
 PASS 0000027883  tsk1 /home/root/pro-test/demos/reliable_broadcast/main.pt.cpp:93
@@ -646,7 +646,7 @@ WAIT 0000027883  tsk1 /home/root/pro-test/demos/reliable_broadcast/main.pt.cpp:1
                       Wait for 18000 ms
 HDL  0000027883  tsk2 /home/root/pro-test/demos/reliable_broadcast/main.pt.cpp:90
                       Handle value of 'deliver':
-                      object@0x55f1204cdc8e[2] {
+                      object@0x55b8e05c4c8e[2] {
                         0x2a 0x01
                       }
 RESM 0000027883  tsk2 /home/root/pro-test/demos/reliable_broadcast/main.pt.cpp:146
@@ -656,7 +656,7 @@ WAIT 0000027883  tsk2 /home/root/pro-test/demos/reliable_broadcast/main.pt.cpp:1
                       Wait for 18000 ms
 HDL  0000027883  tsk3 /home/root/pro-test/demos/reliable_broadcast/main.pt.cpp:90
                       Handle value of 'deliver':
-                      object@0x55f1204cdc8e[2] {
+                      object@0x55b8e05c4c8e[2] {
                         0x2a 0x01
                       }
 RESM 0000027883  tsk3 /home/root/pro-test/demos/reliable_broadcast/main.pt.cpp:146
@@ -1486,27 +1486,27 @@ WARN 0000052613  tsk3 /home/root/pro-test/demos/reliable_broadcast/sut/reliable_
                       Failure detected: Duplicated message!
 PUSH 0000054919  thd3 /home/root/pro-test/demos/reliable_broadcast/main.pt.cpp:218
                       Push value to 'deliver':
-                      object@0x55f12050bba6[2] {
+                      object@0x55b8e0602ba6[2] {
                         0x2a 0x03
                       }
 HDL  0000054919  tsk0 /home/root/pro-test/demos/reliable_broadcast/main.pt.cpp:90
                       Handle value of 'deliver':
-                      object@0x55f12050bb2e[2] {
+                      object@0x55b8e0602b2e[2] {
                         0x2a 0x03
                       }
 HDL  0000054919  tsk1 /home/root/pro-test/demos/reliable_broadcast/main.pt.cpp:90
                       Handle value of 'deliver':
-                      object@0x55f12050bb2e[2] {
+                      object@0x55b8e0602b2e[2] {
                         0x2a 0x03
                       }
 HDL  0000054919  tsk2 /home/root/pro-test/demos/reliable_broadcast/main.pt.cpp:90
                       Handle value of 'deliver':
-                      object@0x55f12050bb2e[2] {
+                      object@0x55b8e0602b2e[2] {
                         0x2a 0x03
                       }
 HDL  0000054919  tsk3 /home/root/pro-test/demos/reliable_broadcast/main.pt.cpp:90
                       Handle value of 'deliver':
-                      object@0x55f12050bb2e[2] {
+                      object@0x55b8e0602b2e[2] {
                         0x2a 0x03
                       }
 PASS 0000054919  tsk3 /home/root/pro-test/demos/reliable_broadcast/main.pt.cpp:93
@@ -1517,12 +1517,12 @@ PASS 0000054919  tsk3 /home/root/pro-test/demos/reliable_broadcast/main.pt.cpp:9
                       'v == 42u || mIsFaulty'
 PUSH 0000055033  thd0 /home/root/pro-test/demos/reliable_broadcast/main.pt.cpp:218
                       Push value to 'deliver':
-                      object@0x55f1204aedb6[2] {
+                      object@0x55b8e05a5db6[2] {
                         0x2a 0x00
                       }
 HDL  0000055033  tsk0 /home/root/pro-test/demos/reliable_broadcast/main.pt.cpp:90
                       Handle value of 'deliver':
-                      object@0x55f1204aed3e[2] {
+                      object@0x55b8e05a5d3e[2] {
                         0x2a 0x00
                       }
 PASS 0000055033  tsk0 /home/root/pro-test/demos/reliable_broadcast/main.pt.cpp:93
@@ -1533,27 +1533,27 @@ PASS 0000055033  tsk0 /home/root/pro-test/demos/reliable_broadcast/main.pt.cpp:9
                       'v == 42u || mIsFaulty'
 HDL  0000055033  tsk1 /home/root/pro-test/demos/reliable_broadcast/main.pt.cpp:90
                       Handle value of 'deliver':
-                      object@0x55f1204aed3e[2] {
+                      object@0x55b8e05a5d3e[2] {
                         0x2a 0x00
                       }
 HDL  0000055033  tsk2 /home/root/pro-test/demos/reliable_broadcast/main.pt.cpp:90
                       Handle value of 'deliver':
-                      object@0x55f1204aed3e[2] {
+                      object@0x55b8e05a5d3e[2] {
                         0x2a 0x00
                       }                      
 HDL  0000055033  tsk3 /home/root/pro-test/demos/reliable_broadcast/main.pt.cpp:90
                       Handle value of 'deliver':
-                      object@0x55f1204aed3e[2] {
+                      object@0x55b8e05a5d3e[2] {
                         0x2a 0x00
                       }
 PUSH 0000055349  thd1 /home/root/pro-test/demos/reliable_broadcast/main.pt.cpp:218
                       Push value to 'deliver':
-                      object@0x55f1204cdd06[2] {
+                      object@0x55b8e05c4d06[2] {
                         0x2a 0x01
                       }                      
 HDL  0000055349  tsk0 /home/root/pro-test/demos/reliable_broadcast/main.pt.cpp:90
                       Handle value of 'deliver':
-                      object@0x55f1204cdc8e[2] {
+                      object@0x55b8e05c4c8e[2] {
                         0x2a 0x01
                       }
 RESM 0000055349  tsk0 /home/root/pro-test/demos/reliable_broadcast/main.pt.cpp:141
@@ -1564,7 +1564,7 @@ WAIT 0000055349  tsk0 /home/root/pro-test/demos/reliable_broadcast/main.pt.cpp:1
                       'mDeliverPort.size() == numberOfNodes'
 HDL  0000055349  tsk1 /home/root/pro-test/demos/reliable_broadcast/main.pt.cpp:90
                       Handle value of 'deliver':
-                      object@0x55f1204cdc8e[2] {
+                      object@0x55b8e05c4c8e[2] {
                         0x2a 0x01
                       }
 PASS 0000055349  tsk1 /home/root/pro-test/demos/reliable_broadcast/main.pt.cpp:93
@@ -1581,7 +1581,7 @@ WAIT 0000055349  tsk1 /home/root/pro-test/demos/reliable_broadcast/main.pt.cpp:1
                       'mDeliverPort.size() == numberOfNodes'
 HDL  0000055349  tsk2 /home/root/pro-test/demos/reliable_broadcast/main.pt.cpp:90
                       Handle value of 'deliver':
-                      object@0x55f1204cdc8e[2] {
+                      object@0x55b8e05c4c8e[2] {
                         0x2a 0x01
                       }
 RESM 0000055349  tsk2 /home/root/pro-test/demos/reliable_broadcast/main.pt.cpp:141
@@ -1592,7 +1592,7 @@ WAIT 0000055349  tsk2 /home/root/pro-test/demos/reliable_broadcast/main.pt.cpp:1
                       'mDeliverPort.size() == numberOfNodes'
 HDL  0000055349  tsk3 /home/root/pro-test/demos/reliable_broadcast/main.pt.cpp:90
                       Handle value of 'deliver':
-                      object@0x55f1204cdc8e[2] {
+                      object@0x55b8e05c4c8e[2] {
                         0x2a 0x01
                       }
 RESM 0000055349  tsk3 /home/root/pro-test/demos/reliable_broadcast/main.pt.cpp:141
@@ -1603,12 +1603,12 @@ WAIT 0000055349  tsk3 /home/root/pro-test/demos/reliable_broadcast/main.pt.cpp:1
                       'mDeliverPort.size() == numberOfNodes'
 PUSH 0000055419  thd2 /home/root/pro-test/demos/reliable_broadcast/main.pt.cpp:218
                       Push value to 'deliver':
-                      object@0x55f1204ecc56[2] {
+                      object@0x55b8e05e3c56[2] {
                         0x2a 0x02
                       }
 HDL  0000055419  tsk0 /home/root/pro-test/demos/reliable_broadcast/main.pt.cpp:90
                       Handle value of 'deliver':
-                      object@0x55f1204ecbde[2] {
+                      object@0x55b8e05e3bde[2] {
                         0x2a 0x02
                       }
 RESM 0000055419  tsk0 /home/root/pro-test/demos/reliable_broadcast/main.pt.cpp:146
@@ -1618,7 +1618,7 @@ WAIT 0000055419  tsk0 /home/root/pro-test/demos/reliable_broadcast/main.pt.cpp:1
                       Wait for 18000 ms
 HDL  0000055419  tsk1 /home/root/pro-test/demos/reliable_broadcast/main.pt.cpp:90
                       Handle value of 'deliver':
-                      object@0x55f1204ecbde[2] {
+                      object@0x55b8e05e3bde[2] {
                         0x2a 0x02
                       }
 RESM 0000055419  tsk1 /home/root/pro-test/demos/reliable_broadcast/main.pt.cpp:146
@@ -1628,7 +1628,7 @@ WAIT 0000055419  tsk1 /home/root/pro-test/demos/reliable_broadcast/main.pt.cpp:1
                       Wait for 18000 ms
 HDL  0000055419  tsk2 /home/root/pro-test/demos/reliable_broadcast/main.pt.cpp:90
                       Handle value of 'deliver':
-                      object@0x55f1204ecbde[2] {
+                      object@0x55b8e05e3bde[2] {
                         0x2a 0x02
                       }
 PASS 0000055419  tsk2 /home/root/pro-test/demos/reliable_broadcast/main.pt.cpp:93
@@ -1644,7 +1644,7 @@ WAIT 0000055419  tsk2 /home/root/pro-test/demos/reliable_broadcast/main.pt.cpp:1
                       Wait for 18000 ms
 HDL  0000055419  tsk3 /home/root/pro-test/demos/reliable_broadcast/main.pt.cpp:90
                       Handle value of 'deliver':
-                      object@0x55f1204ecbde[2] {
+                      object@0x55b8e05e3bde[2] {
                         0x2a 0x02
                       }
 RESM 0000055419  tsk3 /home/root/pro-test/demos/reliable_broadcast/main.pt.cpp:146
@@ -2114,17 +2114,17 @@ WARN 0000082542  tsk0 /home/root/pro-test/demos/reliable_broadcast/sut/reliable_
                       Failure detected: Invalid sequence! (3 != 2)
 PUSH 0000082636  thd1 /home/root/pro-test/demos/reliable_broadcast/main.pt.cpp:218
                       Push value to 'deliver':
-                      object@0x55f1204cdd06[2] {
+                      object@0x55b8e05c4d06[2] {
                         0x2a 0x01
                       }
 HDL  0000082636  tsk0 /home/root/pro-test/demos/reliable_broadcast/main.pt.cpp:90
                       Handle value of 'deliver':
-                      object@0x55f1204cdc8e[2] {
+                      object@0x55b8e05c4c8e[2] {
                         0x2a 0x01
                       }
 HDL  0000082636  tsk1 /home/root/pro-test/demos/reliable_broadcast/main.pt.cpp:90
                       Handle value of 'deliver':
-                      object@0x55f1204cdc8e[2] {
+                      object@0x55b8e05c4c8e[2] {
                         0x2a 0x01
                       }
 PASS 0000082636  tsk1 /home/root/pro-test/demos/reliable_broadcast/main.pt.cpp:93
@@ -2135,32 +2135,32 @@ PASS 0000082636  tsk1 /home/root/pro-test/demos/reliable_broadcast/main.pt.cpp:9
                       'v == 42u || mIsFaulty'
 HDL  0000082636  tsk2 /home/root/pro-test/demos/reliable_broadcast/main.pt.cpp:90
                       Handle value of 'deliver':
-                      object@0x55f1204cdc8e[2] {
+                      object@0x55b8e05c4c8e[2] {
                         0x2a 0x01
                       }
 HDL  0000082636  tsk3 /home/root/pro-test/demos/reliable_broadcast/main.pt.cpp:90
                       Handle value of 'deliver':
-                      object@0x55f1204cdc8e[2] {
+                      object@0x55b8e05c4c8e[2] {
                         0x2a 0x01
                       }
 PUSH 0000082669  thd2 /home/root/pro-test/demos/reliable_broadcast/main.pt.cpp:218
                       Push value to 'deliver':
-                      object@0x55f1204ecc56[2] {
+                      object@0x55b8e05e3c56[2] {
                         0x2a 0x02
                       }
 HDL  0000082669  tsk0 /home/root/pro-test/demos/reliable_broadcast/main.pt.cpp:90
                       Handle value of 'deliver':
-                      object@0x55f1204ecbde[2] {
+                      object@0x55b8e05e3bde[2] {
                         0x2a 0x02
                       }                      
 HDL  0000082669  tsk1 /home/root/pro-test/demos/reliable_broadcast/main.pt.cpp:90
                       Handle value of 'deliver':
-                      object@0x55f1204ecbde[2] {
+                      object@0x55b8e05e3bde[2] {
                         0x2a 0x02
                       }
 HDL  0000082669  tsk2 /home/root/pro-test/demos/reliable_broadcast/main.pt.cpp:90
                       Handle value of 'deliver':
-                      object@0x55f1204ecbde[2] {
+                      object@0x55b8e05e3bde[2] {
                         0x2a 0x02
                       }
 PASS 0000082669  tsk2 /home/root/pro-test/demos/reliable_broadcast/main.pt.cpp:93
@@ -2171,17 +2171,17 @@ PASS 0000082669  tsk2 /home/root/pro-test/demos/reliable_broadcast/main.pt.cpp:9
                       'v == 42u || mIsFaulty'
 HDL  0000082669  tsk3 /home/root/pro-test/demos/reliable_broadcast/main.pt.cpp:90
                       Handle value of 'deliver':
-                      object@0x55f1204ecbde[2] {
+                      object@0x55b8e05e3bde[2] {
                         0x2a 0x02
                       }
 PUSH 0000082876  thd3 /home/root/pro-test/demos/reliable_broadcast/main.pt.cpp:218
                       Push value to 'deliver':
-                      object@0x55f12050bba6[2] {
+                      object@0x55b8e0602ba6[2] {
                         0x2a 0x03
                       }
 HDL  0000082876  tsk0 /home/root/pro-test/demos/reliable_broadcast/main.pt.cpp:90
                       Handle value of 'deliver':
-                      object@0x55f12050bb2e[2] {
+                      object@0x55b8e0602b2e[2] {
                         0x2a 0x03
                       }
 RESM 0000082876  tsk0 /home/root/pro-test/demos/reliable_broadcast/main.pt.cpp:141
@@ -2192,7 +2192,7 @@ WAIT 0000082876  tsk0 /home/root/pro-test/demos/reliable_broadcast/main.pt.cpp:1
                       'mDeliverPort.size() == numberOfNodes'
 HDL  0000082876  tsk1 /home/root/pro-test/demos/reliable_broadcast/main.pt.cpp:90
                       Handle value of 'deliver':
-                      object@0x55f12050bb2e[2] {
+                      object@0x55b8e0602b2e[2] {
                         0x2a 0x03
                       }
 RESM 0000082876  tsk1 /home/root/pro-test/demos/reliable_broadcast/main.pt.cpp:141
@@ -2203,7 +2203,7 @@ WAIT 0000082876  tsk1 /home/root/pro-test/demos/reliable_broadcast/main.pt.cpp:1
                       'mDeliverPort.size() == numberOfNodes'                      
 HDL  0000082876  tsk2 /home/root/pro-test/demos/reliable_broadcast/main.pt.cpp:90
                       Handle value of 'deliver':
-                      object@0x55f12050bb2e[2] {
+                      object@0x55b8e0602b2e[2] {
                         0x2a 0x03
                       }
 RESM 0000082876  tsk2 /home/root/pro-test/demos/reliable_broadcast/main.pt.cpp:141
@@ -2214,7 +2214,7 @@ WAIT 0000082876  tsk2 /home/root/pro-test/demos/reliable_broadcast/main.pt.cpp:1
                       'mDeliverPort.size() == numberOfNodes'
 HDL  0000082876  tsk3 /home/root/pro-test/demos/reliable_broadcast/main.pt.cpp:90
                       Handle value of 'deliver':
-                      object@0x55f12050bb2e[2] {
+                      object@0x55b8e0602b2e[2] {
                         0x2a 0x03
                       }
 PASS 0000082876  tsk3 /home/root/pro-test/demos/reliable_broadcast/main.pt.cpp:93
@@ -2231,12 +2231,12 @@ WAIT 0000082876  tsk3 /home/root/pro-test/demos/reliable_broadcast/main.pt.cpp:1
                       'mDeliverPort.size() == numberOfNodes'
 PUSH 0000082928  thd0 /home/root/pro-test/demos/reliable_broadcast/main.pt.cpp:218
                       Push value to 'deliver':
-                      object@0x55f1204aedb6[2] {
+                      object@0x55b8e05a5db6[2] {
                         0x2a 0x00
                       }
 HDL  0000082928  tsk0 /home/root/pro-test/demos/reliable_broadcast/main.pt.cpp:90
                       Handle value of 'deliver':
-                      object@0x55f1204aed3e[2] {
+                      object@0x55b8e05a5d3e[2] {
                         0x2a 0x00
                       }
 PASS 0000082928  tsk0 /home/root/pro-test/demos/reliable_broadcast/main.pt.cpp:93
@@ -2252,7 +2252,7 @@ WAIT 0000082928  tsk0 /home/root/pro-test/demos/reliable_broadcast/main.pt.cpp:1
                       Wait for 18000 ms
 HDL  0000082928  tsk1 /home/root/pro-test/demos/reliable_broadcast/main.pt.cpp:90
                       Handle value of 'deliver':
-                      object@0x55f1204aed3e[2] {
+                      object@0x55b8e05a5d3e[2] {
                         0x2a 0x00
                       }
 RESM 0000082928  tsk1 /home/root/pro-test/demos/reliable_broadcast/main.pt.cpp:146
@@ -2262,7 +2262,7 @@ WAIT 0000082928  tsk1 /home/root/pro-test/demos/reliable_broadcast/main.pt.cpp:1
                       Wait for 18000 ms
 HDL  0000082928  tsk2 /home/root/pro-test/demos/reliable_broadcast/main.pt.cpp:90
                       Handle value of 'deliver':
-                      object@0x55f1204aed3e[2] {
+                      object@0x55b8e05a5d3e[2] {
                         0x2a 0x00
                       }
 RESM 0000082928  tsk2 /home/root/pro-test/demos/reliable_broadcast/main.pt.cpp:146
@@ -2272,7 +2272,7 @@ WAIT 0000082928  tsk2 /home/root/pro-test/demos/reliable_broadcast/main.pt.cpp:1
                       Wait for 18000 ms
 HDL  0000082928  tsk3 /home/root/pro-test/demos/reliable_broadcast/main.pt.cpp:90
                       Handle value of 'deliver':
-                      object@0x55f1204aed3e[2] {
+                      object@0x55b8e05a5d3e[2] {
                         0x2a 0x00
                       }
 RESM 0000082928  tsk3 /home/root/pro-test/demos/reliable_broadcast/main.pt.cpp:146
@@ -2700,17 +2700,17 @@ HDL  0000106223  tsk3 /home/root/pro-test/demos/reliable_broadcast/main.pt.cpp:8
                       }
 PUSH 0000110059  thd1 /home/root/pro-test/demos/reliable_broadcast/main.pt.cpp:218
                       Push value to 'deliver':
-                      object@0x55f1204cdd06[2] {
+                      object@0x55b8e05c4d06[2] {
                         0x2a 0x01
                       }
 HDL  0000110059  tsk0 /home/root/pro-test/demos/reliable_broadcast/main.pt.cpp:90
                       Handle value of 'deliver':
-                      object@0x55f1204cdc8e[2] {
+                      object@0x55b8e05c4c8e[2] {
                         0x2a 0x01
                       }
 HDL  0000110059  tsk1 /home/root/pro-test/demos/reliable_broadcast/main.pt.cpp:90
                       Handle value of 'deliver':
-                      object@0x55f1204cdc8e[2] {
+                      object@0x55b8e05c4c8e[2] {
                         0x2a 0x01
                       }
 PASS 0000110059  tsk1 /home/root/pro-test/demos/reliable_broadcast/main.pt.cpp:93
@@ -2721,37 +2721,37 @@ PASS 0000110059  tsk1 /home/root/pro-test/demos/reliable_broadcast/main.pt.cpp:9
                       'v == 42u || mIsFaulty'
 HDL  0000110059  tsk2 /home/root/pro-test/demos/reliable_broadcast/main.pt.cpp:90
                       Handle value of 'deliver':
-                      object@0x55f1204cdc8e[2] {
+                      object@0x55b8e05c4c8e[2] {
                         0x2a 0x01
                       }
 HDL  0000110059  tsk3 /home/root/pro-test/demos/reliable_broadcast/main.pt.cpp:90
                       Handle value of 'deliver':
-                      object@0x55f1204cdc8e[2] {
+                      object@0x55b8e05c4c8e[2] {
                         0x2a 0x01
                       }
 PUSH 0000110139  thd3 /home/root/pro-test/demos/reliable_broadcast/main.pt.cpp:218
                       Push value to 'deliver':
-                      object@0x55f12050bba6[2] {
+                      object@0x55b8e0602ba6[2] {
                         0x2a 0x03
                       }
 HDL  0000110139  tsk0 /home/root/pro-test/demos/reliable_broadcast/main.pt.cpp:90
                       Handle value of 'deliver':
-                      object@0x55f12050bb2e[2] {
+                      object@0x55b8e0602b2e[2] {
                         0x2a 0x03
                       }                      
 HDL  0000110139  tsk1 /home/root/pro-test/demos/reliable_broadcast/main.pt.cpp:90
                       Handle value of 'deliver':
-                      object@0x55f12050bb2e[2] {
+                      object@0x55b8e0602b2e[2] {
                         0x2a 0x03
                       }
 HDL  0000110139  tsk2 /home/root/pro-test/demos/reliable_broadcast/main.pt.cpp:90
                       Handle value of 'deliver':
-                      object@0x55f12050bb2e[2] {
+                      object@0x55b8e0602b2e[2] {
                         0x2a 0x03
                       }
 HDL  0000110139  tsk3 /home/root/pro-test/demos/reliable_broadcast/main.pt.cpp:90
                       Handle value of 'deliver':
-                      object@0x55f12050bb2e[2] {
+                      object@0x55b8e0602b2e[2] {
                         0x2a 0x03
                       }
 PASS 0000110139  tsk3 /home/root/pro-test/demos/reliable_broadcast/main.pt.cpp:93
@@ -2762,12 +2762,12 @@ PASS 0000110139  tsk3 /home/root/pro-test/demos/reliable_broadcast/main.pt.cpp:9
                       'v == 42u || mIsFaulty'
 PUSH 0000110368  thd0 /home/root/pro-test/demos/reliable_broadcast/main.pt.cpp:218
                       Push value to 'deliver':
-                      object@0x55f1204aedb6[2] {
+                      object@0x55b8e05a5db6[2] {
                         0x2a 0x00
                       }
 HDL  0000110368  tsk0 /home/root/pro-test/demos/reliable_broadcast/main.pt.cpp:90
                       Handle value of 'deliver':
-                      object@0x55f1204aed3e[2] {
+                      object@0x55b8e05a5d3e[2] {
                         0x2a 0x00
                       }
 PASS 0000110368  tsk0 /home/root/pro-test/demos/reliable_broadcast/main.pt.cpp:93
@@ -2784,7 +2784,7 @@ WAIT 0000110368  tsk0 /home/root/pro-test/demos/reliable_broadcast/main.pt.cpp:1
                       'mDeliverPort.size() == numberOfNodes'
 HDL  0000110368  tsk1 /home/root/pro-test/demos/reliable_broadcast/main.pt.cpp:90
                       Handle value of 'deliver':
-                      object@0x55f1204aed3e[2] {
+                      object@0x55b8e05a5d3e[2] {
                         0x2a 0x00
                       }
 RESM 0000110368  tsk1 /home/root/pro-test/demos/reliable_broadcast/main.pt.cpp:141
@@ -2795,7 +2795,7 @@ WAIT 0000110368  tsk1 /home/root/pro-test/demos/reliable_broadcast/main.pt.cpp:1
                       'mDeliverPort.size() == numberOfNodes'
 HDL  0000110368  tsk2 /home/root/pro-test/demos/reliable_broadcast/main.pt.cpp:90
                       Handle value of 'deliver':
-                      object@0x55f1204aed3e[2] {
+                      object@0x55b8e05a5d3e[2] {
                         0x2a 0x00
                       }
 RESM 0000110368  tsk2 /home/root/pro-test/demos/reliable_broadcast/main.pt.cpp:141
@@ -2806,7 +2806,7 @@ WAIT 0000110368  tsk2 /home/root/pro-test/demos/reliable_broadcast/main.pt.cpp:1
                       'mDeliverPort.size() == numberOfNodes'                      
 HDL  0000110368  tsk3 /home/root/pro-test/demos/reliable_broadcast/main.pt.cpp:90
                       Handle value of 'deliver':
-                      object@0x55f1204aed3e[2] {
+                      object@0x55b8e05a5d3e[2] {
                         0x2a 0x00
                       }
 RESM 0000110368  tsk3 /home/root/pro-test/demos/reliable_broadcast/main.pt.cpp:141
@@ -2817,12 +2817,12 @@ WAIT 0000110368  tsk3 /home/root/pro-test/demos/reliable_broadcast/main.pt.cpp:1
                       'mDeliverPort.size() == numberOfNodes'
 PUSH 0000110687  thd2 /home/root/pro-test/demos/reliable_broadcast/main.pt.cpp:218
                       Push value to 'deliver':
-                      object@0x55f1204ecc56[2] {
+                      object@0x55b8e05e3c56[2] {
                         0x2a 0x02
                       }
 HDL  0000110687  tsk0 /home/root/pro-test/demos/reliable_broadcast/main.pt.cpp:90
                       Handle value of 'deliver':
-                      object@0x55f1204ecbde[2] {
+                      object@0x55b8e05e3bde[2] {
                         0x2a 0x02
                       }
 RESM 0000110687  tsk0 /home/root/pro-test/demos/reliable_broadcast/main.pt.cpp:146
@@ -2832,7 +2832,7 @@ WAIT 0000110687  tsk0 /home/root/pro-test/demos/reliable_broadcast/main.pt.cpp:1
                       Wait for 18000 ms
 HDL  0000110687  tsk1 /home/root/pro-test/demos/reliable_broadcast/main.pt.cpp:90
                       Handle value of 'deliver':
-                      object@0x55f1204ecbde[2] {
+                      object@0x55b8e05e3bde[2] {
                         0x2a 0x02
                       }
 RESM 0000110687  tsk1 /home/root/pro-test/demos/reliable_broadcast/main.pt.cpp:146
@@ -2842,7 +2842,7 @@ WAIT 0000110687  tsk1 /home/root/pro-test/demos/reliable_broadcast/main.pt.cpp:1
                       Wait for 18000 ms
 HDL  0000110687  tsk2 /home/root/pro-test/demos/reliable_broadcast/main.pt.cpp:90
                       Handle value of 'deliver':
-                      object@0x55f1204ecbde[2] {
+                      object@0x55b8e05e3bde[2] {
                         0x2a 0x02
                       }
 PASS 0000110687  tsk2 /home/root/pro-test/demos/reliable_broadcast/main.pt.cpp:93
@@ -2858,7 +2858,7 @@ WAIT 0000110687  tsk2 /home/root/pro-test/demos/reliable_broadcast/main.pt.cpp:1
                       Wait for 18000 ms
 HDL  0000110687  tsk3 /home/root/pro-test/demos/reliable_broadcast/main.pt.cpp:90
                       Handle value of 'deliver':
-                      object@0x55f1204ecbde[2] {
+                      object@0x55b8e05e3bde[2] {
                         0x2a 0x02
                       }
 RESM 0000110687  tsk3 /home/root/pro-test/demos/reliable_broadcast/main.pt.cpp:146
@@ -3370,27 +3370,27 @@ HDL  0000134852  tsk0 /home/root/pro-test/demos/reliable_broadcast/main.pt.cpp:8
                       }
 PUSH 0000138051  thd3 /home/root/pro-test/demos/reliable_broadcast/main.pt.cpp:218
                       Push value to 'deliver':
-                      object@0x55f12050bba6[2] {
+                      object@0x55b8e0602ba6[2] {
                         0x2a 0x03
                       }
 HDL  0000138051  tsk0 /home/root/pro-test/demos/reliable_broadcast/main.pt.cpp:90
                       Handle value of 'deliver':
-                      object@0x55f12050bb2e[2] {
+                      object@0x55b8e0602b2e[2] {
                         0x2a 0x03
                       }
 HDL  0000138051  tsk1 /home/root/pro-test/demos/reliable_broadcast/main.pt.cpp:90
                       Handle value of 'deliver':
-                      object@0x55f12050bb2e[2] {
+                      object@0x55b8e0602b2e[2] {
                         0x2a 0x03
                       }
 HDL  0000138051  tsk2 /home/root/pro-test/demos/reliable_broadcast/main.pt.cpp:90
                       Handle value of 'deliver':
-                      object@0x55f12050bb2e[2] {
+                      object@0x55b8e0602b2e[2] {
                         0x2a 0x03
                       }
 HDL  0000138051  tsk3 /home/root/pro-test/demos/reliable_broadcast/main.pt.cpp:90
                       Handle value of 'deliver':
-                      object@0x55f12050bb2e[2] {
+                      object@0x55b8e0602b2e[2] {
                         0x2a 0x03
                       }
 PASS 0000138051  tsk3 /home/root/pro-test/demos/reliable_broadcast/main.pt.cpp:93
@@ -3401,17 +3401,17 @@ PASS 0000138051  tsk3 /home/root/pro-test/demos/reliable_broadcast/main.pt.cpp:9
                       'v == 42u || mIsFaulty'
 PUSH 0000138236  thd1 /home/root/pro-test/demos/reliable_broadcast/main.pt.cpp:218
                       Push value to 'deliver':
-                      object@0x55f1204cdd06[2] {
+                      object@0x55b8e05c4d06[2] {
                         0x2a 0x01
                       }
 HDL  0000138236  tsk0 /home/root/pro-test/demos/reliable_broadcast/main.pt.cpp:90
                       Handle value of 'deliver':
-                      object@0x55f1204cdc8e[2] {
+                      object@0x55b8e05c4c8e[2] {
                         0x2a 0x01
                       }
 HDL  0000138236  tsk1 /home/root/pro-test/demos/reliable_broadcast/main.pt.cpp:90
                       Handle value of 'deliver':
-                      object@0x55f1204cdc8e[2] {
+                      object@0x55b8e05c4c8e[2] {
                         0x2a 0x01
                       }
 PASS 0000138236  tsk1 /home/root/pro-test/demos/reliable_broadcast/main.pt.cpp:93
@@ -3422,22 +3422,22 @@ PASS 0000138236  tsk1 /home/root/pro-test/demos/reliable_broadcast/main.pt.cpp:9
                       'v == 42u || mIsFaulty'
 HDL  0000138236  tsk2 /home/root/pro-test/demos/reliable_broadcast/main.pt.cpp:90
                       Handle value of 'deliver':
-                      object@0x55f1204cdc8e[2] {
+                      object@0x55b8e05c4c8e[2] {
                         0x2a 0x01
                       }                      
 HDL  0000138236  tsk3 /home/root/pro-test/demos/reliable_broadcast/main.pt.cpp:90
                       Handle value of 'deliver':
-                      object@0x55f1204cdc8e[2] {
+                      object@0x55b8e05c4c8e[2] {
                         0x2a 0x01
                       }
 PUSH 0000138453  thd0 /home/root/pro-test/demos/reliable_broadcast/main.pt.cpp:218
                       Push value to 'deliver':
-                      object@0x55f1204aedb6[2] {
+                      object@0x55b8e05a5db6[2] {
                         0x2a 0x00
                       }
 HDL  0000138453  tsk0 /home/root/pro-test/demos/reliable_broadcast/main.pt.cpp:90
                       Handle value of 'deliver':
-                      object@0x55f1204aed3e[2] {
+                      object@0x55b8e05a5d3e[2] {
                         0x2a 0x00
                       }
 PASS 0000138453  tsk0 /home/root/pro-test/demos/reliable_broadcast/main.pt.cpp:93
@@ -3454,7 +3454,7 @@ WAIT 0000138453  tsk0 /home/root/pro-test/demos/reliable_broadcast/main.pt.cpp:1
                       'mDeliverPort.size() == numberOfNodes'                      
 HDL  0000138453  tsk1 /home/root/pro-test/demos/reliable_broadcast/main.pt.cpp:90
                       Handle value of 'deliver':
-                      object@0x55f1204aed3e[2] {
+                      object@0x55b8e05a5d3e[2] {
                         0x2a 0x00
                       }
 RESM 0000138453  tsk1 /home/root/pro-test/demos/reliable_broadcast/main.pt.cpp:141
@@ -3465,7 +3465,7 @@ WAIT 0000138453  tsk1 /home/root/pro-test/demos/reliable_broadcast/main.pt.cpp:1
                       'mDeliverPort.size() == numberOfNodes'
 HDL  0000138453  tsk2 /home/root/pro-test/demos/reliable_broadcast/main.pt.cpp:90
                       Handle value of 'deliver':
-                      object@0x55f1204aed3e[2] {
+                      object@0x55b8e05a5d3e[2] {
                         0x2a 0x00
                       }
 RESM 0000138453  tsk2 /home/root/pro-test/demos/reliable_broadcast/main.pt.cpp:141
@@ -3476,7 +3476,7 @@ WAIT 0000138453  tsk2 /home/root/pro-test/demos/reliable_broadcast/main.pt.cpp:1
                       'mDeliverPort.size() == numberOfNodes'
 HDL  0000138453  tsk3 /home/root/pro-test/demos/reliable_broadcast/main.pt.cpp:90
                       Handle value of 'deliver':
-                      object@0x55f1204aed3e[2] {
+                      object@0x55b8e05a5d3e[2] {
                         0x2a 0x00
                       }
 RESM 0000138453  tsk3 /home/root/pro-test/demos/reliable_broadcast/main.pt.cpp:141
@@ -3487,12 +3487,12 @@ WAIT 0000138453  tsk3 /home/root/pro-test/demos/reliable_broadcast/main.pt.cpp:1
                       'mDeliverPort.size() == numberOfNodes'
 PUSH 0000138556  thd2 /home/root/pro-test/demos/reliable_broadcast/main.pt.cpp:218
                       Push value to 'deliver':
-                      object@0x55f1204ecc56[2] {
+                      object@0x55b8e05e3c56[2] {
                         0x2a 0x02
                       }
 HDL  0000138556  tsk0 /home/root/pro-test/demos/reliable_broadcast/main.pt.cpp:90
                       Handle value of 'deliver':
-                      object@0x55f1204ecbde[2] {
+                      object@0x55b8e05e3bde[2] {
                         0x2a 0x02
                       }
 RESM 0000138556  tsk0 /home/root/pro-test/demos/reliable_broadcast/main.pt.cpp:146
@@ -3500,7 +3500,7 @@ RESM 0000138556  tsk0 /home/root/pro-test/demos/reliable_broadcast/main.pt.cpp:1
                       'mDeliverPort.size() == numberOfNodes'
 HDL  0000138556  tsk1 /home/root/pro-test/demos/reliable_broadcast/main.pt.cpp:90
                       Handle value of 'deliver':
-                      object@0x55f1204ecbde[2] {
+                      object@0x55b8e05e3bde[2] {
                         0x2a 0x02
                       }
 RESM 0000138556  tsk1 /home/root/pro-test/demos/reliable_broadcast/main.pt.cpp:146
@@ -3508,7 +3508,7 @@ RESM 0000138556  tsk1 /home/root/pro-test/demos/reliable_broadcast/main.pt.cpp:1
                       'mDeliverPort.size() == numberOfNodes'
 HDL  0000138556  tsk2 /home/root/pro-test/demos/reliable_broadcast/main.pt.cpp:90
                       Handle value of 'deliver':
-                      object@0x55f1204ecbde[2] {
+                      object@0x55b8e05e3bde[2] {
                         0x2a 0x02
                       }
 PASS 0000138556  tsk2 /home/root/pro-test/demos/reliable_broadcast/main.pt.cpp:93
@@ -3522,7 +3522,7 @@ RESM 0000138556  tsk2 /home/root/pro-test/demos/reliable_broadcast/main.pt.cpp:1
                       'mDeliverPort.size() == numberOfNodes'
 HDL  0000138556  tsk3 /home/root/pro-test/demos/reliable_broadcast/main.pt.cpp:90
                       Handle value of 'deliver':
-                      object@0x55f1204ecbde[2] {
+                      object@0x55b8e05e3bde[2] {
                         0x2a 0x02
                       }
 RESM 0000138556  tsk3 /home/root/pro-test/demos/reliable_broadcast/main.pt.cpp:146

@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.19)
 
-project(demo-11 C CXX)
+project(demo-14 C CXX)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED True)
@@ -22,10 +22,12 @@ set (modules
 )
 
 add_protest_files(SOURCES ${protestSrc}
-                 TARGETS protestOut
-                 DEPENDENCIES ${modules})
+                  TARGETS protestOut
+                  DEPENDENCIES ${modules}
+                  INCLUDES "${CMAKE_CURRENT_LIST_DIR}")
 
-add_executable(run_test ${protestOut})
+add_executable(run_test ${protestOut} "my_class.cpp")
+target_include_directories(run_test PUBLIC ".")
 target_link_libraries(run_test
   ${modules}
   protest::core

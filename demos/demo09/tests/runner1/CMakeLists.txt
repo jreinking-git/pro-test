@@ -11,7 +11,7 @@ set(modules
   module_b
 )
 
-add_protest_file(SOURCES ${sources}
+add_protest_files(SOURCES ${sources}
                  TARGETS protestOut
                  DEPENDENCIES ${modules}
                  INCLUDES ${includes})

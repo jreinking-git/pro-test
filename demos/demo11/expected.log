@@ -396,57 +396,57 @@ INFO             main ==========================================================
 PASS 0000000000  main /home/root/pro-test/demos/demo11/main.pt.cpp:333
                       Value of: ptr
                       Expected: is equal to
-                                @0x559956176ba0 -> { 42, 0x0000002a }
-                        Actual: @0x559956176ba0 -> { 42, 0x0000002a }
+                                @0x55f24fb92ba0 -> { 42, 0x0000002a }
+                        Actual: @0x55f24fb92ba0 -> { 42, 0x0000002a }
 FAIL 0000000000  main /home/root/pro-test/demos/demo11/main.pt.cpp:335
                       Value of: ptr
                       Expected: is equal to
-                                @0x559956176ba8 -> { 42, 0x0000002a }
-                        But is: @0x559956176ba0 -> { 42, 0x0000002a }
+                                @0x55f24fb92ba8 -> { 42, 0x0000002a }
+                        But is: @0x55f24fb92ba0 -> { 42, 0x0000002a }
 PASS 0000000000  main /home/root/pro-test/demos/demo11/main.pt.cpp:347
                       Value of: adptr
                       Expected: is equal to
-                                @0x559956176ba0 -> @0x559956176b98 -> { 42, 0x0000002a }
-                        Actual: @0x559956176ba0 -> @0x559956176b98 -> { 42, 0x0000002a }
+                                @0x55f24fb92ba0 -> @0x55f24fb92b98 -> { 42, 0x0000002a }
+                        Actual: @0x55f24fb92ba0 -> @0x55f24fb92b98 -> { 42, 0x0000002a }
 FAIL 0000000000  main /home/root/pro-test/demos/demo11/main.pt.cpp:349
                       Value of: adptr
                       Expected: is equal to
-                                @0x559956176ba8 -> @0x559956176b9c -> { 42, 0x0000002a }
-                        But is: @0x559956176ba0 -> @0x559956176b98 -> { 42, 0x0000002a }
+                                @0x55f24fb92ba8 -> @0x55f24fb92b9c -> { 42, 0x0000002a }
+                        But is: @0x55f24fb92ba0 -> @0x55f24fb92b98 -> { 42, 0x0000002a }
 PASS 0000000000  main /home/root/pro-test/demos/demo11/main.pt.cpp:363
                       Value of: aptr
                       Expected: is equal to
-                                @0x559956176b9c -> struct TestStruct {
+                                @0x55f24fb92b9c -> struct TestStruct {
                                   a : { 42, 0x0000002a }
                                 }
-                        Actual: @0x559956176b9c -> struct TestStruct {
+                        Actual: @0x55f24fb92b9c -> struct TestStruct {
                                   a : { 42, 0x0000002a }
                                 }
 FAIL 0000000000  main /home/root/pro-test/demos/demo11/main.pt.cpp:365
                       Value of: bptr
                       Expected: is equal to
-                                @0x559956176b9c -> struct TestStruct {
+                                @0x55f24fb92b9c -> struct TestStruct {
                                   a : { 42, 0x0000002a }
                                 }
-                        But is: @0x559956176ba0 -> struct TestStruct {
+                        But is: @0x55f24fb92ba0 -> struct TestStruct {
                                   a : { 42, 0x0000002a }
                                 }
 FAIL 0000000000  main /home/root/pro-test/demos/demo11/main.pt.cpp:368
                       Value of: aptr
                       Expected: is not equal to
-                                @0x559956176b9c -> struct TestStruct {
+                                @0x55f24fb92b9c -> struct TestStruct {
                                   a : { 42, 0x0000002a }
                                 }
-                        But is: @0x559956176b9c -> struct TestStruct {
+                        But is: @0x55f24fb92b9c -> struct TestStruct {
                                   a : { 42, 0x0000002a }
                                 }
 PASS 0000000000  main /home/root/pro-test/demos/demo11/main.pt.cpp:370
                       Value of: bptr
                       Expected: is not equal to
-                                @0x559956176b9c -> struct TestStruct {
+                                @0x55f24fb92b9c -> struct TestStruct {
                                   a : { 42, 0x0000002a }
                                 }
-                        Actual: @0x559956176ba0 -> struct TestStruct {
+                        Actual: @0x55f24fb92ba0 -> struct TestStruct {
                                   a : { 42, 0x0000002a }
                                 }
 INFO             main -------------------------------------------------------------------------------
@@ -458,7 +458,7 @@ INFO             main ==========================================================
 PASS 0000000000  main /home/root/pro-test/demos/demo11/main.pt.cpp:381
                       Value of: aptr
                       Expected: is not Null
-                        Actual: @0x559956176ba8
+                        Actual: @0x55f24fb92ba8
 FAIL 0000000000  main /home/root/pro-test/demos/demo11/main.pt.cpp:383
                       Value of: nullptr
                       Expected: is not Null
@@ -474,7 +474,7 @@ PASS 0000000000  main /home/root/pro-test/demos/demo11/main.pt.cpp:387
 FAIL 0000000000  main /home/root/pro-test/demos/demo11/main.pt.cpp:389
                       Value of: aptr
                       Expected: is Null
-                        But is: @0x559956176ba8
+                        But is: @0x55f24fb92ba8
 INFO             main -------------------------------------------------------------------------------
                       End section                                              pointer null check (4)
                       ===============================================================================
@@ -484,33 +484,33 @@ INFO             main ==========================================================
 PASS 0000000000  main /home/root/pro-test/demos/demo11/main.pt.cpp:401
                       Value of: c
                       Expected: is a reference to value
-                                @0x559956176a2c
-                        Actual: @0x559956176a2c
+                                @0x55f24fb92a2c
+                        Actual: @0x55f24fb92a2c
 PASS 0000000000  main /home/root/pro-test/demos/demo11/main.pt.cpp:404
                       Value of: a
                       Expected: is a reference to value
-                                @0x559956176a2c
-                        Actual: @0x559956176a2c
+                                @0x55f24fb92a2c
+                        Actual: @0x55f24fb92a2c
 FAIL 0000000000  main /home/root/pro-test/demos/demo11/main.pt.cpp:406
                       Value of: a
                       Expected: is a reference to value
-                                @0x559956176a2c
-                        But is: @0x559956176a2c
+                                @0x55f24fb92a2c
+                        But is: @0x55f24fb92a2c
 FAIL 0000000000  main /home/root/pro-test/demos/demo11/main.pt.cpp:408
                       Value of: a
                       Expected: is not a reference to value
-                                @0x5599561769cc
-                        But is: @0x5599561769cc
+                                @0x55f24fb929cc
+                        But is: @0x55f24fb929cc
 PASS 0000000000  main /home/root/pro-test/demos/demo11/main.pt.cpp:410
                       Value of: a
                       Expected: is not a reference to value
-                                @0x5599561769cc
-                        Actual: @0x5599561769cc
+                                @0x55f24fb929cc
+                        Actual: @0x55f24fb929cc
 FAIL 0000000000  main /home/root/pro-test/demos/demo11/main.pt.cpp:412
                       Value of: a
                       Expected: is a reference to value
-                                @0x55995617696c
-                        But is: @0x55995617696c
+                                @0x55f24fb9296c
+                        But is: @0x55f24fb9296c
 INFO             main -------------------------------------------------------------------------------
                       End section                                                 reference check (5)
                       ===============================================================================

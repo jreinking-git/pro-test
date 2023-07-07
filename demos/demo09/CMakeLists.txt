@@ -23,7 +23,7 @@ set(modules
   runner2
 )
 
-add_protest_file(SOURCES "main.pt.cpp"
+add_protest_files(SOURCES "main.pt.cpp"
                  TARGETS protestOut
                  DEPENDENCIES ${modules}
                  INCLUDES ${CMAKE_CURRENT_LIST_DIR}
