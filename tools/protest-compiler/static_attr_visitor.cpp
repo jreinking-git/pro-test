@@ -22,6 +22,7 @@
  */
 
 #include "static_attr_visitor.h"
+#include "utils.h"
 
 #include "clang/AST/AST.h"
 
@@ -34,7 +35,7 @@ using namespace protest;
 void
 StaticAttrVisitor::handle(clang::FunctionDecl* decl)
 {
-  if (decl->getQualifiedNameAsString() == "getMemberAttr")
+  if (decl->getQualifiedNameAsString() == "protest::getMemberAttr")
   {
     auto* record = getCxxRecord(decl);
 
@@ -62,9 +63,11 @@ StaticAttrVisitor::handle(clang::FunctionDecl* decl)
         output << startImplementation(record, attr);
         output << addMember(record, attr, true);
 
-        while (true)
+        bool again = true;
+        while (again)
         {
           int index = 0;
+          again = false;
           for (auto* other : attrs)
           {
             bool eq = compareSignature(attr, other);
@@ -73,13 +76,13 @@ StaticAttrVisitor::handle(clang::FunctionDecl* decl)
             {
               output << addMember(record, other, false);
               attrs.erase(std::next(attrs.begin(), index));
+              again = true;
               break;
             }
             index++;
           }
-          output << endImplementation(record, attr);
-          break;
         }
+        output << endImplementation(record, attr);
       }
       auto key = std::pair(record->getBeginLoc(), record->getEndLoc());
       mImplementation[key] = output.str();
@@ -117,7 +120,7 @@ bool
 StaticAttrVisitor::compareSignature(clang::VarDecl* first,
                                     clang::VarDecl* second)
 {
-  return first->getType() == second->getType();
+  return first->getType().getNonReferenceType() == second->getType().getNonReferenceType();
 }
 
 clang::CXXRecordDecl*
@@ -136,7 +139,7 @@ StaticAttrVisitor::startImplementation(clang::CXXRecordDecl* cls,
   std::string retValue = member->getType().getNonReferenceType().getAsString();
 
   std::stringstream output;
-  output << "template <>";
+  output << "namespace protest { template <>";
   output << retValue << "& ";
   output << "getMemberAttr("
          << "const char* name, " << cls->getQualifiedNameAsString() << "*)";
@@ -149,7 +152,7 @@ StaticAttrVisitor::endImplementation(clang::CXXRecordDecl* cls,
                                      clang::VarDecl* member)
 {
   std::stringstream output;
-  output << "assert(false); }\n";
+  output << "assert(false); }}\n";
   return output.str();
 }
 
@@ -179,10 +182,11 @@ StaticAttrVisitor::storeDeclaration(clang::CXXRecordDecl* cls,
   std::string retValue = member->getType().getNonReferenceType().getAsString();
 
   std::stringstream output;
-  output << "template <>";
+  output << forwardDeclarationOf(cls);
+  output << "namespace protest { template <>";
   output << retValue << "& ";
   output << "getMemberAttr(const char* name, " << cls->getQualifiedNameAsString() << "*)";
-  output << ";\n";
+  output << "; }\n";
 
   auto key = std::pair(member->getBeginLoc(), member->getEndLoc());
   mDeclarations[key] = output.str();

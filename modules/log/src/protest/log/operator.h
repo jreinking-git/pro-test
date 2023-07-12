@@ -245,6 +245,7 @@ inline constexpr bool secondLevel =
     HasOutputOperator<std::remove_reference_t<T>>::value &&
     !HasCustomOperator<std::remove_reference_t<T>>::value &&
     !std::is_pointer_v<std::remove_reference_t<T>> &&
+    !std::is_enum_v<std::remove_reference_t<T>> &&
     !std::is_array_v<std::remove_reference_t<T>>;
 
 /**

@@ -7,22 +7,248 @@
 INFO             main -------------------------------------------------------------------------------
                       Start runner 'main'
                       -------------------------------------------------------------------------------
-INFO 0000000000  main /home/root/pro-test/demos/demo14/main.pt.cpp:52
-                      44
-INFO 0000000000  main /home/root/pro-test/demos/demo14/main.pt.cpp:55
-                      45
-INFO 0000000000  main /home/root/pro-test/demos/demo14/main.pt.cpp:58
-                      46
-INFO 0000000000  main /home/root/pro-test/demos/demo14/main.pt.cpp:61
-                      40
-INFO 0000000000  main /home/root/pro-test/demos/demo14/main.pt.cpp:64
-                      41
-INFO 0000000000  main /home/root/pro-test/demos/demo14/main.pt.cpp:67
-                      42
-INFO 0000000000  main /home/root/pro-test/demos/demo14/main.pt.cpp:70
-                      43
-INFO 0000000000  main /home/root/pro-test/demos/demo14/main.pt.cpp:73
-                      42
+INFO             main ===============================================================================
+                      Section                                                      private method (1)
+                      -------------------------------------------------------------------------------
+INFO             main -------------------------------------------------------------------------------
+                      Get the private method @c func and call it.
+                      -------------------------------------------------------------------------------
+PASS 0000000000  main /home/root/pro-test/demos/demo14/main.pt.cpp:52
+                      Value of: true
+                      Expected: to be true
+                        Actual: true
+INFO             main -------------------------------------------------------------------------------
+                      Get the private method @c func and call it. It has a return value and a
+                      parameter.
+                      -------------------------------------------------------------------------------
+PASS 0000000000  main /home/root/pro-test/demos/demo14/main.pt.cpp:64
+                      Value of: value
+                      Expected: is equal to
+                                { 44, 0x0000002c }
+                        Actual: { 44, 0x0000002c }
+INFO             main -------------------------------------------------------------------------------
+                      Get the private method @c other and call it. It has the same signature as @c
+                      func.
+                      -------------------------------------------------------------------------------
+PASS 0000000000  main /home/root/pro-test/demos/demo14/main.pt.cpp:76
+                      Value of: value
+                      Expected: is equal to
+                                { 45, 0x0000002d }
+                        Actual: { 45, 0x0000002d }
+INFO             main -------------------------------------------------------------------------------
+                      Get the private method @c other and call it. @c other is a overloaded method.
+                      @c getMemberFunction should return the function which takes an double as first
+                      parameter.
+                      -------------------------------------------------------------------------------
+PASS 0000000000  main /home/root/pro-test/demos/demo14/main.pt.cpp:89
+                      Value of: value
+                      Expected: is equal to
+                                { 46, 0x0000002e }
+                        Actual: { 46, 0x0000002e }
+INFO             main -------------------------------------------------------------------------------
+                      Get private static function @c value and call it.
+                      -------------------------------------------------------------------------------
+PASS 0000000000  main /home/root/pro-test/demos/demo14/main.pt.cpp:100
+                      Value of: value
+                      Expected: is equal to
+                                { 40, 0x00000028 }
+                        Actual: { 40, 0x00000028 }
+INFO             main -------------------------------------------------------------------------------
+                      End section                                                  private method (1)
+                      ===============================================================================
+INFO             main ===============================================================================
+                      Section                                                 private data member (2)
+                      -------------------------------------------------------------------------------
+INFO             main -------------------------------------------------------------------------------
+                      Get private member @c mMember1.
+                      -------------------------------------------------------------------------------
+PASS 0000000000  main /home/root/pro-test/demos/demo14/main.pt.cpp:116
+                      Value of: value
+                      Expected: is equal to
+                                { 41, 0x00000029 }
+                        Actual: { 41, 0x29 }
+INFO             main -------------------------------------------------------------------------------
+                      Get private member @c mMember2 which has the same type as @c mMember1.
+                      -------------------------------------------------------------------------------
+PASS 0000000000  main /home/root/pro-test/demos/demo14/main.pt.cpp:127
+                      Value of: value
+                      Expected: is equal to
+                                { 42, 0x0000002a }
+                        Actual: { 42, 0x2a }
+INFO             main -------------------------------------------------------------------------------
+                      Get private member @c mMember3 which has a diffrent type then @c mMember1 and
+                      @c mMember2.
+                      -------------------------------------------------------------------------------
+PASS 0000000000  main /home/root/pro-test/demos/demo14/main.pt.cpp:138
+                      Value of: value
+                      Expected: is equal to
+                                { 43, 0x0000002b }
+                        Actual: { 43, 0x002b }
+INFO             main -------------------------------------------------------------------------------
+                      Get private member @c mMember4 which is a reference to @c mMember1.
+                      -------------------------------------------------------------------------------
+PASS 0000000000  main /home/root/pro-test/demos/demo14/main.pt.cpp:149
+                      Value of: value
+                      Expected: is equal to
+                                { 41, 0x00000029 }
+                        Actual: { 41, 0x29 }
+INFO             main -------------------------------------------------------------------------------
+                      Get private static const data @c mMember5.
+                      -------------------------------------------------------------------------------
+PASS 0000000000  main /home/root/pro-test/demos/demo14/main.pt.cpp:159
+                      Value of: value
+                      Expected: is equal to
+                                { 44, 0x0000002c }
+                        Actual: { 44, 0x2c }
+INFO             main -------------------------------------------------------------------------------
+                      Get private data @c mMember6.
+                      -------------------------------------------------------------------------------
+PASS 0000000000  main /home/root/pro-test/demos/demo14/main.pt.cpp:169
+                      Value of: value.mValue
+                      Expected: is equal to
+                                { 45, 0x0000002d }
+                        Actual: { 45, 0x2d }
+INFO             main -------------------------------------------------------------------------------
+                      Get private data @c mMember7.
+                      -------------------------------------------------------------------------------
+PASS 0000000000  main /home/root/pro-test/demos/demo14/main.pt.cpp:179
+                      Value of: value.mValue
+                      Expected: is equal to
+                                { 46, 0x0000002e }
+                        Actual: { 46, 0x2e }
+INFO             main -------------------------------------------------------------------------------
+                      Get private data @c mMode.
+                      -------------------------------------------------------------------------------
+PASS 0000000000  main /home/root/pro-test/demos/demo14/main.pt.cpp:189
+                      Value of: value
+                      Expected: is equal to
+                                { MyClass::Mode::ground, 1, 0x00000001 }
+                        Actual: { MyClass::Mode::ground, 1, 0x00000001 }
+INFO             main -------------------------------------------------------------------------------
+                      Get private static data @c myvalue.
+                      -------------------------------------------------------------------------------
+PASS 0000000000  main /home/root/pro-test/demos/demo14/main.pt.cpp:199
+                      Value of: value
+                      Expected: is equal to
+                                { 42, 0x0000002a }
+                        Actual: { 42, 0x0000002a }
+INFO             main -------------------------------------------------------------------------------
+                      End section                                             private data member (2)
+                      ===============================================================================
+INFO             main ===============================================================================
+                      Section                                                  class in namespace (3)
+                      -------------------------------------------------------------------------------
+INFO             main -------------------------------------------------------------------------------
+                      Get private static data @c myvalue.
+                      -------------------------------------------------------------------------------
+PASS 0000000000  main /home/root/pro-test/demos/demo14/main.pt.cpp:215
+                      Value of: value
+                      Expected: is equal to
+                                { 42, 0x0000002a }
+                        Actual: { 42, 0x0000002a }
+INFO             main -------------------------------------------------------------------------------
+                      Get private static function @c value and call it.
+                      -------------------------------------------------------------------------------
+PASS 0000000000  main /home/root/pro-test/demos/demo14/main.pt.cpp:226
+                      Value of: value
+                      Expected: is equal to
+                                { 40, 0x00000028 }
+                        Actual: { 40, 0x00000028 }
+INFO             main -------------------------------------------------------------------------------
+                      Get private member @c mMember1.
+                      -------------------------------------------------------------------------------
+PASS 0000000000  main /home/root/pro-test/demos/demo14/main.pt.cpp:236
+                      Value of: value
+                      Expected: is equal to
+                                { 41, 0x00000029 }
+                        Actual: { 41, 0x29 }
+INFO             main -------------------------------------------------------------------------------
+                      Get the private method @c func and call it. It has a return value and a
+                      parameter.
+                      -------------------------------------------------------------------------------
+PASS 0000000000  main /home/root/pro-test/demos/demo14/main.pt.cpp:248
+                      Value of: value
+                      Expected: is equal to
+                                { 44, 0x0000002c }
+                        Actual: { 44, 0x0000002c }
+INFO             main -------------------------------------------------------------------------------
+                      End section                                              class in namespace (3)
+                      ===============================================================================
+INFO             main ===============================================================================
+                      Section                                             class in two namespaces (4)
+                      -------------------------------------------------------------------------------
+INFO             main -------------------------------------------------------------------------------
+                      Get private static data @c myvalue.
+                      -------------------------------------------------------------------------------
+PASS 0000000000  main /home/root/pro-test/demos/demo14/main.pt.cpp:264
+                      Value of: value
+                      Expected: is equal to
+                                { 42, 0x0000002a }
+                        Actual: { 42, 0x0000002a }
+INFO             main -------------------------------------------------------------------------------
+                      Get private static function @c value and call it.
+                      -------------------------------------------------------------------------------
+PASS 0000000000  main /home/root/pro-test/demos/demo14/main.pt.cpp:275
+                      Value of: value
+                      Expected: is equal to
+                                { 40, 0x00000028 }
+                        Actual: { 40, 0x00000028 }
+INFO             main -------------------------------------------------------------------------------
+                      Get private member @c mMember1.
+                      -------------------------------------------------------------------------------
+PASS 0000000000  main /home/root/pro-test/demos/demo14/main.pt.cpp:285
+                      Value of: value
+                      Expected: is equal to
+                                { 41, 0x00000029 }
+                        Actual: { 41, 0x29 }
+INFO             main -------------------------------------------------------------------------------
+                      Get the private method @c func and call it. It has a return value and a
+                      parameter.
+                      -------------------------------------------------------------------------------
+PASS 0000000000  main /home/root/pro-test/demos/demo14/main.pt.cpp:297
+                      Value of: value
+                      Expected: is equal to
+                                { 44, 0x0000002c }
+                        Actual: { 44, 0x0000002c }
+INFO             main -------------------------------------------------------------------------------
+                      End section                                         class in two namespaces (4)
+                      ===============================================================================
+INFO             main ===============================================================================
+                      Section                                             definition in pt script (5)
+                      -------------------------------------------------------------------------------
+INFO             main -------------------------------------------------------------------------------
+                      Get private member @c mMember1 of class which is defined in this pt script.
+                      -------------------------------------------------------------------------------
+PASS 0000000000  main /home/root/pro-test/demos/demo14/main.pt.cpp:314
+                      Value of: value
+                      Expected: is equal to
+                                { 48, 0x00000030 }
+                        Actual: { 48, 0x30 }
+INFO             main -------------------------------------------------------------------------------
+                      End section                                         definition in pt script (5)
+                      ===============================================================================
+INFO             main ===============================================================================
+                      Section                                                        private type (6)
+                      -------------------------------------------------------------------------------
+INFO             main -------------------------------------------------------------------------------
+                      The member @c mMember8 has a private type. This type cannot be used in the pt
+                      script without getting a invalid access error from the IDE. Therefore a @c
+                      MyType is used. This struct has the same layout as the private type of the
+                      member.
+                      -------------------------------------------------------------------------------
+PASS 0000000000  main /home/root/pro-test/demos/demo14/main.pt.cpp:339
+                      Value of: value->mValue1
+                      Expected: is equal to
+                                { 49, 0x00000031 }
+                        Actual: { 49, 0x31 }
+PASS 0000000000  main /home/root/pro-test/demos/demo14/main.pt.cpp:340
+                      Value of: value->mValue2
+                      Expected: is equal to
+                                { 50, 0x00000032 }
+                        Actual: { 50, 0x0032 }
+INFO             main -------------------------------------------------------------------------------
+                      End section                                                    private type (6)
+                      ===============================================================================
 INFO             main -------------------------------------------------------------------------------
                       Exit of 'main'
                       -------------------------------------------------------------------------------
@@ -31,5 +257,5 @@ INFO             main ----------------------------------------------------------
                       * WARNINGS:                0                                               PASS 
                       * INV VIOLATION:           0                                               PASS 
                       *
-                      * TOTAL:                                                             NOT TESTED
+                      * TOTAL:                                                                   PASS
                       *******************************************************************************

@@ -22,6 +22,7 @@
  */
 
 #include "member_func_visitor.h"
+#include "utils.h"
 
 #include "clang/AST/AST.h"
 
@@ -33,7 +34,7 @@ using namespace protest;
 void
 MemberFuncVisitor::handle(clang::FunctionDecl* decl)
 {
-  if (decl->getQualifiedNameAsString() == "getMemberFunction")
+  if (decl->getQualifiedNameAsString() == "protest::getMemberFunction")
   {
     auto* record = getCxxRecord(decl);
     if (record && !alreadyHandled(record))
@@ -58,9 +59,11 @@ MemberFuncVisitor::handle(clang::FunctionDecl* decl)
           output << startImplementation(record, function);
           output << addMember(record, function, true);
 
-          while (true)
+          bool again = true;
+          while (again)
           {
             int index = 0;
+            again = false;
             for (auto* other : methods)
             {
               bool eq = compareSignature(function, other);
@@ -69,13 +72,13 @@ MemberFuncVisitor::handle(clang::FunctionDecl* decl)
               {
                 output << addMember(record, other, false);
                 methods.erase(std::next(methods.begin(), index));
+                again = true;
                 break;
               }
               index++;
             }
-            output << endImplementation(record, function);
-            break;
           }
+          output << endImplementation(record, function);
         }
       }
       auto key = std::pair(record->getBeginLoc(), record->getEndLoc());
@@ -184,9 +187,9 @@ MemberFuncVisitor::startImplementation(clang::CXXRecordDecl* cls,
   std::string placeholders = getPlaceholders(member->getNumParams());
 
   std::stringstream output;
-  output << "template <>";
+  output << "namespace protest { template <>";
   output << "std::function<" << retValue << "(" << params << ")>";
-  output << "getMemberFunction(";
+  output << "protest::getMemberFunction(";
   if (!member->isStatic())
   {
     output << cls->getQualifiedNameAsString() << "& obj, ";
@@ -209,7 +212,7 @@ MemberFuncVisitor::endImplementation(clang::CXXRecordDecl* cls,
   std::string params = getParameters(member);
   std::stringstream output;
   output << "return std::function<" << retValue << "(" << params << ")"
-         << ">();}\n";
+         << ">();}}\n";
   return output.str();
 }
 
@@ -258,7 +261,8 @@ MemberFuncVisitor::storeDeclaration(clang::CXXRecordDecl* cls,
   std::string params = getParameters(member);
 
   std::stringstream output;
-  output << "template <>";
+  output << forwardDeclarationOf(cls);
+  output << "namespace protest { template <>";
   output << "std::function<" << retValue << "(" << params << ")>";
   output << "getMemberFunction(";
   if (!member->isStatic())
@@ -270,7 +274,7 @@ MemberFuncVisitor::storeDeclaration(clang::CXXRecordDecl* cls,
   {
     output << ", " << cls->getQualifiedNameAsString() << "*";
   }
-  output << ");\n";
+  output << "); }\n";
 
   auto key = std::pair(member->getBeginLoc(), member->getEndLoc());
   mDeclarations[key] = output.str();

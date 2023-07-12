@@ -22,6 +22,7 @@
  */
 
 #include "member_attr_visitor.h"
+#include "utils.h"
 
 #include "clang/AST/AST.h"
 
@@ -34,7 +35,7 @@ using namespace protest;
 void
 MemberAttrVisitor::handle(clang::FunctionDecl* decl)
 {
-  if (decl->getQualifiedNameAsString() == "getMemberAttr")
+  if (decl->getQualifiedNameAsString() == "protest::getMemberAttr")
   {
     auto* record = getCxxRecord(decl);
 
@@ -42,26 +43,34 @@ MemberAttrVisitor::handle(clang::FunctionDecl* decl)
     {
       std::vector<clang::FieldDecl*> attrs;
       
+      std::stringstream output;
+      storeDeclarationRaw(record);
+
+      output << startImplementationRaw(record);
+
+      bool first = true;
       for (auto* attr : record->fields())
       {
+        output << addMemberRaw(record, attr, first);
         attrs.push_back(attr);
+        first = false;
       }
+      output << "assert(false); }}\n";
 
-      std::stringstream output;
       while (!attrs.empty())
       {
         auto* attr = attrs.back();
         attrs.pop_back();
 
-        // TODO (jreinking) forward decl of record so that it can be used for
-        // types which are defined in the pt script itself
         storeDeclaration(record, attr);
         output << startImplementation(record, attr);
         output << addMember(record, attr, true);
 
-        while (true)
+        bool again = true;
+        while (again)
         {
           int index = 0;
+          again = false;
           for (auto* other : attrs)
           {
             bool eq = compareSignature(attr, other);
@@ -70,13 +79,13 @@ MemberAttrVisitor::handle(clang::FunctionDecl* decl)
             {
               output << addMember(record, other, false);
               attrs.erase(std::next(attrs.begin(), index));
+              again = true;
               break;
             }
             index++;
           }
-          output << endImplementation(record, attr);
-          break;
         }
+        output << endImplementation(record, attr);
       }
       auto key = std::pair(record->getBeginLoc(), record->getEndLoc());
       mImplementation[key] = output.str();
@@ -114,7 +123,7 @@ bool
 MemberAttrVisitor::compareSignature(clang::FieldDecl* first,
                                     clang::FieldDecl* second)
 {
-  return first->getType() == second->getType();
+  return first->getType().getNonReferenceType() == second->getType().getNonReferenceType();
 }
 
 clang::CXXRecordDecl*
@@ -133,10 +142,22 @@ MemberAttrVisitor::startImplementation(clang::CXXRecordDecl* cls,
   std::string retValue = member->getType().getNonReferenceType().getAsString();
 
   std::stringstream output;
-  output << "template <>";
+  output << "namespace protest { template <>";
   output << retValue << "& ";
-  output << "getMemberAttr(" << cls->getQualifiedNameAsString()
+  output << "protest::getMemberAttr(" << cls->getQualifiedNameAsString()
          << "& obj, const char* name)";
+  output << "{";
+  return output.str();
+}
+
+std::string
+MemberAttrVisitor::startImplementationRaw(clang::CXXRecordDecl* cls)
+{
+  std::stringstream output;
+  output << "namespace protest { template <>";
+  output << "const void*";
+  output << "protest::getMemberAttrRaw(" << cls->getQualifiedNameAsString()
+         << "& obj, const char* name, size_t size)";
   output << "{";
   return output.str();
 }
@@ -146,7 +167,7 @@ MemberAttrVisitor::endImplementation(clang::CXXRecordDecl* cls,
                                      clang::FieldDecl* member)
 {
   std::stringstream output;
-  output << "assert(false); }\n";
+  output << "assert(false); }}\n";
   return output.str();
 }
 
@@ -155,8 +176,6 @@ MemberAttrVisitor::addMember(clang::CXXRecordDecl* cls,
                              clang::FieldDecl* member,
                              bool first)
 {
-  std::string retValue = member->getType().getNonReferenceType().getAsString();
-
   std::string extra;
   if (!first)
   {
@@ -169,6 +188,23 @@ MemberAttrVisitor::addMember(clang::CXXRecordDecl* cls,
   return output.str();
 }
 
+std::string
+MemberAttrVisitor::addMemberRaw(clang::CXXRecordDecl* cls,
+                                clang::FieldDecl* member,
+                                bool first)
+{
+  std::string extra;
+  if (!first)
+  {
+    extra = "else ";
+  }
+
+  std::stringstream output;
+  output << extra << "if (name == std::string(\"" << member->getNameAsString()
+         << "\")) { assert(sizeof(obj." << member->getNameAsString() << ") == size); return reinterpret_cast<const void*>(&obj." << member->getNameAsString() << ");}\n";
+  return output.str();
+}
+
 void
 MemberAttrVisitor::storeDeclaration(clang::CXXRecordDecl* cls,
                                     clang::FieldDecl* member)
@@ -176,12 +212,28 @@ MemberAttrVisitor::storeDeclaration(clang::CXXRecordDecl* cls,
   std::string retValue = member->getType().getNonReferenceType().getAsString();
 
   std::stringstream output;
-  output << "template <>";
+  output << forwardDeclarationOf(cls);
+  output << "namespace protest { template <>";
   output << retValue << "& ";
   output << "getMemberAttr(" << cls->getQualifiedNameAsString();
   output << "& obj, const char* name)";
-  output << ";\n";
+  output << "; }\n";
 
   auto key = std::pair(member->getBeginLoc(), member->getEndLoc());
+  mDeclarations[key] = output.str();
+}
+
+void
+MemberAttrVisitor::storeDeclarationRaw(clang::CXXRecordDecl* cls)
+{
+  std::stringstream output;
+  output << forwardDeclarationOf(cls);
+  output << "namespace protest { template <>";
+  output << "const void* ";
+  output << "getMemberAttrRaw(" << cls->getQualifiedNameAsString();
+  output << "& obj, const char* name, size_t size)";
+  output << "; }\n";
+
+  auto key = std::pair(cls->getBeginLoc(), cls->getEndLoc());
   mDeclarations[key] = output.str();
 }

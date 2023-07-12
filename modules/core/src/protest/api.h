@@ -38,6 +38,7 @@
 #define PROTEST_HIDE(X)
 #endif
 
+#include "protest/core/member_access.h"
 #include "protest/core/api.h"
 #include "protest/matcher/matcher.h"
 #include "protest/log/operator.h"

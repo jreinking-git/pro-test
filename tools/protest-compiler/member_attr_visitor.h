@@ -79,6 +79,9 @@ private:
   startImplementation(clang::CXXRecordDecl* cls, clang::FieldDecl* member);
 
   std::string
+  startImplementationRaw(clang::CXXRecordDecl* cls);
+
+  std::string
   endImplementation(clang::CXXRecordDecl* cls, clang::FieldDecl* member);
 
   std::string
@@ -86,8 +89,16 @@ private:
             clang::FieldDecl* member,
             bool first);
 
+  std::string
+  addMemberRaw(clang::CXXRecordDecl* cls,
+               clang::FieldDecl* member,
+               bool first);
+
   void
   storeDeclaration(clang::CXXRecordDecl* cls, clang::FieldDecl* member);
+
+  void
+  storeDeclarationRaw(clang::CXXRecordDecl* cls);
 
   using Key = std::pair<clang::SourceLocation, clang::SourceLocation>;
 
