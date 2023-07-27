@@ -1,5 +1,29 @@
 include(CMakeParseArguments)
 
+find_package(nlohmann_json REQUIRED)
+
+macro(add_protest_executable)
+  set(prefix PROTEST)
+  set(flags)
+  set(singleValues TARGET)
+  set(multiValues SOURCES)
+
+  cmake_parse_arguments(${prefix}
+    "${flags}"
+    "${singleValues}"
+    "${multiValues}"
+    ${ARGN})
+
+    add_executable(run_test ${PROTEST_SOURCES})
+    
+    add_custom_command(
+      TARGET run_test
+      POST_BUILD
+      COMMAND python3 ${PROTEST_MODULE_PATH}/ProtestPostExecutable.py
+        --target "$<TARGET_FILE:run_test>"
+        --sources ${PROTEST_SOURCES}
+      COMMAND_EXPAND_LISTS VERBATIM)
+endmacro()
 
 function(add_source_files)
   set(prefix PROTEST)

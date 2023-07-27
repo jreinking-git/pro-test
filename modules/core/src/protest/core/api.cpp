@@ -187,21 +187,6 @@ Stream::operator bool() const
 }
 
 // ---------------------------------------------------------------------------
-Section::Section(const char* name)
-{
-  auto* context = core::Context::getCurrentContext();
-  auto* runner = context->getCurrentVirtual();
-  runner->startSection(name);
-}
-
-Section::~Section()
-{
-  auto* context = core::Context::getCurrentContext();
-  auto* runner = context->getCurrentVirtual();
-  runner->endSection();
-}
-
-// ---------------------------------------------------------------------------
 Section
 protest::section(const char* name)
 {

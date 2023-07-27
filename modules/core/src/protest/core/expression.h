@@ -129,6 +129,11 @@ struct Not
 };
 
 // ---------------------------------------------------------------------------
+struct ExprTag
+{
+};
+
+// ---------------------------------------------------------------------------
 /**
  * @class CopyExprTag
  * 
@@ -139,7 +144,7 @@ struct Not
  * Therefore it does not need to hide methods and does not need an internal
  * representation.
  */
-struct CopyExprTag
+struct CopyExprTag : public ExprTag
 {
 };
 
@@ -165,7 +170,7 @@ struct CopyExprTag
  * 3) and @c SamplePortExpr which is used to represent a @c SamplePort
  *    inside of an expression
  */
-struct ConvertableToCopyExprTag
+struct ConvertableToCopyExprTag : ExprTag
 {
 };
 
@@ -586,9 +591,11 @@ UnaryExpression<Operation, Operand>::conditionDisable()
 }
 
 // ---------------------------------------------------------------------------
+// the enable_if_t avoids clashes with other implementations of operator! when
+// 'using namespace protest::core' is used.
 #define UNARY_OPERATOR(oprcls, opr)                                            \
   template <typename Operand>                                                  \
-  UnaryExpression<oprcls, Operand> operator opr(Operand operand)               \
+  std::enable_if_t<std::is_base_of_v<ExprTag, Operand>, UnaryExpression<oprcls, Operand>> operator opr(Operand operand) \
   {                                                                            \
     return UnaryExpression<oprcls, Operand>(operand);                          \
   }

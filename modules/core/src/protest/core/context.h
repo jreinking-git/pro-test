@@ -30,6 +30,7 @@
 #include "protest/meta/test_manager.h"
 #include "protest/meta/call_context.h"
 #include "protest/doc/doc_manager.h"
+#include "protest/json/json.h"
 
 namespace protest
 {
@@ -94,10 +95,14 @@ public:
    * must be called at the start of the program in the main function.
    */
   void
-  initialize();
+  initialize(int argc,
+             const char** argv);
 
   int
   run();
+
+  json::Value
+  getContextFile();
 
 // ---------------------------------------------------------------------------
   /**
@@ -152,6 +157,7 @@ public:
 
 private:
   static Context* currentContext;
+
   meta::TestManager mTestManager;
   protest::List<RunnerRaw> mRunners;
   meta::CallContext& mCallContext;
@@ -159,6 +165,7 @@ private:
   // TODO (jreinking) should not use doc manager directly. Use listener pattern
   // instead
   protest::doc::DocManager mDocManager;
+  json::JsonParser mJsonParser;
 };
 
 } // namespace core

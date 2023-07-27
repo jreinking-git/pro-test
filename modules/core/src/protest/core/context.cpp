@@ -26,6 +26,8 @@
 #include "protest/core/context.h"
 #include "protest/core/runner_raw.h"
 
+#include <string>
+
 using namespace protest::core;
 using namespace protest::coro;
 using namespace protest::meta;
@@ -76,8 +78,10 @@ Context::addRunner(RunnerRaw* runner)
 }
 
 void
-Context::initialize()
+Context::initialize(int argc,
+                    const char** argv)
 {
+  mJsonParser.parse(std::string(argv[0]) + ".json");
   currentContext = this;
   mTestManager.initialize();
 }
@@ -113,6 +117,12 @@ Context::run()
   mDocManager.printPostamble();
 
   return getExitValue();
+}
+
+protest::json::Value
+Context::getContextFile()
+{
+  return mJsonParser.getValue();
 }
 
 // ---------------------------------------------------------------------------

@@ -9,6 +9,7 @@ set(sources
   "protest/core/stopwatch.cpp"
   "protest/core/api.cpp"
   "protest/core/signal_raw.cpp"
+  "protest/core/section.cpp"
   "${CMAKE_CURRENT_BINARY_DIR}/version.cpp"
 )
 
@@ -27,7 +28,9 @@ target_link_libraries(core
   log
   coro
   meta
+  t3
   doc
+  json
   matcher)
 
 install(TARGETS core EXPORT Protest)

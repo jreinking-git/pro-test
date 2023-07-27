@@ -233,7 +233,7 @@ private:
 int
 main(int argc, char const* argv[])
 {
-  context.initialize();
+  context.initialize(argc, argv);
   MyRunner runner0(context, "tsk0", "thd0", 0, true, true);
   MyRunner runner1(context, "tsk1", "thd1", 1, true, false);
   MyRunner runner2(context, "tsk2", "thd2", 2, true, false);

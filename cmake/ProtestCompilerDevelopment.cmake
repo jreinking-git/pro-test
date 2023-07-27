@@ -6,6 +6,8 @@
 
 include(CMakeParseArguments)
 
+find_package(nlohmann_json REQUIRED)
+
 # when installing the libraries a namespace protest:: is added.
 # In developing mode use aliases with the prefix protest:: instead.
 # So if you add a module please add it to the list here
@@ -32,6 +34,8 @@ set(PROTEST_ROOT_PATH "${CMAKE_CURRENT_LIST_DIR}/..")
 set(IMPLICIT_INCLUDES
   "${PROTEST_ROOT_PATH}/modules/matcher/src"
   "${PROTEST_ROOT_PATH}/modules/doc/src"
+  "${PROTEST_ROOT_PATH}/modules/json/src"
+  "${PROTEST_ROOT_PATH}/modules/t3/src"
   "${PROTEST_ROOT_PATH}/modules/core/src"
   "${PROTEST_ROOT_PATH}/modules/coro/src"
   "${PROTEST_ROOT_PATH}/modules/coro/arch/posix/src"
@@ -41,6 +45,29 @@ set(IMPLICIT_INCLUDES
   "${PROTEST_ROOT_PATH}/modules/mock/src"
   "${PROTEST_ROOT_PATH}/modules/utils/src"
 )
+
+macro(add_protest_executable)
+  set(prefix PROTEST)
+  set(flags)
+  set(singleValues TARGET)
+  set(multiValues SOURCES)
+
+  cmake_parse_arguments(${prefix}
+    "${flags}"
+    "${singleValues}"
+    "${multiValues}"
+    ${ARGN})
+
+    add_executable(run_test ${PROTEST_SOURCES})
+    
+    add_custom_command(
+      TARGET run_test
+      POST_BUILD
+      COMMAND python3 ${PROTEST_ROOT_PATH}/tools/protest-precompiler/ProtestPostExecutable.py
+        --target "$<TARGET_FILE:run_test>"
+        --sources ${PROTEST_SOURCES}
+      COMMAND_EXPAND_LISTS VERBATIM)
+endmacro()
 
 function(add_source_files)
   set(prefix PROTEST)
@@ -139,7 +166,6 @@ function(add_protest_files)
   foreach(pt ${PROTEST_SOURCES})
     get_filename_component(name ${pt} NAME_WE)
     get_filename_component(ext ${pt} EXT)
-    message("dir: ${CMAKE_CURRENT_SOURCE_DIR}")
 
     add_custom_command(
       OUTPUT "${CMAKE_CURRENT_BINARY_DIR}/${name}.pretest${ext}"

@@ -25,7 +25,7 @@ add_protest_files(SOURCES ${protestSrc}
                  DEPENDENCIES ${modules}
                  INCLUDES "${CMAKE_CURRENT_LIST_DIR}")
 
-add_executable(run_test ${protestOut})
+add_protest_executable(TARGET run_test SOURCES ${protestOut})
 target_include_directories(run_test PRIVATE .)
 target_link_libraries(run_test
   ${modules}

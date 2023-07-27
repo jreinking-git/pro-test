@@ -29,7 +29,7 @@ add_protest_files(SOURCES "main.pt.cpp"
                  INCLUDES ${CMAKE_CURRENT_LIST_DIR}
                  DEFINITIONS FLAG_A FLAG_B)
 
-add_executable(run_test ${protestOut})
+add_protest_executable(TARGET run_test SOURCES ${protestOut})
 
 target_compile_definitions(run_test PUBLIC FLAG_A FLAG_B)
 

@@ -19,7 +19,7 @@ set(CLANG_VERSION "${LLVM_VERSION_MAJOR}.${LLVM_VERSION_MINOR}.${LLVM_VERSION_PA
 add_definitions(${LLVM_DEFINITIONS})
 add_definitions(${LLVM_INCLUDE_DIRS})
 
-add_llvm_executable(protest-compiler "protest_compiler.cpp" "member_func_visitor.cpp" "member_attr_visitor.cpp" "static_attr_visitor.cpp" "utils.cpp")
+add_llvm_executable(protest-compiler "protest_compiler.cpp" "member_func_visitor.cpp" "member_attr_visitor.cpp" "static_attr_visitor.cpp" "static_var_visitor.cpp" "utils.cpp")
 set_property(TARGET protest-compiler PROPERTY CXX_STANDARD 17)
 target_link_libraries(protest-compiler PRIVATE clangTooling)
 target_compile_definitions(protest-compiler PUBLIC PATH_TO_STD_CLANG_INCLUDE="${LLVM_LIBRARY_DIR}/clang/${CLANG_VERSION}/include")

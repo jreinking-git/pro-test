@@ -55,6 +55,7 @@ then
         "demo12"
         "demo13"
         "demo14"
+        "demo15"
         "reliable_broadcast"
         "tutorial01"
         "tutorial02")

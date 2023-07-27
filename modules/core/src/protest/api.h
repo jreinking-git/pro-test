@@ -38,7 +38,7 @@
 #define PROTEST_HIDE(X)
 #endif
 
-#include "protest/core/member_access.h"
+// TODO (jreinking) add module 'api'
 #include "protest/core/api.h"
 #include "protest/matcher/matcher.h"
 #include "protest/log/operator.h"
@@ -46,3 +46,4 @@
 #include "protest/mock/mock_base.h"
 #include "protest/mock/expectation.h"
 #include "protest/mock/in_sequence.h"
+#include "protest/t3/member_access.h"

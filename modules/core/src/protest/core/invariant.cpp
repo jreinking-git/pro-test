@@ -31,6 +31,7 @@
 
 using namespace protest::core;
 
+// ---------------------------------------------------------------------------
 Invariant::~Invariant()
 {
   if (mCondition->isEnabled())

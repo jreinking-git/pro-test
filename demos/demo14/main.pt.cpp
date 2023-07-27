@@ -353,7 +353,7 @@ private:
 int
 main(int argc, char const* argv[])
 {
-  context.initialize();
+  context.initialize(argc, argv);
   MyRunner runner(context);
   return context.run();
 }

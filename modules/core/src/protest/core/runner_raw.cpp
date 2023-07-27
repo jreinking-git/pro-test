@@ -25,6 +25,7 @@
 
 #include "protest/core/runner_raw.h"
 #include "protest/core/condition.h"
+#include "protest/core/section.h"
 #include "protest/utils/log.h"
 
 #include <cassert>
@@ -247,13 +248,13 @@ RunnerRaw::wakeup()
 
 // ---------------------------------------------------------------------------
 void
-RunnerRaw::startSection(const char* name)
+RunnerRaw::startSection(Section* section)
 {
+  assert(section != nullptr);
+  assert(mCurrentTestStepName == nullptr);
+
   std::string number = "(" + std::to_string(mTestSteps) + ")";
-  if (name != nullptr)
-  {
-    number = std::string(name) + " " + number;
-  }
+  number = std::string(section->getName()) + " " + number;
   std::stringstream sstream;
   const std::string beginTestStepAsString = "Section";
   sstream << beginTestStepAsString;
@@ -261,7 +262,7 @@ RunnerRaw::startSection(const char* name)
           << std::setw(static_cast<int>(seperatorLength -
                                         beginTestStepAsString.size()))
           << std::right << number;
-  mCurrentTestStepName = name;
+  mCurrentTestStepName = section;
   auto stream = mLogger.startLog("INFO", getName());
   stream.operator std::ostream&() << std::string(seperatorLength, '=') << "\n"
                                   << sstream.str() << "\n"
@@ -271,10 +272,12 @@ RunnerRaw::startSection(const char* name)
 void
 RunnerRaw::endSection()
 {
+  assert(mCurrentTestStepName != nullptr);
+
   std::string number = "(" + std::to_string(mTestSteps) + ")";
   if (mCurrentTestStepName != nullptr)
   {
-    number = std::string(mCurrentTestStepName) + " " + number;
+    number = std::string(mCurrentTestStepName->getName()) + " " + number;
   }
   std::stringstream sstream;
   const std::string endTeststepAsString = "End section";
@@ -289,6 +292,7 @@ RunnerRaw::endSection()
                                   << sstream.str() << "\n"
                                   << std::string(seperatorLength, '=') << "\n";
   mTestSteps++;
+  mCurrentTestStepName = nullptr;
 }
 
 // ---------------------------------------------------------------------------

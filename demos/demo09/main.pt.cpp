@@ -26,7 +26,7 @@ static_assert(false);
 int
 main(int argc, char const* argv[])
 {
-  context.initialize();
+  context.initialize(argc, argv);
   Runner1 runner1(context);
   Runner2 runner2(context);
   Runner3 runner3(context);

@@ -26,6 +26,7 @@
 #include "member_func_visitor.h"
 #include "member_attr_visitor.h"
 #include "static_attr_visitor.h"
+#include "static_var_visitor.h"
 
 #include "clang/AST/AST.h"
 #include "clang/AST/ASTConsumer.h"
@@ -205,7 +206,8 @@ public:
     Context(Context),
     Rewriter(Rewriter),
     mOutputFile(outputFile),
-    mIdNext(0)
+    mIdNext(0),
+    mStaticVarVisitor(Context)
   {
   }
 
@@ -357,6 +359,8 @@ public:
                     if (mAlreadyTraversed.count(funcDecl) == 0)
                     {
                       mAlreadyTraversed.insert(funcDecl);
+                      static int i = 0;
+                      i++;
                       TraverseDecl(funcDecl);
                     }
                   }
@@ -383,12 +387,12 @@ public:
           std::string attr_name(attr->getSpelling());
           std::string attr_annotate("annotate");
           std::string attr_my("annotate(\"my_attr\")");
-          // std::cout << "attr_name: " << attr_name << std::endl;
+        
           if (attr_name == attr_annotate)
           {
-            // std::cout << "attr->getAttrName(): " << attr->getAttrName()->getName().str() << std::endl;
-            // std::cout << "attr_name: " << attr_name << std::endl;
-            // std::cout << "here: " << attr->getNormalizedFullName() << std::endl;
+          
+          
+          
             std::string SS;
             llvm::raw_string_ostream S(SS);
             static PrintingPolicy print_policy(Context->getLangOpts());
@@ -405,8 +409,8 @@ public:
               if (n != std::string::npos)
               {
                 annotations = annotations.substr(n + 4);
-                // std::cout << "n: " << n << std::endl;
-                // std::cout << "anno: " << annotations << std::endl;
+              
+              
                 int start = annotations.find("(");
                 int braces = 1;
                 int i = 0;
@@ -461,6 +465,18 @@ public:
   bool
   VisitCallExpr(CallExpr* Expr)
   {
+    // TODO (jreinking)
+    // static std::set<CallExpr*> visted;
+    // if (visted.find(Expr) != visted.end())
+    // {
+    //   return false;
+    // }
+    // else
+    // {
+    //   visted.insert(Expr);
+    // }
+
+  
     auto cxxcall = dyn_cast_or_null<CXXMemberCallExpr>(Expr);
     FunctionDecl* decl = dyn_cast_or_null<FunctionDecl>(Expr->getCalleeDecl());
 
@@ -502,6 +518,8 @@ public:
                     if (mAlreadyTraversed.count(funcDecl) == 0)
                     {
                       mAlreadyTraversed.insert(funcDecl);
+                      static int i = 0;
+                      i++;
                       TraverseDecl(funcDecl);
                     }
                   }
@@ -511,6 +529,12 @@ public:
             }
           }
         }
+        else
+        {
+        }
+      }
+      else
+      {
       }
     }
 
@@ -628,6 +652,7 @@ public:
       mMemberFuncVisitor.handle(decl);
       mMemberAttrVisitor.handle(decl);
       mStaticAttrVisitor.handle(decl);
+      mStaticVarVisitor.handle(Expr);
     }
     return true;
   }
@@ -641,6 +666,7 @@ public:
   protest::MemberFuncVisitor mMemberFuncVisitor;
   protest::MemberAttrVisitor mMemberAttrVisitor;
   protest::StaticAttrVisitor mStaticAttrVisitor;
+  protest::StaticVarVisitor mStaticVarVisitor;
 
   std::map<std::pair<SourceLocation, SourceLocation>,
            std::pair<std::string, int>>
@@ -1177,6 +1203,7 @@ public:
       Visitor.mMemberAttrVisitor.writeDeclarations(mOutputFile);
       Visitor.mMemberFuncVisitor.writeDeclarations(mOutputFile);
       Visitor.mStaticAttrVisitor.writeDeclarations(mOutputFile);
+      Visitor.mStaticVarVisitor.writeDeclarations(mOutputFile);
 
       // operator2 needs template specialization from above. Therefore it must
       // be include at last #include

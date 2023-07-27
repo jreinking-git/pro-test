@@ -27,7 +27,7 @@ add_protest_files(SOURCES ${protestSrc}
                   TARGETS protestOut
                   DEPENDENCIES ${modules})
 
-add_executable(run_test ${protestOut})
+add_protest_executable(TARGET run_test SOURCES ${protestOut})
 target_link_libraries(run_test
   ${modules}
   protest::core

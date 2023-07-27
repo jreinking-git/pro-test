@@ -62,7 +62,7 @@ private:
 int
 main(int argc, char const* argv[])
 {
-  context.initialize();
+  context.initialize(argc, argv);
   TestRunner runner(context);
   return context.run();
 }

@@ -29,6 +29,7 @@
 using namespace protest;
 using namespace protest::core;
 
+// ---------------------------------------------------------------------------
 Job::Job() :
   mArmed(false),
   mCondition(nullptr),

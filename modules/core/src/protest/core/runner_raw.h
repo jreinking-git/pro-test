@@ -37,6 +37,8 @@
 namespace protest
 {
 
+class Section;
+
 namespace core
 {
 
@@ -136,7 +138,7 @@ public:
 
 // ---------------------------------------------------------------------------
   void
-  startSection(const char* name);
+  startSection(Section* section);
 
   void
   endSection();
@@ -191,7 +193,8 @@ private:
   void
   notify() override;
 
-  Heap<Job, 100> mPriorityQueue;// TODO
+  // TODO (jreinking) magic number
+  Heap<Job, 100> mPriorityQueue;
   Condition* mCondition;
   const char* mName;
   bool mWakeUpEvent;
@@ -199,7 +202,7 @@ private:
   RunnerRaw* mNext;
 
   uint32_t mTestSteps;
-  const char* mCurrentTestStepName;
+  Section* mCurrentTestStepName;
   std::array<Userdata*, numberOfPerRunnerData> mUserdata;
 };
 

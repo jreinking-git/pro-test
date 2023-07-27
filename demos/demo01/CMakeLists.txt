@@ -18,9 +18,9 @@ set(protestSrc
 )
 
 add_protest_files(SOURCES ${protestSrc}
-                 TARGETS protestOut)
+                  TARGETS protestOut)
 
-add_executable(run_test ${protestOut})
+add_protest_executable(TARGET run_test SOURCES ${protestOut})
 target_link_libraries(run_test
   protest::core
   protest::doc)

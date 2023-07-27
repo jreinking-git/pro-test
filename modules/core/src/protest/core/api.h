@@ -33,6 +33,7 @@
 #include "protest/core/signal.h"
 #include "protest/core/value.h"
 #include "protest/matcher/matcher.h"
+#include "protest/core/section.h"
 
 namespace protest
 {
@@ -326,29 +327,6 @@ operator<<(Stream stream, T&& value)
 }
 
 // ---------------------------------------------------------------------------
-/**
- * @class Section
- */
-class Section
-{
-public:
-  explicit Section(const char* name);
-
-  Section(const Section& other) = delete;
-
-  Section(Section&& other) = default;
-
-  Section&
-  operator=(const Section& other) = delete;
-
-  Section&
-  operator=(Section&& other) = delete;
-
-  ~Section();
-
-private:
-};
-
 Section
 section(const char* name = nullptr);
 
