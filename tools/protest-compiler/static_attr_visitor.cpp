@@ -121,7 +121,8 @@ bool
 StaticAttrVisitor::compareSignature(clang::VarDecl* first,
                                     clang::VarDecl* second)
 {
-  return first->getType().getNonReferenceType() == second->getType().getNonReferenceType();
+  return first->getType().getNonReferenceType() ==
+         second->getType().getNonReferenceType();
 }
 
 clang::CXXRecordDecl*
@@ -172,7 +173,8 @@ StaticAttrVisitor::addMember(clang::CXXRecordDecl* cls,
 
   std::stringstream output;
   output << extra << "if (name == std::string(\"" << member->getNameAsString()
-         << "\")) { return " << cls->getQualifiedNameAsString() << "::" << member->getNameAsString() << ";}\n";
+         << "\")) { return " << cls->getQualifiedNameAsString()
+         << "::" << member->getNameAsString() << ";}\n";
   return output.str();
 }
 
@@ -186,7 +188,8 @@ StaticAttrVisitor::storeDeclaration(clang::CXXRecordDecl* cls,
   output << forwardDeclarationOf(cls);
   output << "namespace protest { template <>";
   output << retValue << "& ";
-  output << "getMemberAttr(const char* name, " << cls->getQualifiedNameAsString() << "*)";
+  output << "getMemberAttr(const char* name, "
+         << cls->getQualifiedNameAsString() << "*)";
   output << "; }\n";
 
   auto key = std::pair(member->getBeginLoc(), member->getEndLoc());

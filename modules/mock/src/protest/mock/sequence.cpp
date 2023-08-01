@@ -35,7 +35,8 @@ Sequence::Sequence() : mLast(nullptr)
 
 // ---------------------------------------------------------------------------
 void
-Sequence::addExpectation(std::shared_ptr<internal::ExpectationBase>& expectation)
+Sequence::addExpectation(
+    std::shared_ptr<internal::ExpectationBase>& expectation)
 {
   if (mLast != nullptr)
   {

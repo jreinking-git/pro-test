@@ -40,7 +40,7 @@ using namespace protest::rtos;
 static constexpr size_t bufferSize = 1024;
 
 // ---------------------------------------------------------------------------
-void // NOLINTNEXTLINE
+void// NOLINTNEXTLINE
 protest::rtos::_info(const char* file, size_t line, const char* format, ...)
 {
   va_list argp;
@@ -52,14 +52,14 @@ protest::rtos::_info(const char* file, size_t line, const char* format, ...)
                                              file,
                                              line,
                                              runner->now());
-  static char buf[bufferSize]; // TODO (jreinking) no static
+  static char buf[bufferSize];// TODO (jreinking) no static
   const int ret = vsnprintf(&buf[0], bufferSize, format, &argp[0]);
   assert(ret >= 0 && ret < bufferSize);
   stream.operator std::ostream&() << &buf[0];
   va_end(&argp[0]);
 }
 
-void // NOLINTNEXTLINE
+void// NOLINTNEXTLINE
 protest::rtos::_warn(const char* file, size_t line, const char* format, ...)
 {
   va_list argp;
@@ -71,7 +71,7 @@ protest::rtos::_warn(const char* file, size_t line, const char* format, ...)
                                              file,
                                              line,
                                              runner->now());
-  static char buf[bufferSize]; // TODO (jreinking) no static
+  static char buf[bufferSize];// TODO (jreinking) no static
   const int ret = vsnprintf(&buf[0], bufferSize, format, &argp[0]);
   assert(ret >= 0 && ret < bufferSize);
   stream.operator std::ostream&() << &buf[0];

@@ -243,8 +243,9 @@ MemberFuncVisitor::addMember(clang::CXXRecordDecl* cls,
   {
     output << cls->getQualifiedNameAsString() << "::*)(" << params << ")) &";
   }
-  output << cls->getQualifiedNameAsString() << "::" << member->getNameAsString();
-  
+  output << cls->getQualifiedNameAsString()
+         << "::" << member->getNameAsString();
+
   if (!member->isStatic())
   {
     output << ", obj";

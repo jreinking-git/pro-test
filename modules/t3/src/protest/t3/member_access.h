@@ -245,4 +245,4 @@ getStaticFunction(const char* name, size_t index = 0)
   return std::function<F>(*((F*) var));
 }
 
-} // namespace t3
+} // namespace protest

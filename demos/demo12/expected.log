@@ -17,16 +17,16 @@ INFO             main ----------------------------------------------------------
                       No expectation. A call to 'void doSomething(void)' should yield in a
                       'Unexpected call' message.
                       -------------------------------------------------------------------------------
-FAIL 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:132
+FAIL 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:136
                       Unexpected call to mock function 'doSomething()'
 INFO             main -------------------------------------------------------------------------------
                       There is an expectation. But it requires a 42 as parameter. Therfore a call to
                       'void doSomething(23)' should yield in a 'Unexpected call' message.
                       -------------------------------------------------------------------------------
-FAIL 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:147
+FAIL 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:151
                       Unexpected call to mock function 'doSomething(uint8_t param)' with:
                          param: { 23, 0x17 }
-FAIL 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:150
+FAIL 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:154
                       Missing function call for 'doSomething(Eq(42))'
                       Expected: called once
                            But: never called
@@ -34,10 +34,10 @@ INFO             main ----------------------------------------------------------
                       No expectation. Two calls to 'void doSomething(void)' should yield in two
                       'Unexpected call' message.
                       -------------------------------------------------------------------------------
-FAIL 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:165
+FAIL 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:169
                       Unexpected call to mock function 'doSomething(uint8_t param)' with:
                          param: { 32, 0x20 }
-FAIL 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:165
+FAIL 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:169
                       Unexpected call to mock function 'doSomething(uint8_t param)' with:
                          param: { 33, 0x21 }
 INFO             main -------------------------------------------------------------------------------
@@ -56,48 +56,48 @@ INFO             main ==========================================================
 INFO             main -------------------------------------------------------------------------------
                       Expect one call to doSomething(void)
                       -------------------------------------------------------------------------------
-MOCK 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:197
+MOCK 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:201
                       Call to mock function 'doSomething()'
 INFO             main -------------------------------------------------------------------------------
                       Expect one call to doSomething(42)
                       -------------------------------------------------------------------------------
-MOCK 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:211
+MOCK 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:215
                       Call to mock function 'doSomething(uint8_t param)' with:
                          param: { 42, 0x2a }
 INFO             main -------------------------------------------------------------------------------
                       Expect two calls to @c doSomething(42)
                       -------------------------------------------------------------------------------
-MOCK 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:224
+MOCK 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:228
                       Call to mock function 'doSomething(uint8_t param)' with:
                          param: { 42, 0x2a }
-MOCK 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:224
+MOCK 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:228
                       Call to mock function 'doSomething(uint8_t param)' with:
                          param: { 42, 0x2a }
 INFO             main -------------------------------------------------------------------------------
                       Expect 3 calls to @c doSomething(42)
                       -------------------------------------------------------------------------------
-MOCK 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:240
+MOCK 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:244
                       Call to mock function 'doSomething(uint8_t param)' with:
                          param: { 42, 0x2a }
-MOCK 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:240
+MOCK 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:244
                       Call to mock function 'doSomething(uint8_t param)' with:
                          param: { 42, 0x2a }
-MOCK 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:240
+MOCK 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:244
                       Call to mock function 'doSomething(uint8_t param)' with:
                          param: { 42, 0x2a }
 INFO             main -------------------------------------------------------------------------------
                       Expect 3 calls to @c setValue(42). The default value should be returned since
                       there was no action specified. uint8_t setValue(uint8_t)
                       -------------------------------------------------------------------------------
-MOCK 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:259
+MOCK 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:263
                       Call to mock function 'setValue(uint8_t value)' with:
                          value: { 42, 0x2a }
                         return: { 0, 0x00 }
-MOCK 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:259
+MOCK 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:263
                       Call to mock function 'setValue(uint8_t value)' with:
                          value: { 42, 0x2a }
                         return: { 0, 0x00 }
-MOCK 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:259
+MOCK 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:263
                       Call to mock function 'setValue(uint8_t value)' with:
                          value: { 42, 0x2a }
                         return: { 0, 0x00 }
@@ -113,64 +113,64 @@ INFO             main ==========================================================
 INFO             main -------------------------------------------------------------------------------
                       Expected one call to @c doSomething() but it is missing.
                       -------------------------------------------------------------------------------
-FAIL 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:290
+FAIL 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:294
                       Missing function call for 'doSomething()'
                       Expected: called once
                            But: never called
 INFO             main -------------------------------------------------------------------------------
                       Expected one call to @c doSomething(42) but it is missing.
                       -------------------------------------------------------------------------------
-FAIL 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:304
+FAIL 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:308
                       Missing function call for 'doSomething(Eq(42))'
                       Expected: called once
                            But: never called
 INFO             main -------------------------------------------------------------------------------
                       Expected two calls to @c doSomething(42) but both are missing.
                       -------------------------------------------------------------------------------
-FAIL 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:318
+FAIL 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:322
                       Missing function call for 'doSomething(Eq(42))'
                       Expected: called twice
                            But: never called
 INFO             main -------------------------------------------------------------------------------
                       Expected two calls to @c doSomething(42) but one is missing.
                       -------------------------------------------------------------------------------
-MOCK 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:333
+MOCK 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:337
                       Call to mock function 'doSomething(uint8_t param)' with:
                          param: { 42, 0x2a }
-FAIL 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:333
+FAIL 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:337
                       Missing function call for 'doSomething(Eq(42))'
                       Expected: called twice
                            But: called once
 INFO             main -------------------------------------------------------------------------------
                       Expected 3 calls to @c doSomething(42) but all of them are missing.
                       -------------------------------------------------------------------------------
-FAIL 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:350
+FAIL 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:354
                       Missing function call for 'doSomething(Eq(42))'
                       Expected: called 3 times
                            But: never called
 INFO             main -------------------------------------------------------------------------------
                       Expected 3 calls to @c setValue(42) but two of them are missing.
                       -------------------------------------------------------------------------------
-MOCK 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:365
+MOCK 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:369
                       Call to mock function 'setValue(uint8_t value)' with:
                          value: { 42, 0x2a }
                         return: { 0, 0x00 }
-FAIL 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:365
+FAIL 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:369
                       Missing function call for 'setValue(Eq(42))'
                       Expected: called 3 times
                            But: called once
 INFO             main -------------------------------------------------------------------------------
                       Expected 3 calls to @c setValue(42) but one of them is missing.
                       -------------------------------------------------------------------------------
-MOCK 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:382
+MOCK 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:386
                       Call to mock function 'setValue(uint8_t value)' with:
                          value: { 42, 0x2a }
                         return: { 0, 0x00 }
-MOCK 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:382
+MOCK 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:386
                       Call to mock function 'setValue(uint8_t value)' with:
                          value: { 42, 0x2a }
                         return: { 0, 0x00 }
-FAIL 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:382
+FAIL 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:386
                       Missing function call for 'setValue(Eq(42))'
                       Expected: called 3 times
                            But: called twice
@@ -188,18 +188,18 @@ INFO             main ==========================================================
 INFO             main -------------------------------------------------------------------------------
                       Expect a call to @c doSomething() but there are two.
                       -------------------------------------------------------------------------------
-MOCK 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:412
+MOCK 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:416
                       Call to mock function 'doSomething()'
-FAIL 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:412
+FAIL 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:416
                       Unexpected function call for 'doSomething()'
                       Expected: called once
 INFO             main -------------------------------------------------------------------------------
                       Expect a call to @c doSomething(42) but there are two.
                       -------------------------------------------------------------------------------
-MOCK 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:429
+MOCK 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:433
                       Call to mock function 'doSomething(uint8_t param)' with:
                          param: { 42, 0x2a }
-FAIL 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:429
+FAIL 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:433
                       Unexpected function call for 'doSomething(Eq(42))'
                       Expected: called once
 INFO             main -------------------------------------------------------------------------------
@@ -207,19 +207,19 @@ INFO             main ----------------------------------------------------------
                       return 3. The 4 call should yield in a 'Unexpected call' message. In this case
                       the default value should be returned. Which is 0 in this case.
                       -------------------------------------------------------------------------------
-MOCK 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:449
+MOCK 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:453
                       Call to mock function 'setValue(uint8_t value)' with:
                          value: { 42, 0x2a }
                         return: { 3, 0x03 }
-MOCK 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:449
+MOCK 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:453
                       Call to mock function 'setValue(uint8_t value)' with:
                          value: { 42, 0x2a }
                         return: { 3, 0x03 }
-MOCK 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:449
+MOCK 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:453
                       Call to mock function 'setValue(uint8_t value)' with:
                          value: { 42, 0x2a }
                         return: { 3, 0x03 }
-FAIL 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:449
+FAIL 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:453
                       Unexpected function call for 'setValue(Eq(42))'
                       Expected: called 3 times
                         return: { 0, 0x00 }
@@ -240,7 +240,7 @@ INFO             main ----------------------------------------------------------
 INFO             main -------------------------------------------------------------------------------
                       Expected at most one call to @c doSomething() . Actually one call performed.
                       -------------------------------------------------------------------------------
-MOCK 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:501
+MOCK 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:505
                       Call to mock function 'doSomething()'
 INFO             main -------------------------------------------------------------------------------
                       Expected at most one call to @c doSomething(42). Actually zero calls performed.
@@ -248,24 +248,24 @@ INFO             main ----------------------------------------------------------
 INFO             main -------------------------------------------------------------------------------
                       Expected at most one call to @c doSomething(42) . Actually one call performed.
                       -------------------------------------------------------------------------------
-MOCK 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:531
+MOCK 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:535
                       Call to mock function 'doSomething(uint8_t param)' with:
                          param: { 42, 0x2a }
 INFO             main -------------------------------------------------------------------------------
                       Expected at most 3 calls to @c setValue(42) . Actually one call performed.
                       -------------------------------------------------------------------------------
-MOCK 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:547
+MOCK 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:551
                       Call to mock function 'setValue(uint8_t value)' with:
                          value: { 42, 0x2a }
                         return: { 0, 0x00 }
 INFO             main -------------------------------------------------------------------------------
                       Expected at most 3 calls to @c setValue(42) . Actually two calls performed.
                       -------------------------------------------------------------------------------
-MOCK 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:563
+MOCK 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:567
                       Call to mock function 'setValue(uint8_t value)' with:
                          value: { 42, 0x2a }
                         return: { 0, 0x00 }
-MOCK 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:563
+MOCK 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:567
                       Call to mock function 'setValue(uint8_t value)' with:
                          value: { 42, 0x2a }
                         return: { 0, 0x00 }
@@ -273,15 +273,15 @@ INFO             main ----------------------------------------------------------
                       Expected at most 3 calls to @c setValue(42) . Actually 3 calls are performed.
                       There should return the default value.
                       -------------------------------------------------------------------------------
-MOCK 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:580
+MOCK 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:584
                       Call to mock function 'setValue(uint8_t value)' with:
                          value: { 42, 0x2a }
                         return: { 0, 0x00 }
-MOCK 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:580
+MOCK 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:584
                       Call to mock function 'setValue(uint8_t value)' with:
                          value: { 42, 0x2a }
                         return: { 0, 0x00 }
-MOCK 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:580
+MOCK 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:584
                       Call to mock function 'setValue(uint8_t value)' with:
                          value: { 42, 0x2a }
                         return: { 0, 0x00 }
@@ -299,27 +299,27 @@ INFO             main ==========================================================
 INFO             main -------------------------------------------------------------------------------
                       Expected at most one call to 'doSomething()'. Actually two calls are performed.
                       -------------------------------------------------------------------------------
-MOCK 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:614
+MOCK 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:618
                       Call to mock function 'doSomething()'
-FAIL 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:614
+FAIL 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:618
                       Unexpected function call for 'doSomething()'
                       Expected: called at most once
 INFO             main -------------------------------------------------------------------------------
                       Expected at most 3 calls to @c setValue(42) . Actually 4 calls are performed.
                       -------------------------------------------------------------------------------
-MOCK 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:633
+MOCK 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:637
                       Call to mock function 'setValue(uint8_t value)' with:
                          value: { 42, 0x2a }
                         return: { 0, 0x00 }
-MOCK 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:633
+MOCK 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:637
                       Call to mock function 'setValue(uint8_t value)' with:
                          value: { 42, 0x2a }
                         return: { 0, 0x00 }
-MOCK 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:633
+MOCK 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:637
                       Call to mock function 'setValue(uint8_t value)' with:
                          value: { 42, 0x2a }
                         return: { 0, 0x00 }
-FAIL 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:633
+FAIL 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:637
                       Unexpected function call for 'setValue(Eq(42))'
                       Expected: called at most 3 times
                         return: { 0, 0x00 }
@@ -340,16 +340,16 @@ INFO             main ----------------------------------------------------------
                       Expect at least 0 calls to @c doSomething() which should be always fulfilled.
                       Actually call @c doSomething() once.
                       -------------------------------------------------------------------------------
-MOCK 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:678
+MOCK 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:682
                       Call to mock function 'doSomething()'
 INFO             main -------------------------------------------------------------------------------
                       Expected at least two calls to @c setValue(42). Call it actually twice.
                       -------------------------------------------------------------------------------
-MOCK 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:694
+MOCK 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:698
                       Call to mock function 'setValue(uint8_t value)' with:
                          value: { 42, 0x2a }
                         return: { 0, 0x00 }
-MOCK 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:694
+MOCK 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:698
                       Call to mock function 'setValue(uint8_t value)' with:
                          value: { 42, 0x2a }
                         return: { 0, 0x00 }
@@ -366,11 +366,11 @@ INFO             main ==========================================================
 INFO             main -------------------------------------------------------------------------------
                       Expected at least two calls to @c setValue(42). Call it actually once.
                       -------------------------------------------------------------------------------
-MOCK 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:721
+MOCK 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:725
                       Call to mock function 'setValue(uint8_t value)' with:
                          value: { 42, 0x2a }
                         return: { 0, 0x00 }
-FAIL 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:721
+FAIL 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:725
                       Missing function call for 'setValue(Eq(42))'
                       Expected: called at least twice
                            But: called once
@@ -390,19 +390,19 @@ INFO             main ----------------------------------------------------------
 INFO             main -------------------------------------------------------------------------------
                       Expect calls between 0 and 1. Should be fulfilled with 1 calls.
                       -------------------------------------------------------------------------------
-MOCK 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:761
+MOCK 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:765
                       Call to mock function 'doSomething()'
 INFO             main -------------------------------------------------------------------------------
                       Expect calls between 1 and 2. Should be fulfilled with 1 calls.
                       -------------------------------------------------------------------------------
-MOCK 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:776
+MOCK 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:780
                       Call to mock function 'doSomething()'
 INFO             main -------------------------------------------------------------------------------
                       Expect calls between 1 and 2. Should be fulfilled with 2 calls.
                       -------------------------------------------------------------------------------
-MOCK 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:791
+MOCK 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:795
                       Call to mock function 'doSomething()'
-MOCK 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:791
+MOCK 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:795
                       Call to mock function 'doSomething()'
 INFO             main -------------------------------------------------------------------------------
                       End section                            cardinality - in between - satisfied (9)
@@ -418,7 +418,7 @@ INFO             main ----------------------------------------------------------
                       Expect calls between 1 and 2. Should report a missing call when there was no
                       call to the mock function.
                       -------------------------------------------------------------------------------
-FAIL 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:818
+FAIL 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:822
                       Missing function call for 'doSomething()'
                       Expected: called between 1 and 2 times
                            But: never called
@@ -436,11 +436,11 @@ INFO             main ----------------------------------------------------------
                       Expect calls between 1 and 2. Should report a missing call when there was no
                       call to the mock function.
                       -------------------------------------------------------------------------------
-MOCK 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:844
+MOCK 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:848
                       Call to mock function 'doSomething()'
-MOCK 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:844
+MOCK 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:848
                       Call to mock function 'doSomething()'
-FAIL 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:844
+FAIL 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:848
                       Unexpected function call for 'doSomething()'
                       Expected: called between 1 and 2 times
 INFO             main -------------------------------------------------------------------------------
@@ -460,13 +460,13 @@ INFO             main ----------------------------------------------------------
                       but less or equals then 50 the first expectation will be choosen. In this test
                       no failure message should be reported since both expectations are fulfilled.
                       -------------------------------------------------------------------------------
-MOCK 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:881
+MOCK 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:885
                       Call to mock function 'doSomething(uint8_t param)' with:
                          param: { 51, 0x33 }
-MOCK 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:881
+MOCK 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:885
                       Call to mock function 'doSomething(uint8_t param)' with:
                          param: { 51, 0x33 }
-MOCK 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:878
+MOCK 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:882
                       Call to mock function 'doSomething(uint8_t param)' with:
                          param: { 43, 0x2b }
 INFO             main -------------------------------------------------------------------------------
@@ -477,16 +477,16 @@ INFO             main ----------------------------------------------------------
                       a failure message should be reported since the second expectation
                       oversaturates.
                       -------------------------------------------------------------------------------
-MOCK 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:907
+MOCK 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:911
+                      Call to mock function 'doSomething(uint8_t param)' with:
+                         param: { 51, 0x33 }
+MOCK 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:911
                       Call to mock function 'doSomething(uint8_t param)' with:
                          param: { 51, 0x33 }
 MOCK 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:907
-                      Call to mock function 'doSomething(uint8_t param)' with:
-                         param: { 51, 0x33 }
-MOCK 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:903
                       Call to mock function 'doSomething(uint8_t param)' with:
                          param: { 43, 0x2b }
-FAIL 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:907
+FAIL 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:911
                       Unexpected function call for 'doSomething(Gt(50))'
                       Expected: called twice
 INFO             main -------------------------------------------------------------------------------
@@ -505,13 +505,13 @@ INFO             main ----------------------------------------------------------
                       until its saturates. This is the case after 2 calls. The third call will then
                       be matched with the first expectation. No failure message should be reported.
                       -------------------------------------------------------------------------------
-MOCK 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:945
+MOCK 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:949
                       Call to mock function 'doSomething(uint8_t param)' with:
                          param: { 42, 0x2a }
-MOCK 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:945
+MOCK 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:949
                       Call to mock function 'doSomething(uint8_t param)' with:
                          param: { 42, 0x2a }
-MOCK 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:942
+MOCK 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:946
                       Call to mock function 'doSomething(uint8_t param)' with:
                          param: { 42, 0x2a }
 INFO             main -------------------------------------------------------------------------------
@@ -520,16 +520,16 @@ INFO             main ----------------------------------------------------------
                       be matched with the first expectation. The fourth call will oversaturate the
                       first expectation which should yield in a 'unexpected call' report.
                       -------------------------------------------------------------------------------
-MOCK 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:971
+MOCK 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:975
                       Call to mock function 'doSomething(uint8_t param)' with:
                          param: { 42, 0x2a }
-MOCK 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:971
+MOCK 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:975
                       Call to mock function 'doSomething(uint8_t param)' with:
                          param: { 42, 0x2a }
-MOCK 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:968
+MOCK 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:972
                       Call to mock function 'doSomething(uint8_t param)' with:
                          param: { 42, 0x2a }
-FAIL 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:968
+FAIL 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:972
                       Unexpected function call for 'doSomething(Gt(40))'
                       Expected: called once
 INFO             main -------------------------------------------------------------------------------
@@ -547,13 +547,13 @@ INFO             main ----------------------------------------------------------
                       Pro-test should use the first since the prerequisites of the thrid expectation
                       are not met yet. The test should not report an violation of the expectations.
                       -------------------------------------------------------------------------------
-MOCK 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:1007
+MOCK 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:1011
                       Call to mock function 'doSomething(uint8_t param)' with:
                          param: { 40, 0x28 }
-MOCK 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:1008
+MOCK 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:1012
                       Call to mock function 'doSomething(uint8_t param)' with:
                          param: { 41, 0x29 }
-MOCK 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:1009
+MOCK 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:1013
                       Call to mock function 'doSomething(uint8_t param)' with:
                          param: { 40, 0x28 }
 INFO             main -------------------------------------------------------------------------------
@@ -562,16 +562,16 @@ INFO             main ----------------------------------------------------------
                       will be matched against the function call. The test should report an missing
                       call to the #1 and an unmet prerequisites of #2.
                       -------------------------------------------------------------------------------
-MOCK 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:1034
+MOCK 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:1038
                       Call to mock function 'doSomething(uint8_t param)' with:
                          param: { 40, 0x28 }
-MOCK 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:1032
+MOCK 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:1036
                       Call to mock function 'doSomething(uint8_t param)' with:
                          param: { 41, 0x29 }
-FAIL 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:1031
+FAIL 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:1035
                       Unmet prerequisite 'doSomething(Eq(40))'
                       Expected: called once
-MOCK 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:1031
+MOCK 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:1035
                       Call to mock function 'doSomething(uint8_t param)' with:
                          param: { 40, 0x28 }
 INFO             main -------------------------------------------------------------------------------
@@ -582,19 +582,19 @@ INFO             main ----------------------------------------------------------
                       doSomething(40) will then match #2 since #4 is retired. @c doSomething(41) will
                       then match #3 since it has no unmet prerequisites and the highest priority.
                       -------------------------------------------------------------------------------
-MOCK 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:1061
-                      Call to mock function 'doSomething(uint8_t param)' with:
-                         param: { 41, 0x29 }
 MOCK 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:1065
                       Call to mock function 'doSomething(uint8_t param)' with:
-                         param: { 40, 0x28 }
-FAIL 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:1061
-                      Unexpected function call for 'doSomething(Eq(41))'
-                      Expected: called once
-MOCK 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:1062
+                         param: { 41, 0x29 }
+MOCK 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:1069
                       Call to mock function 'doSomething(uint8_t param)' with:
                          param: { 40, 0x28 }
-MOCK 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:1063
+FAIL 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:1065
+                      Unexpected function call for 'doSomething(Eq(41))'
+                      Expected: called once
+MOCK 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:1066
+                      Call to mock function 'doSomething(uint8_t param)' with:
+                         param: { 40, 0x28 }
+MOCK 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:1067
                       Call to mock function 'doSomething(uint8_t param)' with:
                          param: { 41, 0x29 }
 INFO             main -------------------------------------------------------------------------------
@@ -602,16 +602,16 @@ INFO             main ----------------------------------------------------------
                       prerequisites are met and therefore there will be no corresponding error
                       reports.
                       -------------------------------------------------------------------------------
-MOCK 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:1093
+MOCK 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:1097
                       Call to mock function 'doSomething(uint8_t param)' with:
                          param: { 41, 0x29 }
-MOCK 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:1094
+MOCK 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:1098
                       Call to mock function 'doSomething(uint8_t param)' with:
                          param: { 40, 0x28 }
-MOCK 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:1095
+MOCK 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:1099
                       Call to mock function 'doSomething(uint8_t param)' with:
                          param: { 41, 0x29 }
-MOCK 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:1096
+MOCK 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:1100
                       Call to mock function 'doSomething(uint8_t param)' with:
                          param: { 40, 0x28 }
 INFO             main -------------------------------------------------------------------------------
@@ -619,22 +619,22 @@ INFO             main ----------------------------------------------------------
                       prerequisites are met and therefore there will be a corresponding unmet
                       prerequisite report.
                       -------------------------------------------------------------------------------
-MOCK 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:1121
-                      Call to mock function 'doSomething(uint8_t param)' with:
-                         param: { 41, 0x29 }
-MOCK 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:1122
-                      Call to mock function 'doSomething(uint8_t param)' with:
-                         param: { 40, 0x28 }
-FAIL 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:1116
-                      Unexpected call to mock function 'doSomething(uint8_t param)' with:
-                         param: { 41, 0x29 }
 MOCK 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:1125
                       Call to mock function 'doSomething(uint8_t param)' with:
+                         param: { 41, 0x29 }
+MOCK 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:1126
+                      Call to mock function 'doSomething(uint8_t param)' with:
                          param: { 40, 0x28 }
-FAIL 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:1124
+FAIL 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:1120
+                      Unexpected call to mock function 'doSomething(uint8_t param)' with:
+                         param: { 41, 0x29 }
+MOCK 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:1129
+                      Call to mock function 'doSomething(uint8_t param)' with:
+                         param: { 40, 0x28 }
+FAIL 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:1128
                       Unmet prerequisite 'doSomething(Eq(41))'
                       Expected: called once
-FAIL 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:1124
+FAIL 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:1128
                       Missing function call for 'doSomething(Eq(41))'
                       Expected: called once
                            But: never called
@@ -642,16 +642,16 @@ INFO             main ----------------------------------------------------------
                       Expectation can be in a sequence even if the corresponding mock object does not
                       exists any more. In this test case all prerequisites are met.
                       -------------------------------------------------------------------------------
-MOCK 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:1150
+MOCK 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:1154
                       Call to mock function 'doSomething(uint8_t param)' with:
                          param: { 41, 0x29 }
-MOCK 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:1151
+MOCK 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:1155
                       Call to mock function 'doSomething(uint8_t param)' with:
                          param: { 41, 0x29 }
-MOCK 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:1161
+MOCK 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:1165
                       Call to mock function 'doSomething(uint8_t param)' with:
                          param: { 40, 0x28 }
-MOCK 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:1162
+MOCK 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:1166
                       Call to mock function 'doSomething(uint8_t param)' with:
                          param: { 40, 0x28 }
 INFO             main -------------------------------------------------------------------------------
@@ -659,20 +659,20 @@ INFO             main ----------------------------------------------------------
                       exists any more. In this test case not all prerequisites are met and therefore
                       there should be unmet precondition report.
                       -------------------------------------------------------------------------------
-MOCK 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:1182
+MOCK 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:1186
                       Call to mock function 'doSomething(uint8_t param)' with:
                          param: { 41, 0x29 }
-FAIL 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:1183
+FAIL 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:1187
                       Missing function call for 'doSomething(Eq(41))'
                       Expected: called once
                            But: never called
-MOCK 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:1193
+MOCK 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:1197
                       Call to mock function 'doSomething(uint8_t param)' with:
                          param: { 40, 0x28 }
-FAIL 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:1183
+FAIL 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:1187
                       Unmet prerequisite 'doSomething(Eq(41))'
                       Expected: called once
-MOCK 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:1194
+MOCK 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:1198
                       Call to mock function 'doSomething(uint8_t param)' with:
                          param: { 40, 0x28 }
 INFO             main -------------------------------------------------------------------------------
@@ -685,19 +685,19 @@ INFO             main ----------------------------------------------------------
 INFO             main ===============================================================================
                       Section                                                              after (15)
                       -------------------------------------------------------------------------------
-MOCK 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:1217
+MOCK 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:1221
                       Call to mock function 'doSomething(uint8_t param)' with:
                          param: { 40, 0x28 }
-MOCK 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:1218
+MOCK 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:1222
                       Call to mock function 'doSomething(uint8_t param)' with:
                          param: { 41, 0x29 }
-MOCK 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:1230
+MOCK 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:1234
                       Call to mock function 'doSomething(uint8_t param)' with:
                          param: { 41, 0x29 }
-FAIL 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:1229
+FAIL 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:1233
                       Unmet prerequisite 'doSomething(Eq(40))'
                       Expected: called once
-MOCK 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:1229
+MOCK 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:1233
                       Call to mock function 'doSomething(uint8_t param)' with:
                          param: { 40, 0x28 }
 INFO             main -------------------------------------------------------------------------------
@@ -710,19 +710,19 @@ INFO             main ----------------------------------------------------------
 INFO             main ===============================================================================
                       Section                                                           sequence (16)
                       -------------------------------------------------------------------------------
-MOCK 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:1255
+MOCK 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:1259
                       Call to mock function 'doSomething(uint8_t param)' with:
                          param: { 40, 0x28 }
-MOCK 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:1257
+MOCK 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:1261
                       Call to mock function 'doSomething(uint8_t param)' with:
                          param: { 41, 0x29 }
-MOCK 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:1272
+MOCK 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:1276
                       Call to mock function 'doSomething(uint8_t param)' with:
                          param: { 41, 0x29 }
-FAIL 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:1270
+FAIL 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:1274
                       Unmet prerequisite 'doSomething(Eq(40))'
                       Expected: called once
-MOCK 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:1270
+MOCK 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:1274
                       Call to mock function 'doSomething(uint8_t param)' with:
                          param: { 40, 0x28 }
 INFO             main -------------------------------------------------------------------------------
@@ -734,7 +734,7 @@ INFO             main ==========================================================
 INFO             main -------------------------------------------------------------------------------
                       Lambda functions can be implicit converted into a action.
                       -------------------------------------------------------------------------------
-MOCK 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:1294
+MOCK 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:1298
                       Call to mock function 'setValue(uint8_t value)' with:
                          value: { 40, 0x28 }
                         return: { 41, 0x29 }
@@ -749,7 +749,7 @@ INFO             main ----------------------------------------------------------
                       match for the given mock function call. The mock function call can be seen in
                       the log.
                       -------------------------------------------------------------------------------
-MOCK 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:1318
+MOCK 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:1322
                       Call to mock function 'setValue(uint8_t value)' with:
                          value: { 40, 0x28 }
                         return: { 42, 0x2a }
@@ -759,7 +759,7 @@ INFO             main ----------------------------------------------------------
                       Furthere more a reason given, why the best candidate does not match the
                       function call (I.e.: the not fulfilled when-clause).
                       -------------------------------------------------------------------------------
-FAIL 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:1339
+FAIL 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:1343
                       Unexpected function call for 'setValue(Eq(40))'
                           when: 'value == 5' not fulfilled!
                         return: { 0, 0x00 }
@@ -768,7 +768,7 @@ INFO             main ----------------------------------------------------------
                       reason will be given since there is no candidate which is close to match. Only
                       a unexpected function call will be reported.
                       -------------------------------------------------------------------------------
-FAIL 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:1356
+FAIL 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:1360
                       Unexpected call to mock function 'setValue(uint8_t value)' with:
                          value: { 41, 0x29 }
                         return: { 0, 0x00 }
@@ -780,7 +780,7 @@ INFO             main ----------------------------------------------------------
                       there are two candidates but the last one will be reported as best candidate
                       due the higher priority (the later the higher the priority).
                       -------------------------------------------------------------------------------
-FAIL 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:1386
+FAIL 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:1390
                       Unexpected function call for 'setValue(Eq(40))'
                           when: 'value == 5' not fulfilled!
                         return: { 0, 0x00 }
@@ -789,20 +789,20 @@ INFO             main ----------------------------------------------------------
                       mechanism is deactivated in this case by the when clause. Therefore #1 will
                       matched first and then #2.
                       -------------------------------------------------------------------------------
-MOCK 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:1414
+MOCK 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:1418
                       Call to mock function 'setValue(uint8_t value)' with:
                          value: { 40, 0x28 }
                         return: { 42, 0x2a }
-PASS 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:1423
+PASS 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:1427
                       Value of: mock.setValue(40)
                       Expected: is equal to
                                 { 42, 0x0000002a }
                         Actual: { 42, 0x2a }
-MOCK 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:1418
+MOCK 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:1422
                       Call to mock function 'setValue(uint8_t value)' with:
                          value: { 40, 0x28 }
                         return: { 43, 0x2b }
-PASS 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:1426
+PASS 0000000000  main /home/root/pro-test/demos/demo12/main.pt.cpp:1430
                       Value of: mock.setValue(40)
                       Expected: is equal to
                                 { 43, 0x0000002b }
@@ -815,51 +815,51 @@ INFO             main ----------------------------------------------------------
                       -------------------------------------------------------------------------------
                       *******************************************************************************
                       * NUMBER OF OVERSATURATED FUNCTION CALLS: 11
-                      * /home/root/pro-test/demos/demo12/main.pt.cpp:412
-                      * /home/root/pro-test/demos/demo12/main.pt.cpp:429
-                      * /home/root/pro-test/demos/demo12/main.pt.cpp:449
-                      * /home/root/pro-test/demos/demo12/main.pt.cpp:614
-                      * /home/root/pro-test/demos/demo12/main.pt.cpp:633
-                      * /home/root/pro-test/demos/demo12/main.pt.cpp:844
-                      * /home/root/pro-test/demos/demo12/main.pt.cpp:907
-                      * /home/root/pro-test/demos/demo12/main.pt.cpp:968
-                      * /home/root/pro-test/demos/demo12/main.pt.cpp:1061
-                      * /home/root/pro-test/demos/demo12/main.pt.cpp:1339
-                      * /home/root/pro-test/demos/demo12/main.pt.cpp:1386
+                      * /home/root/pro-test/demos/demo12/main.pt.cpp:416
+                      * /home/root/pro-test/demos/demo12/main.pt.cpp:433
+                      * /home/root/pro-test/demos/demo12/main.pt.cpp:453
+                      * /home/root/pro-test/demos/demo12/main.pt.cpp:618
+                      * /home/root/pro-test/demos/demo12/main.pt.cpp:637
+                      * /home/root/pro-test/demos/demo12/main.pt.cpp:848
+                      * /home/root/pro-test/demos/demo12/main.pt.cpp:911
+                      * /home/root/pro-test/demos/demo12/main.pt.cpp:972
+                      * /home/root/pro-test/demos/demo12/main.pt.cpp:1065
+                      * /home/root/pro-test/demos/demo12/main.pt.cpp:1343
+                      * /home/root/pro-test/demos/demo12/main.pt.cpp:1390
                       *******************************************************************************
                       * NUMBER OF MISSING FUNCTION CALLS: 12
-                      * /home/root/pro-test/demos/demo12/main.pt.cpp:150
-                      * /home/root/pro-test/demos/demo12/main.pt.cpp:290
-                      * /home/root/pro-test/demos/demo12/main.pt.cpp:304
-                      * /home/root/pro-test/demos/demo12/main.pt.cpp:318
-                      * /home/root/pro-test/demos/demo12/main.pt.cpp:333
-                      * /home/root/pro-test/demos/demo12/main.pt.cpp:350
-                      * /home/root/pro-test/demos/demo12/main.pt.cpp:365
-                      * /home/root/pro-test/demos/demo12/main.pt.cpp:382
-                      * /home/root/pro-test/demos/demo12/main.pt.cpp:721
-                      * /home/root/pro-test/demos/demo12/main.pt.cpp:818
-                      * /home/root/pro-test/demos/demo12/main.pt.cpp:1124
-                      * /home/root/pro-test/demos/demo12/main.pt.cpp:1183
+                      * /home/root/pro-test/demos/demo12/main.pt.cpp:154
+                      * /home/root/pro-test/demos/demo12/main.pt.cpp:294
+                      * /home/root/pro-test/demos/demo12/main.pt.cpp:308
+                      * /home/root/pro-test/demos/demo12/main.pt.cpp:322
+                      * /home/root/pro-test/demos/demo12/main.pt.cpp:337
+                      * /home/root/pro-test/demos/demo12/main.pt.cpp:354
+                      * /home/root/pro-test/demos/demo12/main.pt.cpp:369
+                      * /home/root/pro-test/demos/demo12/main.pt.cpp:386
+                      * /home/root/pro-test/demos/demo12/main.pt.cpp:725
+                      * /home/root/pro-test/demos/demo12/main.pt.cpp:822
+                      * /home/root/pro-test/demos/demo12/main.pt.cpp:1128
+                      * /home/root/pro-test/demos/demo12/main.pt.cpp:1187
                       *******************************************************************************
                       * NUMBER OF UNEXPECTED FUNCTION CALLS: 6
-                      * /home/root/pro-test/demos/demo12/main.pt.cpp:412
-                      * /home/root/pro-test/demos/demo12/main.pt.cpp:429
-                      * /home/root/pro-test/demos/demo12/main.pt.cpp:449
-                      * /home/root/pro-test/demos/demo12/main.pt.cpp:614
-                      * /home/root/pro-test/demos/demo12/main.pt.cpp:633
-                      * /home/root/pro-test/demos/demo12/main.pt.cpp:844
-                      * /home/root/pro-test/demos/demo12/main.pt.cpp:907
-                      * /home/root/pro-test/demos/demo12/main.pt.cpp:968
-                      * /home/root/pro-test/demos/demo12/main.pt.cpp:1061
-                      * /home/root/pro-test/demos/demo12/main.pt.cpp:1339
-                      * /home/root/pro-test/demos/demo12/main.pt.cpp:1386
+                      * /home/root/pro-test/demos/demo12/main.pt.cpp:416
+                      * /home/root/pro-test/demos/demo12/main.pt.cpp:433
+                      * /home/root/pro-test/demos/demo12/main.pt.cpp:453
+                      * /home/root/pro-test/demos/demo12/main.pt.cpp:618
+                      * /home/root/pro-test/demos/demo12/main.pt.cpp:637
+                      * /home/root/pro-test/demos/demo12/main.pt.cpp:848
+                      * /home/root/pro-test/demos/demo12/main.pt.cpp:911
+                      * /home/root/pro-test/demos/demo12/main.pt.cpp:972
+                      * /home/root/pro-test/demos/demo12/main.pt.cpp:1065
+                      * /home/root/pro-test/demos/demo12/main.pt.cpp:1343
+                      * /home/root/pro-test/demos/demo12/main.pt.cpp:1390
                       *******************************************************************************
                       * NUMBER OF MISSING PREREQUISITES: 5
-                      * /home/root/pro-test/demos/demo12/main.pt.cpp:1032
-                      * /home/root/pro-test/demos/demo12/main.pt.cpp:1125
-                      * /home/root/pro-test/demos/demo12/main.pt.cpp:1193
-                      * /home/root/pro-test/demos/demo12/main.pt.cpp:1230
-                      * /home/root/pro-test/demos/demo12/main.pt.cpp:1272
+                      * /home/root/pro-test/demos/demo12/main.pt.cpp:1036
+                      * /home/root/pro-test/demos/demo12/main.pt.cpp:1129
+                      * /home/root/pro-test/demos/demo12/main.pt.cpp:1197
+                      * /home/root/pro-test/demos/demo12/main.pt.cpp:1234
+                      * /home/root/pro-test/demos/demo12/main.pt.cpp:1276
                       *******************************************************************************
                       * FAILURES:                0                                               PASS
                       * WARNINGS:                0                                               PASS 

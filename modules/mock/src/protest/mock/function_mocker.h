@@ -335,8 +335,7 @@ FunctionMockerBase<F>::findMatchingExpectation(typename F::Args& args)
     if (expectation->isMatch(args))
     {
       // the args match the expectation
-      if ((!isSaturated(expectation) ||
-           !expectation->retiresOnSaturation()) &&
+      if ((!isSaturated(expectation) || !expectation->retiresOnSaturation()) &&
           expectation->prerequisitesMet() &&
           expectation->isWhenConditionFulfilled())
       {
@@ -349,7 +348,7 @@ FunctionMockerBase<F>::findMatchingExpectation(typename F::Args& args)
       else
       {
         /// if the prerequisites is not met, this expectation might be the
-        /// canditate to return. Instead of setting @c returnValue 
+        /// canditate to return. Instead of setting @c returnValue
         /// @c lastBest will be set. The loop will continue to check if there
         /// is a better canditate to return. E.g.:
         ///

@@ -33,7 +33,8 @@ namespace protest
 static int dummyVariable;
 
 // just a dummy function to get the base address
-static void dummyFunction()
+static void
+dummyFunction()
 {
 }
 
@@ -59,9 +60,10 @@ protest::getStaticVariableRaw(const char* name, size_t index)
 {
   int64_t offset = getPointerRaw("protest::dummyVariable", 0);
   int64_t varOffset = getPointerRaw(name, index);
-  
+
   // TODO (jreinking) c++ style cast
-  void* base = (void*) (((ptrdiff_t) &protest::dummyVariable) - (ptrdiff_t) offset);
+  void* base =
+      (void*) (((ptrdiff_t) &protest::dummyVariable) - (ptrdiff_t) offset);
   void* var = (void*) ((ptrdiff_t) base + (ptrdiff_t) varOffset);
   return var;
 }
@@ -72,9 +74,10 @@ protest::getStaticFunctionRaw(const char* name, size_t index)
 {
   int64_t offset = getPointerRaw("protest::dummyFunction", 0);
   int64_t varOffset = getPointerRaw(name, index);
-  
+
   // TODO (jreinking) c++ style cast
-  void* base = (void*) (((ptrdiff_t) &protest::dummyFunction) - (ptrdiff_t) offset);
+  void* base =
+      (void*) (((ptrdiff_t) &protest::dummyFunction) - (ptrdiff_t) offset);
   void* var = (void*) ((ptrdiff_t) base + (ptrdiff_t) varOffset);
   return var;
 }

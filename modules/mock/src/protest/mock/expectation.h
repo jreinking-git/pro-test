@@ -249,7 +249,7 @@ public:
   void
   retireOnSaturation();
 
-  template<typename Expr>
+  template <typename Expr>
   void
   when(Expr&& expr, protest::meta::CallContext& callContext);
 
@@ -287,7 +287,6 @@ Expectation<F>::Expectation(
 template <typename F>
 Expectation<F>::~Expectation()
 {
-
 }
 
 // ---------------------------------------------------------------------------
@@ -311,8 +310,8 @@ template <typename F>
 void
 Expectation<F>::willOnce(Action<F>&& action)
 {
-  assert(!mWillRepeatedlyCalled); // willOnce cannot appear after willRepeatedly
-  assert(!mRetiresOnSaturationCalled); // retire on saturation must be last
+  assert(!mWillRepeatedlyCalled);// willOnce cannot appear after willRepeatedly
+  assert(!mRetiresOnSaturationCalled);// retire on saturation must be last
   mActions.emplace_back(std::move(action));
   if (!mCardinalitySpecified)
   {
@@ -324,8 +323,8 @@ template <typename F>
 void
 Expectation<F>::willRepeatedly(Action<F>&& action)
 {
-  assert(!mWillRepeatedlyCalled); // should not be called twice
-  assert(!mRetiresOnSaturationCalled); // retire on saturation must be last
+  assert(!mWillRepeatedlyCalled);// should not be called twice
+  assert(!mRetiresOnSaturationCalled);// retire on saturation must be last
   mWillRepeatedlyCalled = true;
   mReapetedAction = std::move(action);
   if (!mCardinalitySpecified)
@@ -343,7 +342,7 @@ Expectation<F>::retireOnSaturation()
 }
 
 template <typename F>
-template<typename Expr>
+template <typename Expr>
 void
 Expectation<F>::when(Expr&& expr, protest::meta::CallContext& callContext)
 {
@@ -543,7 +542,9 @@ public:
    */
   template <typename Expr>
   ExpectationHandle
-  when(Expr&& expr, protest::meta::CallContext& callContext = protest::meta::CallContext::defaultContext());
+  when(Expr&& expr,
+       protest::meta::CallContext& callContext =
+           protest::meta::CallContext::defaultContext());
 
   std::shared_ptr<Expectation<F>>
   getExpectation();

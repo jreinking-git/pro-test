@@ -28,8 +28,7 @@
 using namespace protest;
 
 // ---------------------------------------------------------------------------
-Section::Section(const char* name) :
-  mName(name)
+Section::Section(const char* name) : mName(name)
 {
   auto* context = core::Context::getCurrentContext();
   auto* runner = context->getCurrentVirtual();

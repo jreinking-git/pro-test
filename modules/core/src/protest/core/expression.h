@@ -595,7 +595,9 @@ UnaryExpression<Operation, Operand>::conditionDisable()
 // 'using namespace protest::core' is used.
 #define UNARY_OPERATOR(oprcls, opr)                                            \
   template <typename Operand>                                                  \
-  std::enable_if_t<std::is_base_of_v<ExprTag, Operand>, UnaryExpression<oprcls, Operand>> operator opr(Operand operand) \
+  std::enable_if_t<std::is_base_of_v<ExprTag, Operand>,                        \
+                   UnaryExpression<oprcls, Operand>>                           \
+  operator opr(Operand operand)                                                \
   {                                                                            \
     return UnaryExpression<oprcls, Operand>(operand);                          \
   }

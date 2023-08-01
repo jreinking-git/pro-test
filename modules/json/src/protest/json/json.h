@@ -49,8 +49,7 @@ class Value;
 class Base
 {
 public:
-  explicit
-  Base(void* handle);
+  explicit Base(void* handle);
 
   Base(const Base&) = delete;
 
@@ -75,8 +74,7 @@ protected:
 class Object : Base
 {
 public:
-  explicit
-  Object(void* object);
+  explicit Object(void* object);
 
   Object(const Object&) = delete;
 
@@ -107,8 +105,7 @@ private:
 class Array : Base
 {
 public:
-  explicit
-  Array(void* array);
+  explicit Array(void* array);
 
   Array(const Array&) = delete;
 
@@ -130,7 +127,6 @@ public:
   get(size_t index);
 
 private:
-  
 };
 
 // ---------------------------------------------------------------------------
@@ -140,8 +136,7 @@ private:
 class Value : Base
 {
 public:
-  explicit
-  Value(void* value);
+  explicit Value(void* value);
 
   Value(const Value&) = delete;
 
@@ -187,8 +182,7 @@ private:
 class JsonParser
 {
 public:
-  explicit
-  JsonParser();
+  explicit JsonParser();
 
   JsonParser(const JsonParser&) = delete;
 

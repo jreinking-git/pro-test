@@ -1,5 +1,5 @@
                       *******************************************************************************
-                      * @test           demo-14
+                      * @test           demo-15
                       * @author         Janosch Reinking
                       * @version        1.0.0
                       * @date           01-01-2022 12-00-00
@@ -7,10 +7,108 @@
 INFO             main -------------------------------------------------------------------------------
                       Start runner 'main'
                       -------------------------------------------------------------------------------
-__data_start: 417792
-    my_value: 0x5654a7952010
-        base: 0x5654a7923000
-var: 42
+INFO             main -------------------------------------------------------------------------------
+                      Get the static variable @c my_value.
+                      -------------------------------------------------------------------------------
+PASS 0000000000  main /home/root/pro-test/demos/demo15/main.pt.cpp:100
+                      Value of: *ptr
+                      Expected: is equal to
+                                { 42, 0x0000002a }
+                        Actual: { 42, 0x0000002a }
+INFO             main -------------------------------------------------------------------------------
+                      Get the static variable @c variable of function @c function().
+                      -------------------------------------------------------------------------------
+PASS 0000000000  main /home/root/pro-test/demos/demo15/main.pt.cpp:110
+                      Value of: *ptr
+                      Expected: is equal to
+                                { 43, 0x0000002b }
+                        Actual: { 43, 0x0000002b }
+INFO             main -------------------------------------------------------------------------------
+                      Get the static variable @c variable of static function @c function().
+                      -------------------------------------------------------------------------------
+PASS 0000000000  main /home/root/pro-test/demos/demo15/main.pt.cpp:121
+                      Value of: *ptr
+                      Expected: is equal to
+                                { 43, 0x0000002b }
+                        Actual: { 43, 0x0000002b }
+INFO             main -------------------------------------------------------------------------------
+                      Get the static variable @c my_value of namespace @c demo.
+                      -------------------------------------------------------------------------------
+PASS 0000000000  main /home/root/pro-test/demos/demo15/main.pt.cpp:131
+                      Value of: *ptr
+                      Expected: is equal to
+                                { 44, 0x0000002c }
+                        Actual: { 44, 0x0000002c }
+INFO             main -------------------------------------------------------------------------------
+                      Get the static variable @c variable of function @c function() of namespace @c
+                      demo.
+                      -------------------------------------------------------------------------------
+PASS 0000000000  main /home/root/pro-test/demos/demo15/main.pt.cpp:143
+                      Value of: *ptr
+                      Expected: is equal to
+                                { 45, 0x0000002d }
+                        Actual: { 45, 0x0000002d }
+INFO             main -------------------------------------------------------------------------------
+                      Get the static variable @c variable of function @c function(int).
+                      -------------------------------------------------------------------------------
+PASS 0000000000  main /home/root/pro-test/demos/demo15/main.pt.cpp:154
+                      Value of: *ptr
+                      Expected: is equal to
+                                { 46, 0x0000002e }
+                        Actual: { 46, 0x0000002e }
+INFO             main -------------------------------------------------------------------------------
+                      Get the static variable @c variable of function @c function(std::string).
+                      -------------------------------------------------------------------------------
+PASS 0000000000  main /home/root/pro-test/demos/demo15/main.pt.cpp:173
+                      Value of: *ptr
+                      Expected: is equal to
+                                { 47, 0x0000002f }
+                        Actual: { 47, 0x0000002f }
+INFO             main -------------------------------------------------------------------------------
+                      Get the static variable @c variable of function @c function(std::string) using
+                      regular expression.
+                      -------------------------------------------------------------------------------
+PASS 0000000000  main /home/root/pro-test/demos/demo15/main.pt.cpp:185
+                      Value of: *ptr
+                      Expected: is equal to
+                                { 47, 0x0000002f }
+                        Actual: { 47, 0x0000002f }
+INFO             main -------------------------------------------------------------------------------
+                      Get the static variable @c variable of function @c other(). Since the name
+                      exists twice an index has to be provided.
+                      -------------------------------------------------------------------------------
+PASS 0000000000  main /home/root/pro-test/demos/demo15/main.pt.cpp:198
+                      Value of: *ptr1
+                      Expected: is equal to
+                                { 48, 0x00000030 }
+                        Actual: { 48, 0x00000030 }
+PASS 0000000000  main /home/root/pro-test/demos/demo15/main.pt.cpp:199
+                      Value of: *ptr2
+                      Expected: is equal to
+                                { 49, 0x00000031 }
+                        Actual: { 49, 0x00000031 }
+INFO             main -------------------------------------------------------------------------------
+                      Get the static variable @c variable of function @c other(). Since the name
+                      exists twice an index has to be provided.
+                      -------------------------------------------------------------------------------
+PASS 0000000000  main /home/root/pro-test/demos/demo15/main.pt.cpp:215
+                      Value of: *ptr1
+                      Expected: is equal to
+                                { 50, 0x00000032 }
+                        Actual: { 50, 0x00000032 }
+PASS 0000000000  main /home/root/pro-test/demos/demo15/main.pt.cpp:216
+                      Value of: *ptr2
+                      Expected: is equal to
+                                { 51, 0x00000033 }
+                        Actual: { 51, 0x00000033 }
+INFO             main -------------------------------------------------------------------------------
+                      Get the static function @c staticFunction()
+                      -------------------------------------------------------------------------------
+PASS 0000000000  main /home/root/pro-test/demos/demo15/main.pt.cpp:228
+                      Value of: ret
+                      Expected: is equal to
+                                { 43, 0x0000002b }
+                        Actual: { 43, 0x0000002b }
 INFO             main -------------------------------------------------------------------------------
                       Exit of 'main'
                       -------------------------------------------------------------------------------
@@ -19,5 +117,5 @@ INFO             main ----------------------------------------------------------
                       * WARNINGS:                0                                               PASS 
                       * INV VIOLATION:           0                                               PASS 
                       *
-                      * TOTAL:                                                             NOT TESTED
+                      * TOTAL:                                                                   PASS
                       *******************************************************************************

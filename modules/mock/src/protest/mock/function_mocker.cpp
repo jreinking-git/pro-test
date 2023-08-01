@@ -154,8 +154,9 @@ FunctionMockerRaw::printFunction(std::ostream& ostream)
 }
 
 void
-FunctionMockerRaw::printFunctionWithExpectation(std::ostream& ostream,
-                                                ExpectationBase* expectation) const
+FunctionMockerRaw::printFunctionWithExpectation(
+    std::ostream& ostream,
+    ExpectationBase* expectation) const
 {
   ostream << getName() << "(";
   bool notFirst = false;
@@ -220,7 +221,6 @@ FunctionMockerRaw::printUnexpectedFunctionCall(ExpectationBase* expectation)
   }
   else
   {
-
   }
 }
 
@@ -278,6 +278,7 @@ FunctionMockerRaw::printWhenClause(ExpectationBase* expectation)
 
   if (expectation->hasWhenClause())
   {
-    stream << "    when: '" << expectation->getWhenConditionAsString() << "' not fulfilled!" << std::endl;
+    stream << "    when: '" << expectation->getWhenConditionAsString()
+           << "' not fulfilled!" << std::endl;
   }
 }

@@ -32,8 +32,8 @@ public:
   MyRunner(Context& context) : Runner(context, "main")
   {
   }
- 
-  void 
+
+  void
   process()
   {
     {
@@ -215,7 +215,7 @@ public:
         assertThat(value, Eq(42));
       }
 
-     /** @info(format)
+      /** @info(format)
        * @seperator
        * Get private static function @c value and call it.
        * @seperator
@@ -264,13 +264,14 @@ public:
         assertThat(value, Eq(42));
       }
 
-     /** @info(format)
+      /** @info(format)
        * @seperator
        * Get private static function @c value and call it.
        * @seperator
        */
       {
-        auto func = getMemberFunction<test::test2::MyClass, uint32_t()>("value");
+        auto func =
+            getMemberFunction<test::test2::MyClass, uint32_t()>("value");
         auto value = func();
         assertThat(value, Eq(40));
       }
@@ -326,7 +327,7 @@ public:
           uint8_t mValue1;
           uint16_t mValue2;
         };
-        
+
         /** @info(format)
          * @seperator
          * The member @c mMember8 has a private type. This type cannot be used
@@ -335,7 +336,8 @@ public:
          * as the private type of the member.
          * @seperator
          */
-        auto* value = const_cast<MyType*>(getMemberAttrRaw<MyType>(obj, "mMember8"));
+        auto* value =
+            const_cast<MyType*>(getMemberAttrRaw<MyType>(obj, "mMember8"));
         assertThat(value->mValue1, Eq(49));
         assertThat(value->mValue2, Eq(50));
       }
@@ -346,7 +348,7 @@ public:
   finalize()
   {
   }
- 
+
 private:
 };
 

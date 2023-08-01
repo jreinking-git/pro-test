@@ -95,8 +95,7 @@ public:
    * must be called at the start of the program in the main function.
    */
   void
-  initialize(int argc,
-             const char** argv);
+  initialize(int argc, const char** argv);
 
   int
   run();

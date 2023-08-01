@@ -152,7 +152,7 @@ TestManager::getNumberOfMocks() const
 
 // ---------------------------------------------------------------------------
 size_t
-TestManager::sum(size_t(Unit::*func)() const) const
+TestManager::sum(size_t (Unit::*func)() const) const
 {
   size_t number = 0;
   auto iter = mUnits.begin();

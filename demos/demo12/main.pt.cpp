@@ -63,7 +63,8 @@ public:
   checkUnexpectedFuncCalls(size_t diff)
   {
     auto& mgr = context.getTestManager();
-    if ((mgr.getNumberOfUnexpectedFunctionCalls() - mNumberOfUnexpectedFunctionCalls) != diff)
+    if ((mgr.getNumberOfUnexpectedFunctionCalls() -
+         mNumberOfUnexpectedFunctionCalls) != diff)
     {
       // std::cout << "have: " << mgr.getNumberOfUnexpectedFunctionCalls() << std::endl;
       // std::cout << "expected: " << mNumberOfUnexpectedFunctionCalls + diff << std::endl;
@@ -76,7 +77,8 @@ public:
   checkOversaturatedFuncCalls(size_t diff)
   {
     auto& mgr = context.getTestManager();
-    if ((mgr.getNumberOfOversaturatedFunctionCalls() - mNumberOfOversaturatedCalls) != diff)
+    if ((mgr.getNumberOfOversaturatedFunctionCalls() -
+         mNumberOfOversaturatedCalls) != diff)
     {
       // std::cout << "have: " << mgr.getNumberOfOversaturatedFunctionCalls() << std::endl;
       // std::cout << "expected: " << mNumberOfOversaturatedCalls + diff << std::endl;
@@ -89,7 +91,8 @@ public:
   checkUnmetPrerequisites(size_t diff)
   {
     auto& mgr = context.getTestManager();
-    if ((mgr.getNumberOfUnmetPrerequisties() - mNumberUnmetPrerequisitesCalls) != diff)
+    if ((mgr.getNumberOfUnmetPrerequisties() -
+         mNumberUnmetPrerequisitesCalls) != diff)
     {
       // std::cout << "have: " << mgr.getNumberOfUnmetPrerequisties() << std::endl;
       // std::cout << "expected: " << mNumberUnmetPrerequisitesCalls + diff << std::endl;
@@ -104,7 +107,8 @@ public:
     auto& mgr = context.getTestManager();
     // std::cout << mgr.getNumberOfMissingFunctionCalls() << std::endl;
     // std::cout << mNumberOfMissingFunctionCalls << std::endl;
-    assert((mgr.getNumberOfMissingFunctionCalls() - mNumberOfMissingFunctionCalls) == diff);
+    assert((mgr.getNumberOfMissingFunctionCalls() -
+            mNumberOfMissingFunctionCalls) == diff);
     mNumberOfMissingFunctionCalls += diff;
   }
 

@@ -90,8 +90,7 @@ public:
 
   template <
       typename G,
-      typename =
-          std::enable_if_t<protest::CanInvokeTuple<G, Args>::value, G>>
+      typename = std::enable_if_t<protest::CanInvokeTuple<G, Args>::value, G>>
   Action(G&& fun);
 
   explicit Action(ActionInterface<F>* interface);

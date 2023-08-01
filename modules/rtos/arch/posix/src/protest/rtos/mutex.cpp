@@ -119,7 +119,6 @@ Mutex::release()
   pthread_mutex_unlock(userdata);
 }
 
-
 bool
 Mutex::isAcquired()
 {

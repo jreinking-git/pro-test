@@ -32,8 +32,11 @@
 
 using namespace protest::rtos;
 
-void // NOLINTNEXTLINE
-protest::rtos::_info(const char* /* file */, size_t /* line */, const char* format, ...)
+void// NOLINTNEXTLINE
+protest::rtos::_info(const char* /* file */,
+                     size_t /* line */,
+                     const char* format,
+                     ...)
 {
   va_list argp;
   va_start(&argp[0], format);
@@ -44,8 +47,11 @@ protest::rtos::_info(const char* /* file */, size_t /* line */, const char* form
   va_end(&argp[0]);
 }
 
-void // NOLINTNEXTLINE
-protest::rtos::_warn(const char* /* file */, size_t /* line */, const char* format, ...)
+void// NOLINTNEXTLINE
+protest::rtos::_warn(const char* /* file */,
+                     size_t /* line */,
+                     const char* format,
+                     ...)
 {
   va_list argp;
   va_start(&argp[0], format);

@@ -110,7 +110,7 @@ public:
   operator<=(const Coroutine& other);
 
 // ---------------------------------------------------------------------------
-// TODO (jreinking) make private
+  // TODO (jreinking) make private
 protected:
   Scheduler& mScheduler;
   // TODO move to port

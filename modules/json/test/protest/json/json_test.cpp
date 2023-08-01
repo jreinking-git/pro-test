@@ -7,7 +7,8 @@ TEST(json, should_parse)
 {
   protest::json::JsonParser json;
 
-  auto ret = json.parse("../../../modules/json/test/protest/json/test_file.json");
+  auto ret =
+      json.parse("../../../modules/json/test/protest/json/test_file.json");
 
   ASSERT_TRUE(ret);
 }

@@ -43,7 +43,7 @@ MemberAttrVisitor::handle(clang::FunctionDecl* decl)
     if (record && !alreadyHandled(record))
     {
       std::vector<clang::FieldDecl*> attrs;
-      
+
       std::stringstream output;
       storeDeclarationRaw(record);
 
@@ -124,7 +124,8 @@ bool
 MemberAttrVisitor::compareSignature(clang::FieldDecl* first,
                                     clang::FieldDecl* second)
 {
-  return first->getType().getNonReferenceType() == second->getType().getNonReferenceType();
+  return first->getType().getNonReferenceType() ==
+         second->getType().getNonReferenceType();
 }
 
 clang::CXXRecordDecl*
@@ -202,7 +203,9 @@ MemberAttrVisitor::addMemberRaw(clang::CXXRecordDecl* cls,
 
   std::stringstream output;
   output << extra << "if (name == std::string(\"" << member->getNameAsString()
-         << "\")) { assert(sizeof(obj." << member->getNameAsString() << ") == size); return reinterpret_cast<const void*>(&obj." << member->getNameAsString() << ");}\n";
+         << "\")) { assert(sizeof(obj." << member->getNameAsString()
+         << ") == size); return reinterpret_cast<const void*>(&obj."
+         << member->getNameAsString() << ");}\n";
   return output.str();
 }
 

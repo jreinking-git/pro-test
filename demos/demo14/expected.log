@@ -188,7 +188,7 @@ PASS 0000000000  main /home/root/pro-test/demos/demo14/main.pt.cpp:264
 INFO             main -------------------------------------------------------------------------------
                       Get private static function @c value and call it.
                       -------------------------------------------------------------------------------
-PASS 0000000000  main /home/root/pro-test/demos/demo14/main.pt.cpp:275
+PASS 0000000000  main /home/root/pro-test/demos/demo14/main.pt.cpp:276
                       Value of: value
                       Expected: is equal to
                                 { 40, 0x00000028 }
@@ -196,7 +196,7 @@ PASS 0000000000  main /home/root/pro-test/demos/demo14/main.pt.cpp:275
 INFO             main -------------------------------------------------------------------------------
                       Get private member @c mMember1.
                       -------------------------------------------------------------------------------
-PASS 0000000000  main /home/root/pro-test/demos/demo14/main.pt.cpp:285
+PASS 0000000000  main /home/root/pro-test/demos/demo14/main.pt.cpp:286
                       Value of: value
                       Expected: is equal to
                                 { 41, 0x00000029 }
@@ -205,7 +205,7 @@ INFO             main ----------------------------------------------------------
                       Get the private method @c func and call it. It has a return value and a
                       parameter.
                       -------------------------------------------------------------------------------
-PASS 0000000000  main /home/root/pro-test/demos/demo14/main.pt.cpp:297
+PASS 0000000000  main /home/root/pro-test/demos/demo14/main.pt.cpp:298
                       Value of: value
                       Expected: is equal to
                                 { 44, 0x0000002c }
@@ -219,7 +219,7 @@ INFO             main ==========================================================
 INFO             main -------------------------------------------------------------------------------
                       Get private member @c mMember1 of class which is defined in this pt script.
                       -------------------------------------------------------------------------------
-PASS 0000000000  main /home/root/pro-test/demos/demo14/main.pt.cpp:314
+PASS 0000000000  main /home/root/pro-test/demos/demo14/main.pt.cpp:315
                       Value of: value
                       Expected: is equal to
                                 { 48, 0x00000030 }
@@ -236,12 +236,12 @@ INFO             main ----------------------------------------------------------
                       MyType is used. This struct has the same layout as the private type of the
                       member.
                       -------------------------------------------------------------------------------
-PASS 0000000000  main /home/root/pro-test/demos/demo14/main.pt.cpp:339
+PASS 0000000000  main /home/root/pro-test/demos/demo14/main.pt.cpp:341
                       Value of: value->mValue1
                       Expected: is equal to
                                 { 49, 0x00000031 }
                         Actual: { 49, 0x31 }
-PASS 0000000000  main /home/root/pro-test/demos/demo14/main.pt.cpp:340
+PASS 0000000000  main /home/root/pro-test/demos/demo14/main.pt.cpp:342
                       Value of: value->mValue2
                       Expected: is equal to
                                 { 50, 0x00000032 }

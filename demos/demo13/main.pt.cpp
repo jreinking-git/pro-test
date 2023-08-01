@@ -29,12 +29,14 @@ public:
   }
 
   ExecutionTimer(const ExecutionTimer& other) = delete;
-  
+
   ExecutionTimer(ExecutionTimer&& other) = delete;
 
-  ExecutionTimer& operator=(const ExecutionTimer& other) = delete;
+  ExecutionTimer&
+  operator=(const ExecutionTimer& other) = delete;
 
-  ExecutionTimer& operator=(ExecutionTimer&& other) = delete;
+  ExecutionTimer&
+  operator=(ExecutionTimer&& other) = delete;
 
   ~ExecutionTimer()
   {
@@ -48,13 +50,9 @@ public:
                       mCallContext.getUnit().getFileName(),
                       mCallContext.getLine(),
                       runner->now())
-        << "Min execution time not reached!\n"
-        << "Expected min: "
-        << mDuration.milliseconds()
-        << " ms\n"
-        << "     But got: "
-        << diff.milliseconds()
-        << " ms";
+          << "Min execution time not reached!\n"
+          << "Expected min: " << mDuration.milliseconds() << " ms\n"
+          << "     But got: " << diff.milliseconds() << " ms";
     }
     else if (!mMin && diff > mDuration)
     {
@@ -63,13 +61,9 @@ public:
                       mCallContext.getUnit().getFileName(),
                       mCallContext.getLine(),
                       runner->now())
-        << "Max execution time exceeded!\n"
-        << "Expected max: "
-        << mDuration.milliseconds()
-        << " ms\n"
-        << "     But got: "
-        << diff.milliseconds()
-        << " ms";
+          << "Max execution time exceeded!\n"
+          << "Expected max: " << mDuration.milliseconds() << " ms\n"
+          << "     But got: " << diff.milliseconds() << " ms";
     }
   }
 
@@ -81,37 +75,39 @@ private:
 };
 
 // ---------------------------------------------------------------------------
-ExecutionTimer minExecutionTime(Duration min, CallContext& context)
+ExecutionTimer
+minExecutionTime(Duration min, CallContext& context)
 {
   return ExecutionTimer(min, true, context);
 }
 
-ExecutionTimer maxExecutionTime(Duration max, CallContext& context)
+ExecutionTimer
+maxExecutionTime(Duration max, CallContext& context)
 {
   return ExecutionTimer(max, false, context);
 }
 
-int protectedBy(protest::rtos::Mutex& mutex, CallContext& context)
+int
+protectedBy(protest::rtos::Mutex& mutex, CallContext& context)
 {
   if (!mutex.isAcquired())
   {
     auto* runner = Context::getCurrentContext()->getCurrentVirtual();
     auto& logger = runner->getLogger();
     logger.startLog("FAIL",
-                runner->getName(),
-                context.getUnit().getFileName(),
-                context.getLine(),
-                runner->now())
+                    runner->getName(),
+                    context.getUnit().getFileName(),
+                    context.getLine(),
+                    runner->now())
         << "Function is not protected!";
   }
   else
   {
-
   }
   return 0;
 }
 
-}; // namespace protest
+};// namespace protest
 
 // ---------------------------------------------------------------------------
 /**
@@ -128,11 +124,7 @@ public:
   {
   }
 
-  [[
-    pt::minExecutionTime(100_ms),
-    pt::maxExecutionTime(1000_ms),
-  ]]
-  void
+  [[pt::minExecutionTime(100_ms), pt::maxExecutionTime(1000_ms), ]] void
   process()
   {
     func1();
@@ -142,11 +134,9 @@ public:
     mMutex.release();
   }
 
-  [[ pt::protectedBy(mMutex) ]]
-  void
+  [[pt::protectedBy(mMutex)]] void
   func1()
   {
-
   }
 
   void
@@ -165,4 +155,3 @@ main(int argc, char const* argv[])
   MyRunner runner(context);
   return context.run();
 }
-

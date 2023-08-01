@@ -28,9 +28,9 @@
 // PROTEST_HIDE is used to hide certain parts of the code which are used
 // by the protest-compiler but can cause problems in the last compile stage
 // (I.e.: when creating a object file). E.g.:
-// 
+//
 // PROTEST_HIDE(__attribute__("annotation")) void function() {}
-// 
+//
 // the __attribute__("annotation") is only visible for the protest-compiler
 #ifdef PROTEST_COMPILE_STAGE
 #define PROTEST_HIDE(X) X

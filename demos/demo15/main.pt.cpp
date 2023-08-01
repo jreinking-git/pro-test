@@ -15,12 +15,14 @@ Context context;
 // ---------------------------------------------------------------------------
 static uint32_t my_value = 42;
 
-void function()
+void
+function()
 {
   static uint32_t variable = 43;
 }
 
-static int staticFunction()
+static int
+staticFunction()
 {
   static uint32_t variable = 43;
   return variable;
@@ -31,24 +33,28 @@ namespace demo
 
 static uint32_t my_value = 44;
 
-void function()
+void
+function()
 {
   static uint32_t variable = 45;
 }
 
-} // demo
+} // namespace demo
 
-void function(int a)
+void
+function(int a)
 {
   static uint32_t variable = 46;
 }
 
-void function(std::string)
+void
+function(std::string)
 {
   static uint32_t variable = 47;
 }
 
-void other()
+void
+other()
 {
   {
     static uint32_t variable = 48;
@@ -58,12 +64,14 @@ void other()
   }
 }
 
-void another(int)
+void
+another(int)
 {
   static uint32_t variable = 50;
 }
 
-void another(double)
+void
+another(double)
 {
   static uint32_t variable = 51;
 }
@@ -78,8 +86,8 @@ public:
   MyRunner(Context& context) : Runner(context, "main")
   {
   }
- 
-  void 
+
+  void
   process()
   {
     {
@@ -108,7 +116,8 @@ public:
        * Get the static variable @c variable of static function @c function().
        * @seperator
        */
-      auto* ptr = protest::getStaticVariable<uint32_t>("staticFunction()::variable");
+      auto* ptr =
+          protest::getStaticVariable<uint32_t>("staticFunction()::variable");
       assertThat(*ptr, Eq(43));
     }
 
@@ -129,7 +138,8 @@ public:
        * namespace @c demo.
        * @seperator
        */
-      auto* ptr = protest::getStaticVariable<uint32_t>("demo::function()::variable");
+      auto* ptr =
+          protest::getStaticVariable<uint32_t>("demo::function()::variable");
       assertThat(*ptr, Eq(45));
     }
 
@@ -139,7 +149,8 @@ public:
        * Get the static variable @c variable of function @c function(int).
        * @seperator
        */
-      auto* ptr = protest::getStaticVariable<uint32_t>("function(int)::variable");
+      auto* ptr =
+          protest::getStaticVariable<uint32_t>("function(int)::variable");
       assertThat(*ptr, Eq(46));
     }
 
@@ -150,7 +161,15 @@ public:
        * @c function(std::string). 
        * @seperator
        */
-      auto* ptr = protest::getStaticVariable<uint32_t>("function(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >)::variable");
+      // clang-format: off
+      auto* ptr = protest::getStaticVariable<uint32_t>(
+          "function(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >)::variable");
+      // clang-format: on
+      
+      // TODO (jreinking) does not work:
+      // auto* ptr = protest::getStaticVariable<uint32_t>(
+      //    "function(std::__cxx11::basic_string<char, std::char_traits<char>, "
+      //    "std::allocator<char> >)::variable");
       assertThat(*ptr, Eq(47));
     }
 
@@ -161,7 +180,8 @@ public:
        * @c function(std::string) using regular expression.
        * @seperator
        */
-      auto* ptr = protest::getStaticVariable<uint32_t>("function(std::.*string.*)::variable");
+      auto* ptr = protest::getStaticVariable<uint32_t>(
+          "function(std::.*string.*)::variable");
       assertThat(*ptr, Eq(47));
     }
 
@@ -187,8 +207,10 @@ public:
        * @seperator
        */
       // TODO (jreinking) is the order random? sort the list
-      auto* ptr1 = protest::getStaticVariable<uint32_t>("another(.*)::variable", 1);
-      auto* ptr2 = protest::getStaticVariable<uint32_t>("another(.*)::variable", 0);
+      auto* ptr1 =
+          protest::getStaticVariable<uint32_t>("another(.*)::variable", 1);
+      auto* ptr2 =
+          protest::getStaticVariable<uint32_t>("another(.*)::variable", 0);
 
       assertThat(*ptr1, Eq(50));
       assertThat(*ptr2, Eq(51));
@@ -211,7 +233,7 @@ public:
   finalize()
   {
   }
- 
+
 private:
 };
 

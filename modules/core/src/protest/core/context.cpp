@@ -78,8 +78,7 @@ Context::addRunner(RunnerRaw* runner)
 }
 
 void
-Context::initialize(int argc,
-                    const char** argv)
+Context::initialize(int argc, const char** argv)
 {
   mJsonParser.parse(std::string(argv[0]) + ".json");
   currentContext = this;

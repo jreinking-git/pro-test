@@ -41,7 +41,8 @@ protest::forwardDeclarationOf(clang::CXXRecordDecl* decl)
     auto ns = clang::dyn_cast_or_null<clang::NamespaceDecl>(parent);
     if (ns)
     {
-      forwardDeclaration = "namespace " + ns->getNameAsString() + " { " + forwardDeclaration;
+      forwardDeclaration =
+          "namespace " + ns->getNameAsString() + " { " + forwardDeclaration;
       parent = parent->getParent();
       n++;
     }

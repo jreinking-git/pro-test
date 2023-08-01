@@ -118,7 +118,7 @@ public:
 
 private:
   size_t
-  sum(size_t(Unit::*func)() const) const;
+  sum(size_t (Unit::*func)() const) const;
 
   std::vector<Unit*> mUnits;
 };

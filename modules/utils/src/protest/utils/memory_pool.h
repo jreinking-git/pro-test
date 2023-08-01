@@ -177,11 +177,10 @@ MemoryPool<numberOfBlocks, blockSize>::block2index(const uint8_t* block)
   // is in mBuffer?
   PROTEST_ASSERT(block >= mBuffer &&
                  block < &mBuffer[numberOfBlocks * blockSize]);
-  
+
   // points to start of block?
-  PROTEST_ASSERT((block - mBuffer) % blockSize ==
-                 0u);
-  
+  PROTEST_ASSERT((block - mBuffer) % blockSize == 0u);
+
   return (block - mBuffer) / blockSize;
 }
 

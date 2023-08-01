@@ -387,12 +387,10 @@ public:
           std::string attr_name(attr->getSpelling());
           std::string attr_annotate("annotate");
           std::string attr_my("annotate(\"my_attr\")");
-        
+
           if (attr_name == attr_annotate)
           {
-          
-          
-          
+
             std::string SS;
             llvm::raw_string_ostream S(SS);
             static PrintingPolicy print_policy(Context->getLangOpts());
@@ -409,8 +407,7 @@ public:
               if (n != std::string::npos)
               {
                 annotations = annotations.substr(n + 4);
-              
-              
+
                 int start = annotations.find("(");
                 int braces = 1;
                 int i = 0;
@@ -476,7 +473,6 @@ public:
     //   visted.insert(Expr);
     // }
 
-  
     auto cxxcall = dyn_cast_or_null<CXXMemberCallExpr>(Expr);
     FunctionDecl* decl = dyn_cast_or_null<FunctionDecl>(Expr->getCalleeDecl());
 
@@ -1222,7 +1218,6 @@ public:
     {
       mOutputFile << impl.second;
     }
-
 
     Visitor.mMemberFuncVisitor.writeImplementation(mOutputFile);
     Visitor.mMemberAttrVisitor.writeImplementation(mOutputFile);

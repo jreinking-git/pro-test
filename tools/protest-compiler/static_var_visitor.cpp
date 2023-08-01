@@ -67,7 +67,7 @@ StaticVarVisitor::handle(clang::CallExpr* expr)
   auto* decl =
       clang::dyn_cast_or_null<clang::FunctionDecl>(expr->getCalleeDecl());
   if (decl &&
-      (decl->getQualifiedNameAsString() == "protest::getStaticVariable" || 
+      (decl->getQualifiedNameAsString() == "protest::getStaticVariable" ||
        decl->getQualifiedNameAsString() == "protest::getStaticFunction"))
   {
     auto* arg = expr->getArg(0);
@@ -85,6 +85,6 @@ StaticVarVisitor::writeDeclarations(llvm::raw_fd_ostream& stream)
 {
   for (auto& decl : mDeclarations)
   {
-    stream << decl <<"\n";
+    stream << decl << "\n";
   }
 }

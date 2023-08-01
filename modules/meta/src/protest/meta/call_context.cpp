@@ -334,12 +334,11 @@ MockCreation::defaultContext()
 }
 
 // ---------------------------------------------------------------------------
-MockCreation::MockCreation(
-    Unit& unit,
-    size_t line,
-    const char* objectName,
-    std::vector<std::string>&& args,
-    std::map<std::string, std::string>&& comments) :
+MockCreation::MockCreation(Unit& unit,
+                           size_t line,
+                           const char* objectName,
+                           std::vector<std::string>&& args,
+                           std::map<std::string, std::string>&& comments) :
   CallContext(unit, line, objectName, std::move(args), std::move(comments)),
   mNumberOfUnexpectedCalls(0),
   mNumberOfCreations(0)

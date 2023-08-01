@@ -34,8 +34,7 @@
 using namespace protest::json;
 
 // ---------------------------------------------------------------------------
-Base::Base(void* handle) :
-  mHandle(nullptr)
+Base::Base(void* handle) : mHandle(nullptr)
 {
   assert(handle);
   auto* input = reinterpret_cast<nlohmann::json*>(handle);
@@ -52,10 +51,8 @@ Base::~Base()
 }
 
 // ---------------------------------------------------------------------------
-Object::Object(void* object) :
-  Base(object)
+Object::Object(void* object) : Base(object)
 {
-
 }
 
 // ---------------------------------------------------------------------------
@@ -76,10 +73,8 @@ Object::get(std::string key)
 }
 
 // ---------------------------------------------------------------------------
-Array::Array(void* array) :
-  Base(array)
+Array::Array(void* array) : Base(array)
 {
-
 }
 
 // ---------------------------------------------------------------------------
@@ -99,8 +94,7 @@ Array::get(size_t index)
 }
 
 // ---------------------------------------------------------------------------
-Value::Value(void* value) :
-  Base(value)
+Value::Value(void* value) : Base(value)
 {
   assert(value);
 }
@@ -156,8 +150,7 @@ Value::getAsArray()
 }
 
 // ---------------------------------------------------------------------------
-JsonParser::JsonParser() :
-  mHandle(nullptr)
+JsonParser::JsonParser() : mHandle(nullptr)
 {
   auto* json = new nlohmann::json();
   mHandle = json;

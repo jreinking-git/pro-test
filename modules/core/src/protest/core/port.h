@@ -70,8 +70,7 @@ public:
   friend class QueuePort<T>;
   friend class SamplePort<T>;
 
-  explicit AnyPortCreator(core::Signal<T>& signal,
-                          RunnerRaw* runner);
+  explicit AnyPortCreator(core::Signal<T>& signal, RunnerRaw* runner);
 
   AnyPortCreator(const AnyPortCreator&) = default;
 
@@ -92,8 +91,7 @@ private:
 
 // ---------------------------------------------------------------------------
 template <typename T>
-AnyPortCreator<T>::AnyPortCreator(core::Signal<T>& signal,
-                                  RunnerRaw* runner) :
+AnyPortCreator<T>::AnyPortCreator(core::Signal<T>& signal, RunnerRaw* runner) :
   mSignal(signal),
   mRunner(runner)
 {
