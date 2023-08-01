@@ -28,7 +28,8 @@ if __name__ == "__main__":
     protest_files = filter(lambda x: "protest.pt.cpp" in x, args.sources)
 
     data = {}
-    data["protest::dummy"] = find_address_of(args.target, "protest::dummy")
+    data["protest::dummyVariable"] = find_address_of(args.target, "protest::dummyVariable")
+    data["protest::dummyFunction"] = find_address_of(args.target, "protest::dummyFunction")
 
     for file in protest_files:
         with open(file, 'r') as file:

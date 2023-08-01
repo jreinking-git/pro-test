@@ -20,6 +20,12 @@ void function()
   static uint32_t variable = 43;
 }
 
+static int staticFunction()
+{
+  static uint32_t variable = 43;
+  return variable;
+}
+
 namespace demo
 {
 
@@ -99,6 +105,16 @@ public:
     {
       /** @info(format)
        * @seperator
+       * Get the static variable @c variable of static function @c function().
+       * @seperator
+       */
+      auto* ptr = protest::getStaticVariable<uint32_t>("staticFunction()::variable");
+      assertThat(*ptr, Eq(43));
+    }
+
+    {
+      /** @info(format)
+       * @seperator
        * Get the static variable @c my_value of namespace @c demo.
        * @seperator
        */
@@ -170,11 +186,24 @@ public:
        * the name exists twice an index has to be provided.
        * @seperator
        */
+      // TODO (jreinking) is the order random? sort the list
       auto* ptr1 = protest::getStaticVariable<uint32_t>("another(.*)::variable", 1);
       auto* ptr2 = protest::getStaticVariable<uint32_t>("another(.*)::variable", 0);
 
       assertThat(*ptr1, Eq(50));
       assertThat(*ptr2, Eq(51));
+    }
+
+    {
+      /** @info(format)
+       * @seperator
+       * Get the static function @c staticFunction()
+       * @seperator
+       */
+      auto func = protest::getStaticFunction<int()>("staticFunction()");
+      auto ret = func();
+
+      assertThat(ret, Eq(43));
     }
   }
 

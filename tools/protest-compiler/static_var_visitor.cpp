@@ -66,7 +66,9 @@ StaticVarVisitor::handle(clang::CallExpr* expr)
 {
   auto* decl =
       clang::dyn_cast_or_null<clang::FunctionDecl>(expr->getCalleeDecl());
-  if (decl && decl->getQualifiedNameAsString() == "protest::getStaticVariable")
+  if (decl &&
+      (decl->getQualifiedNameAsString() == "protest::getStaticVariable" || 
+       decl->getQualifiedNameAsString() == "protest::getStaticFunction"))
   {
     auto* arg = expr->getArg(0);
     std::string argAsString = getArgument(mContext, expr, 0);

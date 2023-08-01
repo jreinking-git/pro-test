@@ -29,12 +29,8 @@
 #include <cstddef>
 #include <cstdint>
 
-
 namespace protest
 {
-
-// just a dummy to get the base address
-static int dummy;
 
 // ---------------------------------------------------------------------------
 /**
@@ -193,6 +189,10 @@ getMemberAttrRaw(T& obj, const char* name)
   return reinterpret_cast<const R*>(getMemberAttrRaw(obj, name, sizeof(R)));
 }
 
+// ---------------------------------------------------------------------------
+void*
+getStaticVariableRaw(const char* name, size_t index);
+
 /**
  * @brief getStaticVariable
  * 
@@ -202,64 +202,47 @@ getMemberAttrRaw(T& obj, const char* name)
  * @param name
  *  the fully qualified name of the variable
  * 
+ * @param index
+ *  if there are multiple matches (e.g.: there is for example more then one
+ *  definition of a variable for the given name) the index will be used to
+ *  identify the variable to return.
+ * 
  * @return pointer to the variable
  */
 template <typename R>
 R*
-getStaticVariable(const char* name)
+getStaticVariable(const char* name, size_t index = 0)
 {
-  auto* context = protest::Context::getCurrentContext();
-  auto contextFile = context->getContextFile();
-  auto object = contextFile.getAsObject();
-
-  int64_t offset = 0;
-  {
-    auto dummyValue = object.get("protest::dummy");
-    auto array = dummyValue.getAsArray();
-    auto value = array.get(0).getInteger();
-    offset = value;
-  }
-
-  int64_t varOffset = 0;
-  {
-    auto my_value = object.get(name);
-    auto array = my_value.getAsArray();
-    auto value = array.get(0).getInteger();
-    varOffset = value;
-  }
-
-  void* base = (void*) (((ptrdiff_t) &dummy) - (ptrdiff_t) offset);
-  uint32_t* var = (uint32_t*) ((ptrdiff_t) base + (ptrdiff_t) varOffset);
-  return var;
+  void* ptr = getStaticVariableRaw(name, index);
+  return (R*) ptr;
 }
 
-template <typename R>
-R*
-getStaticVariable(const char* name, size_t index)
+// ---------------------------------------------------------------------------
+void*
+getStaticFunctionRaw(const char* name, size_t index);
+
+/**
+ * @brief getStaticFunction
+ * 
+ * @tparam F
+ *  the signature
+ * 
+ * @param name
+ *  the fully qualified name of the function
+ * 
+ * @param index
+ *  if there are multiple matches (e.g.: there is for example more then one
+ *  function with the given name) the index will be used to identify the
+ *  function to return.
+ * 
+ * @return std::function to function
+ */
+template <typename F>
+std::function<F>
+getStaticFunction(const char* name, size_t index = 0)
 {
-  auto* context = protest::Context::getCurrentContext();
-  auto contextFile = context->getContextFile();
-  auto object = contextFile.getAsObject();
-
-  int64_t offset = 0;
-  {
-    auto dummyValue = object.get("protest::dummy");
-    auto array = dummyValue.getAsArray();
-    auto value = array.get(0).getInteger();
-    offset = value;
-  }
-
-  int64_t varOffset = 0;
-  {
-    auto my_value = object.get(name);
-    auto array = my_value.getAsArray();
-    auto value = array.get(index).getInteger();
-    varOffset = value;
-  }
-
-  void* base = (void*) (((ptrdiff_t) &dummy) - (ptrdiff_t) offset);
-  uint32_t* var = (uint32_t*) ((ptrdiff_t) base + (ptrdiff_t) varOffset);
-  return var;
+  auto* var = getStaticFunctionRaw(name, index);
+  return std::function<F>(*((F*) var));
 }
 
 } // namespace t3

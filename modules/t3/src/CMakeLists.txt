@@ -1,5 +1,6 @@
-set(sources
-  "protest/t3/empty.cpp"
+set(
+  sources
+  "protest/t3/member_access.cpp"
 )
 
 if (PROTEST_INCLUDE_UNIT_TESTS)
@@ -8,9 +9,16 @@ endif()
 
 add_library(t3 STATIC ${sources})
 
-target_include_directories(t3 PUBLIC
+target_link_libraries(
+  t3
+  core
+)
+
+target_include_directories(
+  t3 PUBLIC
   $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>
-  $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>)
+  $<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>
+)
 
 install(TARGETS t3 EXPORT Protest)
 install(DIRECTORY . DESTINATION ${CMAKE_INSTALL_INCLUDEDIR} FILES_MATCHING PATTERN *.h)
