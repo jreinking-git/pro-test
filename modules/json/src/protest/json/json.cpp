@@ -67,9 +67,9 @@ Value
 Object::get(std::string key)
 {
   auto* json = reinterpret_cast<nlohmann::json*>(mHandle);
-  auto asdf = (*json)[key];
-  assert(&asdf);
-  return Value(&asdf);
+  auto value = (*json)[key];
+  assert(&value);
+  return Value(&value);
 }
 
 // ---------------------------------------------------------------------------
