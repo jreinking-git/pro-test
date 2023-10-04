@@ -26,6 +26,9 @@
 
 #include <clang/AST/Decl.h>
 
+#include <iostream>
+
+using namespace clang;
 using namespace protest;
 
 // ---------------------------------------------------------------------------
@@ -69,4 +72,73 @@ protest::forwardDeclarationOf(clang::CXXRecordDecl* decl)
   }
 
   return forwardDeclaration;
+}
+
+// ---------------------------------------------------------------------------
+clang::CharSourceRange
+protest::getRange(const clang::Expr* expr)
+{
+  return CharSourceRange::getTokenRange(expr->getBeginLoc(), expr->getEndLoc());
+}
+
+// ---------------------------------------------------------------------------
+std::string
+protest::getSourceText(clang::ASTContext* context, const clang::Expr* expr)
+{
+  return Lexer::getSourceText(getRange(expr),
+                              context->getSourceManager(),
+                              context->getLangOpts())
+      .str();
+}
+
+std::string
+protest::getSourceText(ASTContext* context, CharSourceRange range)
+{
+  return Lexer::getSourceText(range,
+                              context->getSourceManager(),
+                              context->getLangOpts())
+      .str();
+}
+
+// ---------------------------------------------------------------------------
+int
+protest::getNumParams(clang::CallExpr* expr)
+{
+  int n = 0;
+  for (unsigned int i = 0; i < expr->getNumArgs(); i++)
+  {
+    const clang::Expr* arg = expr->getArg(i);
+    clang::CharSourceRange conditionRange =
+        clang::CharSourceRange::getTokenRange(arg->getBeginLoc(), arg->getEndLoc());
+    if (conditionRange.isValid())
+    {
+      n++;
+    }
+    else
+    {
+      break;
+    }
+  }
+  return n;
+}
+
+std::string
+protest::getArgumentsAsString(clang::Rewriter& rewriter, clang::CallExpr* expr)
+{
+  std::string exprAsString = "";
+  for (unsigned int i = 0; i < expr->getNumArgs(); i++)
+  {
+    const clang::Expr* arg = expr->getArg(i);
+    clang::CharSourceRange conditionRange =
+        clang::CharSourceRange::getTokenRange(arg->getBeginLoc(), arg->getEndLoc());
+    if (conditionRange.isValid())
+    {
+      exprAsString += rewriter.getRewrittenText(conditionRange) + ", ";
+    }
+    else
+    {
+      break;
+    }
+  }
+  return exprAsString;
 }

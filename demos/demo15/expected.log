@@ -10,7 +10,7 @@ INFO             main ----------------------------------------------------------
 INFO             main -------------------------------------------------------------------------------
                       Get the static variable @c my_value.
                       -------------------------------------------------------------------------------
-PASS 0000000000  main /home/root/pro-test/demos/demo15/main.pt.cpp:100
+PASS 0000000000  main /home/root/pro-test/demos/demo15/main.pt.cpp:151
                       Value of: *ptr
                       Expected: is equal to
                                 { 42, 0x0000002a }
@@ -18,7 +18,7 @@ PASS 0000000000  main /home/root/pro-test/demos/demo15/main.pt.cpp:100
 INFO             main -------------------------------------------------------------------------------
                       Get the static variable @c variable of function @c function().
                       -------------------------------------------------------------------------------
-PASS 0000000000  main /home/root/pro-test/demos/demo15/main.pt.cpp:110
+PASS 0000000000  main /home/root/pro-test/demos/demo15/main.pt.cpp:161
                       Value of: *ptr
                       Expected: is equal to
                                 { 43, 0x0000002b }
@@ -26,7 +26,7 @@ PASS 0000000000  main /home/root/pro-test/demos/demo15/main.pt.cpp:110
 INFO             main -------------------------------------------------------------------------------
                       Get the static variable @c variable of static function @c function().
                       -------------------------------------------------------------------------------
-PASS 0000000000  main /home/root/pro-test/demos/demo15/main.pt.cpp:121
+PASS 0000000000  main /home/root/pro-test/demos/demo15/main.pt.cpp:172
                       Value of: *ptr
                       Expected: is equal to
                                 { 43, 0x0000002b }
@@ -34,7 +34,7 @@ PASS 0000000000  main /home/root/pro-test/demos/demo15/main.pt.cpp:121
 INFO             main -------------------------------------------------------------------------------
                       Get the static variable @c my_value of namespace @c demo.
                       -------------------------------------------------------------------------------
-PASS 0000000000  main /home/root/pro-test/demos/demo15/main.pt.cpp:131
+PASS 0000000000  main /home/root/pro-test/demos/demo15/main.pt.cpp:182
                       Value of: *ptr
                       Expected: is equal to
                                 { 44, 0x0000002c }
@@ -43,7 +43,7 @@ INFO             main ----------------------------------------------------------
                       Get the static variable @c variable of function @c function() of namespace @c
                       demo.
                       -------------------------------------------------------------------------------
-PASS 0000000000  main /home/root/pro-test/demos/demo15/main.pt.cpp:143
+PASS 0000000000  main /home/root/pro-test/demos/demo15/main.pt.cpp:194
                       Value of: *ptr
                       Expected: is equal to
                                 { 45, 0x0000002d }
@@ -51,7 +51,7 @@ PASS 0000000000  main /home/root/pro-test/demos/demo15/main.pt.cpp:143
 INFO             main -------------------------------------------------------------------------------
                       Get the static variable @c variable of function @c function(int).
                       -------------------------------------------------------------------------------
-PASS 0000000000  main /home/root/pro-test/demos/demo15/main.pt.cpp:154
+PASS 0000000000  main /home/root/pro-test/demos/demo15/main.pt.cpp:205
                       Value of: *ptr
                       Expected: is equal to
                                 { 46, 0x0000002e }
@@ -59,7 +59,7 @@ PASS 0000000000  main /home/root/pro-test/demos/demo15/main.pt.cpp:154
 INFO             main -------------------------------------------------------------------------------
                       Get the static variable @c variable of function @c function(std::string).
                       -------------------------------------------------------------------------------
-PASS 0000000000  main /home/root/pro-test/demos/demo15/main.pt.cpp:173
+PASS 0000000000  main /home/root/pro-test/demos/demo15/main.pt.cpp:224
                       Value of: *ptr
                       Expected: is equal to
                                 { 47, 0x0000002f }
@@ -68,7 +68,7 @@ INFO             main ----------------------------------------------------------
                       Get the static variable @c variable of function @c function(std::string) using
                       regular expression.
                       -------------------------------------------------------------------------------
-PASS 0000000000  main /home/root/pro-test/demos/demo15/main.pt.cpp:185
+PASS 0000000000  main /home/root/pro-test/demos/demo15/main.pt.cpp:236
                       Value of: *ptr
                       Expected: is equal to
                                 { 47, 0x0000002f }
@@ -77,12 +77,12 @@ INFO             main ----------------------------------------------------------
                       Get the static variable @c variable of function @c other(). Since the name
                       exists twice an index has to be provided.
                       -------------------------------------------------------------------------------
-PASS 0000000000  main /home/root/pro-test/demos/demo15/main.pt.cpp:198
+PASS 0000000000  main /home/root/pro-test/demos/demo15/main.pt.cpp:249
                       Value of: *ptr1
                       Expected: is equal to
                                 { 48, 0x00000030 }
                         Actual: { 48, 0x00000030 }
-PASS 0000000000  main /home/root/pro-test/demos/demo15/main.pt.cpp:199
+PASS 0000000000  main /home/root/pro-test/demos/demo15/main.pt.cpp:250
                       Value of: *ptr2
                       Expected: is equal to
                                 { 49, 0x00000031 }
@@ -91,24 +91,69 @@ INFO             main ----------------------------------------------------------
                       Get the static variable @c variable of function @c other(). Since the name
                       exists twice an index has to be provided.
                       -------------------------------------------------------------------------------
-PASS 0000000000  main /home/root/pro-test/demos/demo15/main.pt.cpp:215
+PASS 0000000000  main /home/root/pro-test/demos/demo15/main.pt.cpp:266
                       Value of: *ptr1
                       Expected: is equal to
                                 { 50, 0x00000032 }
                         Actual: { 50, 0x00000032 }
-PASS 0000000000  main /home/root/pro-test/demos/demo15/main.pt.cpp:216
+PASS 0000000000  main /home/root/pro-test/demos/demo15/main.pt.cpp:267
                       Value of: *ptr2
                       Expected: is equal to
                                 { 51, 0x00000033 }
                         Actual: { 51, 0x00000033 }
 INFO             main -------------------------------------------------------------------------------
-                      Get the static function @c staticFunction()
+                      Get the static function @c staticFunction*(). Tested with diffrent signatures
+                      to test name mangling.
                       -------------------------------------------------------------------------------
-PASS 0000000000  main /home/root/pro-test/demos/demo15/main.pt.cpp:228
+PASS 0000000000  main /home/root/pro-test/demos/demo15/main.pt.cpp:281
+                      Value of: staticFunction1WasCalled
+                      Expected: to be true
+                        Actual: true
+PASS 0000000000  main /home/root/pro-test/demos/demo15/main.pt.cpp:287
+                      Value of: staticFunction2WasCalled
+                      Expected: to be true
+                        Actual: true
+PASS 0000000000  main /home/root/pro-test/demos/demo15/main.pt.cpp:288
                       Value of: ret
                       Expected: is equal to
-                                { 43, 0x0000002b }
-                        Actual: { 43, 0x0000002b }
+                                { 0, 0x00000000 }
+                        Actual: { 0, 0x00000000 }
+PASS 0000000000  main /home/root/pro-test/demos/demo15/main.pt.cpp:294
+                      Value of: staticFunction3WasCalled
+                      Expected: to be true
+                        Actual: true
+PASS 0000000000  main /home/root/pro-test/demos/demo15/main.pt.cpp:295
+                      Value of: ret
+                      Expected: is equal to
+                                { 0, 0x00000000 }
+                        Actual: { 0, 0x00000000 }
+PASS 0000000000  main /home/root/pro-test/demos/demo15/main.pt.cpp:301
+                      Value of: staticFunction4WasCalled
+                      Expected: to be true
+                        Actual: true
+PASS 0000000000  main /home/root/pro-test/demos/demo15/main.pt.cpp:302
+                      Value of: ret
+                      Expected: is equal to
+                                ""
+                        Actual: ""
+PASS 0000000000  main /home/root/pro-test/demos/demo15/main.pt.cpp:308
+                      Value of: staticFunction5WasCalled
+                      Expected: to be true
+                        Actual: true
+PASS 0000000000  main /home/root/pro-test/demos/demo15/main.pt.cpp:309
+                      Value of: ret
+                      Expected: is equal to
+                                ""
+                        Actual: ""
+PASS 0000000000  main /home/root/pro-test/demos/demo15/main.pt.cpp:315
+                      Value of: staticFunction6WasCalled
+                      Expected: to be true
+                        Actual: true
+PASS 0000000000  main /home/root/pro-test/demos/demo15/main.pt.cpp:316
+                      Value of: ret
+                      Expected: is equal to
+                                ""
+                        Actual: ""
 INFO             main -------------------------------------------------------------------------------
                       Exit of 'main'
                       -------------------------------------------------------------------------------

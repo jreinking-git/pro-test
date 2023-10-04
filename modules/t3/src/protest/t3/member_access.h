@@ -25,6 +25,7 @@
 #pragma once
 
 #include <functional>
+#include <iostream>
 
 #include <cstddef>
 #include <cstdint>
@@ -190,6 +191,16 @@ getMemberAttrRaw(T& obj, const char* name)
 }
 
 // ---------------------------------------------------------------------------
+template <typename Func>
+struct AsVoidFunction;
+
+template <typename Ret, typename... Args>
+struct AsVoidFunction<Ret(Args...)>
+{
+  using Function = void(Args...);
+};
+
+// ---------------------------------------------------------------------------
 void*
 getStaticVariableRaw(const char* name, size_t index);
 
@@ -211,9 +222,19 @@ getStaticVariableRaw(const char* name, size_t index);
  */
 template <typename R>
 R*
-getStaticVariable(const char* name, size_t index = 0)
+getStaticVariable(const char* name, size_t index = 0, const char* nm = "")
 {
-  void* ptr = getStaticVariableRaw(name, index);
+  std::cout << "nm: " << nm << std::endl;
+  void* ptr = getStaticVariableRaw(nm, index);
+  return (R*) ptr;
+}
+
+template <typename R, typename F, typename FF = typename AsVoidFunction<F>::Function>
+R*
+getStaticVariable(const char* function, const char* name, size_t index = 0, const char* nm = 0)
+{
+  std::cout << "nm: " << nm << std::endl;
+  void* ptr = getStaticVariableRaw(nm, index);
   return (R*) ptr;
 }
 
@@ -227,6 +248,10 @@ getStaticFunctionRaw(const char* name, size_t index);
  * @tparam F
  *  the signature
  * 
+ * @tparam FF
+ *  it is easier to get the gcc mangled name from clang when having a void
+ *  function. FF should not be used.
+ * 
  * @param name
  *  the fully qualified name of the function
  * 
@@ -237,11 +262,11 @@ getStaticFunctionRaw(const char* name, size_t index);
  * 
  * @return std::function to function
  */
-template <typename F>
+template <typename F, typename FF = typename AsVoidFunction<F>::Function>
 std::function<F>
-getStaticFunction(const char* name, size_t index = 0)
+getStaticFunction(const char* name, size_t index = 0, const char* nm = "")
 {
-  auto* var = getStaticFunctionRaw(name, index);
+  auto* var = getStaticFunctionRaw(nm, index);
   return std::function<F>(*((F*) var));
 }
 

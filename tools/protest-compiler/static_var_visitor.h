@@ -25,9 +25,11 @@
 #pragma once
 
 #include <clang/Basic/SourceLocation.h>
+
 #include <clang/AST/Decl.h>
 #include <clang/AST/DeclCXX.h>
 #include <llvm/Support/raw_ostream.h>
+#include "clang/Rewrite/Core/Rewriter.h"
 
 namespace protest
 {
@@ -40,7 +42,7 @@ class StaticVarVisitor
 {
 public:
   explicit
-  StaticVarVisitor(clang::ASTContext* context);
+  StaticVarVisitor(clang::Rewriter& rewriter, clang::ASTContext* context);
 
   StaticVarVisitor(const StaticVarVisitor&) = delete;
 
@@ -62,7 +64,26 @@ public:
   writeDeclarations(llvm::raw_fd_ostream& stream);
 
 private:
+  static const char* staticVariable;
+  static const char* staticFunction;
+
+  std::string
+  getArgumentWithoutQuotes(clang::CallExpr *expr, size_t index);
+
+  std::string
+  mangledName(clang::QualType type);
+
+  std::string
+  buildNameForFunction(std::string name, clang::QualType signature);
+
+  std::string
+  buildNameForVariable(std::string name, clang::QualType type);
+
+  std::string
+  buildNameForVariableInFunction(std::string function, std::string name, clang::QualType signature, bool isStatic);
+
   clang::ASTContext* mContext;
+  clang::Rewriter& mRewriter;
 
   using Key = std::pair<clang::SourceLocation, clang::SourceLocation>;
   std::vector<std::string> mDeclarations;

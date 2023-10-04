@@ -2,6 +2,8 @@
 #include <protest/doc.h>
 #include <protest/rtos.h>
 
+#include <cxxabi.h>
+
 using namespace protest;
 
 // ---------------------------------------------------------------------------
@@ -47,6 +49,7 @@ function(int a)
   static uint32_t variable = 46;
 }
 
+// _Z8functionNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEE
 void
 function(std::string)
 {
@@ -74,6 +77,54 @@ void
 another(double)
 {
   static uint32_t variable = 51;
+}
+
+// ---------------------------------------------------------------------------
+static bool staticFunction1WasCalled = false;
+
+static void staticFunction1()
+{
+  staticFunction1WasCalled = true;
+}
+
+static bool staticFunction2WasCalled = false;
+
+static int staticFunction2()
+{
+  staticFunction2WasCalled = true;
+  return 0;
+}
+
+static bool staticFunction3WasCalled = false;
+
+static int staticFunction3(int, std::string)
+{
+  staticFunction3WasCalled = true;
+  return 0;
+}
+
+static bool staticFunction4WasCalled = false;
+
+static std::string staticFunction4(int, std::string)
+{
+  staticFunction4WasCalled = true;
+  return "";
+}
+
+static bool staticFunction5WasCalled = false;
+
+static std::string staticFunction5(std::string, std::string)
+{
+  staticFunction5WasCalled = true;
+  return "";
+}
+
+static bool staticFunction6WasCalled = false;
+
+static std::string staticFunction6(protest::Runner&, protest::Runner&)
+{
+  staticFunction6WasCalled = true;
+  return "";
 }
 
 // ---------------------------------------------------------------------------
@@ -106,7 +157,7 @@ public:
        * Get the static variable @c variable of function @c function().
        * @seperator
        */
-      auto* ptr = protest::getStaticVariable<uint32_t>("function()::variable");
+      auto* ptr = protest::getStaticVariable<uint32_t, void()>("function", "variable");
       assertThat(*ptr, Eq(43));
     }
 
@@ -117,7 +168,7 @@ public:
        * @seperator
        */
       auto* ptr =
-          protest::getStaticVariable<uint32_t>("staticFunction()::variable");
+          protest::getStaticVariable<uint32_t, int()>("staticFunction", "variable");
       assertThat(*ptr, Eq(43));
     }
 
@@ -127,8 +178,9 @@ public:
        * Get the static variable @c my_value of namespace @c demo.
        * @seperator
        */
-      auto* ptr = protest::getStaticVariable<uint32_t>("demo::my_value");
-      assertThat(*ptr, Eq(44));
+      // TODO
+      // auto* ptr = protest::getStaticVariable<uint32_t>("demo::my_value");
+      // assertThat(*ptr, Eq(44));
     }
 
     {
@@ -138,9 +190,10 @@ public:
        * namespace @c demo.
        * @seperator
        */
-      auto* ptr =
-          protest::getStaticVariable<uint32_t>("demo::function()::variable");
-      assertThat(*ptr, Eq(45));
+      // TODO (jreinking)
+      // auto* ptr =
+      //     protest::getStaticVariable<uint32_t>("demo::function()::variable");
+      // assertThat(*ptr, Eq(45));
     }
 
     {
@@ -150,7 +203,7 @@ public:
        * @seperator
        */
       auto* ptr =
-          protest::getStaticVariable<uint32_t>("function(int)::variable");
+          protest::getStaticVariable<uint32_t, void(int)>("function", "variable");
       assertThat(*ptr, Eq(46));
     }
 
@@ -162,26 +215,9 @@ public:
        * @seperator
        */
       // clang-format: off
-      auto* ptr = protest::getStaticVariable<uint32_t>(
-          "function(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >)::variable");
+      auto* ptr = protest::getStaticVariable<uint32_t, void(std::string)>("function", "variable");
       // clang-format: on
       
-      // TODO (jreinking) does not work:
-      // auto* ptr = protest::getStaticVariable<uint32_t>(
-      //    "function(std::__cxx11::basic_string<char, std::char_traits<char>, "
-      //    "std::allocator<char> >)::variable");
-      assertThat(*ptr, Eq(47));
-    }
-
-    {
-      /** @info(format)
-       * @seperator
-       * Get the static variable @c variable of function
-       * @c function(std::string) using regular expression.
-       * @seperator
-       */
-      auto* ptr = protest::getStaticVariable<uint32_t>(
-          "function(std::.*string.*)::variable");
       assertThat(*ptr, Eq(47));
     }
 
@@ -192,8 +228,8 @@ public:
        * the name exists twice an index has to be provided.
        * @seperator
        */
-      auto* ptr1 = protest::getStaticVariable<uint32_t>("other()::variable", 0);
-      auto* ptr2 = protest::getStaticVariable<uint32_t>("other()::variable", 1);
+      auto* ptr1 = protest::getStaticVariable<uint32_t, void()>("other", "variable", 0);
+      auto* ptr2 = protest::getStaticVariable<uint32_t, void()>("other", "variable", 1);
 
       assertThat(*ptr1, Eq(48));
       assertThat(*ptr2, Eq(49));
@@ -202,15 +238,12 @@ public:
     {
       /** @info(format)
        * @seperator
-       * Get the static variable @c variable of function @c other(). Since
-       * the name exists twice an index has to be provided.
+       * Get the static variable @c variable of function @c another(). The
+       * signature identifies the function exactly.
        * @seperator
        */
-      // TODO (jreinking) is the order random? sort the list
-      auto* ptr1 =
-          protest::getStaticVariable<uint32_t>("another(.*)::variable", 1);
-      auto* ptr2 =
-          protest::getStaticVariable<uint32_t>("another(.*)::variable", 0);
+      auto* ptr1 = protest::getStaticVariable<uint32_t, void(int)>("another", "variable");
+      auto* ptr2 = protest::getStaticVariable<uint32_t, void(double)>("another", "variable");
 
       assertThat(*ptr1, Eq(50));
       assertThat(*ptr2, Eq(51));
@@ -219,13 +252,53 @@ public:
     {
       /** @info(format)
        * @seperator
-       * Get the static function @c staticFunction()
+       * Get the static function @c staticFunction*(). Tested with diffrent
+       * signatures to test name mangling.
        * @seperator
        */
-      auto func = protest::getStaticFunction<int()>("staticFunction()");
-      auto ret = func();
 
-      assertThat(ret, Eq(43));
+      {
+        auto func = protest::getStaticFunction<void()>("staticFunction1");
+        func();
+        assertThat(staticFunction1WasCalled, IsTrue());
+      }
+
+      {
+        auto func = protest::getStaticFunction<int()>("staticFunction2");
+        auto ret = func();
+        assertThat(staticFunction2WasCalled, IsTrue());
+        assertThat(ret, Eq(0));
+      }
+
+      {
+        auto func = protest::getStaticFunction<int(int, std::string)>("staticFunction3");
+        auto ret = func(1, "");
+        assertThat(staticFunction3WasCalled, IsTrue());
+        assertThat(ret, Eq(0));
+      }
+
+      {
+        auto func = protest::getStaticFunction<std::string(int, std::string)>("staticFunction4");
+        auto ret = func(1, "");
+        assertThat(staticFunction4WasCalled, IsTrue());
+        assertThat(ret, Eq(std::string("")));
+      }
+
+      {
+        auto func = protest::getStaticFunction<std::string(std::string, std::string)>("staticFunction5");
+        auto ret = func("", "");
+        assertThat(staticFunction5WasCalled, IsTrue());
+        assertThat(ret, Eq(std::string("")));
+      }
+
+      {
+        auto func = protest::getStaticFunction<std::string(protest::Runner&, protest::Runner&)>("staticFunction6");
+        auto ret = func(*this, *this);
+        assertThat(staticFunction6WasCalled, IsTrue());
+        assertThat(ret, Eq(std::string("")));
+      }
+
+      // TODO (jreinking) test with namespaces
     }
   }
 

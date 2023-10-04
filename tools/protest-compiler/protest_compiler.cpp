@@ -26,6 +26,7 @@
 #include "member_attr_visitor.h"
 #include "static_attr_visitor.h"
 #include "static_var_visitor.h"
+#include "utils.h"
 
 #include "clang/AST/AST.h"
 #include "clang/AST/ASTConsumer.h"
@@ -48,6 +49,7 @@ using namespace clang;
 using namespace clang::tooling;
 using namespace llvm::cl;
 using namespace llvm;
+using namespace protest;
 
 bool
 isInMainFile(clang::ASTContext* context, const clang::Decl* const decl)
@@ -172,30 +174,6 @@ lineNumber(ASTContext* context, const Decl* expr)
   return context->getSourceManager().getPresumedLineNumber(expr->getBeginLoc());
 }
 
-CharSourceRange
-getRange(const Expr* expr)
-{
-  return CharSourceRange::getTokenRange(expr->getBeginLoc(), expr->getEndLoc());
-}
-
-std::string
-getSourceText(ASTContext* context, const Expr* expr)
-{
-  return Lexer::getSourceText(getRange(expr),
-                              context->getSourceManager(),
-                              context->getLangOpts())
-      .str();
-}
-
-std::string
-getSourceText(ASTContext* context, CharSourceRange range)
-{
-  return Lexer::getSourceText(range,
-                              context->getSourceManager(),
-                              context->getLangOpts())
-      .str();
-}
-
 class ProtestVisitor : public RecursiveASTVisitor<ProtestVisitor>
 {
 public:
@@ -206,7 +184,7 @@ public:
     Rewriter(Rewriter),
     mOutputFile(outputFile),
     mIdNext(0),
-    mStaticVarVisitor(Context)
+    mStaticVarVisitor(Rewriter, Context)
   {
   }
 
