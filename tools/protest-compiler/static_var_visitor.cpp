@@ -65,8 +65,6 @@ StaticVarVisitor::handle(CallExpr* expr)
 
         auto range = getRange(expr);
         std::string oldCall = getSourceText(mContext, range);
-        std::cout << "call: " << oldCall << std::endl;
-        std::cout << "static: " << decl->isStatic() << std::endl;
 
         // TODO code duplication
         int tpl = 0;

@@ -49,7 +49,6 @@ function(int a)
   static uint32_t variable = 46;
 }
 
-// _Z8functionNSt7__cxx1112basic_stringIcSt11char_traitsIcESaIcEEE
 void
 function(std::string)
 {
@@ -108,7 +107,7 @@ static bool staticFunction4WasCalled = false;
 static std::string staticFunction4(int, std::string)
 {
   staticFunction4WasCalled = true;
-  return "";
+  return "staticFunction4";
 }
 
 static bool staticFunction5WasCalled = false;
@@ -116,7 +115,7 @@ static bool staticFunction5WasCalled = false;
 static std::string staticFunction5(std::string, std::string)
 {
   staticFunction5WasCalled = true;
-  return "";
+  return "staticFunction5";
 }
 
 static bool staticFunction6WasCalled = false;
@@ -124,7 +123,7 @@ static bool staticFunction6WasCalled = false;
 static std::string staticFunction6(protest::Runner&, protest::Runner&)
 {
   staticFunction6WasCalled = true;
-  return "";
+  return "staticFunction6";
 }
 
 // ---------------------------------------------------------------------------
@@ -164,11 +163,10 @@ public:
     {
       /** @info(format)
        * @seperator
-       * Get the static variable @c variable of static function @c function().
+       * Get the static variable @c variable of static function @c staticFunction().
        * @seperator
        */
-      auto* ptr =
-          protest::getStaticVariable<uint32_t, int()>("staticFunction", "variable");
+      auto* ptr = protest::getStaticVariable<uint32_t, int()>("staticFunction", "variable");
       assertThat(*ptr, Eq(43));
     }
 
@@ -281,21 +279,21 @@ public:
         auto func = protest::getStaticFunction<std::string(int, std::string)>("staticFunction4");
         auto ret = func(1, "");
         assertThat(staticFunction4WasCalled, IsTrue());
-        assertThat(ret, Eq(std::string("")));
+        assertThat(ret, Eq(std::string("staticFunction4")));
       }
 
       {
         auto func = protest::getStaticFunction<std::string(std::string, std::string)>("staticFunction5");
         auto ret = func("", "");
         assertThat(staticFunction5WasCalled, IsTrue());
-        assertThat(ret, Eq(std::string("")));
+        assertThat(ret, Eq(std::string("staticFunction5")));
       }
 
       {
         auto func = protest::getStaticFunction<std::string(protest::Runner&, protest::Runner&)>("staticFunction6");
         auto ret = func(*this, *this);
         assertThat(staticFunction6WasCalled, IsTrue());
-        assertThat(ret, Eq(std::string("")));
+        assertThat(ret, Eq(std::string("staticFunction6")));
       }
 
       // TODO (jreinking) test with namespaces

@@ -10,7 +10,7 @@ INFO             main ----------------------------------------------------------
 INFO             main -------------------------------------------------------------------------------
                       Get the static variable @c my_value.
                       -------------------------------------------------------------------------------
-PASS 0000000000  main /home/root/pro-test/demos/demo15/main.pt.cpp:151
+PASS 0000000000  main /home/root/pro-test/demos/demo15/main.pt.cpp:150
                       Value of: *ptr
                       Expected: is equal to
                                 { 42, 0x0000002a }
@@ -18,15 +18,15 @@ PASS 0000000000  main /home/root/pro-test/demos/demo15/main.pt.cpp:151
 INFO             main -------------------------------------------------------------------------------
                       Get the static variable @c variable of function @c function().
                       -------------------------------------------------------------------------------
-PASS 0000000000  main /home/root/pro-test/demos/demo15/main.pt.cpp:161
+PASS 0000000000  main /home/root/pro-test/demos/demo15/main.pt.cpp:160
                       Value of: *ptr
                       Expected: is equal to
                                 { 43, 0x0000002b }
                         Actual: { 43, 0x0000002b }
 INFO             main -------------------------------------------------------------------------------
-                      Get the static variable @c variable of static function @c function().
+                      Get the static variable @c variable of static function @c staticFunction().
                       -------------------------------------------------------------------------------
-PASS 0000000000  main /home/root/pro-test/demos/demo15/main.pt.cpp:172
+PASS 0000000000  main /home/root/pro-test/demos/demo15/main.pt.cpp:170
                       Value of: *ptr
                       Expected: is equal to
                                 { 43, 0x0000002b }
@@ -34,20 +34,10 @@ PASS 0000000000  main /home/root/pro-test/demos/demo15/main.pt.cpp:172
 INFO             main -------------------------------------------------------------------------------
                       Get the static variable @c my_value of namespace @c demo.
                       -------------------------------------------------------------------------------
-PASS 0000000000  main /home/root/pro-test/demos/demo15/main.pt.cpp:182
-                      Value of: *ptr
-                      Expected: is equal to
-                                { 44, 0x0000002c }
-                        Actual: { 44, 0x0000002c }
 INFO             main -------------------------------------------------------------------------------
                       Get the static variable @c variable of function @c function() of namespace @c
                       demo.
                       -------------------------------------------------------------------------------
-PASS 0000000000  main /home/root/pro-test/demos/demo15/main.pt.cpp:194
-                      Value of: *ptr
-                      Expected: is equal to
-                                { 45, 0x0000002d }
-                        Actual: { 45, 0x0000002d }
 INFO             main -------------------------------------------------------------------------------
                       Get the static variable @c variable of function @c function(int).
                       -------------------------------------------------------------------------------
@@ -59,16 +49,7 @@ PASS 0000000000  main /home/root/pro-test/demos/demo15/main.pt.cpp:205
 INFO             main -------------------------------------------------------------------------------
                       Get the static variable @c variable of function @c function(std::string).
                       -------------------------------------------------------------------------------
-PASS 0000000000  main /home/root/pro-test/demos/demo15/main.pt.cpp:224
-                      Value of: *ptr
-                      Expected: is equal to
-                                { 47, 0x0000002f }
-                        Actual: { 47, 0x0000002f }
-INFO             main -------------------------------------------------------------------------------
-                      Get the static variable @c variable of function @c function(std::string) using
-                      regular expression.
-                      -------------------------------------------------------------------------------
-PASS 0000000000  main /home/root/pro-test/demos/demo15/main.pt.cpp:236
+PASS 0000000000  main /home/root/pro-test/demos/demo15/main.pt.cpp:219
                       Value of: *ptr
                       Expected: is equal to
                                 { 47, 0x0000002f }
@@ -77,26 +58,26 @@ INFO             main ----------------------------------------------------------
                       Get the static variable @c variable of function @c other(). Since the name
                       exists twice an index has to be provided.
                       -------------------------------------------------------------------------------
-PASS 0000000000  main /home/root/pro-test/demos/demo15/main.pt.cpp:249
+PASS 0000000000  main /home/root/pro-test/demos/demo15/main.pt.cpp:232
                       Value of: *ptr1
                       Expected: is equal to
                                 { 48, 0x00000030 }
                         Actual: { 48, 0x00000030 }
-PASS 0000000000  main /home/root/pro-test/demos/demo15/main.pt.cpp:250
+PASS 0000000000  main /home/root/pro-test/demos/demo15/main.pt.cpp:233
                       Value of: *ptr2
                       Expected: is equal to
                                 { 49, 0x00000031 }
                         Actual: { 49, 0x00000031 }
 INFO             main -------------------------------------------------------------------------------
-                      Get the static variable @c variable of function @c other(). Since the name
-                      exists twice an index has to be provided.
+                      Get the static variable @c variable of function @c another(). The signature
+                      identifies the function exactly.
                       -------------------------------------------------------------------------------
-PASS 0000000000  main /home/root/pro-test/demos/demo15/main.pt.cpp:266
+PASS 0000000000  main /home/root/pro-test/demos/demo15/main.pt.cpp:246
                       Value of: *ptr1
                       Expected: is equal to
                                 { 50, 0x00000032 }
                         Actual: { 50, 0x00000032 }
-PASS 0000000000  main /home/root/pro-test/demos/demo15/main.pt.cpp:267
+PASS 0000000000  main /home/root/pro-test/demos/demo15/main.pt.cpp:247
                       Value of: *ptr2
                       Expected: is equal to
                                 { 51, 0x00000033 }
@@ -105,55 +86,55 @@ INFO             main ----------------------------------------------------------
                       Get the static function @c staticFunction*(). Tested with diffrent signatures
                       to test name mangling.
                       -------------------------------------------------------------------------------
-PASS 0000000000  main /home/root/pro-test/demos/demo15/main.pt.cpp:281
+PASS 0000000000  main /home/root/pro-test/demos/demo15/main.pt.cpp:261
                       Value of: staticFunction1WasCalled
                       Expected: to be true
                         Actual: true
-PASS 0000000000  main /home/root/pro-test/demos/demo15/main.pt.cpp:287
+PASS 0000000000  main /home/root/pro-test/demos/demo15/main.pt.cpp:267
                       Value of: staticFunction2WasCalled
                       Expected: to be true
                         Actual: true
-PASS 0000000000  main /home/root/pro-test/demos/demo15/main.pt.cpp:288
+PASS 0000000000  main /home/root/pro-test/demos/demo15/main.pt.cpp:268
                       Value of: ret
                       Expected: is equal to
                                 { 0, 0x00000000 }
                         Actual: { 0, 0x00000000 }
-PASS 0000000000  main /home/root/pro-test/demos/demo15/main.pt.cpp:294
+PASS 0000000000  main /home/root/pro-test/demos/demo15/main.pt.cpp:274
                       Value of: staticFunction3WasCalled
                       Expected: to be true
                         Actual: true
-PASS 0000000000  main /home/root/pro-test/demos/demo15/main.pt.cpp:295
+PASS 0000000000  main /home/root/pro-test/demos/demo15/main.pt.cpp:275
                       Value of: ret
                       Expected: is equal to
                                 { 0, 0x00000000 }
                         Actual: { 0, 0x00000000 }
-PASS 0000000000  main /home/root/pro-test/demos/demo15/main.pt.cpp:301
+PASS 0000000000  main /home/root/pro-test/demos/demo15/main.pt.cpp:281
                       Value of: staticFunction4WasCalled
                       Expected: to be true
                         Actual: true
-PASS 0000000000  main /home/root/pro-test/demos/demo15/main.pt.cpp:302
+PASS 0000000000  main /home/root/pro-test/demos/demo15/main.pt.cpp:282
                       Value of: ret
                       Expected: is equal to
-                                ""
-                        Actual: ""
-PASS 0000000000  main /home/root/pro-test/demos/demo15/main.pt.cpp:308
+                                "staticFunction4"
+                        Actual: "staticFunction4"
+PASS 0000000000  main /home/root/pro-test/demos/demo15/main.pt.cpp:288
                       Value of: staticFunction5WasCalled
                       Expected: to be true
                         Actual: true
-PASS 0000000000  main /home/root/pro-test/demos/demo15/main.pt.cpp:309
+PASS 0000000000  main /home/root/pro-test/demos/demo15/main.pt.cpp:289
                       Value of: ret
                       Expected: is equal to
-                                ""
-                        Actual: ""
-PASS 0000000000  main /home/root/pro-test/demos/demo15/main.pt.cpp:315
+                                "staticFunction5"
+                        Actual: "staticFunction5"
+PASS 0000000000  main /home/root/pro-test/demos/demo15/main.pt.cpp:295
                       Value of: staticFunction6WasCalled
                       Expected: to be true
                         Actual: true
-PASS 0000000000  main /home/root/pro-test/demos/demo15/main.pt.cpp:316
+PASS 0000000000  main /home/root/pro-test/demos/demo15/main.pt.cpp:296
                       Value of: ret
                       Expected: is equal to
-                                ""
-                        Actual: ""
+                                "staticFunction6"
+                        Actual: "staticFunction6"
 INFO             main -------------------------------------------------------------------------------
                       Exit of 'main'
                       -------------------------------------------------------------------------------

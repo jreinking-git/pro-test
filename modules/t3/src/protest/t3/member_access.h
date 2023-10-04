@@ -224,7 +224,6 @@ template <typename R>
 R*
 getStaticVariable(const char* name, size_t index = 0, const char* nm = "")
 {
-  std::cout << "nm: " << nm << std::endl;
   void* ptr = getStaticVariableRaw(nm, index);
   return (R*) ptr;
 }
@@ -233,7 +232,6 @@ template <typename R, typename F, typename FF = typename AsVoidFunction<F>::Func
 R*
 getStaticVariable(const char* function, const char* name, size_t index = 0, const char* nm = 0)
 {
-  std::cout << "nm: " << nm << std::endl;
   void* ptr = getStaticVariableRaw(nm, index);
   return (R*) ptr;
 }
